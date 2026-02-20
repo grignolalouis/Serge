@@ -1,0 +1,5 @@
+1. yes the agent has to be cross sources not focused on one spoecificities.
+2. does not have to be too complicated we can mdoelize a small suplly chain. no need for real crm integration but make fake data yes.
+3. No real industry partner needed just the data. we will slecte a random or the easiest supply chain use cas starting from simple.
+4. we will start with architecture design first then we will build the prototype.
+5. we will use go as backend to interact with the agent and a next frontend to interact with the user. the go backend will use fiber and trpc agent go https://github.com/trpc-group/trpc-agent-go as main ai agentic framework. i alreday know how to do a backend and the nex js. agent session endpoint sse etc. the idea is more to architecture the agent not the backend / frontend. and also how do i structure the supply chain modelisation use cases and data sources.

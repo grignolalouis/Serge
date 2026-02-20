@@ -1,0 +1,106 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Packages ---
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+% --- Formatting ---
+\setlist{nosep,leftmargin=1.5em}
+\titlespacing*{\section}{0pt}{1.4em}{0.6em}
+\titlespacing*{\subsection}{0pt}{0.8em}{0.4em}
+\hypersetup{colorlinks=true,linkcolor=blue!60!black,urlcolor=blue!60!black}
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\small SE618-1 Logistics}
+\lhead{\small Week 2 -- Progress Report}
+\cfoot{\thepage}
+
+% --- Title ---
+\title{
+    \vspace{-1.5cm}
+    \textbf{Week 2 -- Progress Report}\\[0.3em]
+    \large AI Agent for Supply Chain Operations\\[0.2em]
+    \large SE618-1 Logistics -- Sirindhorn International Institute of Technology
+}
+\author{
+    Louis Grignola \and Gauthier Schmitt \and Ma\"el Talus \and Matteo Schwarz
+}
+\date{February 2026}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+% ============================================================
+\section{Activities Completed}
+% ============================================================
+
+\subsection{Domain Research}
+
+We studied supply chain operations with a focus on understanding how data is structured across standard enterprise systems. We identified four key domains that form the backbone of a distribution company:
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}llX@{}}
+\toprule
+\textbf{System} & \textbf{Scope} & \textbf{Key Data} \\
+\midrule
+SRM & Suppliers \& Purchasing & Suppliers, Purchase Orders, Lead Times \\
+WMS & Inventory              & Products, Stock Levels, Warehouse Movements \\
+OMS & Sales                  & Customers, Orders, Order Lines \\
+TMS & Delivery               & Shipments, Carriers, Tracking Events \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent Our research confirmed that \textbf{data silos} between these systems are a primary source of operational friction: answering a simple question like \textit{``Why is order \#123 delayed?''} can require manually querying three or four separate systems.
+
+\subsection{Tutor Meeting}
+
+We contacted and scheduled a first advisory meeting with our tutor, \textbf{Ajarn Warut} (SIIT), to present our topic and validate the project direction.
+
+% ============================================================
+\section{Roadmap}
+% ============================================================
+
+\subsection{Phase 1: Supply Chain Modeling}
+
+Design and populate a simulated supply chain (PostgreSQL) with coherent test data across all four systems. Target scale: 5 suppliers, 30 products, 50 customers, ${\sim}500$ orders over 3 months, 2 warehouses.
+
+\subsection{Phase 2: Agent Development (Two Tracks)}
+
+We will explore two complementary approaches to building the AI agent:
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}l l X@{}}
+\toprule
+\textbf{Track} & \textbf{Stack} & \textbf{Description} \\
+\midrule
+A: Custom Agent & Go, tRPC-Agent-Go &
+    Build a fully custom agent with control over reasoning, tool routing, and orchestration. Our team is actively \textbf{contributing} to the open-source tRPC-Agent-Go framework. \\[0.6em]
+B: MCP Integration & Go, MCP &
+    Expose supply chain data via \textbf{MCP servers} (Model Context Protocol) and leverage existing agentic platforms (Claude, Claude Code) to query it. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent Both tracks target the same core capability: enabling an AI agent to perform \textbf{read-only, cross-system reasoning}, autonomously navigating multiple data sources to diagnose problems, retrieve information, and surface actionable insights.
+
+% ============================================================
+\section{Next Steps}
+% ============================================================
+
+Begin an in-depth exploration of supply chain operations, studying how each system (SRM, WMS, OMS, TMS) functions individually, how data flows between them, and where the key interdependencies and pain points arise. This foundational understanding will guide the design of both the data model and the agent tooling.
+
+\end{document}
