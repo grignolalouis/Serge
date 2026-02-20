@@ -1,0 +1,77 @@
+flowchart TB
+    subgraph USER["Supply Chain Operator"]
+        Q["Natural Language Question<br/><i>'Why is order #ORD-0847 delayed?'</i><br/><i>'Analyze delivery performance this month'</i><br/><i>'Compare supplier lead times for SKU-456'</i>"]
+    end
+
+    subgraph ENGINE["Agentic Engine (Approach A or B)"]
+        direction TB
+
+        subgraph A["Approach A - trpc-agent-go"]
+            direction TB
+            ORCHESTRATOR_A["Orchestrator Agent<br/><small>Graph / Chain routing</small>"]
+            subgraph SUBAGENTS["Specialized Sub-Agents"]
+                direction LR
+                SA_PROC["Procurement<br/>Agent"]
+                SA_INV["Inventory<br/>Agent"]
+                SA_ORD["Order<br/>Agent"]
+                SA_SHIP["Shipping<br/>Agent"]
+            end
+            ORCHESTRATOR_A --> SUBAGENTS
+        end
+
+        subgraph B["Approach B - Claude Code SDK / CLI"]
+            direction TB
+            CLAUDE["Claude Agent<br/><small>Autonomous reasoning</small>"]
+            subgraph TOOLS["Built-in Capabilities"]
+                direction LR
+                BASH["Code Executor<br/><small>Bash, Python, R</small>"]
+                SUB["Sub-Agent<br/>Spawning"]
+                SKILL["SKILL.md<br/><small>Report generation</small><br/><small>Data analysis</small>"]
+            end
+            CLAUDE --> TOOLS
+        end
+    end
+
+    subgraph MCPLAYER["MCP Protocol Layer - trpc-mcp-go"]
+        direction LR
+        SRM_MCP["SRM Server<br/><small>Suppliers and POs</small><br/><small><i>read-only</i></small>"]
+        WMS_MCP["WMS Server<br/><small>Inventory and Stock</small><br/><small><i>read-only</i></small>"]
+        OMS_MCP["OMS Server<br/><small>Orders and Customers</small><br/><small><i>read-only</i></small>"]
+        TMS_MCP["TMS Server<br/><small>Shipments and Carriers</small><br/><small><i>read-only</i></small>"]
+    end
+
+    subgraph WORKSPACE["Controlled Working Environment"]
+        direction LR
+        FOLDER["Project Folder<br/><small>Reports, exports,<br/>analysis outputs</small>"]
+        SHEETS["Extracted Data<br/><small>CSV / Excel sheets<br/>for analysis</small>"]
+        REPORTS["Generated Reports<br/><small>Via SKILL.md templates</small>"]
+    end
+
+    subgraph DB["PostgreSQL - Simulated SC Data (Read-Only)"]
+        direction LR
+        D1[("suppliers<br/>purchase_orders")]
+        D2[("products<br/>inventory<br/>stock_movements")]
+        D3[("customers<br/>orders<br/>order_lines")]
+        D4[("shipments<br/>carriers")]
+    end
+
+    Q --> ENGINE
+    A -->|"MCP Tool Calls"| MCPLAYER
+    B -->|"MCP Tool Calls"| MCPLAYER
+    SRM_MCP --> D1
+    WMS_MCP --> D2
+    OMS_MCP --> D3
+    TMS_MCP --> D4
+    MCPLAYER -->|"Structured Results"| ENGINE
+    ENGINE -->|"Write reports and analysis"| WORKSPACE
+    ENGINE -->|"Synthesized Answer"| USER
+
+    style USER fill:#f0f4ff,stroke:#3b82f6,stroke-width:2px
+    style ENGINE fill:#fffbeb,stroke:#f59e0b,stroke-width:2px
+    style A fill:#fef3c7,stroke:#d97706,stroke-width:1.5px
+    style B fill:#fef3c7,stroke:#d97706,stroke-width:1.5px
+    style MCPLAYER fill:#ecfdf5,stroke:#10b981,stroke-width:2px
+    style WORKSPACE fill:#f5f3ff,stroke:#8b5cf6,stroke-width:2px
+    style DB fill:#f3f4f6,stroke:#6b7280,stroke-width:2px
+    style SUBAGENTS fill:#fff7ed,stroke:#ea580c,stroke-width:1px
+    style TOOLS fill:#fff7ed,stroke:#ea580c,stroke-width:1px

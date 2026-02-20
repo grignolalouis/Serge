@@ -1,0 +1,30 @@
+flowchart TB
+    subgraph L1["Layer 1 — Intelligence & Reasoning"]
+        direction LR
+        SDK["<b>Claude Agent SDK</b><br/>Autonomous reasoning<br/>Subagent orchestration<br/>Session persistence<br/>Built-in tools"]
+    end
+
+    subgraph L2["Layer 2 — Protocol & Interoperability"]
+        direction LR
+        MCP["<b>trpc-mcp-go</b><br/>MCP specification<br/>Tool discovery & invocation<br/>HTTP / SSE streaming<br/>Session management"]
+    end
+
+    subgraph L3["Layer 3 — Backend Agent Engine"]
+        direction LR
+        AGO["<b>trpc-agent-go</b><br/>Chain / Parallel / Graph orchestration<br/>Persistent memory<br/>A2A protocol<br/>Langfuse observability"]
+    end
+
+    subgraph L4["Layer 4 — Data & Services"]
+        direction LR
+        PG["PostgreSQL"]
+        API["SC Microservices"]
+    end
+
+    L1 -->|"MCP Protocol"| L2
+    L2 -->|"Tool Invocation"| L3
+    L3 -->|"SQL / API"| L4
+
+    style L1 fill:#fef3c7,stroke:#f59e0b,stroke-width:2px
+    style L2 fill:#ecfdf5,stroke:#10b981,stroke-width:2px
+    style L3 fill:#fce7f3,stroke:#ec4899,stroke-width:2px
+    style L4 fill:#f3f4f6,stroke:#6b7280,stroke-width:2px

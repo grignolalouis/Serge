@@ -1,0 +1,37 @@
+gantt
+    title AI Agent for Supply Chain Operations - 8 Week Project Timeline
+    dateFormat YYYY-MM-DD
+    axisFormat %b %d
+    tickInterval 1week
+
+    section Research and Setup
+    W1 - Topic Selection and Team Registration    :done, w1, 2026-02-05, 7d
+    W2 - Domain Research and Roadmap              :done, w2, 2026-02-12, 7d
+    W3 - State of the Art and Frameworks          :active, w3, 2026-02-19, 7d
+
+    section Supply Chain Modeling
+    W4 - Database Schema Design                   :db, 2026-02-26, 7d
+    W4 - Seed Data Generation (500 orders)        :seed, 2026-02-26, 7d
+    Data Validation and Scenario Testing          :val, after seed, 3d
+
+    section MCP Server Development
+    W5 - SRM MCP Server (suppliers, POs)          :srm, 2026-03-05, 7d
+    W5 - WMS MCP Server (inventory, movements)    :wms, 2026-03-05, 7d
+    W6 - OMS MCP Server (orders, customers)       :oms, 2026-03-12, 7d
+    W6 - TMS MCP Server (shipments, carriers)     :tms, 2026-03-12, 7d
+    MCP Integration Testing                       :mcptest, after tms, 3d
+
+    section Agent Development
+    W6 - Agentic Engine Setup (Approach A / B)    :agent1, 2026-03-12, 7d
+    W7 - SKILL.md and Report Templates            :skills, 2026-03-19, 7d
+    W7 - Sub-Agent Orchestration                  :agent2, 2026-03-19, 7d
+    W7 - Cross-System Reasoning and Analysis      :reason, 2026-03-22, 5d
+
+    section Testing and Demo
+    W8 - End-to-End Scenario Testing              :test, 2026-03-26, 7d
+    W8 - Demo Preparation and Polishing           :demo, 2026-04-02, 7d
+    W8 - Final Report Writing                     :report, 2026-04-02, 10d
+    Final Presentation                            :milestone, crit, final, 2026-04-15, 1d
+
+    section Documentation
+    Weekly Progress Reports                       :doc, 2026-02-05, 70d

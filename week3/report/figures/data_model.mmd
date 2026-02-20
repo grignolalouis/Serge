@@ -1,0 +1,93 @@
+erDiagram
+    SUPPLIER ||--o{ PURCHASE_ORDER : "receives"
+    SUPPLIER ||--o{ PRODUCT : "supplies"
+    PRODUCT ||--o{ INVENTORY : "stored_in"
+    PRODUCT ||--o{ ORDER_LINE : "ordered_as"
+    PRODUCT ||--o{ STOCK_MOVEMENT : "tracked_by"
+    CUSTOMER ||--o{ ORDER : "places"
+    ORDER ||--o{ ORDER_LINE : "contains"
+    ORDER ||--o| SHIPMENT : "shipped_via"
+    SHIPMENT }o--|| CARRIER : "carried_by"
+    PURCHASE_ORDER }o--|| PRODUCT : "orders"
+
+    SUPPLIER {
+        uuid id PK
+        string name
+        string country
+        int lead_time_days
+        decimal reliability
+    }
+
+    PRODUCT {
+        uuid id PK
+        string sku UK
+        string name
+        string category
+        decimal unit_price
+        int reorder_point
+    }
+
+    INVENTORY {
+        uuid id PK
+        uuid product_id FK
+        string warehouse_id
+        int quantity
+        int reserved
+        int available
+    }
+
+    CUSTOMER {
+        uuid id PK
+        string name
+        string company
+        string segment
+    }
+
+    ORDER {
+        uuid id PK
+        uuid customer_id FK
+        string status
+        date order_date
+        date required_date
+        string priority
+    }
+
+    ORDER_LINE {
+        uuid id PK
+        uuid order_id FK
+        uuid product_id FK
+        int quantity
+        string status
+    }
+
+    SHIPMENT {
+        uuid id PK
+        uuid order_id FK
+        uuid carrier_id FK
+        string status
+        string tracking_number
+        timestamp estimated_arrival
+    }
+
+    CARRIER {
+        uuid id PK
+        string name
+        string type
+        decimal on_time_rate
+    }
+
+    PURCHASE_ORDER {
+        uuid id PK
+        uuid supplier_id FK
+        uuid product_id FK
+        string status
+        date expected_date
+    }
+
+    STOCK_MOVEMENT {
+        uuid id PK
+        uuid product_id FK
+        string movement_type
+        int quantity
+        string reference_type
+    }
