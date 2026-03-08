@@ -1,0 +1,581 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+% ── Geometry & Layout ────────────────────────────────────────────────
+\usepackage[margin=2.4cm,top=2.8cm,bottom=2.8cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+% ── Tables ───────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries\small}
+\renewcommand\theadgape{}
+
+% ── Graphics & Color ─────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+
+% ── Typography & Structure ───────────────────────────────────────────
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+
+% ── Section formatting ───────────────────────────────────────────────
+\setlist{nosep,leftmargin=1.5em}
+\titleformat{\section}{\Large\bfseries\color{MidnightBlue}}{}{0em}{}[\vspace{0.2em}\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{MidnightBlue!80}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{MidnightBlue!60}}{}{0em}{}
+\titlespacing*{\section}{0pt}{2em}{1em}
+\titlespacing*{\subsection}{0pt}{1.4em}{0.6em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.4em}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MidnightBlue,
+    urlcolor=RoyalBlue,
+    citecolor=MidnightBlue,
+    pdfauthor={Grignola, Schmitt, Tellus, Schwarz},
+    pdftitle={Week 4 Progress Report -- SERGE: AI Agent for Supply Chain Operations},
+}
+
+% ── Header / Footer ─────────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\lhead{\small\color{gray} SE618-1 Logistics -- SIIT}
+\rhead{\small\color{gray} Week~4 -- Progress Report}
+\cfoot{\small\thepage}
+
+% ── Custom boxes ─────────────────────────────────────────────────────
+\newtcolorbox{keyinsight}{
+    colback=MidnightBlue!5,
+    colframe=MidnightBlue!60,
+    fonttitle=\bfseries,
+    title=Key Insight,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newtcolorbox{painbox}{
+    colback=OrangeRed!5,
+    colframe=OrangeRed!50,
+    fonttitle=\bfseries,
+    title=Customer Pain Point,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newtcolorbox{notebox}[1][Note]{
+    colback=Goldenrod!8,
+    colframe=Goldenrod!60,
+    fonttitle=\bfseries,
+    title=#1,
+    boxrule=0.6pt,
+    arc=2pt,
+    left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+% ── Column types ─────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% =====================================================================
+%                           DOCUMENT
+% =====================================================================
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+
+{\color{MidnightBlue}\rule{\linewidth}{1.2pt}}
+
+\vspace{1.5cm}
+{\Huge\bfseries\color{MidnightBlue} Week 4 -- Progress Report}
+
+\vspace{0.8cm}
+{\LARGE SERGE: AI Agent for Supply Chain Operations}
+
+\vspace{0.5cm}
+{\large\color{gray} Use Case Definition, Specifications \& Evaluation Design}
+
+\vspace{1.5cm}
+{\color{MidnightBlue}\rule{\linewidth}{1.2pt}}
+
+\vspace{2cm}
+
+{\large
+\begin{tabular}{ll}
+\textbf{Louis Grignola} & \textbf{Gauthier Schmitt} \\[0.3em]
+\textbf{Ma\"el Tellus}    & \textbf{Matteo Schwarz}   \\
+\end{tabular}
+}
+
+\vspace{2cm}
+
+{\large
+\textbf{Course:} SE618-1 Logistics\\[0.4em]
+\textbf{Institution:} Sirindhorn International Institute of Technology (SIIT)\\[0.4em]
+\textbf{Date:} March 2026
+}
+
+\vfill
+\end{titlepage}
+
+% ── Table of Contents ────────────────────────────────────────────────
+\newpage
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Advisor Feedback \& Project Recentering}
+% =====================================================================
+
+Following our Week~3 advisor meeting, several action items were identified to sharpen the project scope before moving to implementation. The feedback highlighted the need to:
+
+\begin{enumerate}[itemsep=0.5em]
+    \item \textbf{Define a clear field:} choose between B2B and B2C, and narrow the operational context.
+    \item \textbf{Identify a real customer pain point:} ground the project in a concrete, observable problem.
+    \item \textbf{Clarify the agent's role:} is it predictive problem resolution, data retrieval, or diagnostic reasoning?
+    \item \textbf{Design evaluation with ground truth:} use an LLM-as-Judge approach with well-defined expected answers.
+    \item \textbf{Add proper references:} strengthen the methodology report with citations from our literature review.
+\end{enumerate}
+
+This week's deliverable addresses all five points by defining the project specifications: who the user is, what problem we solve, how we evaluate it, and what success looks like.
+
+% =====================================================================
+\section{Project Positioning}
+% =====================================================================
+
+\subsection{Field: B2B Distribution}
+
+We position SERGE in a \textbf{B2B mid-size distribution company} context. This type of company purchases goods from suppliers, stores them in warehouses, and ships them to business customers (retailers, manufacturers, or other distributors).
+
+\begin{keyinsight}
+B2B distribution is the ideal setting because it involves all four supply chain systems (SRM, WMS, OMS, TMS) with high interdependency. A single delayed supplier shipment can cascade into stockouts, delayed customer orders, and carrier rebooking --- exactly the kind of cross-system reasoning our agent targets.
+\end{keyinsight}
+
+\vspace{0.5em}
+
+\textbf{Why not B2C?} In B2C (e-commerce, retail), the end customer typically interacts with a single storefront. The operational complexity we target --- cross-system investigation across procurement, warehousing, order management, and transport --- is a B2B operations team problem, not a consumer-facing one.
+
+\subsection{Agent Role: Data Retrieval \& Diagnostic Reasoning}
+
+We explicitly scope SERGE as a \textbf{retrieval and diagnostic} agent, not a predictive or decision-making one:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l c X @{}}
+\toprule
+\thead{Capability} & \thead{In Scope?} & \thead{Description} \\
+\midrule
+Data retrieval          & Yes & Query any of the 4 systems via natural language \\
+Cross-system diagnostic & Yes & Connect data across SRM, WMS, OMS, TMS to find root causes \\
+Report generation       & Yes & Produce structured summaries and comparisons \\
+Predictive analytics    & No  & Forecasting demand, predicting delays (future work) \\
+Autonomous decisions    & No  & Reordering stock, rerouting shipments (out of scope) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+This scoping is deliberate: in practice, companies deploy read-only AI assistants \textit{before} trusting AI with write access~[1, 2]. Our agent reflects this real-world adoption pattern.
+
+% =====================================================================
+\section{Customer Pain Point}
+% =====================================================================
+
+\begin{painbox}
+\textbf{Problem:} In a B2B distribution company, operations managers spend \textbf{15--30 minutes per investigation} when diagnosing supply chain issues (delayed orders, stockouts, supplier problems). They must manually log into 3--4 separate systems, extract data from each, and mentally piece together the causal chain.
+
+\vspace{0.5em}
+
+\textbf{Consequences:}
+\begin{itemize}
+    \item Slow response to customer inquiries about order status
+    \item Incomplete investigations (human misses a data point in one system)
+    \item Knowledge concentrated in senior staff who know ``where to look''
+    \item No structured audit trail of investigations
+\end{itemize}
+\end{painbox}
+
+\subsection{User Persona}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\thead{Attribute} & \thead{Description} \\
+\midrule
+\textbf{Role}       & Operations Manager / Supply Chain Coordinator \\
+\textbf{Company}    & Mid-size B2B distributor (50--500 employees) \\
+\textbf{Daily tasks} & Monitor order fulfillment, investigate delays, coordinate with suppliers and carriers, report on KPIs \\
+\textbf{Systems used} & SRM, WMS, OMS, TMS (often separate vendors, separate logins) \\
+\textbf{Pain}       & Spends 2--3 hours/day on cross-system lookups; relies on experience to know which system to check first \\
+\textbf{Goal}       & Get answers in seconds, not minutes; never miss a data point \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Value Proposition}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X X @{}}
+\toprule
+\thead{Dimension} & \thead{Without SERGE} & \thead{With SERGE} \\
+\midrule
+Investigation time   & 15--30 min (manual, 3--4 systems) & $<$1 min (single natural language query) \\
+Completeness         & Depends on operator experience    & Systematic: always checks all relevant systems \\
+Knowledge dependency & Senior staff bottleneck            & Any team member can investigate \\
+Audit trail          & None (mental process)             & Structured report with sources cited \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+\newpage
+\section{Use Case Specifications}
+% =====================================================================
+
+We define \textbf{three use cases}, each representing a common operations task. They are deliberately simple and concrete to allow rigorous evaluation.
+
+% ── Use Case 1 ───────────────────────────────────────────────────────
+\subsection{UC-1: Order Status Inquiry}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Title}       & Order Status Inquiry \\
+\midrule
+\textbf{Actor}       & Operations Manager \\
+\textbf{Trigger}     & A customer calls asking about their order \\
+\textbf{Question}    & \textit{``What is the status of order \#ORD-2024-0456?''} \\
+\textbf{Systems}     & OMS (order details) $\to$ TMS (shipment tracking) \\
+\textbf{Expected flow} &
+    \begin{enumerate}[nosep,leftmargin=1.2em]
+        \item Agent queries OMS for order details (status, items, dates)
+        \item Agent queries TMS for associated shipment(s)
+        \item Agent returns a unified status: order info + shipping status + ETA
+    \end{enumerate} \\
+\textbf{Success}     & Correct order data, correct shipment status, correct ETA \\
+\textbf{Complexity}  & Low --- 2 systems, direct lookup \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{notebox}[Why this use case?]
+This is the most frequent query in any distribution company. It validates the agent's basic ability to retrieve and combine data from two systems. If the agent cannot do this reliably, nothing else matters.
+\end{notebox}
+
+% ── Use Case 2 ───────────────────────────────────────────────────────
+\subsection{UC-2: Delayed Order Root Cause Analysis}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Title}       & Delayed Order Root Cause Analysis \\
+\midrule
+\textbf{Actor}       & Operations Manager \\
+\textbf{Trigger}     & An order is overdue and the manager needs to explain why \\
+\textbf{Question}    & \textit{``Why is order \#ORD-2024-0456 delayed?''} \\
+\textbf{Systems}     & OMS $\to$ TMS $\to$ WMS $\to$ SRM (full chain) \\
+\textbf{Expected flow} &
+    \begin{enumerate}[nosep,leftmargin=1.2em]
+        \item Agent queries OMS: order is overdue, status = processing
+        \item Agent queries TMS: no shipment created yet
+        \item Agent queries WMS: insufficient stock for one item
+        \item Agent queries SRM: purchase order exists but is delayed from supplier
+        \item Agent synthesizes: ``Order delayed because SKU-X is out of stock. A purchase order is pending from Supplier~Y, expected in 3 days.''
+    \end{enumerate} \\
+\textbf{Success}     & Correctly identifies the root cause (inventory shortage $\to$ supplier delay) \\
+\textbf{Complexity}  & Medium --- 4 systems, causal chain reasoning \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{notebox}[Why this use case?]
+This is the core value proposition of SERGE. A human doing this manually would need to check 4 systems sequentially, each time using the output of the previous query as input for the next. This is exactly the kind of cross-system reasoning that justifies an agentic approach over a simple chatbot.
+\end{notebox}
+
+% ── Use Case 3 ───────────────────────────────────────────────────────
+\subsection{UC-3: Supplier Performance Comparison}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Title}       & Supplier Performance Comparison \\
+\midrule
+\textbf{Actor}       & Operations Manager / Procurement \\
+\textbf{Trigger}     & Need to decide which supplier to use for a new purchase order \\
+\textbf{Question}    & \textit{``Compare the performance of our suppliers for electronic components''} \\
+\textbf{Systems}     & SRM (supplier data, PO history, performance metrics) \\
+\textbf{Expected flow} &
+    \begin{enumerate}[nosep,leftmargin=1.2em]
+        \item Agent queries SRM for suppliers in the relevant product category
+        \item Agent queries SRM for performance metrics (on-time rate, lead time, defect rate)
+        \item Agent queries SRM for recent PO history
+        \item Agent generates a comparison table with metrics
+    \end{enumerate} \\
+\textbf{Success}     & Correct metrics for each supplier, accurate comparison, reasonable ranking \\
+\textbf{Complexity}  & Low--Medium --- 1 system, multiple queries, structured output \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{notebox}[Why this use case?]
+This demonstrates the agent's ability to perform structured data extraction and present it in a useful format (comparison table). Unlike UC-1 and UC-2 which are investigative, this is an \textit{analytical} query that tests report generation quality.
+\end{notebox}
+
+% ── Use Case Summary ─────────────────────────────────────────────────
+\subsection{Use Case Summary}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} c l c c l @{}}
+\toprule
+\thead{UC} & \thead{Name} & \thead{Systems} & \thead{Complexity} & \thead{Tests} \\
+\midrule
+1 & Order Status Inquiry          & OMS, TMS       & Low    & Retrieval accuracy, data merging \\
+2 & Delayed Order Root Cause      & OMS, TMS, WMS, SRM & Medium & Cross-system reasoning, causal chain \\
+3 & Supplier Performance          & SRM            & Low--Med & Structured output, data analysis \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+\newpage
+\section{Evaluation Design: LLM-as-Judge}
+% =====================================================================
+
+\subsection{Approach}
+
+Following our advisor's recommendation, we adopt an \textbf{LLM-as-Judge} evaluation methodology. This requires:
+
+\begin{enumerate}[itemsep=0.5em]
+    \item \textbf{Ground truth:} For each test scenario, we predefine the correct answer based on the seed data. We know exactly what the agent \textit{should} find.
+    \item \textbf{Agent execution:} The agent processes the query and produces a response.
+    \item \textbf{Judge evaluation:} A separate LLM (the ``judge'') compares the agent's response against the ground truth and scores it on predefined criteria.
+\end{enumerate}
+
+\begin{keyinsight}
+The LLM-as-Judge approach is well-suited for our project because our agent's outputs are \textit{natural language reports}, not numerical predictions. Traditional metrics (accuracy, F1) don't capture whether the agent correctly explained a root cause. A judge LLM can assess both factual correctness and reasoning quality.
+\end{keyinsight}
+
+\subsection{Ground Truth Design}
+
+For each use case, we define \textbf{test scenarios} with known answers embedded in the seed data.
+
+\subsubsection{Scenario 1: Order Status (UC-1)}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Input}        & ``What is the status of order \#ORD-2024-0456?'' \\
+\midrule
+\textbf{Ground truth} &
+    \begin{itemize}[nosep,leftmargin=1em]
+        \item Order \#ORD-2024-0456: placed 2024-01-10, customer = MegaCorp, status = shipped
+        \item Contains 2 line items: 50x SKU-WIDGET-A, 20x SKU-GADGET-B
+        \item Shipment SHP-2024-1892: carrier = DHL, status = in transit, ETA = 2024-01-17
+    \end{itemize} \\
+\textbf{Must contain}  & Order ID, customer name, order status, item list, shipment ID, carrier, ETA \\
+\textbf{Must NOT contain} & Fabricated data, incorrect quantities, wrong carrier \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Scenario 2: Root Cause Analysis (UC-2)}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Input}        & ``Why is order \#ORD-2024-0789 delayed?'' \\
+\midrule
+\textbf{Ground truth} &
+    \begin{itemize}[nosep,leftmargin=1em]
+        \item Order \#ORD-2024-0789: required by 2024-01-15, status = processing (not shipped)
+        \item No shipment created yet
+        \item WMS: SKU-MOTOR-X has 12 units available, order requires 50
+        \item SRM: PO-2024-102 for 150 units of SKU-MOTOR-X from TechParts Inc, status = in transit, ETA = 2024-01-18
+        \item Root cause: inventory shortage due to pending supplier delivery
+    \end{itemize} \\
+\textbf{Must contain}  & Inventory shortage identified, supplier PO referenced, expected resolution date \\
+\textbf{Must NOT contain} & Incorrect root cause, missing causal link \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Scenario 3: Supplier Comparison (UC-3)}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Input}        & ``Compare our suppliers for electronic components'' \\
+\midrule
+\textbf{Ground truth} &
+    \begin{itemize}[nosep,leftmargin=1em]
+        \item 3 suppliers in category: Acme Electronics, TechParts Inc, GlobalSupply Co
+        \item On-time rates: Acme 91\%, TechParts 96\%, GlobalSupply 78\%
+        \item Avg lead times: Acme 12 days, TechParts 8 days, GlobalSupply 15 days
+        \item TechParts has best reliability; GlobalSupply has lowest cost but worst reliability
+    \end{itemize} \\
+\textbf{Must contain}  & All 3 suppliers listed, on-time rates, lead times, comparative analysis \\
+\textbf{Must NOT contain} & Missing suppliers, fabricated metrics \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Judge Evaluation Criteria}
+
+The judge LLM scores each agent response on 5 dimensions (1--5 scale):
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\thead{Criterion} & \thead{Weight} & \thead{What the Judge Assesses} \\
+\midrule
+Factual correctness  & 30\% & Are all stated facts accurate compared to ground truth? \\
+Completeness         & 25\% & Does the response cover all required data points? \\
+Reasoning quality    & 20\% & Is the causal chain logical and well-explained? (UC-2 mainly) \\
+Source attribution    & 15\% & Does the agent cite which system each piece of data comes from? \\
+Response structure   & 10\% & Is the output well-organized and easy to read? \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Evaluation Protocol}
+
+\begin{enumerate}[itemsep=0.5em]
+    \item Prepare \textbf{5 scenarios per use case} (15 total) with ground truth
+    \item Run each scenario \textbf{3 times} to measure consistency (45 runs total)
+    \item Judge LLM scores each response independently
+    \item Compute per-use-case and aggregate scores
+    \item Also measure: number of MCP tool calls, total response time
+\end{enumerate}
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l l l X @{}}
+\toprule
+\thead{Metric} & \thead{Type} & \thead{Target} & \thead{How Measured} \\
+\midrule
+Judge score          & Quality     & $\geq$4.0/5.0     & LLM-as-Judge weighted average \\
+Factual accuracy     & Correctness & $\geq$90\%          & Judge criterion \#1 \\
+Scenario pass rate   & Reliability & $\geq$80\%          & \% of runs scoring $\geq$3.5/5.0 \\
+Avg tool calls       & Efficiency  & $\leq$6 per query   & Count of MCP calls per scenario \\
+Response time        & Performance & $<$30 seconds       & End-to-end wall clock time \\
+Consistency          & Stability   & $\sigma \leq 0.5$   & Std deviation across 3 runs \\
+\bottomrule
+\end{tabularx}
+\caption{Quantitative evaluation targets.}
+\end{table}
+
+% =====================================================================
+\newpage
+\section{Objectives Summary}
+% =====================================================================
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\thead{Question} & \thead{Answer} \\
+\midrule
+\textbf{Who is the user?} &
+    Operations manager at a mid-size B2B distributor \\[0.6em]
+\textbf{What is the pain?} &
+    Cross-system investigations take 15--30 min because data is siloed across SRM, WMS, OMS, TMS \\[0.6em]
+\textbf{What does SERGE do?} &
+    Retrieves data from all 4 systems via natural language and produces diagnostic reports in $<$1~min \\[0.6em]
+\textbf{What is the scope?} &
+    Read-only retrieval + diagnostic reasoning. No predictions, no write operations \\[0.6em]
+\textbf{Why agentic AI?} &
+    A simple chatbot cannot chain queries across systems adaptively. An agent reasons about \textit{what to query next} based on intermediate results (e.g., ``stock is low $\to$ check supplier POs'') \\[0.6em]
+\textbf{How do we evaluate?} &
+    LLM-as-Judge with predefined ground truth; 15 scenarios, 45 runs \\[0.6em]
+\textbf{What does success look like?} &
+    Judge score $\geq$4.0/5.0, factual accuracy $\geq$90\%, response time $<$30s \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+\section{Updated References}
+% =====================================================================
+
+The following references support the design decisions made in this report. Numbers [1]--[14] refer to our Week~3 literature catalogue; new references are marked with~*.
+
+\vspace{0.5em}
+
+\renewcommand{\arraystretch}{1.25}
+\begin{enumerate}[leftmargin=2em, itemsep=0.3em, label={[\arabic*]}]
+    \item Jannelli, V. et al. (2024). Agentic LLMs in the Supply Chain: Towards Autonomous Multi-Agent Consensus-Seeking. \textit{arXiv:2411.10184}. \textit{Int.\ J.\ Prod.\ Res.}, 2025.
+
+    \item Yin, J. et al. (2025). Rethinking Supply Chain Planning: A Generative Paradigm (SCPA). \textit{arXiv:2509.03811}. --- \textit{Used to justify read-only deployment as first step (Section~2.2).}
+
+    \item AlMahri, S. et al. (2026). Automating Supply Chain Disruption Monitoring via an Agentic AI Approach. \textit{arXiv:2601.09680}. --- \textit{Supports our synthetic scenario evaluation design (Section~5).}
+
+    \item Yoshizato, K. et al. (2026). AI Agent Systems for Supply Chains: Structured Decision Prompts \& Memory Retrieval. \textit{arXiv:2602.05524}. AAMAS~2026. --- \textit{Informs our multi-step reasoning approach in UC-2.}
+
+    \item Quan, Y. \& Liu, Z. (2024). InvAgent: A LLM-based Multi-Agent System for Inventory Management. \textit{arXiv:2407.11384}.
+
+    \item Gosmar, D. et al. (2025). Agentic AI Sustainability Assessment for SC Document Insights. \textit{arXiv:2511.07097}.
+
+    \item Zhang, Y. et al. (2025). Multi-Agent RAG for Supply Chain Knowledge Bases. \textit{arXiv:2506.17484}. KDD~2025 Workshop. --- \textit{Validates our approach of querying structured SC data via an agent.}
+
+    \item Parekh, R. et al. (2025). Leveraging Knowledge Graphs and LLM Reasoning for Warehouse Bottlenecks. \textit{arXiv:2507.17273}.
+
+    \item Integrating RAG with Prompt Engineering for SC Solutions. (2025). \textit{ResearchGate~393479215}.
+
+    \item Zheng, G. et al. (2025). LLMs in SCM: Opportunities and a Case Study. \textit{IFAC-PapersOnLine}, MIM~2025.
+
+    \item Li, B. et al. (2023). OptiGuide: LLMs for Supply Chain Optimization. \textit{arXiv:2307.03875}.
+
+    \item Enhancing SC Resilience with Multi-Agent Systems and ML. (2025). \textit{Am.\ J.\ Eng.\ \& Tech.}
+
+    \item Intelligent Human-Machine Partnership: Simulation-Driven KGs and LLM Collaboration. (2025). \textit{arXiv:2512.18265}.
+
+    \item Supply Chain Mapping through RAG: Electronics Industry. (2026). \textit{J.\ Oper.\ Res.\ Soc.}
+
+    \item[{[15]*}] Zheng, L. et al. (2023). Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. \textit{NeurIPS~2023}. \textit{arXiv:2306.05685}. --- \textit{Foundational paper for our LLM-as-Judge evaluation methodology.}
+
+    \item[{[16]*}] Shankar, S. et al. (2024). Who Validates the Validators? Aligning LLM-Assisted Evaluation with Human Preferences. \textit{arXiv:2404.12272}. --- \textit{Guidelines for designing reliable judge prompts and scoring rubrics.}
+\end{enumerate}
+\renewcommand{\arraystretch}{1.0}
+
+% =====================================================================
+\section{Next Steps}
+% =====================================================================
+
+\begin{itemize}[itemsep=0.6em]
+    \item \textbf{Week 5:} Implement PostgreSQL schema for all 4 systems; write seed data scripts with the 15 evaluation scenarios embedded as ground truth.
+    \item \textbf{Week 5--6:} Build MCP servers (SRM, WMS first, then OMS, TMS) with read-only tools.
+    \item \textbf{Week 6:} Implement the LLM-as-Judge evaluation pipeline; design judge prompt and scoring rubric.
+    \item \textbf{Week 7:} Agent integration, run evaluation scenarios, iterate on agent prompts.
+\end{itemize}
+
+\end{document}
