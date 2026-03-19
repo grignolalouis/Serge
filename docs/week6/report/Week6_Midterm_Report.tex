@@ -1,0 +1,1007 @@
+% !TEX program = pdflatex
+\documentclass[12pt,a4paper]{report}
+
+% ── Geometry & Layout ────────────────────────────────────────────────
+\usepackage[left=3.5cm,right=2.5cm,top=3.5cm,bottom=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{setspace}
+\onehalfspacing
+
+% ── Tables ───────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+
+% ── Graphics & Color ─────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{float}
+
+% ── Typography & Structure ───────────────────────────────────────────
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{tocloft}
+\usepackage{caption}
+
+% ── Page numbering ───────────────────────────────────────────────────
+\usepackage{etoolbox}
+
+% ── Chapter/Section formatting (SIIT style) ──────────────────────────
+\titleformat{\chapter}[display]
+    {\centering\bfseries\large}
+    {CHAPTER \thechapter}
+    {0pt}
+    {\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+\titleformat{\section}
+    {\bfseries\normalsize}
+    {\thesection}
+    {1em}
+    {}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+
+\titleformat{\subsection}
+    {\bfseries\normalsize}
+    {\thesubsection}
+    {1em}
+    {}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+
+\titleformat{\subsubsection}
+    {\bfseries\normalsize}
+    {\thesubsubsection}
+    {1em}
+    {}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+
+% ── Headers / Footers ───────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\thepage}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black,
+}
+
+% ── Table of Contents formatting ─────────────────────────────────────
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappresnum}{CHAPTER }
+\renewcommand{\cftchapaftersnum}{ }
+\newlength{\mylen}
+\settowidth{\mylen}{\cftchappresnum\cftchapaftersnum}
+\addtolength{\cftchapnumwidth}{\mylen}
+
+% ── Column types ─────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% =====================================================================
+%                           DOCUMENT
+% =====================================================================
+\begin{document}
+
+% ── Use roman numerals for front matter ──────────────────────────────
+\pagenumbering{roman}
+
+% =====================================================================
+%                        TITLE PAGE
+% =====================================================================
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+\includegraphics[width=4cm]{figures/siitlogo.png}
+
+\vspace{1cm}
+
+{\large\bfseries SE618 LOGISTIC CASE STUDY ANALYSIS}
+
+\vspace{1.5cm}
+
+{\large\bfseries PROJECT TITLE: SERGE -- AI Agent for Supply Chain Operations}
+
+\vspace{1.5cm}
+
+\begin{tabular}{l l}
+Gauthier SCHMITT & 6822807466 \\
+Louis GRIGNOLA   & 6822807516 \\
+Matteo SCHWARZ   & 6822807557 \\
+Ma\"el TELLUS    & 6822807532 \\
+\end{tabular}
+
+\vspace{1.5cm}
+
+{\large SUBMITTED TO:}\\[0.5em]
+{\large AJARN WARUT}
+
+\vspace{1.5cm}
+
+{\large MARCH 2026}\\[0.3em]
+{\large SEMESTER 2/2025}
+
+\vspace{2cm}
+
+{\large
+SCHOOL OF MANUFACTURING SYSTEMS AND MECHANICAL ENGINEERING\\[0.3em]
+SIRINDHORN INTERNATIONAL INSTITUTE OF TECHNOLOGY\\[0.3em]
+THAMMASAT UNIVERSITY
+}
+
+\vfill
+\end{titlepage}
+
+% =====================================================================
+%                         ABSTRACT
+% =====================================================================
+\newpage
+\addcontentsline{toc}{chapter}{ABSTRACT}
+\begin{center}
+{\large\bfseries ABSTRACT}
+\end{center}
+
+\vspace{1em}
+
+Supply chain operations in B2B distribution companies suffer from data fragmentation across multiple enterprise systems (SRM, WMS, OMS, TMS), forcing operations managers to spend 15--30 minutes per investigation when diagnosing issues such as delayed orders or stockouts. This project presents SERGE, a ready-to-use system that connects supply chain infrastructure to industry-standard AI agents through the Model Context Protocol (MCP). We implement four Go services simulating a mango distribution company, expose them as read-only MCP tools, and connect a Claude Code agent that performs cross-system diagnostic queries via natural language. The agent's outputs are evaluated using an LLM-as-Judge pipeline with predefined ground truth across 15 scenarios and 45 evaluation runs. Our literature review of 35+ papers identifies four research gaps: no standardized SC agent benchmarks, no plug-and-play SC agent architecture, underexplored read-only diagnostic agents, and no SC-specific evaluation framework. SERGE directly addresses three of these gaps by providing a documented, reproducible, and agent-agnostic architecture for supply chain diagnostics.
+
+\vspace{1em}
+
+\noindent\textbf{Keywords:}\quad AI Agent, Supply Chain Management, Model Context Protocol, LLM-as-Judge, B2B Distribution, Diagnostic Reasoning
+
+% =====================================================================
+%                     TABLE OF CONTENTS
+% =====================================================================
+\newpage
+\addcontentsline{toc}{chapter}{TABLE OF CONTENTS}
+\tableofcontents
+
+% =====================================================================
+%                     LIST OF TABLES
+% =====================================================================
+\newpage
+\addcontentsline{toc}{chapter}{LIST OF TABLES}
+\listoftables
+
+% =====================================================================
+%                  LIST OF ABBREVIATIONS
+% =====================================================================
+\newpage
+\addcontentsline{toc}{chapter}{LIST OF SYMBOLS/ABBREVIATIONS}
+\begin{center}
+{\large\bfseries LIST OF SYMBOLS/ABBREVIATIONS}
+\end{center}
+
+\vspace{1em}
+
+\begin{tabular}{@{} l l @{}}
+\textbf{Symbols/Abbreviations} & \textbf{Terms} \\[0.5em]
+ACI   & Agent-Computer Interface \\
+API   & Application Programming Interface \\
+B2B   & Business-to-Business \\
+CRUD  & Create, Read, Update, Delete \\
+ERP   & Enterprise Resource Planning \\
+LLM   & Large Language Model \\
+MCP   & Model Context Protocol \\
+OMS   & Order Management System \\
+ReAct & Reasoning and Acting \\
+SCOR  & Supply Chain Operations Reference \\
+SERGE & Supply Chain Agent (project name) \\
+SIIT  & Sirindhorn International Institute of Technology \\
+SRM   & Supplier Relationship Management \\
+TMS   & Transport Management System \\
+WMS   & Warehouse Management System \\
+\end{tabular}
+
+% ── Switch to arabic page numbers ────────────────────────────────────
+\newpage
+\pagenumbering{arabic}
+
+% =====================================================================
+%              CHAPTER 1: INTRODUCTION
+% =====================================================================
+\chapter{Introduction}
+
+\section{Problem Statement}
+
+Modern supply chains rely on multiple enterprise systems operating in silos: Supplier Relationship Management (SRM), Warehouse Management (WMS), Order Management (OMS), and Transport Management (TMS). Each system is typically provided by a different vendor, accessed through a different interface, and stores its data independently. According to a GEODIS survey, \textbf{only 6\% of companies report full supply chain visibility}, while nearly 80\% have either no visibility or a restricted view~\cite{geodis2024}.
+
+In a B2B distribution context, this fragmentation creates a concrete operational problem. Operations managers spend \textbf{15--30 minutes per investigation} when diagnosing supply chain issues (delayed orders, stockouts, supplier problems). They must manually log into 3--4 separate systems, extract data from each, and mentally piece together the causal chain. The consequences are:
+
+\begin{itemize}[itemsep=0.3em]
+    \item Slow response to customer inquiries about order status
+    \item Incomplete investigations: humans miss data points across systems
+    \item Knowledge concentrated in senior staff who know ``where to look''
+    \item No structured audit trail of investigations
+\end{itemize}
+
+Each system ``speaks a different language'': finance in ERP, orders in OMS, inventory in WMS, transport in TMS~\cite{aws2024sync}. Without integration, cross-system queries require manual reconciliation, creating communication delays, errors, and inefficiencies that worsen at scale.
+
+\section{Objectives}
+
+The objective of this project is to design, implement, and evaluate \textbf{SERGE}, an AI agent that provides a \textbf{ready-to-use system} for connecting supply chain infrastructure to any industry-standard AI agent. Concretely, SERGE:
+
+\begin{enumerate}[itemsep=0.3em]
+    \item \textbf{Connects} the four supply chain systems (SRM, WMS, OMS, TMS) to AI agents through the Model Context Protocol (MCP), an open industry standard.
+    \item \textbf{Retrieves} data from any combination of systems in response to natural language queries.
+    \item \textbf{Reasons} across systems to identify root causes, correlations, and patterns (e.g., ``this order is delayed because the supplier shipment is late, causing an inventory shortage'').
+    \item \textbf{Generates} structured diagnostic reports with source attribution.
+    \item \textbf{Remains strictly read-only}: SERGE never writes to the supply chain databases.
+\end{enumerate}
+
+Because SERGE exposes supply chain data through the MCP standard, \textbf{any MCP-compatible agent} (Claude, GPT, Llama, Mistral, or custom agents) can plug into the supply chain infrastructure without any modification to the data layer. The system is designed as a bridge between existing supply chain software and the rapidly evolving ecosystem of AI agents.
+
+\section{Scope}
+
+We explicitly scope SERGE as a \textbf{retrieval and diagnostic} agent, not a predictive or decision-making one:
+
+\begin{table}[H]
+\centering\small
+\caption{SERGE capabilities and scope.}
+\begin{tabularx}{\textwidth}{@{} l c X @{}}
+\toprule
+\textbf{Capability} & \textbf{In Scope?} & \textbf{Description} \\
+\midrule
+Data retrieval          & Yes & Query any of the 4 systems via natural language \\
+Cross-system diagnostic & Yes & Connect data across SRM, WMS, OMS, TMS to find root causes \\
+Report generation       & Yes & Produce structured summaries and comparisons \\
+Predictive analytics    & No  & Forecasting demand, predicting delays (future work) \\
+Autonomous decisions    & No  & Reordering stock, rerouting shipments (out of scope) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+This scoping is deliberate: in practice, companies deploy read-only AI assistants \textit{before} trusting AI with write access. Our agent reflects this real-world adoption pattern.
+
+B2B distribution is the ideal setting because it involves all four supply chain systems with high interdependency. A single delayed supplier shipment can cascade into stockouts, delayed customer orders, and carrier rebooking, which is exactly the kind of cross-system reasoning our agent targets.
+
+% =====================================================================
+%              CHAPTER 2: REVIEW OF LITERATURE
+% =====================================================================
+\chapter{Review of Literature}
+
+\section{Large Language Models}
+
+Large Language Models (LLMs) are the foundational technology powering modern AI agents. Built on the Transformer architecture introduced by Vaswani et al.~\cite{vaswani2017attention}, LLMs rely entirely on self-attention mechanisms to process input sequences in parallel, capturing long-range dependencies between tokens.
+
+\subsection{Scaling Laws and Emergence}
+
+Kaplan et al.~\cite{kaplan2020scaling} established that language model performance scales as a power-law with model size, dataset size, and compute, spanning more than seven orders of magnitude. Larger models are significantly more sample-efficient. Hoffmann et al.~\cite{hoffmann2022chinchilla} later refined these findings, showing that compute-optimal training requires more data than previously assumed.
+
+A critical phenomenon is the emergence of capabilities at scale: performance on certain tasks remains near-random until a critical threshold, after which it increases substantially~\cite{wei2022emergent}. This phase-transition behavior means that modern LLMs exhibit qualitatively different capabilities (reasoning, tool use, multi-step planning) that smaller models simply cannot perform.
+
+\subsection{Current Landscape}
+
+As of early 2026, the major model families include GPT-4/5 (OpenAI), Claude Opus 4.6 and Sonnet 4 (Anthropic), Llama 4 (Meta, open-source), and Mistral Large 3 (Mistral AI, open-weight). These models serve as the \textbf{reasoning engine} for AI agents: without tools, they can only generate text; with tools, they become capable of perceiving environments, making decisions, taking actions, and learning from feedback.
+
+LLMs are the ``fuel'' that powers AI agents. The agent itself is the system built around the LLM: the tool integrations, the orchestration logic, the memory management, and the execution environment. SERGE's architecture separates these concerns, so the LLM can be swapped while the agent infrastructure remains unchanged.
+
+\section{AI Agents: From ReAct to Modern Architectures}
+
+The modern LLM-agent paradigm decomposes autonomous systems into three pillars: \textbf{planning}, \textbf{memory}, and \textbf{tool use}~\cite{weng2023agents}. Agents interleave reasoning with action execution, grounding their decisions in external environments rather than relying solely on parametric knowledge.
+
+\subsection{Foundational Work: ReAct}
+
+Yao et al.~\cite{yao2023react} introduced the ReAct framework where LLMs generate interleaved \textit{reasoning traces} and \textit{task-specific actions}. Evaluated on HotPotQA, FEVER, ALFWorld, and WebShop, ReAct outperforms pure reasoning or pure acting baselines while improving interpretability. However, ReAct has limitations: single-path reasoning, one LLM call per action, and no separation between planning and execution.
+
+\subsection{Beyond ReAct: Modern Agent Paradigms}
+
+The field has evolved significantly beyond ReAct. Plan-and-Execute architectures separate planning from execution, reducing LLM calls and improving task completion. Tree of Thoughts~\cite{yao2023tot} introduces search over multiple reasoning paths, while Graph of Thoughts~\cite{besta2023got} allows arbitrary connections between reasoning steps including aggregation and iterative refinement. ReWOO separates the planning phase entirely from execution, generating a full plan with placeholders before any tool is called.
+
+A recent unified taxonomy~\cite{agenttaxonomy2026} organizes agent architectures along six dimensions: perception, brain (core reasoning), planning, action, tool use, and collaboration. Critical design dimensions now include orchestration strategy, memory architecture, and test-time compute scaling, where extended thinking at inference time can be more effective than scaling model parameters.
+
+\subsection{Claude Code as a State-of-the-Art Agent}
+
+The agent we use in this project, Claude Code, represents the current state of the art in agentic systems. Built by Anthropic~\cite{anthropic2024agents}, it implements a single-threaded agentic loop:
+
+\begin{quote}
+\texttt{while(tool\_call) $\to$ execute tool $\to$ feed results $\to$ repeat}
+\end{quote}
+
+The loop operates in three blended phases: (1) \textbf{gather context} by searching files and reading code, (2) \textbf{take action} by editing files and running commands, and (3) \textbf{verify results} by running tests and checking outputs~\cite{anthropic2025howccworks}.
+
+Claude Code goes well beyond a simple ReAct loop in several ways~\cite{anthropic2025contextengineering}:
+
+\begin{itemize}[itemsep=0.3em]
+    \item \textbf{Integrated deep reasoning:} Extended thinking is built into the model, not bolted on as a prompting technique. The model reasons deeply before and during tool use.
+    \item \textbf{File-system-native:} The agent operates directly in a project directory with full file system access, git awareness, and terminal execution.
+    \item \textbf{Skill-based composition:} Reusable workflows (skills) can be discovered, loaded on demand, and composed. This is more like a library of expert behaviors than a fixed reasoning template.
+    \item \textbf{Sub-agent spawning:} The orchestrator-worker pattern is built in, with strict depth limits and clean context boundaries. Each sub-agent runs in its own isolated context window.
+    \item \textbf{Context engineering:} Sophisticated management of the finite context window, including compaction, structured notes, and progressive skill loading~\cite{anthropic2025contextengineering}.
+\end{itemize}
+
+Anthropic's research on building effective agents~\cite{anthropic2024agents} identifies seven composable patterns: Augmented LLM, Prompt Chaining, Routing, Parallelization, Orchestrator-Workers, Evaluator-Optimizer, and Autonomous Agents. A core principle is to invest in Agent-Computer Interface (ACI) quality, specifically the clarity and documentation of tools exposed to the agent~\cite{anthropic2025writingtools}.
+
+\subsection{Tool Use in LLMs}
+
+Schick et al.~\cite{schick2023toolformer} demonstrated with Toolformer that LLMs can learn in a self-supervised fashion to decide which APIs to call, when to call them, and how to incorporate results. Shen et al.~\cite{shen2023hugginggpt} proposed HuggingGPT, a four-stage workflow using an LLM as a controller to orchestrate 24+ specialized models. Patil et al.~\cite{patil2024gorilla} introduced Gorilla, surpassing GPT-4 on API calls across 1,600+ APIs, along with the Berkeley Function-Calling Leaderboard (BFCL).
+
+Surveys on tool learning~\cite{toollearningsurvey2025} identify three dominant paradigms: (1) fine-tuning, (2) in-context learning, and (3) orchestration frameworks. Notably, forcing JSON output for function calls can degrade reasoning performance by over 27 percentage points, highlighting the importance of separating reasoning from tool-call formatting.
+
+\section{Model Context Protocol}
+
+The Model Context Protocol (MCP)~\cite{mcp2024} is an open standard introduced by Anthropic in November 2024 and now hosted by the Linux Foundation. It standardizes how AI agents connect to external data sources and tools through three core primitives: \textbf{tools} (callable functions), \textbf{resources} (data endpoints), and \textbf{prompts} (reusable templates).
+
+MCP solves the ``N $\times$ M'' integration problem: instead of building custom integrations for every combination of agent and tool, both sides implement a single standard protocol. The analogy is USB-C for AI: a universal connector between agents and external systems. MCP is based on JSON-RPC 2.0, inspired by the Language Server Protocol (LSP), and supports both local (stdio) and remote (HTTP/SSE) transports~\cite{mcpspec}.
+
+By early 2025, over 1,000 MCP servers existed in the ecosystem, with SDKs in Python, TypeScript, C\#, Java, and Go. Enterprise adoption accelerated rapidly: Microsoft launched a Dynamics 365 ERP MCP Server at Build 2025~\cite{msdynamics2025}, Salesforce added native MCP support to Agentforce, and Oracle introduced MCP server support with native database integration.
+
+MCP is the backbone of SERGE's architecture. Each supply chain system is exposed through MCP tools, providing a standardized interface that \textit{any AI agent} can connect to. It is the agent that connects to MCP, not the LLM directly: the LLM is the reasoning engine inside the agent, and the agent uses MCP tools as its hands and eyes into the supply chain. Plugging a new agent into our supply chain infrastructure requires \textbf{zero changes} to the data access layer.
+
+\section{Supply Chain Management: Fragmentation and Visibility}
+
+B2B distribution supply chains are characterized by \textbf{fragmented systems}, \textbf{data silos}, and \textbf{lack of end-to-end visibility}. The SCOR Digital Standard (SCOR-DS)~\cite{scords2022}, maintained by ASCM, provides a process reference framework covering Plan, Source, Transform, Order, Fulfill, Return, and Orchestrate, emphasizing the need for cross-functional visibility.
+
+Almost two-thirds of companies consider their supply chain a competitive advantage, yet only 6\% achieve full visibility~\cite{geodis2024}. Each enterprise system operates independently: ERP handles finance, OMS manages orders, WMS tracks inventory, and TMS coordinates transport~\cite{aws2024sync}. Without integration, functions like transport ordering become manual processes (email exchanges and hand-keyed responses), creating confusion, errors, and inefficiencies at scale.
+
+Recent industry analysis~\cite{omniful2026} confirms that most companies run separate standalone systems, creating persistent data silos. Integration through unified approaches can yield 5--10\% freight cost savings, yet the rise of marketplace platforms is causing ``supplier disintermediation,'' forcing distributors to differentiate through data-driven insights~\cite{globe3distribution}. Academic research on breaking down silos~\cite{irjmets2024silos} proposes integration approaches, but most remain at the infrastructure level (data warehouses, ETL pipelines) rather than offering intelligent query interfaces.
+
+\section{AI and LLM Applications in Supply Chain (2023--2026)}
+
+The application of LLMs and AI agents to supply chain management is an emerging field with a sharp research acceleration: from fewer than 5 papers pre-2021 to approximately 45 in 2024 alone. A systematic review of 98 peer-reviewed studies~\cite{gaisc2025systematic} found that roughly 45\% do not fully specify their architectures, indicating methodological immaturity. Most evidence remains at prototype level, rarely reporting system-wide KPIs.
+
+\subsection{Multi-Agent Supply Chain Systems}
+
+Jannelli et al.~\cite{jannelli2024agentic} introduced consensus-seeking frameworks where LLM agents represent companies, balancing selfish goals with systemic outcomes. Results show that LLM agents minimize the bullwhip effect better than restocking policies and centralized demand approaches. The authors note that ``academic agentic supply chain research is in its infancy.'' JD.com deployed the Supply Chain Planning Agent (SCPA) framework~\cite{yin2025scpa}, demonstrating real-world feasibility.
+
+\subsection{Diagnostic and Knowledge-Based Approaches}
+
+An LLM-driven supply chain diagnosis method~\cite{scddiagnosis2025} integrates LLMs with optimization solvers and fault mode libraries for automated diagnosis. AlMahri et al.~\cite{almahri2026disruption} propose a Knowledge Graph Query Agent for disruption monitoring. Multi-Agent RAG systems~\cite{zhang2025rag} transform unstructured supply chain communications into queryable knowledge bases.
+
+\subsection{Emerging Paradigms}
+
+The concept of Agentic Digital Twins~\cite{agenticdt2026} bridges digital twin infrastructure with agentic AI for real-time decision support. The International Journal of Production Research has launched a dedicated special issue on ``The Agentic Supply Chain''~\cite{agenticscissue}, signaling growing academic recognition. On the industry side, Walmart, Siemens, SAP, Microsoft, and Google are all developing supply chain agent platforms.
+
+\section{LLM-as-Judge Evaluation}
+
+LLM-as-Judge uses strong LLMs to evaluate the outputs of other LLMs or systems, providing scalable, cost-effective assessments as an alternative to human expert evaluation. Zheng et al.~\cite{zheng2023judge} established the foundational framework with MT-Bench and Chatbot Arena, demonstrating that strong LLM judges achieve \textbf{over 80\% agreement with human preferences}. Three evaluation modes exist:
+
+\begin{itemize}[itemsep=0.3em]
+    \item \textbf{Pointwise:} Rate a single output on a rubric (our primary mode)
+    \item \textbf{Pairwise:} Compare two outputs side by side
+    \item \textbf{Listwise:} Rank multiple outputs
+\end{itemize}
+
+Known biases include position bias, verbosity bias, and self-enhancement bias. Comprehensive surveys~\cite{gu2024judgesurvey, li2024judgessurvey} explore strategies to enhance consistency and mitigate these biases. The EMNLP 2025 taxonomy~\cite{li2025emnlpjudge} introduces a three-dimensional framework: \textit{what} to judge, \textit{how} to judge, and \textit{where} to judge.
+
+SERGE's evaluation uses LLM-as-Judge in \textbf{pointwise mode} with well-defined ground truth. For diagnostic queries across SRM/WMS/OMS/TMS, ground truth is established from known data states, and a judge LLM evaluates whether the agent's response correctly synthesizes cross-system information. To mitigate self-enhancement bias, we use a different LLM as judge than the one powering the agent.
+
+\section{Research Gaps}
+
+Our literature review identifies four significant gaps:
+
+\begin{enumerate}[itemsep=0.5em]
+    \item \textbf{No standardized supply chain agent benchmarks.} Current agent benchmarks (AgentBench~\cite{agentbench2024}, SWE-bench, WebArena) focus on software engineering, web navigation, and general reasoning. No benchmark exists for evaluating AI agents operating across supply chain systems.
+
+    \item \textbf{No plug-and-play architecture connecting SC systems to AI agents.} Existing SC-AI solutions are tightly coupled to specific LLM providers or require custom integration code for each supply chain system. Enterprise MCP adoption is recent (2025) and SC-specific MCP servers are not yet standardized.
+
+    \item \textbf{Read-only diagnostic agents underexplored.} Most SC-AI research focuses on optimization (planning, forecasting, replenishment) or autonomous action (consensus-seeking, automated ordering). The read-only diagnostic use case, querying across systems to answer operational questions without modifying data, is underexplored.
+
+    \item \textbf{No SC-specific evaluation with ground truth.} LLM-as-Judge has been validated for general NLP tasks but no evaluation framework exists specifically for supply chain agent responses with domain-specific ground truth.
+\end{enumerate}
+
+SERGE directly addresses \textbf{Gaps 2, 3, and 4}:
+\begin{itemize}[itemsep=0.3em]
+    \item \textbf{Gap 2:} SERGE provides a ready-to-use, plug-and-play architecture via MCP servers for SC systems that any agent can connect to.
+    \item \textbf{Gap 3:} SERGE is explicitly a read-only diagnostic agent, filling the underexplored niche.
+    \item \textbf{Gap 4:} SERGE's evaluation plan uses LLM-as-Judge with SC-specific ground truth, contributing a novel evaluation methodology.
+\end{itemize}
+
+SERGE can also contribute toward closing Gap~1 by publishing its diagnostic query scenarios as a reusable SC agent evaluation dataset.
+
+% =====================================================================
+%              CHAPTER 3: METHODOLOGY
+% =====================================================================
+\chapter{Methodology}
+
+\section{Overall Approach}
+
+Our methodology consists of four components working together:
+
+\begin{enumerate}[itemsep=0.3em]
+    \item \textbf{Four Go services in a monorepo} simulating the supply chain systems (SRM, WMS, OMS, TMS), each with its own data model, repository layer, and controllers.
+    \item \textbf{An MCP integration layer} built with \texttt{trpc-mcp-go}, wrapping the service controllers as read-only MCP tools accessible to any AI agent.
+    \item \textbf{An AI agent} (Claude Code) operating in a dedicated project folder, connecting to the MCP servers to perform diagnostic queries.
+    \item \textbf{An LLM-as-Judge evaluation pipeline} comparing agent outputs against predefined ground truth.
+\end{enumerate}
+
+To ground the system in a concrete scenario, we model a \textbf{small B2B mango distribution company} that sources mangoes from suppliers, stores them in warehouses, processes orders from distributors, and ships via carriers. This deliberately simple use case allows us to model the full supply chain while keeping the data comprehensible for evaluation.
+
+\section{Software Architecture: Four Go Services}
+
+The four supply chain systems are implemented as \textbf{Go services within a single monorepo}, following a clean three-layer architecture: \textbf{structs} (domain entities), \textbf{repositories} (data access), and \textbf{controllers} (business logic). This is not a microservices architecture; all four services live in the same codebase and share a common build pipeline.
+
+\subsection{SRM: Supplier Relationship Management}
+
+The SRM service manages the upstream supply chain: suppliers, purchase orders, and supplier performance tracking.
+
+\begin{table}[H]
+\centering\small
+\caption{SRM service: structs, repository, and controller functions.}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Component} & \textbf{Details} \\
+\midrule
+\textbf{Structs} &
+    \texttt{Supplier} (ID, name, country, contact, rating, product categories),
+    \texttt{PurchaseOrder} (ID, supplier ID, items, status, order date, expected delivery, actual delivery),
+    \texttt{SupplierPerformance} (supplier ID, on-time rate, avg lead time, defect rate, total POs) \\
+\textbf{Repository} &
+    \texttt{GetSupplierByID}, \texttt{ListSuppliers}, \texttt{ListSuppliersByCategory},
+    \texttt{GetPurchaseOrderByID}, \texttt{ListPurchaseOrdersBySupplier}, \texttt{ListPurchaseOrdersByStatus},
+    \texttt{GetSupplierPerformance}, \texttt{ListOverduePurchaseOrders} \\
+\textbf{Controller} &
+    \texttt{GetSupplier(id)} returns full supplier profile with performance metrics.
+    \texttt{ListPurchaseOrders(filters)} returns filtered POs with supplier info.
+    \texttt{GetSupplierPerformance(id)} computes on-time rate, lead time stats, defect rate from PO history.
+    \texttt{CompareSuppliers(category)} returns side-by-side comparison for a product category. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{WMS: Warehouse Management System}
+
+The WMS service tracks products, inventory levels, stock movements, and warehouse locations.
+
+\begin{table}[H]
+\centering\small
+\caption{WMS service: structs, repository, and controller functions.}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Component} & \textbf{Details} \\
+\midrule
+\textbf{Structs} &
+    \texttt{Product} (ID, SKU, name, category, unit, reorder point, reorder quantity),
+    \texttt{Inventory} (product ID, warehouse ID, quantity available, quantity reserved, last updated),
+    \texttt{StockMovement} (ID, product ID, warehouse ID, type [in/out/transfer], quantity, timestamp, reference),
+    \texttt{Warehouse} (ID, name, location, capacity) \\
+\textbf{Repository} &
+    \texttt{GetProductByID}, \texttt{GetProductBySKU}, \texttt{ListProducts},
+    \texttt{GetInventory(product, warehouse)}, \texttt{ListInventoryByWarehouse},
+    \texttt{ListLowStockProducts(threshold)}, \texttt{GetStockMovements(product, dateRange)},
+    \texttt{ListWarehouses} \\
+\textbf{Controller} &
+    \texttt{CheckInventory(sku)} returns current stock across all warehouses with reorder status.
+    \texttt{GetStockMovements(sku, days)} returns recent movements with running balance.
+    \texttt{GetProduct(id)} returns product details with current inventory levels.
+    \texttt{ListLowStock()} identifies products below reorder point. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{OMS: Order Management System}
+
+The OMS service handles customer orders, order lines, and fulfillment status.
+
+\begin{table}[H]
+\centering\small
+\caption{OMS service: structs, repository, and controller functions.}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Component} & \textbf{Details} \\
+\midrule
+\textbf{Structs} &
+    \texttt{Customer} (ID, name, company, segment [retail/wholesale/enterprise], region),
+    \texttt{Order} (ID, customer ID, status [pending/processing/shipped/delivered/cancelled], order date, required date, priority),
+    \texttt{OrderLine} (order ID, product ID, quantity ordered, quantity fulfilled, unit price) \\
+\textbf{Repository} &
+    \texttt{GetOrderByID}, \texttt{ListOrdersByCustomer}, \texttt{ListOrdersByStatus},
+    \texttt{ListOverdueOrders}, \texttt{GetOrderLines(orderID)},
+    \texttt{GetCustomerByID}, \texttt{ListCustomers},
+    \texttt{GetOrderHistory(customer, dateRange)} \\
+\textbf{Controller} &
+    \texttt{GetOrder(id)} returns order with customer info, all lines, and fulfillment status.
+    \texttt{ListOrdersByCustomer(id)} returns order history for a customer.
+    \texttt{ListOverdueOrders()} returns orders past their required date that are not yet delivered.
+    \texttt{GetOrderLines(id)} returns detailed line items with product info and fulfillment rates. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{TMS: Transport Management System}
+
+The TMS service manages shipments, carriers, tracking events, and delivery performance.
+
+\begin{table}[H]
+\centering\small
+\caption{TMS service: structs, repository, and controller functions.}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Component} & \textbf{Details} \\
+\midrule
+\textbf{Structs} &
+    \texttt{Shipment} (ID, order ID, carrier ID, status [pending/in\_transit/delivered/exception], origin, destination, shipped date, ETA, actual delivery),
+    \texttt{Carrier} (ID, name, service type, base cost, avg transit time),
+    \texttt{TrackingEvent} (shipment ID, timestamp, location, status, description) \\
+\textbf{Repository} &
+    \texttt{GetShipmentByID}, \texttt{GetShipmentByOrderID}, \texttt{ListShipmentsByCarrier},
+    \texttt{ListShipmentsByStatus}, \texttt{GetTrackingEvents(shipmentID)},
+    \texttt{GetCarrierByID}, \texttt{ListCarriers},
+    \texttt{GetCarrierPerformance(carrierID)} \\
+\textbf{Controller} &
+    \texttt{GetShipment(id)} returns shipment with carrier info and tracking history.
+    \texttt{TrackDelivery(orderID)} finds the shipment for an order and returns full tracking timeline.
+    \texttt{GetCarrierPerformance(id)} computes on-time rate, avg transit time, exception rate.
+    \texttt{ListExceptionShipments()} returns shipments with delivery issues. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{MCP Integration Layer}
+
+The MCP integration layer is built using \textbf{trpc-mcp-go}~\cite{trpcmcpgo}, a Go implementation of the Model Context Protocol. It lives in the \textbf{same monorepo} as the four Go services.
+
+The architecture follows a clear call chain: the MCP layer receives a tool call from the agent, routes it to the appropriate \textbf{controller}, which implements the business logic and calls the \textbf{repository} for data access. Each controller function is registered as an MCP tool with typed parameters and descriptions. The MCP layer enforces \textbf{read-only access}: only query functions are exposed; no create, update, or delete operations are available to the agent.
+
+\begin{table}[H]
+\centering\small
+\caption{MCP tools mapped to service controllers.}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\textbf{MCP Tool} & \textbf{Routes To} & \textbf{Description} \\
+\midrule
+\texttt{srm\_get\_supplier}           & SRM Controller & Get supplier profile with performance \\
+\texttt{srm\_list\_purchase\_orders}   & SRM Controller & List and filter purchase orders \\
+\texttt{srm\_compare\_suppliers}       & SRM Controller & Side-by-side supplier comparison \\
+\texttt{wms\_check\_inventory}         & WMS Controller & Stock levels across warehouses \\
+\texttt{wms\_get\_stock\_movements}    & WMS Controller & Recent stock movement history \\
+\texttt{wms\_list\_low\_stock}         & WMS Controller & Products below reorder point \\
+\texttt{oms\_get\_order}               & OMS Controller & Full order with lines and status \\
+\texttt{oms\_list\_overdue\_orders}    & OMS Controller & Orders past required date \\
+\texttt{oms\_get\_order\_lines}        & OMS Controller & Detailed line items for an order \\
+\texttt{tms\_get\_shipment}            & TMS Controller & Shipment with tracking history \\
+\texttt{tms\_track\_delivery}          & TMS Controller & Find and track shipment for an order \\
+\texttt{tms\_get\_carrier\_performance} & TMS Controller & Carrier on-time and exception rates \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Following Anthropic's guidelines on writing tools for agents~\cite{anthropic2025writingtools}, each MCP tool is designed to be self-contained, clearly documented with example usage, and token-efficient in its responses. The quality of the tool definitions is critical: the better the agent understands what each tool does and when to use it, the more accurately it can reason across systems.
+
+Because the MCP server uses the standard protocol, any MCP-compatible agent can connect to our supply chain system. This provides \textbf{plug-and-play capabilities}: swap Claude Code for GPT, Llama, or any other agent, and the supply chain tools remain identical. This is the core of SERGE's design: a ready-to-use bridge between supply chain infrastructure and AI agents.
+
+\section{AI Agent: Claude Code in a Dedicated Project}
+
+For the prototype, we use \textbf{Claude Code} as the agent runtime. Claude Code operates in a \textbf{dedicated project folder} that defines the agent's full working context. This folder contains:
+
+\begin{itemize}[itemsep=0.3em]
+    \item \textbf{\texttt{CLAUDE.md}}: The project-level configuration file that instructs the agent on its behavior, available MCP tools, investigation workflows, logging requirements, and constraints (read-only, no data fabrication, always cite sources).
+    \item \textbf{Skills}: Reusable workflow definitions (\texttt{SKILL.md} files) that encode domain-specific investigation procedures (e.g., \texttt{/investigate-order}, \texttt{/supplier-report}). Skills are loaded on demand following Anthropic's progressive disclosure principle~\cite{anthropic2025skills}.
+    \item \textbf{Logs}: Structured output directory where the agent's complete tour (reasoning traces, tool calls, intermediate results, final responses) is captured for evaluation.
+    \item \textbf{Reports}: Generated diagnostic reports and analysis outputs.
+\end{itemize}
+
+This folder-based approach provides several advantages. The agent runs in a \textbf{containerized environment} where its context, capabilities, and constraints are fully defined. The same folder can be used with different agents (Claude Code, a custom agent via the Claude Agent SDK, or any MCP-compatible agent) without modification. Skills can be extended to add new investigation capabilities without changing the core infrastructure.
+
+A critical design choice is comprehensive logging. The agent's complete ``tour'' for every query (each reasoning step, each MCP tool call, each intermediate result) is captured in structured logs. This tour is then compared against the ground truth by the LLM-as-Judge pipeline. Proper logging guidelines are embedded in the project's \texttt{CLAUDE.md} configuration.
+
+\section{Use Cases}
+
+We define \textbf{three use cases} representing common operations tasks, deliberately simple and concrete to allow rigorous evaluation:
+
+\begin{table}[H]
+\centering\small
+\caption{Three use cases with increasing complexity.}
+\begin{tabularx}{\textwidth}{@{} c l c c X @{}}
+\toprule
+\textbf{UC} & \textbf{Name} & \textbf{Systems} & \textbf{Complexity} & \textbf{What It Tests} \\
+\midrule
+1 & Order Status Inquiry          & OMS, TMS       & Low    & Basic retrieval and data merging from 2 systems \\
+2 & Delayed Order Root Cause      & OMS, TMS, WMS, SRM & Medium & Cross-system causal chain reasoning (4 systems) \\
+3 & Supplier Performance          & SRM            & Low--Med & Structured data extraction and report generation \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\textbf{UC-2} is the core value proposition: a human doing this manually would check 4 systems sequentially, each time using the output of the previous query as input for the next. This cross-system reasoning justifies an agentic approach over a simple chatbot.
+
+\section{Evaluation: LLM-as-Judge Pipeline}
+
+Our evaluation follows a three-stage pipeline:
+
+\begin{enumerate}[itemsep=0.3em]
+    \item \textbf{Ground truth definition:} For each test scenario, we predefine the correct answer based on the seeded data. We know exactly what the agent \textit{should} find, which systems it should query, and what causal links it should identify.
+    \item \textbf{Agent execution with logging:} The agent processes the query in its dedicated project folder. Its complete tour (reasoning traces + tool calls + responses) is logged.
+    \item \textbf{LLM-as-Judge scoring:} A separate LLM (the ``judge'') compares the agent's response and tour against the ground truth, scoring on predefined criteria.
+\end{enumerate}
+
+\subsection{Judge Evaluation Criteria}
+
+The judge LLM scores each agent response on 5 dimensions (1--5 scale):
+
+\begin{table}[H]
+\centering\small
+\caption{LLM-as-Judge scoring rubric.}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\textbf{Criterion} & \textbf{Weight} & \textbf{What the Judge Assesses} \\
+\midrule
+Factual correctness  & 30\% & Are all stated facts accurate compared to ground truth? \\
+Completeness         & 25\% & Does the response cover all required data points? \\
+Reasoning quality    & 20\% & Is the causal chain logical and well-explained? (UC-2 mainly) \\
+Source attribution    & 15\% & Does the agent cite which system each piece of data comes from? \\
+Response structure   & 10\% & Is the output well-organized and easy to read? \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Evaluation Protocol}
+
+\begin{table}[H]
+\centering\small
+\caption{Evaluation parameters.}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\textbf{Parameter} & \textbf{Value} & \textbf{Description} \\
+\midrule
+Scenarios         & 15 total      & 5 per use case, with embedded ground truth \\
+Runs              & 45 total      & 3 runs per scenario (consistency measurement) \\
+Judge score       & Weighted avg  & Composite score from the 5 evaluation criteria \\
+Factual accuracy  & Criterion \#1 & Proportion of facts matching ground truth \\
+Scenario pass rate & Per-scenario  & Percentage of runs producing acceptable responses \\
+Tool call count   & Per query     & Number of MCP calls used to resolve the query \\
+Response time     & Wall clock    & End-to-end time from query to final response \\
+Consistency       & Std deviation & Score variation across repeated runs of the same scenario \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Development Timeline}
+
+The remaining development is planned over approximately \textbf{4~weeks} (March~16 to April~16, 2026):
+
+\begin{table}[H]
+\centering\small
+\caption{4-week development plan (March 16 to April 16, 2026).}
+\begin{tabularx}{\textwidth}{@{} c l X @{}}
+\toprule
+\textbf{Week} & \textbf{Dates} & \textbf{Deliverables} \\
+\midrule
+1 & Mar 16--22 & Complete all 4 Go services (structs, repositories, controllers); seed data generation with 15 embedded evaluation scenarios \\
+2 & Mar 23--30 & MCP integration layer: register all tools, test tool descriptions; set up Claude Code agent project folder with \texttt{CLAUDE.md} and skills \\
+3 & Mar 31--Apr 6 & Agent integration testing on all 3 use cases; implement LLM-as-Judge pipeline; define judge prompt and scoring rubric \\
+4 & Apr 7--16 & Full evaluation (45 runs); results analysis and visualization; final report; presentation preparation \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/gantt.pdf}
+\caption{Development Gantt chart: March 16 to April 16, 2026.}
+\label{fig:gantt}
+\end{figure}
+
+% =====================================================================
+%              CHAPTER 4: EXPECTED OUTPUTS
+% =====================================================================
+\chapter{Expected Outputs}
+
+\section{What We Expect from the Agent}
+
+We believe SERGE will \textbf{succeed} at the diagnostic tasks defined in our use cases. This is a realistic and achievable goal for the following reasons:
+
+\begin{enumerate}[itemsep=0.3em]
+    \item \textbf{The tasks are well-scoped:} Each use case involves querying a known set of systems with clearly defined data. The agent does not need to handle ambiguity in the data itself, only in the user's natural language query.
+    \item \textbf{Modern agents excel at tool use:} Claude Code and similar agents have demonstrated strong capabilities in multi-step tool use, reasoning across tool outputs, and generating structured reports. Our use cases (order lookup, root cause analysis, supplier comparison) are well within these capabilities.
+    \item \textbf{The critical success factor is MCP tool design:} The quality of the MCP tool definitions (clear descriptions, well-typed parameters, meaningful return values) directly determines how effectively the agent can use them. We invest significant effort in designing tools following Anthropic's ACI guidelines~\cite{anthropic2025writingtools}.
+\end{enumerate}
+
+For \textbf{UC-1} (Order Status), we expect near-perfect scores: this is a straightforward two-system lookup. For \textbf{UC-2} (Root Cause Analysis), the challenge is in the cross-system causal reasoning, but the seeded data creates clear causal chains that a well-prompted agent should follow. For \textbf{UC-3} (Supplier Comparison), the main test is structured output quality.
+
+The main risks are: (1) the agent making unnecessary tool calls when fewer would suffice, (2) inconsistency across repeated runs on the same scenario, and (3) the agent missing one link in a causal chain for UC-2. These are exactly what the evaluation pipeline is designed to measure and quantify.
+
+\section{Project Deliverables}
+
+\begin{table}[H]
+\centering\small
+\caption{Project deliverables and current status.}
+\begin{tabularx}{\textwidth}{@{} l X l @{}}
+\toprule
+\textbf{Deliverable} & \textbf{Description} & \textbf{Status} \\
+\midrule
+4 Go services (monorepo)  & SRM, WMS, OMS, TMS with structs, repositories, controllers & In progress \\
+MCP integration layer      & trpc-mcp-go wrapping all 4 services with read-only tools   & In progress \\
+Seed data                  & Realistic mango distributor data with 15 embedded scenarios & In progress \\
+Agent project folder       & Claude Code project with \texttt{CLAUDE.md}, skills, and logging & Planned \\
+Evaluation pipeline        & LLM-as-Judge with ground truth, scoring rubric, results     & Planned \\
+Final report               & Complete analysis of results, lessons learned, contributions & Planned \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Research Contributions}
+
+Upon completion, SERGE will contribute:
+
+\begin{enumerate}[itemsep=0.3em]
+    \item \textbf{A ready-to-use SC agent architecture:} A documented, reproducible architecture using MCP to connect any AI agent to supply chain systems (Gap~2).
+    \item \textbf{A read-only diagnostic agent prototype:} Demonstrating that cross-system reasoning without write access is a viable and valuable use case (Gap~3).
+    \item \textbf{An SC-specific LLM-as-Judge evaluation:} A methodology for evaluating supply chain agent responses with domain-specific ground truth (Gap~4).
+    \item \textbf{Reusable evaluation scenarios:} 15 diagnostic scenarios with ground truth that can serve as a starting point for SC agent benchmarks (Gap~1).
+\end{enumerate}
+
+\section{Knowledge Gained}
+
+Beyond the technical deliverables, the team has gained significant knowledge across multiple dimensions:
+
+\subsection{Supply Chain Domain}
+
+\begin{itemize}[itemsep=0.3em]
+    \item Understanding of the four core enterprise systems (SRM, WMS, OMS, TMS) and their interdependencies
+    \item Awareness of B2B distribution operations: procurement cycles, inventory management, order fulfillment, transport logistics
+    \item Insight into real-world operational pain points: data silos, manual cross-system reconciliation, knowledge concentration in senior staff
+    \item Familiarity with the SCOR Digital Standard and industry frameworks
+\end{itemize}
+
+\subsection{Software Engineering}
+
+\begin{itemize}[itemsep=0.3em]
+    \item Go programming: clean architecture patterns (structs, repositories, controllers)
+    \item Protocol design: implementing MCP servers, understanding standardized agent-tool communication
+    \item System design: modeling a multi-service architecture with shared data contracts in a monorepo
+    \item Open-source contribution: working with and contributing to \texttt{trpc-agent-go} and \texttt{trpc-mcp-go}
+\end{itemize}
+
+\subsection{AI and Agent Engineering}
+
+\begin{itemize}[itemsep=0.3em]
+    \item Deep understanding of agentic AI architectures: from ReAct to modern Claude Code-type agents
+    \item LLM evaluation methodology: LLM-as-Judge, ground truth design, bias mitigation
+    \item Practical experience with agent configuration (\texttt{CLAUDE.md}), skill design, and context engineering
+    \item Literature review skills: systematic analysis of 35+ papers across AI agents, SCM, and evaluation
+\end{itemize}
+
+% =====================================================================
+%              CHAPTER 5: PROGRESS PLAN
+% =====================================================================
+\chapter{Progress Plan}
+
+This section provides an explicit status update and forward plan, designed to also serve as the basis for the midterm presentation slides.
+
+\section{Completed Work (Weeks 1--5)}
+
+\begin{table}[H]
+\centering\small
+\caption{Completed milestones.}
+\begin{tabularx}{\textwidth}{@{} c l X c @{}}
+\toprule
+\textbf{Week} & \textbf{Phase} & \textbf{What Was Done} & \textbf{Status} \\
+\midrule
+1 & Topic Selection       & Team formation, project proposal, initial architecture concept & Done \\
+2 & Domain Research       & SC systems research, two-track approach (Go agent vs Claude SDK), tutor meeting & Done \\
+3 & State of the Art      & 14-paper literature review, framework analysis, architecture diagram, Gantt chart & Done \\
+4 & Specifications        & Advisor feedback response: B2B field, 3 use cases, LLM-as-Judge design, references & Done \\
+5 & Implementation Start  & Go services scaffold, data model implementation, seed data generation & In Progress \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Remaining Work (March 16 to April 16)}
+
+\begin{table}[H]
+\centering\small
+\caption{Remaining development plan (March 16 to April 16, 2026).}
+\begin{tabularx}{\textwidth}{@{} c l X @{}}
+\toprule
+\textbf{Week} & \textbf{Dates} & \textbf{Key Tasks} \\
+\midrule
+1 & Mar 16--22 &
+    Complete all 4 Go services with controllers and repositories.
+    Seed database with mango distributor data.
+    Embed 15 evaluation scenarios in seed data. \\
+2 & Mar 23--30 &
+    MCP tool registration for all 4 services (read-only).
+    Set up Claude Code agent project folder with \texttt{CLAUDE.md}.
+    Create investigation skills (\texttt{SKILL.md} files).
+    Define ground truth for all 15 scenarios. \\
+3 & Mar 31--Apr 6 &
+    Agent integration testing on all use cases.
+    Implement LLM-as-Judge pipeline.
+    Run 45 evaluation runs (3 per scenario).
+    Collect and analyze results. \\
+4 & Apr 7--16 &
+    Results analysis and visualization.
+    Final report writing.
+    Presentation preparation.
+    Demo video / live demo. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Risk Assessment}
+
+\begin{table}[H]
+\centering\small
+\caption{Risk assessment and mitigation strategies.}
+\begin{tabularx}{\textwidth}{@{} L{3.5cm} c X @{}}
+\toprule
+\textbf{Risk} & \textbf{Likelihood} & \textbf{Mitigation} \\
+\midrule
+Agent inconsistency across runs & Medium & 3 runs per scenario; measure std deviation; tune temperature \\
+MCP server performance  & Low & Direct function calls (no network); simple data model \\
+LLM-as-Judge reliability & Medium & Use strong model as judge; validate on subset with human review \\
+Scope creep             & Medium & Strict 3 use cases; no write operations; mango distributor only \\
+Poor MCP tool design    & Medium & Follow Anthropic ACI guidelines; iterate on tool descriptions \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+%                    REFERENCES
+% =====================================================================
+\newpage
+\addcontentsline{toc}{chapter}{REFERENCES}
+
+\begin{thebibliography}{99}
+
+% ── LLM Foundations ──────────────────────────────────────────────────
+\bibitem{vaswani2017attention}
+Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.~N., Kaiser, L., \& Polosukhin, I. (2017). Attention is all you need. \textit{Advances in Neural Information Processing Systems}, 30, 5998--6008.
+
+\bibitem{kaplan2020scaling}
+Kaplan, J., McCandlish, S., Henighan, T., Brown, T.~B., Chess, B., Child, R., Gray, S., Radford, A., Wu, J., \& Amodei, D. (2020). Scaling laws for neural language models. \textit{arXiv:2001.08361}.
+
+\bibitem{hoffmann2022chinchilla}
+Hoffmann, J., Borgeaud, S., Mensch, A., Buchatskaya, E., Cai, T., Rutherford, E., et al. (2022). Training compute-optimal large language models. \textit{arXiv:2203.15556}.
+
+\bibitem{wei2022emergent}
+Wei, J., Tay, Y., Bommasani, R., Raffel, C., Zoph, B., Borgeaud, S., et al. (2022). Emergent abilities of large language models. \textit{Transactions on Machine Learning Research}.
+
+% ── AI Agents ────────────────────────────────────────────────────────
+\bibitem{yao2023react}
+Yao, S., Zhao, J., Yu, D., Du, N., Shafran, I., Narasimhan, K., \& Cao, Y. (2023). ReAct: Synergizing reasoning and acting in language models. \textit{Proceedings of ICLR 2023}.
+
+\bibitem{schick2023toolformer}
+Schick, T., Dwivedi-Yu, J., Dessi, R., Raileanu, R., Lomeli, M., Zettlemoyer, L., Cancedda, N., \& Scialom, T. (2023). Toolformer: Language models can teach themselves to use tools. \textit{Proceedings of NeurIPS 2023}.
+
+\bibitem{shen2023hugginggpt}
+Shen, Y., Song, K., Tan, X., Li, D., Lu, W., \& Zhuang, Y. (2023). HuggingGPT: Solving AI tasks with ChatGPT and its friends in Hugging Face. \textit{Proceedings of NeurIPS 2023}.
+
+\bibitem{weng2023agents}
+Weng, L. (2023). LLM powered autonomous agents. Retrieved from \url{https://lilianweng.github.io/posts/2023-06-23-agent/}
+
+\bibitem{yao2023tot}
+Yao, S., Yu, D., Zhao, J., Shafran, I., Griffiths, T.~L., Cao, Y., \& Narasimhan, K. (2023). Tree of thoughts: Deliberate problem solving with large language models. \textit{arXiv:2305.10601}.
+
+\bibitem{besta2023got}
+Besta, M., Blach, N., Kubicek, A., Gerstenberger, R., Gianinazzi, L., Gajber, J., et al. (2023). Graph of thoughts: Solving elaborate problems with large language models. \textit{arXiv:2308.09687}.
+
+\bibitem{patil2024gorilla}
+Patil, S.~G., Zhang, T., Wang, X., \& Gonzalez, J.~E. (2024). Gorilla: Large language model connected with massive APIs. \textit{Proceedings of NeurIPS 2024}.
+
+\bibitem{agenttaxonomy2026}
+Agentic artificial intelligence: Architectures, taxonomies, and evaluation of large language model agents. (2026). \textit{arXiv:2601.12560}.
+
+\bibitem{llmagentsurvey2025}
+Large language model agent: A survey on methodology, applications and challenges. (2025). \textit{arXiv:2503.21460}.
+
+\bibitem{agenticaisurvey2025}
+Agentic AI: A comprehensive survey of architectures, applications, and future directions. (2025). \textit{Artificial Intelligence Review}, Springer.
+
+% ── Anthropic References ─────────────────────────────────────────────
+\bibitem{anthropic2024agents}
+Anthropic. (2024). Building effective agents. Retrieved from \url{https://www.anthropic.com/research/building-effective-agents}
+
+\bibitem{anthropic2025howccworks}
+Anthropic. (2025). How Claude Code works. Retrieved from \url{https://code.claude.com/docs/en/how-claude-code-works}
+
+\bibitem{anthropic2025contextengineering}
+Anthropic. (2025). Effective context engineering for AI agents. Retrieved from \url{https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents}
+
+\bibitem{anthropic2025writingtools}
+Anthropic. (2025). Writing tools for agents. Retrieved from \url{https://www.anthropic.com/engineering/writing-tools-for-agents}
+
+\bibitem{anthropic2025skills}
+Anthropic. (2025). Equipping agents with agent skills. Retrieved from \url{https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills}
+
+% ── MCP and Tool Use ─────────────────────────────────────────────────
+\bibitem{mcp2024}
+Anthropic. (2024). Model context protocol. Retrieved from \url{https://www.anthropic.com/news/model-context-protocol}
+
+\bibitem{mcpspec}
+Model context protocol specification (2025-11-25). Retrieved from \url{https://modelcontextprotocol.io/specification/2025-11-25}
+
+\bibitem{msdynamics2025}
+Microsoft. (2025). Dynamics 365 ERP model context protocol server. Retrieved from \url{https://www.microsoft.com/en-us/dynamics-365/blog/it-professional/2025/11/11/dynamics-365-erp-model-context-protocol/}
+
+\bibitem{toollearningsurvey2025}
+LLM-based agents for tool learning: A survey. (2025). \textit{Data Science and Engineering}, Springer.
+
+\bibitem{trpcmcpgo}
+trpc-mcp-go: Go implementation of the model context protocol. Retrieved from \url{https://github.com/trpc-group/trpc-mcp-go}
+
+% ── Supply Chain Problems ────────────────────────────────────────────
+\bibitem{geodis2024}
+GEODIS supply chain visibility survey. (2024). Cited by Descartes. Retrieved from \url{https://www.descartes.com/resources/knowledge-center/global-supply-chain-visibility-solutions-breaking-down-silos-b2b}
+
+\bibitem{aws2024sync}
+Synchronizing ERP, WMS, and TMS systems for supply chain optimization. (2024). \textit{Supply \& Demand Chain Executive / AWS}.
+
+\bibitem{scords2022}
+ASCM. SCOR digital standard (SCOR-DS). Retrieved from \url{https://www.ascm.org/corporate-solutions/standards-tools/scor-ds/}
+
+\bibitem{omniful2026}
+Unified dashboard: Connecting ERP, OMS, WMS, and TMS. (2026). Omniful. Retrieved from \url{https://www.omniful.ai/blog/unified-dashboard-erp-oms-wms-tms-supply-chain}
+
+\bibitem{globe3distribution}
+Challenges \& opportunities in the trading \& distribution industry. Globe3. Retrieved from \url{https://www.globe3.com/blog/article/challenges--opportunities-in-the-trading--distribution-industry}
+
+\bibitem{irjmets2024silos}
+Breaking down silos: Enhancing supply chain visibility. (2024). \textit{IRJMETS}, September 2024.
+
+% ── AI in Supply Chain ───────────────────────────────────────────────
+\bibitem{jannelli2024agentic}
+Jannelli, V., Schoepf, S., Bickel, M., Netland, T., \& Brintrup, A. (2024). Agentic LLMs in the supply chain: Towards autonomous multi-agent consensus-seeking. \textit{International Journal of Production Research}, 2025.
+
+\bibitem{yin2025scpa}
+Yin, J., et al. (2025). Rethinking supply chain planning: A generative paradigm (SCPA). \textit{arXiv:2509.03811}.
+
+\bibitem{zheng2025llmscm}
+Zheng, G., et al. (2025). LLMs in SCM: Opportunities and a case study. \textit{IFAC-PapersOnLine}, MIM 2025.
+
+\bibitem{scddiagnosis2025}
+Large language model-driven supply chain diagnosis method. (2025). Springer.
+
+\bibitem{almahri2026disruption}
+AlMahri, S., Xu, L., \& Brintrup, A. (2026). Automating supply chain disruption monitoring via an agentic AI approach. \textit{arXiv:2601.09680}.
+
+\bibitem{zhang2025rag}
+Zhang, Y., et al. (2025). Multi-agent RAG for supply chain knowledge bases. \textit{KDD 2025 Workshop}.
+
+\bibitem{gaisc2025systematic}
+Systematic analysis of generative AI for supply chain transformation. (2025). \textit{ScienceDirect}.
+
+\bibitem{agenticdt2026}
+Agentic digital twins: Bridging model-based and AI-driven decision-making. (2026). \textit{International Journal of Production Research}.
+
+\bibitem{agenticscissue}
+The agentic supply chain (special issue). \textit{International Journal of Production Research}, Taylor \& Francis.
+
+% ── LLM-as-Judge ────────────────────────────────────────────────────
+\bibitem{zheng2023judge}
+Zheng, L., Chiang, W.-L., Sheng, Y., Zhuang, S., Wu, Z., Zhuang, Y., et al. (2023). Judging LLM-as-a-judge with MT-bench and chatbot arena. \textit{Proceedings of NeurIPS 2023}.
+
+\bibitem{gu2024judgesurvey}
+Gu, J., et al. (2024). A survey on LLM-as-a-judge. \textit{arXiv:2411.15594}.
+
+\bibitem{li2024judgessurvey}
+Li, H., et al. (2024). LLMs-as-judges: A comprehensive survey on LLM-based evaluation methods. \textit{arXiv:2412.05579}.
+
+\bibitem{li2025emnlpjudge}
+Li, H., et al. (2025). From generation to judgment: Opportunities and challenges of LLM-as-a-judge. \textit{Proceedings of EMNLP 2025}.
+
+% ── Benchmarks ───────────────────────────────────────────────────────
+\bibitem{agentbench2024}
+Liu, X., et al. (2024). AgentBench: Evaluating LLMs as agents. \textit{Proceedings of ICLR 2024}.
+
+\end{thebibliography}
+
+% =====================================================================
+%                    APPENDICES
+% =====================================================================
+\newpage
+\addcontentsline{toc}{chapter}{APPENDICES}
+\appendix
+\chapter{Supplementary Material}
+
+\textbf{Appendix A: MCP Tool Definitions.} Detailed MCP tool definitions with parameter types, descriptions, and example inputs/outputs will be provided in the final report once implementation is complete.
+
+\vspace{1em}
+
+\textbf{Appendix B: Ground Truth Scenarios.} The 15 evaluation scenarios with full ground truth definitions will be documented in the final report.
+
+\end{document}
