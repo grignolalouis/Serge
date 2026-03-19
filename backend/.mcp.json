@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "serge-supply-chain": {
+      "command": "/Users/gschmitt/Documents/Serge/backend/cmd/mcp/mcp-server",
+      "env": {
+        "DATABASE_URL": "postgres://serge_user:serge_password@localhost:5432/serge_db?sslmode=disable"
+      }
+    }
+  }
+}
