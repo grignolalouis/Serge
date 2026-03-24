@@ -10,11 +10,13 @@ const (
 )
 
 type Customer struct {
-	ID      string          `json:"id"`
-	Name    string          `json:"name"`
-	Company string          `json:"company"`
-	Segment CustomerSegment `json:"segment"`
-	Region  string          `json:"region"`
+	ID           string          `json:"id"`
+	Name         string          `json:"name"`
+	Company      string          `json:"company"`
+	Segment      CustomerSegment `json:"segment"`
+	Region       string          `json:"region"`
+	Address      string          `json:"address"`
+	DeliveryZone string          `json:"delivery_zone"` // "central_bkk" or "outer_bkk"
 }
 
 type OrderStatus string
@@ -44,6 +46,7 @@ type Order struct {
 	ShippedDate   *time.Time  `json:"shipped_date,omitempty"`
 	DeliveredDate *time.Time  `json:"delivered_date,omitempty"`
 	Priority      Priority    `json:"priority"`
+	Notes         string      `json:"notes,omitempty"`
 	Lines         []OrderLine `json:"lines"`
 }
 

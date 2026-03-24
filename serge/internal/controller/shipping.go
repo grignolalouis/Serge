@@ -18,7 +18,7 @@ func (c *ShippingController) GetShipment(id string) (service.ShipmentDetail, err
 	return c.svc.GetShipment(id)
 }
 
-func (c *ShippingController) TrackOrder(orderID string) (service.ShipmentDetail, error) {
+func (c *ShippingController) TrackOrder(orderID string) ([]service.ShipmentDetail, error) {
 	return c.svc.TrackOrder(orderID)
 }
 
@@ -28,4 +28,12 @@ func (c *ShippingController) ListExceptionShipments() []domain.Shipment {
 
 func (c *ShippingController) GetCarrier(id string) (domain.Carrier, error) {
 	return c.svc.GetCarrier(id)
+}
+
+func (c *ShippingController) ListShipmentsByStatus(status string) []domain.Shipment {
+	return c.svc.ListShipmentsByStatus(domain.ShipmentStatus(status))
+}
+
+func (c *ShippingController) ListCarriers() []domain.Carrier {
+	return c.svc.ListCarriers()
 }

@@ -1,112 +1,24 @@
 [
-  {
-    "id": "SM-001",
-    "product_id": "PROD-001",
-    "warehouse_id": "WH-BKK",
-    "type": "inbound",
-    "quantity": 100,
-    "reference_id": "PO-001",
-    "reference_type": "purchase_order",
-    "created_at": "2026-01-05T10:00:00Z"
-  },
-  {
-    "id": "SM-002",
-    "product_id": "PROD-001",
-    "warehouse_id": "WH-BKK",
-    "type": "outbound",
-    "quantity": 10,
-    "reference_id": "ORD-001",
-    "reference_type": "sales_order",
-    "created_at": "2026-01-10T07:00:00Z"
-  },
-  {
-    "id": "SM-003",
-    "product_id": "PROD-002",
-    "warehouse_id": "WH-BKK",
-    "type": "inbound",
-    "quantity": 80,
-    "reference_id": "PO-002",
-    "reference_type": "purchase_order",
-    "created_at": "2026-01-13T10:00:00Z"
-  },
-  {
-    "id": "SM-004",
-    "product_id": "PROD-003",
-    "warehouse_id": "WH-BKK",
-    "type": "inbound",
-    "quantity": 120,
-    "reference_id": "PO-003",
-    "reference_type": "purchase_order",
-    "created_at": "2026-01-12T10:00:00Z"
-  },
-  {
-    "id": "SM-005",
-    "product_id": "PROD-004",
-    "warehouse_id": "WH-BKK",
-    "type": "inbound",
-    "quantity": 50,
-    "reference_id": "PO-004",
-    "reference_type": "purchase_order",
-    "created_at": "2026-01-14T10:00:00Z"
-  },
-  {
-    "id": "SM-006",
-    "product_id": "PROD-001",
-    "warehouse_id": "WH-BKK",
-    "type": "outbound",
-    "quantity": 5,
-    "reference_id": "ORD-004",
-    "reference_type": "sales_order",
-    "created_at": "2026-01-21T07:00:00Z"
-  },
-  {
-    "id": "SM-007",
-    "product_id": "PROD-005",
-    "warehouse_id": "WH-BKK",
-    "type": "inbound",
-    "quantity": 60,
-    "reference_id": "PO-005",
-    "reference_type": "purchase_order",
-    "created_at": "2026-01-24T10:00:00Z"
-  },
-  {
-    "id": "SM-008",
-    "product_id": "PROD-001",
-    "warehouse_id": "WH-BKK",
-    "type": "inbound",
-    "quantity": 80,
-    "reference_id": "PO-006",
-    "reference_type": "purchase_order",
-    "created_at": "2026-01-25T10:00:00Z"
-  },
-  {
-    "id": "SM-009",
-    "product_id": "PROD-001",
-    "warehouse_id": "WH-BKK",
-    "type": "outbound",
-    "quantity": 10,
-    "reference_id": "ORD-006",
-    "reference_type": "sales_order",
-    "created_at": "2026-01-27T07:00:00Z"
-  },
-  {
-    "id": "SM-010",
-    "product_id": "PROD-001",
-    "warehouse_id": "WH-BKK",
-    "type": "outbound",
-    "quantity": 8,
-    "reference_id": "ORD-015",
-    "reference_type": "sales_order",
-    "created_at": "2026-01-29T07:00:00Z"
-  },
-  {
-    "id": "SM-011",
-    "product_id": "PROD-003",
-    "warehouse_id": "WH-BKK",
-    "type": "inbound",
-    "quantity": 100,
-    "reference_id": "PO-007",
-    "reference_type": "purchase_order",
-    "created_at": "2026-02-02T10:00:00Z"
-  }
+  {"id": "SM-001", "product_id": "PROD-001", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 100, "reference_id": "PO-001", "reference_type": "purchase_order", "created_at": "2026-01-05T10:00:00Z"},
+  {"id": "SM-002", "product_id": "PROD-001", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 10, "reference_id": "ORD-001", "reference_type": "sales_order", "created_at": "2026-01-10T07:00:00Z"},
+  {"id": "SM-003", "product_id": "PROD-002", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 80, "reference_id": "PO-002", "reference_type": "purchase_order", "created_at": "2026-01-13T10:00:00Z"},
+  {"id": "SM-004", "product_id": "PROD-003", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 120, "reference_id": "PO-003", "reference_type": "purchase_order", "created_at": "2026-01-12T10:00:00Z"},
+  {"id": "SM-005", "product_id": "PROD-004", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 50, "reference_id": "PO-004", "reference_type": "purchase_order", "created_at": "2026-01-14T10:00:00Z"},
+  {"id": "SM-006", "product_id": "PROD-001", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 5, "reference_id": "ORD-004", "reference_type": "sales_order", "created_at": "2026-01-21T07:00:00Z"},
+  {"id": "SM-007", "product_id": "PROD-005", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 60, "reference_id": "PO-005", "reference_type": "purchase_order", "created_at": "2026-01-24T10:00:00Z"},
+  {"id": "SM-008", "product_id": "PROD-001", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 80, "reference_id": "PO-006", "reference_type": "purchase_order", "created_at": "2026-01-25T10:00:00Z"},
+  {"id": "SM-009", "product_id": "PROD-001", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 10, "reference_id": "ORD-006", "reference_type": "sales_order", "created_at": "2026-01-27T07:00:00Z"},
+  {"id": "SM-010", "product_id": "PROD-001", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 8, "reference_id": "ORD-015", "reference_type": "sales_order", "created_at": "2026-01-29T07:00:00Z"},
+  {"id": "SM-011", "product_id": "PROD-003", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 100, "reference_id": "PO-007", "reference_type": "purchase_order", "created_at": "2026-02-02T10:00:00Z"},
+  {"id": "SM-012", "product_id": "PROD-006", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 200, "reference_id": "PO-011", "reference_type": "purchase_order", "created_at": "2026-01-13T10:00:00Z"},
+  {"id": "SM-013", "product_id": "PROD-007", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 80, "reference_id": "PO-011", "reference_type": "purchase_order", "created_at": "2026-01-13T10:00:00Z"},
+  {"id": "SM-014", "product_id": "PROD-001", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 60, "reference_id": "PO-012", "reference_type": "purchase_order", "created_at": "2026-01-22T10:00:00Z"},
+  {"id": "SM-015", "product_id": "PROD-004", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 30, "reference_id": "PO-013", "reference_type": "purchase_order", "created_at": "2026-01-26T10:00:00Z"},
+  {"id": "SM-016", "product_id": "PROD-008", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 40, "reference_id": "PO-013", "reference_type": "purchase_order", "created_at": "2026-01-26T10:00:00Z"},
+  {"id": "SM-017", "product_id": "PROD-006", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 50, "reference_id": "ORD-016", "reference_type": "sales_order", "created_at": "2026-01-22T07:00:00Z"},
+  {"id": "SM-018", "product_id": "PROD-006", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 80, "reference_id": "ORD-029", "reference_type": "sales_order", "created_at": "2026-01-12T07:00:00Z"},
+  {"id": "SM-019", "product_id": "PROD-007", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 15, "reference_id": "ORD-017", "reference_type": "sales_order", "created_at": "2026-01-26T07:00:00Z"},
+  {"id": "SM-020", "product_id": "PROD-005", "warehouse_id": "WH-BKK", "type": "inbound", "quantity": 50, "reference_id": "PO-014", "reference_type": "purchase_order", "created_at": "2026-02-07T10:00:00Z"},
+  {"id": "SM-021", "product_id": "PROD-008", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 8, "reference_id": "ORD-024", "reference_type": "sales_order", "created_at": "2026-01-18T07:00:00Z"},
+  {"id": "SM-022", "product_id": "PROD-006", "warehouse_id": "WH-BKK", "type": "outbound", "quantity": 30, "reference_id": "ORD-022", "reference_type": "sales_order", "created_at": "2026-02-01T07:00:00Z"}
 ]

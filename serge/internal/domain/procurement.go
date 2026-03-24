@@ -3,12 +3,14 @@ package domain
 import "time"
 
 type Supplier struct {
-	ID           string  `json:"id"`
-	Name         string  `json:"name"`
-	Region       string  `json:"region"` // e.g. "Chanthaburi", "Chiang Mai"
-	Contact      string  `json:"contact"`
-	LeadTimeDays int     `json:"lead_time_days"`
-	Rating       float64 `json:"rating"` // 1.0–5.0
+	ID                string   `json:"id"`
+	Name              string   `json:"name"`
+	Region            string   `json:"region"` // e.g. "Chanthaburi", "Chiang Mai"
+	Contact           string   `json:"contact"`
+	LeadTimeDays      int      `json:"lead_time_days"`
+	Rating            float64  `json:"rating"` // 1.0–5.0
+	ProductCategories []string `json:"product_categories"`
+	PaymentTerms      string   `json:"payment_terms"` // "net_15", "net_30", "cod"
 }
 
 type PurchaseOrderStatus string

@@ -70,3 +70,25 @@ func (s *InventoryService) ListLowStock() []InventoryStatus {
 func (s *InventoryService) GetStockMovements(productID string) []domain.StockMovement {
 	return s.repo.ListStockMovements(productID)
 }
+
+func (s *InventoryService) ListAllInventory() []InventoryStatus {
+	records := s.repo.ListInventory()
+	var out []InventoryStatus
+	for _, rec := range records {
+		p, err := s.repo.GetProduct(rec.ProductID)
+		if err != nil {
+			continue
+		}
+		out = append(out, InventoryStatus{
+			Product:      p,
+			Record:       rec,
+			Available:    rec.Available(),
+			NeedsReorder: rec.NeedsReorder(p.ReorderPoint),
+		})
+	}
+	return out
+}
+
+func (s *InventoryService) GetWarehouse(id string) (domain.Warehouse, error) {
+	return s.repo.GetWarehouse(id)
+}

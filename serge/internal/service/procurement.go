@@ -46,6 +46,10 @@ func (s *ProcurementService) ListOverduePurchaseOrders() []domain.PurchaseOrder 
 	return s.repo.ListOverduePurchaseOrders()
 }
 
+func (s *ProcurementService) ListAllPurchaseOrders() []domain.PurchaseOrder {
+	return s.repo.ListPurchaseOrders()
+}
+
 func (s *ProcurementService) CompareSuppliers() []SupplierStats {
 	suppliers := s.repo.ListSuppliers()
 	var stats []SupplierStats

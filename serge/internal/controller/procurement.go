@@ -41,3 +41,7 @@ func (c *ProcurementController) ListOverduePurchaseOrders() []domain.PurchaseOrd
 func (c *ProcurementController) CompareSuppliers() []service.SupplierStats {
 	return c.svc.CompareSuppliers()
 }
+
+func (c *ProcurementController) ListAllPurchaseOrders() []domain.PurchaseOrder {
+	return c.svc.ListAllPurchaseOrders()
+}

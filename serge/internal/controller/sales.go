@@ -33,3 +33,15 @@ func (c *SalesController) ListOrdersByStatus(status string) []domain.Order {
 func (c *SalesController) ListOverdueOrders() []domain.Order {
 	return c.svc.ListOverdueOrders()
 }
+
+func (c *SalesController) ListAllOrders() []domain.Order {
+	return c.svc.ListAllOrders()
+}
+
+func (c *SalesController) ListCustomers() []domain.Customer {
+	return c.svc.ListCustomers()
+}
+
+func (c *SalesController) ListOrdersByProduct(productID string) []domain.Order {
+	return c.svc.ListOrdersByProduct(productID)
+}

@@ -4,55 +4,107 @@
     "name": "Somying Prasertsak",
     "company": "Siam Paragon Food Hall",
     "segment": "retail",
-    "region": "Bangkok"
+    "region": "Bangkok",
+    "address": "991 Rama I Rd, Pathum Wan",
+    "delivery_zone": "central_bkk"
   },
   {
     "id": "CUST-002",
     "name": "Nattapong Suwan",
     "company": "Blue Elephant Restaurant",
     "segment": "wholesale",
-    "region": "Bangkok"
+    "region": "Bangkok",
+    "address": "233 South Sathorn Rd, Yan Nawa",
+    "delivery_zone": "central_bkk"
   },
   {
     "id": "CUST-003",
     "name": "Chaiwat Lertpanya",
     "company": "Tops Supermarket",
     "segment": "retail",
-    "region": "Bangkok"
+    "region": "Bangkok",
+    "address": "Central World, Ratchadamri Rd",
+    "delivery_zone": "central_bkk"
   },
   {
     "id": "CUST-004",
     "name": "Arunee Thongchai",
     "company": "Mandarin Oriental Bangkok",
     "segment": "wholesale",
-    "region": "Bangkok"
+    "region": "Bangkok",
+    "address": "48 Oriental Ave, Bang Rak",
+    "delivery_zone": "central_bkk"
   },
   {
     "id": "CUST-005",
     "name": "Prawit Jantaraksa",
     "company": "Villa Market",
     "segment": "retail",
-    "region": "Bangkok"
+    "region": "Bangkok",
+    "address": "Thonglor Soi 11, Sukhumvit",
+    "delivery_zone": "central_bkk"
   },
   {
     "id": "CUST-006",
     "name": "Kanokwan Meesuk",
     "company": "The Sukhothai Hotel",
     "segment": "wholesale",
-    "region": "Bangkok"
+    "region": "Bangkok",
+    "address": "13/3 South Sathorn Rd",
+    "delivery_zone": "central_bkk"
   },
   {
     "id": "CUST-007",
     "name": "Tanawat Phongsiri",
     "company": "Gourmet Market",
     "segment": "retail",
-    "region": "Bangkok"
+    "region": "Bangkok",
+    "address": "Emporium, Sukhumvit 24",
+    "delivery_zone": "central_bkk"
   },
   {
     "id": "CUST-008",
     "name": "Piyanut Sricharoen",
     "company": "Gaggan Anand Restaurant",
     "segment": "wholesale",
-    "region": "Bangkok"
+    "region": "Bangkok",
+    "address": "68/1 Soi Langsuan, Ploenchit",
+    "delivery_zone": "central_bkk"
+  },
+  {
+    "id": "CUST-009",
+    "name": "Surachai Wongprasert",
+    "company": "Makro Bangkapi",
+    "segment": "retail",
+    "region": "Bangkok",
+    "address": "3498 Lat Phrao Rd, Bangkapi",
+    "delivery_zone": "outer_bkk"
+  },
+  {
+    "id": "CUST-010",
+    "name": "Nanthida Chaiyo",
+    "company": "Chatuchak Weekend Market",
+    "segment": "wholesale",
+    "region": "Bangkok",
+    "address": "Kamphaeng Phet 2 Rd, Chatuchak",
+    "delivery_zone": "outer_bkk"
+  },
+  {
+    "id": "CUST-011",
+    "name": "Wichai Rattanapong",
+    "company": "Lotus's Rangsit",
+    "segment": "retail",
+    "region": "Bangkok",
+    "address": "94 Phahonyothin Rd, Rangsit",
+    "delivery_zone": "outer_bkk"
+  },
+  {
+    "id": "CUST-012",
+    "name": "Pimchanok Saetang",
+    "company": "Banyan Tree Bangkok",
+    "segment": "wholesale",
+    "region": "Bangkok",
+    "address": "21/100 South Sathorn Rd",
+    "delivery_zone": "central_bkk"
   }
 ]

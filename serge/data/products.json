@@ -6,7 +6,10 @@
     "category": "premium",
     "unit_price": 450.00,
     "weight_kg": 5.0,
-    "reorder_point": 20
+    "reorder_point": 20,
+    "shelf_life_days": 7,
+    "storage_type": "refrigerated",
+    "supplier_ids": ["SUP-001", "SUP-004"]
   },
   {
     "id": "PROD-002",
@@ -15,7 +18,10 @@
     "category": "standard",
     "unit_price": 650.00,
     "weight_kg": 10.0,
-    "reorder_point": 15
+    "reorder_point": 15,
+    "shelf_life_days": 7,
+    "storage_type": "refrigerated",
+    "supplier_ids": ["SUP-002", "SUP-003"]
   },
   {
     "id": "PROD-003",
@@ -24,7 +30,10 @@
     "category": "standard",
     "unit_price": 350.00,
     "weight_kg": 5.0,
-    "reorder_point": 25
+    "reorder_point": 25,
+    "shelf_life_days": 10,
+    "storage_type": "refrigerated",
+    "supplier_ids": ["SUP-001", "SUP-003"]
   },
   {
     "id": "PROD-004",
@@ -33,7 +42,10 @@
     "category": "premium",
     "unit_price": 800.00,
     "weight_kg": 10.0,
-    "reorder_point": 10
+    "reorder_point": 10,
+    "shelf_life_days": 5,
+    "storage_type": "refrigerated",
+    "supplier_ids": ["SUP-001", "SUP-005"]
   },
   {
     "id": "PROD-005",
@@ -42,6 +54,45 @@
     "category": "assorted",
     "unit_price": 500.00,
     "weight_kg": 5.0,
-    "reorder_point": 15
+    "reorder_point": 15,
+    "shelf_life_days": 7,
+    "storage_type": "refrigerated",
+    "supplier_ids": ["SUP-002", "SUP-005"]
+  },
+  {
+    "id": "PROD-006",
+    "sku": "MANGO-DRY-500G",
+    "name": "Dried Mango Slices 500g",
+    "category": "processed",
+    "unit_price": 180.00,
+    "weight_kg": 0.5,
+    "reorder_point": 30,
+    "shelf_life_days": 180,
+    "storage_type": "ambient",
+    "supplier_ids": ["SUP-004"]
+  },
+  {
+    "id": "PROD-007",
+    "sku": "MANGO-PUREE-1L",
+    "name": "Mango Puree 1L",
+    "category": "processed",
+    "unit_price": 220.00,
+    "weight_kg": 1.1,
+    "reorder_point": 20,
+    "shelf_life_days": 90,
+    "storage_type": "refrigerated",
+    "supplier_ids": ["SUP-004"]
+  },
+  {
+    "id": "PROD-008",
+    "sku": "MANGO-STICKY-KIT",
+    "name": "Mango Sticky Rice Kit 2-person",
+    "category": "assorted",
+    "unit_price": 320.00,
+    "weight_kg": 1.5,
+    "reorder_point": 15,
+    "shelf_life_days": 3,
+    "storage_type": "refrigerated",
+    "supplier_ids": ["SUP-004", "SUP-005"]
   }
 ]

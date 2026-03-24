@@ -3,13 +3,16 @@ package domain
 import "time"
 
 type Product struct {
-	ID           string  `json:"id"`
-	SKU          string  `json:"sku"`
-	Name         string  `json:"name"`
-	Category     string  `json:"category"`
-	UnitPrice    float64 `json:"unit_price"`
-	WeightKg     float64 `json:"weight_kg"`
-	ReorderPoint int     `json:"reorder_point"`
+	ID            string   `json:"id"`
+	SKU           string   `json:"sku"`
+	Name          string   `json:"name"`
+	Category      string   `json:"category"`
+	UnitPrice     float64  `json:"unit_price"`
+	WeightKg      float64  `json:"weight_kg"`
+	ReorderPoint  int      `json:"reorder_point"`
+	ShelfLifeDays int      `json:"shelf_life_days"` // 7 for fresh, 30 for processed
+	StorageType   string   `json:"storage_type"`    // "refrigerated" or "ambient"
+	SupplierIDs   []string `json:"supplier_ids"`    // which suppliers provide this product
 }
 
 type Warehouse struct {

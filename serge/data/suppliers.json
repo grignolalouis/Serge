@@ -5,7 +5,9 @@
     "region": "Chanthaburi",
     "contact": "somchai@mangomail.th",
     "lead_time_days": 3,
-    "rating": 4.5
+    "rating": 4.5,
+    "product_categories": ["premium", "standard"],
+    "payment_terms": "net_30"
   },
   {
     "id": "SUP-002",
@@ -13,7 +15,9 @@
     "region": "Chiang Mai",
     "contact": "info@northernfruits.th",
     "lead_time_days": 5,
-    "rating": 3.2
+    "rating": 3.2,
+    "product_categories": ["standard", "assorted"],
+    "payment_terms": "net_15"
   },
   {
     "id": "SUP-003",
@@ -21,6 +25,28 @@
     "region": "Prachuap Khiri Khan",
     "contact": "sales@prachuapharvest.th",
     "lead_time_days": 4,
-    "rating": 2.8
+    "rating": 2.8,
+    "product_categories": ["standard"],
+    "payment_terms": "cod"
+  },
+  {
+    "id": "SUP-004",
+    "name": "Rayong Tropical",
+    "region": "Rayong",
+    "contact": "orders@rayongtropical.th",
+    "lead_time_days": 3,
+    "rating": 4.0,
+    "product_categories": ["premium", "processed"],
+    "payment_terms": "net_30"
+  },
+  {
+    "id": "SUP-005",
+    "name": "Isaan Organic Farms",
+    "region": "Nakhon Ratchasima",
+    "contact": "organic@isaanfarms.th",
+    "lead_time_days": 6,
+    "rating": 3.5,
+    "product_categories": ["premium", "assorted"],
+    "payment_terms": "net_15"
   }
 ]

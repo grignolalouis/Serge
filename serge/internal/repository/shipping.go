@@ -59,13 +59,14 @@ func (r *ShippingRepository) GetShipment(id string) (domain.Shipment, error) {
 	return s, nil
 }
 
-func (r *ShippingRepository) GetShipmentByOrder(orderID string) (domain.Shipment, error) {
+func (r *ShippingRepository) ListShipmentsByOrder(orderID string) []domain.Shipment {
+	var out []domain.Shipment
 	for _, s := range r.shipments {
 		if s.OrderID == orderID {
-			return s, nil
+			out = append(out, s)
 		}
 	}
-	return domain.Shipment{}, fmt.Errorf("no shipment found for order %s", orderID)
+	return out
 }
 
 func (r *ShippingRepository) ListShipments() []domain.Shipment {

@@ -84,4 +84,13 @@ func registerProcurementTools(s *mcp.StdioServer, ctrl *controller.ProcurementCo
 			return jsonResult(ctrl.CompareSuppliers())
 		},
 	)
+
+	s.RegisterTool(
+		mcp.NewTool("srm_list_all_purchase_orders",
+			mcp.WithDescription("List all purchase orders across all suppliers with their status, dates, and line items. Use for full procurement visibility."),
+		),
+		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListAllPurchaseOrders())
+		},
+	)
 }

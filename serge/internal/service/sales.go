@@ -32,3 +32,15 @@ func (s *SalesService) ListOrdersByStatus(status domain.OrderStatus) []domain.Or
 func (s *SalesService) ListOverdueOrders() []domain.Order {
 	return s.repo.ListOverdueOrders()
 }
+
+func (s *SalesService) ListAllOrders() []domain.Order {
+	return s.repo.ListOrders()
+}
+
+func (s *SalesService) ListCustomers() []domain.Customer {
+	return s.repo.ListCustomers()
+}
+
+func (s *SalesService) ListOrdersByProduct(productID string) []domain.Order {
+	return s.repo.ListOrdersByProduct(productID)
+}

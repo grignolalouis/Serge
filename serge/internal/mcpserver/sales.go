@@ -66,4 +66,32 @@ func registerSalesTools(s *mcp.StdioServer, ctrl *controller.SalesController) {
 			return jsonResult(ctrl.ListOverdueOrders())
 		},
 	)
+
+	s.RegisterTool(
+		mcp.NewTool("oms_list_all_orders",
+			mcp.WithDescription("List all orders in the system with their status, customer, dates, and line items. Use to get a complete view of all orders or to discover order IDs."),
+		),
+		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListAllOrders())
+		},
+	)
+
+	s.RegisterTool(
+		mcp.NewTool("oms_list_customers",
+			mcp.WithDescription("List all customers with their profiles (company, segment, region, delivery zone). Use to discover customers or understand the customer base."),
+		),
+		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListCustomers())
+		},
+	)
+
+	s.RegisterTool(
+		mcp.NewTool("oms_search_orders_by_product",
+			mcp.WithDescription("Find all orders that contain a specific product. Use to understand demand for a product or to trace which orders are affected by a stock shortage."),
+			mcp.WithString("product_id", mcp.Required(), mcp.Description("Product ID, e.g. PROD-001")),
+		),
+		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListOrdersByProduct(stringArg(req.Params.Arguments, "product_id")))
+		},
+	)
 }

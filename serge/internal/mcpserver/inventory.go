@@ -79,4 +79,27 @@ func registerInventoryTools(s *mcp.StdioServer, ctrl *controller.InventoryContro
 			return jsonResult(ctrl.GetStockMovements(stringArg(req.Params.Arguments, "product_id")))
 		},
 	)
+
+	s.RegisterTool(
+		mcp.NewTool("wms_list_all_inventory",
+			mcp.WithDescription("Get a full inventory snapshot: all products with current stock levels, availability, and reorder status. Use for a complete warehouse overview."),
+		),
+		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListAllInventory())
+		},
+	)
+
+	s.RegisterTool(
+		mcp.NewTool("wms_get_warehouse",
+			mcp.WithDescription("Get warehouse details: name and location. Use when you need warehouse context."),
+			mcp.WithString("warehouse_id", mcp.Required(), mcp.Description("Warehouse ID, e.g. WH-BKK")),
+		),
+		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			result, err := ctrl.GetWarehouse(stringArg(req.Params.Arguments, "warehouse_id"))
+			if err != nil {
+				return errResult(err)
+			}
+			return jsonResult(result)
+		},
+	)
 }

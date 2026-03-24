@@ -60,4 +60,23 @@ func registerShippingTools(s *mcp.StdioServer, ctrl *controller.ShippingControll
 			return jsonResult(result)
 		},
 	)
+
+	s.RegisterTool(
+		mcp.NewTool("tms_list_shipments_by_status",
+			mcp.WithDescription("List all shipments with a given status. Use to find in-transit, delivered, or pending shipments."),
+			mcp.WithString("status", mcp.Required(), mcp.Description("Shipment status: pending, in_transit, delivered, or exception")),
+		),
+		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListShipmentsByStatus(stringArg(req.Params.Arguments, "status")))
+		},
+	)
+
+	s.RegisterTool(
+		mcp.NewTool("tms_list_carriers",
+			mcp.WithDescription("List all available carriers with their profiles (type, cost, transit time). Use to discover carrier options or compare them."),
+		),
+		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListCarriers())
+		},
+	)
 }

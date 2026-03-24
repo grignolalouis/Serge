@@ -1,6 +1,8 @@
 package service
 
 import (
+	"fmt"
+
 	"github.com/serge-music/serge/internal/domain"
 	"github.com/serge-music/serge/internal/repository"
 )
@@ -29,14 +31,18 @@ func (s *ShippingService) GetShipment(id string) (ShipmentDetail, error) {
 	return ShipmentDetail{Shipment: ship, Carrier: carrier, Events: events}, nil
 }
 
-func (s *ShippingService) TrackOrder(orderID string) (ShipmentDetail, error) {
-	ship, err := s.repo.GetShipmentByOrder(orderID)
-	if err != nil {
-		return ShipmentDetail{}, err
+func (s *ShippingService) TrackOrder(orderID string) ([]ShipmentDetail, error) {
+	shipments := s.repo.ListShipmentsByOrder(orderID)
+	if len(shipments) == 0 {
+		return nil, fmt.Errorf("no shipment found for order %s", orderID)
 	}
-	carrier, _ := s.repo.GetCarrier(ship.CarrierID)
-	events := s.repo.GetTrackingEvents(ship.ID)
-	return ShipmentDetail{Shipment: ship, Carrier: carrier, Events: events}, nil
+	var out []ShipmentDetail
+	for _, ship := range shipments {
+		carrier, _ := s.repo.GetCarrier(ship.CarrierID)
+		events := s.repo.GetTrackingEvents(ship.ID)
+		out = append(out, ShipmentDetail{Shipment: ship, Carrier: carrier, Events: events})
+	}
+	return out, nil
 }
 
 func (s *ShippingService) ListExceptionShipments() []domain.Shipment {
@@ -45,4 +51,12 @@ func (s *ShippingService) ListExceptionShipments() []domain.Shipment {
 
 func (s *ShippingService) GetCarrier(id string) (domain.Carrier, error) {
 	return s.repo.GetCarrier(id)
+}
+
+func (s *ShippingService) ListShipmentsByStatus(status domain.ShipmentStatus) []domain.Shipment {
+	return s.repo.ListShipmentsByStatus(status)
+}
+
+func (s *ShippingService) ListCarriers() []domain.Carrier {
+	return s.repo.ListCarriers()
 }

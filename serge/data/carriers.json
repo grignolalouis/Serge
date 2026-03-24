@@ -12,5 +12,12 @@
     "type": "refrigerated",
     "cost_per_kg": 25.00,
     "avg_transit_days": 1
+  },
+  {
+    "id": "CAR-003",
+    "name": "Flash Express Premium",
+    "type": "refrigerated",
+    "cost_per_kg": 35.00,
+    "avg_transit_days": 1
   }
 ]

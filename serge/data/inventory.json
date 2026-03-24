@@ -1,37 +1,10 @@
 [
-  {
-    "product_id": "PROD-001",
-    "warehouse_id": "WH-BKK",
-    "quantity": 8,
-    "reserved": 0,
-    "last_updated": "2026-02-10T00:00:00Z"
-  },
-  {
-    "product_id": "PROD-002",
-    "warehouse_id": "WH-BKK",
-    "quantity": 45,
-    "reserved": 10,
-    "last_updated": "2026-02-10T00:00:00Z"
-  },
-  {
-    "product_id": "PROD-003",
-    "warehouse_id": "WH-BKK",
-    "quantity": 60,
-    "reserved": 15,
-    "last_updated": "2026-02-10T00:00:00Z"
-  },
-  {
-    "product_id": "PROD-004",
-    "warehouse_id": "WH-BKK",
-    "quantity": 22,
-    "reserved": 3,
-    "last_updated": "2026-02-10T00:00:00Z"
-  },
-  {
-    "product_id": "PROD-005",
-    "warehouse_id": "WH-BKK",
-    "quantity": 12,
-    "reserved": 0,
-    "last_updated": "2026-02-10T00:00:00Z"
-  }
+  {"product_id": "PROD-001", "warehouse_id": "WH-BKK", "quantity": 8, "reserved": 0, "last_updated": "2026-02-10T00:00:00Z"},
+  {"product_id": "PROD-002", "warehouse_id": "WH-BKK", "quantity": 45, "reserved": 10, "last_updated": "2026-02-10T00:00:00Z"},
+  {"product_id": "PROD-003", "warehouse_id": "WH-BKK", "quantity": 60, "reserved": 15, "last_updated": "2026-02-10T00:00:00Z"},
+  {"product_id": "PROD-004", "warehouse_id": "WH-BKK", "quantity": 22, "reserved": 3, "last_updated": "2026-02-10T00:00:00Z"},
+  {"product_id": "PROD-005", "warehouse_id": "WH-BKK", "quantity": 12, "reserved": 0, "last_updated": "2026-02-10T00:00:00Z"},
+  {"product_id": "PROD-006", "warehouse_id": "WH-BKK", "quantity": 85, "reserved": 10, "last_updated": "2026-02-10T00:00:00Z"},
+  {"product_id": "PROD-007", "warehouse_id": "WH-BKK", "quantity": 40, "reserved": 5, "last_updated": "2026-02-10T00:00:00Z"},
+  {"product_id": "PROD-008", "warehouse_id": "WH-BKK", "quantity": 6, "reserved": 0, "last_updated": "2026-02-10T00:00:00Z"}
 ]

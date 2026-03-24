@@ -37,3 +37,11 @@ func (c *InventoryController) ListLowStock() []service.InventoryStatus {
 func (c *InventoryController) GetStockMovements(productID string) []domain.StockMovement {
 	return c.svc.GetStockMovements(productID)
 }
+
+func (c *InventoryController) ListAllInventory() []service.InventoryStatus {
+	return c.svc.ListAllInventory()
+}
+
+func (c *InventoryController) GetWarehouse(id string) (domain.Warehouse, error) {
+	return c.svc.GetWarehouse(id)
+}

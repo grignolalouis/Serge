@@ -91,3 +91,16 @@ func (r *SalesRepository) ListOverdueOrders() []domain.Order {
 	}
 	return out
 }
+
+func (r *SalesRepository) ListOrdersByProduct(productID string) []domain.Order {
+	var out []domain.Order
+	for _, o := range r.orders {
+		for _, l := range o.Lines {
+			if l.ProductID == productID {
+				out = append(out, o)
+				break
+			}
+		}
+	}
+	return out
+}
