@@ -2,6 +2,8 @@ module github.com/serge-music/serge
 
 go 1.23
 
+require trpc.group/trpc-go/trpc-mcp-go v0.0.12
+
 require (
 	github.com/getkin/kin-openapi v0.124.0 // indirect
 	github.com/go-openapi/jsonpointer v0.20.2 // indirect
@@ -16,5 +18,4 @@ require (
 	go.uber.org/multierr v1.10.0 // indirect
 	go.uber.org/zap v1.27.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	trpc.group/trpc-go/trpc-mcp-go v0.0.12 // indirect
 )
