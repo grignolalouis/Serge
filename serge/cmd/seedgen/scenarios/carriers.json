@@ -3,21 +3,21 @@
     "id": "CAR-001",
     "name": "Kerry Express",
     "type": "ground",
-    "cost_per_kg": 15,
+    "cost_per_kg": 15.00,
     "avg_transit_days": 2
   },
   {
     "id": "CAR-002",
     "name": "SCG Cold Chain",
     "type": "refrigerated",
-    "cost_per_kg": 25,
+    "cost_per_kg": 25.00,
     "avg_transit_days": 1
   },
   {
     "id": "CAR-003",
     "name": "Flash Express Premium",
     "type": "refrigerated",
-    "cost_per_kg": 35,
+    "cost_per_kg": 35.00,
     "avg_transit_days": 1
   }
 ]
