@@ -1,0 +1,51 @@
+[
+  {
+    "shipment_id": "SHP-005",
+    "timestamp": "2026-02-10T08:30:00Z",
+    "location": "Bang Na, Bangkok",
+    "status": "picked_up",
+    "description": "Package picked up from Bangkok Central Warehouse"
+  },
+  {
+    "shipment_id": "SHP-005",
+    "timestamp": "2026-02-10T14:00:00Z",
+    "location": "Bangkok",
+    "status": "in_transit",
+    "description": "Departed Bangkok sorting facility"
+  },
+  {
+    "shipment_id": "SHP-005",
+    "timestamp": "2026-02-11T10:00:00Z",
+    "location": "Bangkok",
+    "status": "in_transit",
+    "description": "At local distribution center, scheduled for delivery"
+  },
+  {
+    "shipment_id": "SHP-009",
+    "timestamp": "2026-02-06T09:00:00Z",
+    "location": "Bang Na, Bangkok",
+    "status": "picked_up",
+    "description": "Package picked up from Bangkok Central Warehouse"
+  },
+  {
+    "shipment_id": "SHP-009",
+    "timestamp": "2026-02-06T15:00:00Z",
+    "location": "Bangkok",
+    "status": "in_transit",
+    "description": "Departed Bangkok sorting facility"
+  },
+  {
+    "shipment_id": "SHP-009",
+    "timestamp": "2026-02-07T11:00:00Z",
+    "location": "Nonthaburi",
+    "status": "in_transit",
+    "description": "In transit to destination"
+  },
+  {
+    "shipment_id": "SHP-009",
+    "timestamp": "2026-02-08T08:00:00Z",
+    "location": "Pathum Thani",
+    "status": "exception",
+    "description": "Delivery exception: refrigeration unit malfunction on vehicle"
+  }
+]

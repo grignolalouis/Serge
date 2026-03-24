@@ -1,0 +1,58 @@
+[
+  {
+    "id": "CUST-001",
+    "name": "Somying Prasertsak",
+    "company": "Siam Paragon Food Hall",
+    "segment": "retail",
+    "region": "Bangkok"
+  },
+  {
+    "id": "CUST-002",
+    "name": "Nattapong Suwan",
+    "company": "Blue Elephant Restaurant",
+    "segment": "wholesale",
+    "region": "Bangkok"
+  },
+  {
+    "id": "CUST-003",
+    "name": "Chaiwat Lertpanya",
+    "company": "Tops Supermarket",
+    "segment": "retail",
+    "region": "Bangkok"
+  },
+  {
+    "id": "CUST-004",
+    "name": "Arunee Thongchai",
+    "company": "Mandarin Oriental Bangkok",
+    "segment": "wholesale",
+    "region": "Bangkok"
+  },
+  {
+    "id": "CUST-005",
+    "name": "Prawit Jantaraksa",
+    "company": "Villa Market",
+    "segment": "retail",
+    "region": "Bangkok"
+  },
+  {
+    "id": "CUST-006",
+    "name": "Kanokwan Meesuk",
+    "company": "The Sukhothai Hotel",
+    "segment": "wholesale",
+    "region": "Bangkok"
+  },
+  {
+    "id": "CUST-007",
+    "name": "Tanawat Phongsiri",
+    "company": "Gourmet Market",
+    "segment": "retail",
+    "region": "Bangkok"
+  },
+  {
+    "id": "CUST-008",
+    "name": "Piyanut Sricharoen",
+    "company": "Gaggan Anand Restaurant",
+    "segment": "wholesale",
+    "region": "Bangkok"
+  }
+]

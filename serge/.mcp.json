@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "serge-supply-chain": {
+      "command": "/Users/grignolalouis/Desktop/siit/SE618-1_Logistics_Case_Study_Analysis/serge/bin/serge-mcp",
+      "args": ["/Users/grignolalouis/Desktop/siit/SE618-1_Logistics_Case_Study_Analysis/serge/data"]
+    }
+  }
+}

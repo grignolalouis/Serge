@@ -1,0 +1,89 @@
+[
+  {
+    "id": "PO-001",
+    "supplier_id": "SUP-001",
+    "status": "received",
+    "order_date": "2026-01-02T00:00:00Z",
+    "expected_delivery": "2026-01-05T00:00:00Z",
+    "actual_delivery": "2026-01-05T00:00:00Z",
+    "lines": [{"product_id": "PROD-001", "quantity": 100, "unit_cost": 280.00}]
+  },
+  {
+    "id": "PO-002",
+    "supplier_id": "SUP-002",
+    "status": "received",
+    "order_date": "2026-01-05T00:00:00Z",
+    "expected_delivery": "2026-01-10T00:00:00Z",
+    "actual_delivery": "2026-01-13T00:00:00Z",
+    "lines": [{"product_id": "PROD-002", "quantity": 80, "unit_cost": 400.00}]
+  },
+  {
+    "id": "PO-003",
+    "supplier_id": "SUP-003",
+    "status": "received",
+    "order_date": "2026-01-08T00:00:00Z",
+    "expected_delivery": "2026-01-12T00:00:00Z",
+    "actual_delivery": "2026-01-12T00:00:00Z",
+    "lines": [{"product_id": "PROD-003", "quantity": 120, "unit_cost": 200.00}]
+  },
+  {
+    "id": "PO-004",
+    "supplier_id": "SUP-001",
+    "status": "received",
+    "order_date": "2026-01-12T00:00:00Z",
+    "expected_delivery": "2026-01-15T00:00:00Z",
+    "actual_delivery": "2026-01-14T00:00:00Z",
+    "lines": [{"product_id": "PROD-004", "quantity": 50, "unit_cost": 500.00}]
+  },
+  {
+    "id": "PO-005",
+    "supplier_id": "SUP-002",
+    "status": "received",
+    "order_date": "2026-01-15T00:00:00Z",
+    "expected_delivery": "2026-01-20T00:00:00Z",
+    "actual_delivery": "2026-01-24T00:00:00Z",
+    "lines": [{"product_id": "PROD-005", "quantity": 60, "unit_cost": 300.00}]
+  },
+  {
+    "id": "PO-006",
+    "supplier_id": "SUP-001",
+    "status": "received",
+    "order_date": "2026-01-22T00:00:00Z",
+    "expected_delivery": "2026-01-25T00:00:00Z",
+    "actual_delivery": "2026-01-25T00:00:00Z",
+    "lines": [{"product_id": "PROD-001", "quantity": 80, "unit_cost": 280.00}]
+  },
+  {
+    "id": "PO-007",
+    "supplier_id": "SUP-003",
+    "status": "received",
+    "order_date": "2026-01-25T00:00:00Z",
+    "expected_delivery": "2026-01-29T00:00:00Z",
+    "actual_delivery": "2026-02-02T00:00:00Z",
+    "lines": [{"product_id": "PROD-003", "quantity": 100, "unit_cost": 200.00}]
+  },
+  {
+    "id": "PO-008",
+    "supplier_id": "SUP-001",
+    "status": "shipped",
+    "order_date": "2026-02-10T00:00:00Z",
+    "expected_delivery": "2026-02-18T00:00:00Z",
+    "lines": [{"product_id": "PROD-001", "quantity": 150, "unit_cost": 280.00}]
+  },
+  {
+    "id": "PO-009",
+    "supplier_id": "SUP-002",
+    "status": "pending",
+    "order_date": "2026-02-10T00:00:00Z",
+    "expected_delivery": "2026-02-15T00:00:00Z",
+    "lines": [{"product_id": "PROD-002", "quantity": 60, "unit_cost": 400.00}]
+  },
+  {
+    "id": "PO-010",
+    "supplier_id": "SUP-003",
+    "status": "confirmed",
+    "order_date": "2026-02-12T00:00:00Z",
+    "expected_delivery": "2026-02-16T00:00:00Z",
+    "lines": [{"product_id": "PROD-005", "quantity": 80, "unit_cost": 300.00}]
+  }
+]

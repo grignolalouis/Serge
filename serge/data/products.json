@@ -1,0 +1,47 @@
+[
+  {
+    "id": "PROD-001",
+    "sku": "MANGO-NDM-5",
+    "name": "Nam Doc Mai Mango Box 5kg",
+    "category": "premium",
+    "unit_price": 450.00,
+    "weight_kg": 5.0,
+    "reorder_point": 20
+  },
+  {
+    "id": "PROD-002",
+    "sku": "MANGO-ORG-10",
+    "name": "Ok Rong Mango Box 10kg",
+    "category": "standard",
+    "unit_price": 650.00,
+    "weight_kg": 10.0,
+    "reorder_point": 15
+  },
+  {
+    "id": "PROD-003",
+    "sku": "MANGO-KEW-5",
+    "name": "Keaw Mango Box 5kg",
+    "category": "standard",
+    "unit_price": 350.00,
+    "weight_kg": 5.0,
+    "reorder_point": 25
+  },
+  {
+    "id": "PROD-004",
+    "sku": "MANGO-MHC-10",
+    "name": "Mahachanok Mango Box 10kg",
+    "category": "premium",
+    "unit_price": 800.00,
+    "weight_kg": 10.0,
+    "reorder_point": 10
+  },
+  {
+    "id": "PROD-005",
+    "sku": "MANGO-MIX-5",
+    "name": "Mixed Mango Assortment 5kg",
+    "category": "assorted",
+    "unit_price": 500.00,
+    "weight_kg": 5.0,
+    "reorder_point": 15
+  }
+]

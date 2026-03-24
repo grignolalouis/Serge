@@ -1,0 +1,26 @@
+[
+  {
+    "id": "SUP-001",
+    "name": "Somchai Mango Farm",
+    "region": "Chanthaburi",
+    "contact": "somchai@mangomail.th",
+    "lead_time_days": 3,
+    "rating": 4.5
+  },
+  {
+    "id": "SUP-002",
+    "name": "Northern Fruits Co.",
+    "region": "Chiang Mai",
+    "contact": "info@northernfruits.th",
+    "lead_time_days": 5,
+    "rating": 3.2
+  },
+  {
+    "id": "SUP-003",
+    "name": "Prachuap Harvest",
+    "region": "Prachuap Khiri Khan",
+    "contact": "sales@prachuapharvest.th",
+    "lead_time_days": 4,
+    "rating": 2.8
+  }
+]
