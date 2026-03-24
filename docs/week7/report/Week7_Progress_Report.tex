@@ -1,0 +1,370 @@
+% !TEX program = pdflatex
+\documentclass[12pt,a4paper]{report}
+
+% ── Geometry & Layout ────────────────────────────────────────────────
+\usepackage[left=3.5cm,right=2.5cm,top=3.5cm,bottom=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage{setspace}
+\onehalfspacing
+
+% ── Tables ───────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+
+% ── Graphics & Color ─────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{float}
+
+% ── Typography & Structure ───────────────────────────────────────────
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{tocloft}
+\usepackage{caption}
+
+% ── Page numbering ───────────────────────────────────────────────────
+\usepackage{etoolbox}
+
+% ── Chapter/Section formatting (SIIT style) ──────────────────────────
+\titleformat{\chapter}[display]
+    {\centering\bfseries\large}
+    {CHAPTER \thechapter}
+    {0pt}
+    {\MakeUppercase}
+\titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
+\titleformat{\section}
+    {\bfseries\normalsize}
+    {\thesection}
+    {1em}
+    {}
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+
+\titleformat{\subsection}
+    {\bfseries\normalsize}
+    {\thesubsection}
+    {1em}
+    {}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+
+\titleformat{\subsubsection}
+    {\bfseries\normalsize}
+    {\thesubsubsection}
+    {1em}
+    {}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+
+% ── Headers / Footers ───────────────────────────────────────────────
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[R]{\thepage}
+
+% ── Hyperlinks ───────────────────────────────────────────────────────
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black,
+}
+
+% ── Table of Contents formatting ─────────────────────────────────────
+\renewcommand{\cftchapfont}{\normalfont}
+\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftchappresnum}{CHAPTER }
+\renewcommand{\cftchapaftersnum}{ }
+\newlength{\mylen}
+\settowidth{\mylen}{\cftchappresnum\cftchapaftersnum}
+\addtolength{\cftchapnumwidth}{\mylen}
+
+% ── Column types ─────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% =====================================================================
+%                           DOCUMENT
+% =====================================================================
+\begin{document}
+
+% ── Use roman numerals for front matter ──────────────────────────────
+\pagenumbering{roman}
+
+% =====================================================================
+%                        TITLE PAGE
+% =====================================================================
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+\includegraphics[width=4cm]{figures/siitlogo.png}
+
+\vspace{1cm}
+
+{\large\bfseries SE618 LOGISTIC CASE STUDY ANALYSIS}
+
+\vspace{1.5cm}
+
+{\large\bfseries WEEK 7 -- PROGRESS REPORT}
+
+\vspace{0.5cm}
+
+{\large\bfseries SERGE -- AI Agent for Supply Chain Operations}
+
+\vspace{1.5cm}
+
+\begin{tabular}{l l}
+Gauthier SCHMITT & 6822807466 \\
+Louis GRIGNOLA   & 6822807516 \\
+Matteo SCHWARZ   & 6822807557 \\
+Ma\"el TELLUS    & 6822807532 \\
+\end{tabular}
+
+\vspace{1.5cm}
+
+{\large SUBMITTED TO:}\\[0.5em]
+{\large AJARN WARUT}
+
+\vspace{1.5cm}
+
+{\large MARCH 2026}\\[0.3em]
+{\large SEMESTER 2/2025}
+
+\vspace{2cm}
+
+{\large
+SCHOOL OF MANUFACTURING SYSTEMS AND MECHANICAL ENGINEERING\\[0.3em]
+SIRINDHORN INTERNATIONAL INSTITUTE OF TECHNOLOGY\\[0.3em]
+THAMMASAT UNIVERSITY
+}
+
+\vfill
+\end{titlepage}
+
+% ── Switch to arabic page numbers ────────────────────────────────────
+\newpage
+\pagenumbering{arabic}
+
+% =====================================================================
+%              CHAPTER 1: WEEK SUMMARY
+% =====================================================================
+\chapter{Week 7 Summary}
+
+This report covers the work completed during Week~7 (March~16--19, 2026). The focus this week was on \textbf{completing the MCP server implementation}, \textbf{validating it with live agent queries}, and \textbf{creating project documentation}.
+
+\section{Objectives for This Week}
+
+\begin{enumerate}[itemsep=0.3em]
+    \item Complete the Go MCP server with all 21 tools across the 4 supply chain systems
+    \item Validate the agent can perform cross-system reasoning on the three use cases
+    \item Document the MCP setup process for reproducibility
+    \item Document the supply chain modelisation and roadmap
+\end{enumerate}
+
+\section{Status: All Objectives Met}
+
+All four objectives were achieved. The MCP server is fully functional, the agent successfully demonstrated all three use cases (order status, root cause analysis, supplier comparison), and documentation was produced.
+
+% =====================================================================
+%              CHAPTER 2: MCP SERVER IMPLEMENTATION
+% =====================================================================
+\chapter{MCP Server Implementation}
+
+\section{Architecture}
+
+The MCP server is implemented as a \textbf{single Go binary} that loads seed data from JSON files at startup and exposes 21 read-only tools via the Model Context Protocol over stdio. The architecture follows a clean layered design:
+
+\begin{itemize}[itemsep=0.3em]
+    \item \textbf{Repositories:} In-memory data stores loaded from JSON seed files
+    \item \textbf{Services:} Business logic (e.g., computing supplier on-time rates from PO history)
+    \item \textbf{Controllers:} Interface between services and the MCP layer
+    \item \textbf{MCP Server:} Tool registration and stdio transport via \texttt{trpc-mcp-go}
+\end{itemize}
+
+The server is built with Go~1.23 and depends on \texttt{trpc-mcp-go} v0.0.12 for the MCP protocol implementation.
+
+\section{Tools Implemented}
+
+A total of \textbf{21 MCP tools} were implemented across the four supply chain systems:
+
+\begin{table}[H]
+\centering\small
+\caption{MCP tools by system.}
+\begin{tabularx}{\textwidth}{@{} l c X @{}}
+\toprule
+\textbf{System} & \textbf{Tools} & \textbf{Key Capabilities} \\
+\midrule
+SRM (Procurement) & 7 & Supplier lookup, PO filtering by status/supplier, overdue POs, supplier comparison \\
+WMS (Warehouse)   & 6 & Product lookup by ID/SKU, inventory check, low stock detection, stock movements \\
+OMS (Orders)      & 5 & Order details, customer lookup, orders by customer/status, overdue orders \\
+TMS (Transport)   & 4 & Shipment details, order tracking, exception shipments, carrier info \\
+\midrule
+\textbf{Total}    & \textbf{21} & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Seed Data}
+
+The MCP server loads simulated data representing a \textbf{Thai B2B mango distribution company}. The data is stored in 11~JSON files:
+
+\begin{table}[H]
+\centering\small
+\caption{Seed data overview.}
+\begin{tabularx}{\textwidth}{@{} l c X @{}}
+\toprule
+\textbf{Data File} & \textbf{Records} & \textbf{Description} \\
+\midrule
+\texttt{suppliers.json}        & 3   & Thai mango farms (Chanthaburi, Chiang Mai, Prachuap) \\
+\texttt{purchase\_orders.json} & $\sim$10  & Procurement orders to suppliers \\
+\texttt{products.json}         & 5   & Mango product SKUs (premium, standard, assorted) \\
+\texttt{warehouses.json}       & 1   & Bangkok central warehouse (WH-BKK) \\
+\texttt{inventory.json}        & 5   & Stock levels per product \\
+\texttt{stock\_movements.json} & $\sim$20  & Inbound/outbound movement records \\
+\texttt{customers.json}        & 50  & Thai B2B customers (restaurants, hotels, supermarkets) \\
+\texttt{orders.json}           & 500 & Customer sales orders \\
+\texttt{carriers.json}         & 2   & Kerry Express (ground) + SCG Cold Chain (refrigerated) \\
+\texttt{shipments.json}        & 400 & Delivery shipments \\
+\texttt{tracking\_events.json} & $\sim$1000 & Shipment tracking history \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% =====================================================================
+%              CHAPTER 3: USE CASE VALIDATION
+% =====================================================================
+\chapter{Use Case Validation}
+
+The three use cases defined in Week~4 were tested with the live MCP server connected to Claude Code. All three were validated successfully.
+
+\section{UC-1: Order Status Inquiry}
+
+\textbf{Query:} ``What is the status of order ORD-005?''
+
+The agent correctly:
+\begin{enumerate}[itemsep=0.2em]
+    \item Called \texttt{oms\_get\_order} to retrieve order details (customer, status, dates, line items)
+    \item Called \texttt{tms\_track\_order} to find the associated shipment and tracking info
+    \item Returned a unified response with order info + shipping status
+\end{enumerate}
+
+\textbf{Result:} The agent identified that ORD-005 was shipped on Feb~10, two days after being placed and four days before the required date. It correctly listed both line items with quantities and prices, and computed the total (\$14,750).
+
+\textbf{Tool calls:} 2 (optimal)
+
+\section{UC-2: Delayed Order Root Cause Analysis}
+
+\textbf{Query:} ``Why is order ORD-007 delayed?''
+
+The agent correctly performed the full cross-system investigation:
+\begin{enumerate}[itemsep=0.2em]
+    \item Called \texttt{oms\_get\_order}: order is processing, priority urgent, required by Feb~12
+    \item Called \texttt{tms\_track\_order}: no shipment found (order stuck at fulfillment)
+    \item Called \texttt{wms\_check\_inventory}: only 8 units available, 50 needed (shortfall of 42)
+    \item Called \texttt{wms\_get\_product}: confirmed product is Nam Doc Mai Mango Box 5kg
+\end{enumerate}
+
+\textbf{Result:} The agent correctly identified the root cause: \textit{insufficient inventory} (8 units available vs.\ 50 required). It noted the order is 5+ weeks overdue and the inventory is below the reorder point of 20.
+
+\textbf{Tool calls:} 4 (appropriate for the diagnostic chain)
+
+\section{UC-3: Supplier Performance Comparison}
+
+\textbf{Query:} ``Compare the performance of our suppliers''
+
+The agent correctly:
+\begin{enumerate}[itemsep=0.2em]
+    \item Called \texttt{srm\_compare\_suppliers} to get side-by-side performance metrics
+    \item Called \texttt{srm\_list\_suppliers} to get full supplier profiles
+    \item Generated a structured comparison table with all key metrics
+\end{enumerate}
+
+\textbf{Result:} The agent produced a detailed comparison identifying Somchai Mango Farm as the top performer (100\% on-time, 2.7-day avg lead time) and Northern Fruits Co.\ as the weakest (0\% on-time, 8.5-day avg lead time). It included actionable insights about which supplier to use for urgent orders.
+
+\textbf{Tool calls:} 2 (optimal)
+
+\section{Validation Summary}
+
+\begin{table}[H]
+\centering\small
+\caption{Use case validation results.}
+\begin{tabularx}{\textwidth}{@{} c l c c l @{}}
+\toprule
+\textbf{UC} & \textbf{Name} & \textbf{Tool Calls} & \textbf{Correct?} & \textbf{Notes} \\
+\midrule
+1 & Order Status Inquiry     & 2 & Yes & Optimal tool selection, complete data \\
+2 & Root Cause Analysis      & 4 & Yes & Full causal chain identified \\
+3 & Supplier Comparison      & 2 & Yes & Structured output with actionable insights \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+These results are preliminary (single runs, not the full 45-run evaluation protocol), but they confirm that the MCP server and agent integration work correctly for all three use cases.
+
+% =====================================================================
+%              CHAPTER 4: DOCUMENTATION
+% =====================================================================
+\chapter{Documentation}
+
+Two documentation files were created in the \texttt{serge/docs/} directory:
+
+\section{MCP Setup Guide}
+
+\textbf{File:} \texttt{docs/MCP\_SETUP.md}
+
+This guide documents how to build and configure the MCP server from scratch. It covers:
+\begin{itemize}[itemsep=0.2em]
+    \item Prerequisites (Go 1.23+, Claude Code CLI)
+    \item Build command (\texttt{go build})
+    \item Configuration of \texttt{.mcp.json} and \texttt{.claude/settings.local.json}
+    \item Verification steps
+    \item Full reference of all 21 MCP tools
+    \item Seed data summary
+\end{itemize}
+
+All machine-specific paths have been replaced with \texttt{<PROJECT\_ROOT>} placeholders so that any team member or future user can set up the system on their own machine.
+
+\section{Supply Chain Modelisation}
+
+\textbf{File:} \texttt{docs/SUPPLY\_CHAIN\_MODEL.md}
+
+This document describes the V1 supply chain model and the roadmap toward a full B2B simulation:
+\begin{itemize}[itemsep=0.2em]
+    \item \textbf{V1 (current):} Static, read-only Thai mango distribution -- 5 SKUs, 3 suppliers, 1 warehouse, 50 customers, 2 carriers. Validates agent architecture and builds evaluation benchmarks.
+    \item \textbf{V2:} Dynamic operations -- write operations, time simulation, multi-warehouse, more product categories.
+    \item \textbf{V3:} Realistic B2B -- demand forecasting, contracts, payment terms, quality management, multi-carrier optimization.
+    \item \textbf{V4:} Full simulation company -- international trade, real-time events, financial integration, compliance, multi-tenant.
+\end{itemize}
+
+% =====================================================================
+%              CHAPTER 5: NEXT STEPS
+% =====================================================================
+\chapter{Next Steps}
+
+\section{Week 8 Plan}
+
+\begin{table}[H]
+\centering\small
+\caption{Week 8 planned tasks.}
+\begin{tabularx}{\textwidth}{@{} l X @{}}
+\toprule
+\textbf{Task} & \textbf{Description} \\
+\midrule
+Ground truth definition & Define the 15 evaluation scenarios (5 per UC) with expected answers from seed data \\
+LLM-as-Judge pipeline   & Implement the judge evaluation script with the 5-criterion scoring rubric \\
+Full evaluation runs     & Execute 45 runs (15 scenarios $\times$ 3 runs each) and collect results \\
+Results analysis         & Compute aggregate scores, consistency metrics, and tool call efficiency \\
+Final report             & Begin writing the final report with evaluation results \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}
