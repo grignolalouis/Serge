@@ -28,63 +28,56 @@ func main() {
 	warehouses := must(loadScenario[[]domain.Warehouse]("warehouses.json"))
 	customers := must(loadScenario[[]domain.Customer]("customers.json"))
 	carriers := must(loadScenario[[]domain.Carrier]("carriers.json"))
-	scenarioOrders := must(loadScenario[[]domain.Order]("orders.json"))
-	scenarioPOs := must(loadScenario[[]domain.PurchaseOrder]("purchase_orders.json"))
+	supplierProducts := must(loadScenario[[]domain.SupplierProduct]("supplier_products.json"))
+	scenarioOrders := must(loadScenario[[]domain.CustomerOrder]("customer_orders.json"))
+	scenarioSOs := must(loadScenario[[]domain.SupplierOrder]("supplier_orders.json"))
 	scenarioShipments := must(loadScenario[[]domain.Shipment]("shipments.json"))
 	scenarioEvents := must(loadScenario[[]domain.TrackingEvent]("tracking_events.json"))
 	scenarioMovements := must(loadScenario[[]domain.StockMovement]("stock_movements.json"))
 	inventory := must(loadScenario[[]domain.InventoryRecord]("inventory.json"))
 
-	// ── Generate additional data (IDs >= 100) ───────────────────────────
-	startDate := time.Date(2025, 10, 1, 0, 0, 0, 0, time.UTC)
-	endDate := time.Date(2026, 2, 10, 0, 0, 0, 0, time.UTC)
+	start := time.Date(2025, 10, 1, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2026, 2, 10, 0, 0, 0, 0, time.UTC)
 
-	genOrders := generateOrders(rng, customers, products, 470, startDate, endDate)
-	genPOs := generatePOs(rng, suppliers, products, 42, startDate, endDate)
+	genOrders := generateCustomerOrders(rng, customers, products, 470, start, end)
+	genSOs := generateSupplierOrders(rng, suppliers, supplierProducts, 42, start, end)
 	genShipments, genEvents := generateShipments(rng, genOrders, carriers, products)
-	genOrderMovements := generateOrderMovements(rng, genOrders)
-	genPOMovements := generatePOMovements(rng, genPOs)
+	genOrderMvts := generateCustomerOrderMovements(genOrders)
+	genSOMvts := generateSupplierOrderMovements(genSOs, supplierProducts)
 
 	allOrders := append(scenarioOrders, genOrders...)
-	allPOs := append(scenarioPOs, genPOs...)
+	allSOs := append(scenarioSOs, genSOs...)
 	allShipments := append(scenarioShipments, genShipments...)
 	allEvents := append(scenarioEvents, genEvents...)
-	allMovements := append(scenarioMovements, genOrderMovements...)
-	allMovements = append(allMovements, genPOMovements...)
+	allMvts := append(scenarioMovements, genOrderMvts...)
+	allMvts = append(allMvts, genSOMvts...)
 
-	// ── Write output ────────────────────────────────────────────────────
 	writeJSON(filepath.Join(outDir, "suppliers.json"), suppliers)
 	writeJSON(filepath.Join(outDir, "products.json"), products)
 	writeJSON(filepath.Join(outDir, "warehouses.json"), warehouses)
 	writeJSON(filepath.Join(outDir, "customers.json"), customers)
 	writeJSON(filepath.Join(outDir, "carriers.json"), carriers)
+	writeJSON(filepath.Join(outDir, "supplier_products.json"), supplierProducts)
 	writeJSON(filepath.Join(outDir, "inventory.json"), inventory)
-	writeJSON(filepath.Join(outDir, "orders.json"), allOrders)
-	writeJSON(filepath.Join(outDir, "purchase_orders.json"), allPOs)
+	writeJSON(filepath.Join(outDir, "customer_orders.json"), allOrders)
+	writeJSON(filepath.Join(outDir, "supplier_orders.json"), allSOs)
 	writeJSON(filepath.Join(outDir, "shipments.json"), allShipments)
 	writeJSON(filepath.Join(outDir, "tracking_events.json"), allEvents)
-	writeJSON(filepath.Join(outDir, "stock_movements.json"), allMovements)
+	writeJSON(filepath.Join(outDir, "stock_movements.json"), allMvts)
 
 	fmt.Printf("Seed data written to %s/\n", outDir)
-	fmt.Printf("  Orders:          %d (scenario: %d + generated: %d)\n", len(allOrders), len(scenarioOrders), len(genOrders))
-	fmt.Printf("  Purchase Orders: %d (scenario: %d + generated: %d)\n", len(allPOs), len(scenarioPOs), len(genPOs))
-	fmt.Printf("  Shipments:       %d (scenario: %d + generated: %d)\n", len(allShipments), len(scenarioShipments), len(genShipments))
-	fmt.Printf("  Tracking Events: %d (scenario: %d + generated: %d)\n", len(allEvents), len(scenarioEvents), len(genEvents))
-	fmt.Printf("  Stock Movements: %d (scenario: %d + generated: %d)\n", len(allMovements), len(scenarioMovements), len(genOrderMovements)+len(genPOMovements))
+	fmt.Printf("  Customer Orders:  %d (scenario: %d + generated: %d)\n", len(allOrders), len(scenarioOrders), len(genOrders))
+	fmt.Printf("  Supplier Orders:  %d (scenario: %d + generated: %d)\n", len(allSOs), len(scenarioSOs), len(genSOs))
+	fmt.Printf("  Shipments:        %d (scenario: %d + generated: %d)\n", len(allShipments), len(scenarioShipments), len(genShipments))
+	fmt.Printf("  Tracking Events:  %d (scenario: %d + generated: %d)\n", len(allEvents), len(scenarioEvents), len(genEvents))
+	fmt.Printf("  Stock Movements:  %d (scenario: %d + generated: %d)\n", len(allMvts), len(scenarioMovements), len(genOrderMvts)+len(genSOMvts))
 }
 
-func generateOrders(rng *rand.Rand, customers []domain.Customer, products []domain.Product, count int, start, end time.Time) []domain.Order {
+func generateCustomerOrders(rng *rand.Rand, customers []domain.Customer, products []domain.Product, count int, start, end time.Time) []domain.CustomerOrder {
 	priorities := []domain.Priority{domain.PriorityNormal, domain.PriorityNormal, domain.PriorityNormal, domain.PriorityHigh, domain.PriorityUrgent}
-	notes := []string{
-		"", "", "", "", "", "", "", "", "", // 90% no notes
-		"Deliver before 9am",
-		"Call before delivery",
-		"Leave at loading dock B",
-		"Weekly standing order",
-		"Fragile — handle with care",
-	}
+	notes := []string{"", "", "", "", "", "", "", "", "", "Deliver before 9am", "Call before delivery", "Leave at loading dock B", "Weekly standing order", "Fragile — handle with care"}
 
-	orders := make([]domain.Order, 0, count)
+	orders := make([]domain.CustomerOrder, 0, count)
 	for i := 0; i < count; i++ {
 		cust := customers[rng.Intn(len(customers))]
 		orderDate := randomDate(rng, start, end)
@@ -92,9 +85,8 @@ func generateOrders(rng *rand.Rand, customers []domain.Customer, products []doma
 		shippedDate := orderDate.Add(time.Duration(1+rng.Intn(2)) * 24 * time.Hour)
 		deliveredDate := shippedDate.Add(time.Duration(1+rng.Intn(2)) * 24 * time.Hour)
 
-		// 1–3 line items, no duplicate products
 		numLines := 1 + rng.Intn(3)
-		var lines []domain.OrderLine
+		var lines []domain.CustomerOrderLine
 		used := map[string]bool{}
 		for j := 0; j < numLines; j++ {
 			p := products[rng.Intn(len(products))]
@@ -102,103 +94,90 @@ func generateOrders(rng *rand.Rand, customers []domain.Customer, products []doma
 				continue
 			}
 			used[p.ID] = true
-			qty := quantityForSegment(rng, cust.Segment)
-			lines = append(lines, domain.OrderLine{
+			lines = append(lines, domain.CustomerOrderLine{
 				ProductID: p.ID,
-				Quantity:  qty,
-				UnitPrice: p.UnitPrice,
+				Quantity:  quantityForSegment(rng, cust.Segment),
 			})
 		}
 		if len(lines) == 0 {
 			continue
 		}
 
-		note := notes[rng.Intn(len(notes))]
-
-		orders = append(orders, domain.Order{
+		orders = append(orders, domain.CustomerOrder{
 			ID:            fmt.Sprintf("ORD-%03d", 100+i),
 			CustomerID:    cust.ID,
-			Status:        domain.OrderDelivered,
+			Status:        domain.CustomerOrderDelivered,
 			OrderDate:     orderDate,
 			RequiredDate:  requiredDate,
 			ShippedDate:   &shippedDate,
 			DeliveredDate: &deliveredDate,
 			Priority:      priorities[rng.Intn(len(priorities))],
-			Notes:         note,
+			Notes:         notes[rng.Intn(len(notes))],
 			Lines:         lines,
 		})
 	}
 	return orders
 }
 
-func generatePOs(rng *rand.Rand, suppliers []domain.Supplier, products []domain.Product, count int, start, end time.Time) []domain.PurchaseOrder {
-	// Build supplier → products map
-	supplierProducts := map[string][]domain.Product{}
-	for _, p := range products {
-		for _, sid := range p.SupplierIDs {
-			supplierProducts[sid] = append(supplierProducts[sid], p)
-		}
+func generateSupplierOrders(rng *rand.Rand, suppliers []domain.Supplier, sps []domain.SupplierProduct, count int, start, end time.Time) []domain.SupplierOrder {
+	supplierSPs := map[string][]domain.SupplierProduct{}
+	for _, sp := range sps {
+		supplierSPs[sp.SupplierID] = append(supplierSPs[sp.SupplierID], sp)
 	}
 
-	pos := make([]domain.PurchaseOrder, 0, count)
+	sos := make([]domain.SupplierOrder, 0, count)
 	for i := 0; i < count; i++ {
 		sup := suppliers[rng.Intn(len(suppliers))]
-		prods := supplierProducts[sup.ID]
+		prods := supplierSPs[sup.ID]
 		if len(prods) == 0 {
 			continue
 		}
 
 		orderDate := randomDate(rng, start, end)
 		expected := orderDate.Add(time.Duration(sup.LeadTimeDays) * 24 * time.Hour)
-
-		// Supplier reliability affects actual delivery
-		delay := rng.Intn(3) // 0-2 days delay
+		delay := rng.Intn(3)
 		if sup.Rating >= 4.0 {
-			delay = 0 // Reliable suppliers deliver on time
+			delay = 0
 		}
-		actualDelivery := expected.Add(time.Duration(delay) * 24 * time.Hour)
+		actual := expected.Add(time.Duration(delay) * 24 * time.Hour)
 
-		// 1-2 line items
 		numLines := 1 + rng.Intn(2)
-		var lines []domain.PurchaseOrderLine
+		var lines []domain.SupplierOrderLine
 		used := map[string]bool{}
 		for j := 0; j < numLines; j++ {
-			p := prods[rng.Intn(len(prods))]
-			if used[p.ID] {
+			sp := prods[rng.Intn(len(prods))]
+			if used[sp.ID] {
 				continue
 			}
-			used[p.ID] = true
-			qty := 20 + rng.Intn(130) // 20-150 units
-			lines = append(lines, domain.PurchaseOrderLine{
-				ProductID: p.ID,
-				Quantity:  qty,
-				UnitCost:  p.UnitPrice * 0.6, // ~60% of retail
+			used[sp.ID] = true
+			lines = append(lines, domain.SupplierOrderLine{
+				SupplierProductID: sp.ID,
+				Quantity:          20 + rng.Intn(130),
 			})
 		}
 		if len(lines) == 0 {
 			continue
 		}
 
-		pos = append(pos, domain.PurchaseOrder{
+		sos = append(sos, domain.SupplierOrder{
 			ID:               fmt.Sprintf("PO-%03d", 100+i),
 			SupplierID:       sup.ID,
-			Status:           domain.POReceived,
+			Status:           domain.SupplierOrderReceived,
 			OrderDate:        orderDate,
 			ExpectedDelivery: expected,
-			ActualDelivery:   &actualDelivery,
+			ActualDelivery:   &actual,
 			Lines:            lines,
 		})
 	}
-	return pos
+	return sos
 }
 
-func generateShipments(rng *rand.Rand, orders []domain.Order, carriers []domain.Carrier, products []domain.Product) ([]domain.Shipment, []domain.TrackingEvent) {
+func generateShipments(rng *rand.Rand, orders []domain.CustomerOrder, carriers []domain.Carrier, products []domain.Product) ([]domain.Shipment, []domain.TrackingEvent) {
 	productMap := map[string]domain.Product{}
 	for _, p := range products {
 		productMap[p.ID] = p
 	}
 
-	// Separate carriers by type
 	var refCarriers, groundCarriers []domain.Carrier
 	for _, c := range carriers {
 		if c.Type == "refrigerated" {
@@ -216,7 +195,6 @@ func generateShipments(rng *rand.Rand, orders []domain.Order, carriers []domain.
 			continue
 		}
 
-		// Determine if any product needs refrigeration
 		needsRefrigeration := false
 		var totalWeight float64
 		for _, line := range ord.Lines {
@@ -227,7 +205,6 @@ func generateShipments(rng *rand.Rand, orders []domain.Order, carriers []domain.
 			}
 		}
 
-		// Pick carrier
 		var carrier domain.Carrier
 		if needsRefrigeration && len(refCarriers) > 0 {
 			carrier = refCarriers[rng.Intn(len(refCarriers))]
@@ -239,13 +216,11 @@ func generateShipments(rng *rand.Rand, orders []domain.Order, carriers []domain.
 
 		shippedAt := *ord.ShippedDate
 		eta := shippedAt.Add(time.Duration(carrier.AvgTransitDays) * 24 * time.Hour)
-		deliveredAt := ord.DeliveredDate
-
-		shipID := fmt.Sprintf("SHP-%s", ord.ID[4:]) // ORD-100 → SHP-100
+		shipID := fmt.Sprintf("SHP-%s", ord.ID[4:])
 
 		shipments = append(shipments, domain.Shipment{
 			ID:               shipID,
-			OrderID:          ord.ID,
+			CustomerOrderID:  ord.ID,
 			CarrierID:        carrier.ID,
 			Status:           domain.ShipmentDelivered,
 			TrackingNumber:   fmt.Sprintf("%s-%s", carrier.Name[:3], ord.ID[4:]),
@@ -254,105 +229,79 @@ func generateShipments(rng *rand.Rand, orders []domain.Order, carriers []domain.
 			WeightKg:         totalWeight,
 			ShippedAt:        &shippedAt,
 			EstimatedArrival: &eta,
-			DeliveredAt:      deliveredAt,
+			DeliveredAt:      ord.DeliveredDate,
 		})
 
-		// Generate 3-4 tracking events
-		events = append(events, generateTrackingEvents(rng, shipID, shippedAt, deliveredAt)...)
+		events = append(events, generateTrackingEvents(rng, shipID, shippedAt, ord.DeliveredDate)...)
 	}
 	return shipments, events
 }
 
 func generateTrackingEvents(rng *rand.Rand, shipmentID string, shipped time.Time, delivered *time.Time) []domain.TrackingEvent {
 	events := []domain.TrackingEvent{
-		{
-			ShipmentID:  shipmentID,
-			Timestamp:   shipped.Add(30 * time.Minute),
-			Location:    "Bang Na, Bangkok",
-			Status:      "picked_up",
-			Description: "Package picked up from Bangkok Central Warehouse",
-		},
-		{
-			ShipmentID:  shipmentID,
-			Timestamp:   shipped.Add(time.Duration(4+rng.Intn(4)) * time.Hour),
-			Location:    "Bangkok",
-			Status:      "in_transit",
-			Description: "Departed Bangkok sorting facility",
-		},
+		{ShipmentID: shipmentID, Timestamp: shipped.Add(30 * time.Minute), Location: "Bang Na, Bangkok", Status: "picked_up", Description: "Package picked up from Bangkok Central Warehouse"},
+		{ShipmentID: shipmentID, Timestamp: shipped.Add(time.Duration(4+rng.Intn(4)) * time.Hour), Location: "Bangkok", Status: "in_transit", Description: "Departed Bangkok sorting facility"},
 	}
-
 	if delivered != nil {
-		events = append(events, domain.TrackingEvent{
-			ShipmentID:  shipmentID,
-			Timestamp:   *delivered,
-			Location:    "Bangkok",
-			Status:      "delivered",
-			Description: "Delivered — signed by recipient",
-		})
+		events = append(events, domain.TrackingEvent{ShipmentID: shipmentID, Timestamp: *delivered, Location: "Bangkok", Status: "delivered", Description: "Delivered — signed by recipient"})
 	}
-
 	return events
 }
 
-func generateOrderMovements(rng *rand.Rand, orders []domain.Order) []domain.StockMovement {
-	var movements []domain.StockMovement
+func generateCustomerOrderMovements(orders []domain.CustomerOrder) []domain.StockMovement {
+	var mvts []domain.StockMovement
 	idx := 100
 	for _, ord := range orders {
 		if ord.ShippedDate == nil {
 			continue
 		}
 		for _, line := range ord.Lines {
-			movements = append(movements, domain.StockMovement{
-				ID:            fmt.Sprintf("SM-%04d", idx),
-				ProductID:     line.ProductID,
-				WarehouseID:   "WH-BKK",
-				Type:          domain.MovementOutbound,
-				Quantity:      line.Quantity,
-				ReferenceID:   ord.ID,
-				ReferenceType: "sales_order",
-				CreatedAt:     *ord.ShippedDate,
+			mvts = append(mvts, domain.StockMovement{
+				ID: fmt.Sprintf("SM-%04d", idx), ProductID: line.ProductID, WarehouseID: "WH-BKK",
+				Type: domain.MovementOutbound, Quantity: line.Quantity,
+				ReferenceID: ord.ID, ReferenceType: "customer_order", CreatedAt: *ord.ShippedDate,
 			})
 			idx++
 		}
 	}
-	return movements
+	return mvts
 }
 
-func generatePOMovements(rng *rand.Rand, pos []domain.PurchaseOrder) []domain.StockMovement {
-	var movements []domain.StockMovement
+func generateSupplierOrderMovements(sos []domain.SupplierOrder, sps []domain.SupplierProduct) []domain.StockMovement {
+	spMap := map[string]domain.SupplierProduct{}
+	for _, sp := range sps {
+		spMap[sp.ID] = sp
+	}
+
+	var mvts []domain.StockMovement
 	idx := 2000
-	for _, po := range pos {
-		if po.ActualDelivery == nil {
+	for _, so := range sos {
+		if so.ActualDelivery == nil {
 			continue
 		}
-		for _, line := range po.Lines {
-			movements = append(movements, domain.StockMovement{
-				ID:            fmt.Sprintf("SM-%04d", idx),
-				ProductID:     line.ProductID,
-				WarehouseID:   "WH-BKK",
-				Type:          domain.MovementInbound,
-				Quantity:      line.Quantity,
-				ReferenceID:   po.ID,
-				ReferenceType: "purchase_order",
-				CreatedAt:     *po.ActualDelivery,
+		for _, line := range so.Lines {
+			sp := spMap[line.SupplierProductID]
+			mvts = append(mvts, domain.StockMovement{
+				ID: fmt.Sprintf("SM-%04d", idx), ProductID: sp.ProductID, WarehouseID: "WH-BKK",
+				Type: domain.MovementInbound, Quantity: line.Quantity,
+				ReferenceID: so.ID, ReferenceType: "supplier_order", CreatedAt: *so.ActualDelivery,
 			})
 			idx++
 		}
 	}
-	return movements
+	return mvts
 }
 
 func quantityForSegment(rng *rand.Rand, segment domain.CustomerSegment) int {
 	if segment == domain.SegmentWholesale {
-		return 5 + rng.Intn(25) // 5-30
+		return 5 + rng.Intn(25)
 	}
-	return 2 + rng.Intn(15) // 2-17
+	return 2 + rng.Intn(15)
 }
 
 func randomDate(rng *rand.Rand, start, end time.Time) time.Time {
 	diff := end.Sub(start)
-	offset := time.Duration(rng.Int63n(int64(diff)))
-	d := start.Add(offset)
+	d := start.Add(time.Duration(rng.Int63n(int64(diff))))
 	return time.Date(d.Year(), d.Month(), d.Day(), 8, 0, 0, 0, time.UTC)
 }
 

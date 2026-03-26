@@ -8,11 +8,7 @@
     "weight_kg": 5,
     "reorder_point": 20,
     "shelf_life_days": 7,
-    "storage_type": "refrigerated",
-    "supplier_ids": [
-      "SUP-001",
-      "SUP-004"
-    ]
+    "storage_type": "refrigerated"
   },
   {
     "id": "PROD-002",
@@ -23,11 +19,7 @@
     "weight_kg": 10,
     "reorder_point": 15,
     "shelf_life_days": 7,
-    "storage_type": "refrigerated",
-    "supplier_ids": [
-      "SUP-002",
-      "SUP-003"
-    ]
+    "storage_type": "refrigerated"
   },
   {
     "id": "PROD-003",
@@ -38,11 +30,7 @@
     "weight_kg": 5,
     "reorder_point": 25,
     "shelf_life_days": 10,
-    "storage_type": "refrigerated",
-    "supplier_ids": [
-      "SUP-001",
-      "SUP-003"
-    ]
+    "storage_type": "refrigerated"
   },
   {
     "id": "PROD-004",
@@ -53,11 +41,7 @@
     "weight_kg": 10,
     "reorder_point": 10,
     "shelf_life_days": 5,
-    "storage_type": "refrigerated",
-    "supplier_ids": [
-      "SUP-001",
-      "SUP-005"
-    ]
+    "storage_type": "refrigerated"
   },
   {
     "id": "PROD-005",
@@ -68,11 +52,7 @@
     "weight_kg": 5,
     "reorder_point": 15,
     "shelf_life_days": 7,
-    "storage_type": "refrigerated",
-    "supplier_ids": [
-      "SUP-002",
-      "SUP-005"
-    ]
+    "storage_type": "refrigerated"
   },
   {
     "id": "PROD-006",
@@ -83,10 +63,7 @@
     "weight_kg": 0.5,
     "reorder_point": 30,
     "shelf_life_days": 180,
-    "storage_type": "ambient",
-    "supplier_ids": [
-      "SUP-004"
-    ]
+    "storage_type": "ambient"
   },
   {
     "id": "PROD-007",
@@ -97,10 +74,7 @@
     "weight_kg": 1.1,
     "reorder_point": 20,
     "shelf_life_days": 90,
-    "storage_type": "refrigerated",
-    "supplier_ids": [
-      "SUP-004"
-    ]
+    "storage_type": "refrigerated"
   },
   {
     "id": "PROD-008",
@@ -111,10 +85,6 @@
     "weight_kg": 1.5,
     "reorder_point": 15,
     "shelf_life_days": 3,
-    "storage_type": "refrigerated",
-    "supplier_ids": [
-      "SUP-004",
-      "SUP-005"
-    ]
+    "storage_type": "refrigerated"
   }
 ]

@@ -7,28 +7,26 @@ import (
 )
 
 type ProcurementRepository struct {
-	suppliers      map[string]domain.Supplier
-	purchaseOrders map[string]domain.PurchaseOrder
+	suppliers        map[string]domain.Supplier
+	supplierProducts map[string]domain.SupplierProduct
+	supplierOrders   map[string]domain.SupplierOrder
 }
 
 func NewProcurementRepository() *ProcurementRepository {
 	return &ProcurementRepository{
-		suppliers:      make(map[string]domain.Supplier),
-		purchaseOrders: make(map[string]domain.PurchaseOrder),
+		suppliers:        make(map[string]domain.Supplier),
+		supplierProducts: make(map[string]domain.SupplierProduct),
+		supplierOrders:   make(map[string]domain.SupplierOrder),
 	}
 }
 
-// --- Loaders (used by seed) ---
+// --- Loaders ---
 
-func (r *ProcurementRepository) LoadSupplier(s domain.Supplier) {
-	r.suppliers[s.ID] = s
-}
+func (r *ProcurementRepository) LoadSupplier(s domain.Supplier)               { r.suppliers[s.ID] = s }
+func (r *ProcurementRepository) LoadSupplierProduct(sp domain.SupplierProduct) { r.supplierProducts[sp.ID] = sp }
+func (r *ProcurementRepository) LoadSupplierOrder(so domain.SupplierOrder)     { r.supplierOrders[so.ID] = so }
 
-func (r *ProcurementRepository) LoadPurchaseOrder(po domain.PurchaseOrder) {
-	r.purchaseOrders[po.ID] = po
-}
-
-// --- Queries ---
+// --- Supplier queries ---
 
 func (r *ProcurementRepository) GetSupplier(id string) (domain.Supplier, error) {
 	s, ok := r.suppliers[id]
@@ -46,47 +44,87 @@ func (r *ProcurementRepository) ListSuppliers() []domain.Supplier {
 	return out
 }
 
-func (r *ProcurementRepository) GetPurchaseOrder(id string) (domain.PurchaseOrder, error) {
-	po, ok := r.purchaseOrders[id]
+// --- SupplierProduct queries ---
+
+func (r *ProcurementRepository) GetSupplierProduct(id string) (domain.SupplierProduct, error) {
+	sp, ok := r.supplierProducts[id]
 	if !ok {
-		return domain.PurchaseOrder{}, fmt.Errorf("purchase order %s not found", id)
+		return domain.SupplierProduct{}, fmt.Errorf("supplier product %s not found", id)
 	}
-	return po, nil
+	return sp, nil
 }
 
-func (r *ProcurementRepository) ListPurchaseOrders() []domain.PurchaseOrder {
-	out := make([]domain.PurchaseOrder, 0, len(r.purchaseOrders))
-	for _, po := range r.purchaseOrders {
-		out = append(out, po)
+func (r *ProcurementRepository) ListSupplierProducts() []domain.SupplierProduct {
+	out := make([]domain.SupplierProduct, 0, len(r.supplierProducts))
+	for _, sp := range r.supplierProducts {
+		out = append(out, sp)
 	}
 	return out
 }
 
-func (r *ProcurementRepository) ListPurchaseOrdersBySupplier(supplierID string) []domain.PurchaseOrder {
-	var out []domain.PurchaseOrder
-	for _, po := range r.purchaseOrders {
-		if po.SupplierID == supplierID {
-			out = append(out, po)
+func (r *ProcurementRepository) ListSupplierProductsBySupplier(supplierID string) []domain.SupplierProduct {
+	var out []domain.SupplierProduct
+	for _, sp := range r.supplierProducts {
+		if sp.SupplierID == supplierID {
+			out = append(out, sp)
 		}
 	}
 	return out
 }
 
-func (r *ProcurementRepository) ListPurchaseOrdersByStatus(status domain.PurchaseOrderStatus) []domain.PurchaseOrder {
-	var out []domain.PurchaseOrder
-	for _, po := range r.purchaseOrders {
-		if po.Status == status {
-			out = append(out, po)
+func (r *ProcurementRepository) ListSupplierProductsByProduct(productID string) []domain.SupplierProduct {
+	var out []domain.SupplierProduct
+	for _, sp := range r.supplierProducts {
+		if sp.ProductID == productID {
+			out = append(out, sp)
 		}
 	}
 	return out
 }
 
-func (r *ProcurementRepository) ListOverduePurchaseOrders() []domain.PurchaseOrder {
-	var out []domain.PurchaseOrder
-	for _, po := range r.purchaseOrders {
-		if po.IsOverdue() {
-			out = append(out, po)
+// --- SupplierOrder queries ---
+
+func (r *ProcurementRepository) GetSupplierOrder(id string) (domain.SupplierOrder, error) {
+	so, ok := r.supplierOrders[id]
+	if !ok {
+		return domain.SupplierOrder{}, fmt.Errorf("supplier order %s not found", id)
+	}
+	return so, nil
+}
+
+func (r *ProcurementRepository) ListSupplierOrders() []domain.SupplierOrder {
+	out := make([]domain.SupplierOrder, 0, len(r.supplierOrders))
+	for _, so := range r.supplierOrders {
+		out = append(out, so)
+	}
+	return out
+}
+
+func (r *ProcurementRepository) ListSupplierOrdersBySupplier(supplierID string) []domain.SupplierOrder {
+	var out []domain.SupplierOrder
+	for _, so := range r.supplierOrders {
+		if so.SupplierID == supplierID {
+			out = append(out, so)
+		}
+	}
+	return out
+}
+
+func (r *ProcurementRepository) ListSupplierOrdersByStatus(status domain.SupplierOrderStatus) []domain.SupplierOrder {
+	var out []domain.SupplierOrder
+	for _, so := range r.supplierOrders {
+		if so.Status == status {
+			out = append(out, so)
+		}
+	}
+	return out
+}
+
+func (r *ProcurementRepository) ListOverdueSupplierOrders() []domain.SupplierOrder {
+	var out []domain.SupplierOrder
+	for _, so := range r.supplierOrders {
+		if so.IsOverdue() {
+			out = append(out, so)
 		}
 	}
 	return out

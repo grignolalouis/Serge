@@ -2,6 +2,10 @@ package domain
 
 import "time"
 
+// ---------------------------------------------------------------------------
+// Sales domain — customers and customer orders
+// ---------------------------------------------------------------------------
+
 type CustomerSegment string
 
 const (
@@ -16,17 +20,17 @@ type Customer struct {
 	Segment      CustomerSegment `json:"segment"`
 	Region       string          `json:"region"`
 	Address      string          `json:"address"`
-	DeliveryZone string          `json:"delivery_zone"` // "central_bkk" or "outer_bkk"
+	DeliveryZone string          `json:"delivery_zone"`
 }
 
-type OrderStatus string
+type CustomerOrderStatus string
 
 const (
-	OrderPending    OrderStatus = "pending"
-	OrderProcessing OrderStatus = "processing"
-	OrderShipped    OrderStatus = "shipped"
-	OrderDelivered  OrderStatus = "delivered"
-	OrderCancelled  OrderStatus = "cancelled"
+	CustomerOrderPending    CustomerOrderStatus = "pending"
+	CustomerOrderProcessing CustomerOrderStatus = "processing"
+	CustomerOrderShipped    CustomerOrderStatus = "shipped"
+	CustomerOrderDelivered  CustomerOrderStatus = "delivered"
+	CustomerOrderCancelled  CustomerOrderStatus = "cancelled"
 )
 
 type Priority string
@@ -37,33 +41,26 @@ const (
 	PriorityUrgent Priority = "urgent"
 )
 
-type Order struct {
-	ID            string      `json:"id"`
-	CustomerID    string      `json:"customer_id"`
-	Status        OrderStatus `json:"status"`
-	OrderDate     time.Time   `json:"order_date"`
-	RequiredDate  time.Time   `json:"required_date"`
-	ShippedDate   *time.Time  `json:"shipped_date,omitempty"`
-	DeliveredDate *time.Time  `json:"delivered_date,omitempty"`
-	Priority      Priority    `json:"priority"`
-	Notes         string      `json:"notes,omitempty"`
-	Lines         []OrderLine `json:"lines"`
+// CustomerOrder is a sales order placed by a B2B customer.
+type CustomerOrder struct {
+	ID            string              `json:"id"`
+	CustomerID    string              `json:"customer_id"`
+	Status        CustomerOrderStatus `json:"status"`
+	OrderDate     time.Time           `json:"order_date"`
+	RequiredDate  time.Time           `json:"required_date"`
+	ShippedDate   *time.Time          `json:"shipped_date,omitempty"`
+	DeliveredDate *time.Time          `json:"delivered_date,omitempty"`
+	Priority      Priority            `json:"priority"`
+	Notes         string              `json:"notes,omitempty"`
+	Lines         []CustomerOrderLine `json:"lines"`
 }
 
-type OrderLine struct {
-	ProductID string  `json:"product_id"`
-	Quantity  int     `json:"quantity"`
-	UnitPrice float64 `json:"unit_price"`
+// CustomerOrderLine references a Product — price comes from Product.UnitPrice.
+type CustomerOrderLine struct {
+	ProductID string `json:"product_id"`
+	Quantity  int    `json:"quantity"`
 }
 
-func (o Order) TotalAmount() float64 {
-	var total float64
-	for _, l := range o.Lines {
-		total += float64(l.Quantity) * l.UnitPrice
-	}
-	return total
-}
-
-func (o Order) IsOverdue() bool {
-	return o.Status != OrderDelivered && o.Status != OrderCancelled && time.Now().After(o.RequiredDate)
+func (o CustomerOrder) IsOverdue() bool {
+	return o.Status != CustomerOrderDelivered && o.Status != CustomerOrderCancelled && time.Now().After(o.RequiredDate)
 }

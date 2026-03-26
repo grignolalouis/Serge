@@ -9,24 +9,23 @@ import (
 )
 
 func registerProcurementTools(s *mcp.StdioServer, ctrl *controller.ProcurementController) {
-
 	s.RegisterTool(
 		mcp.NewTool("srm_get_supplier",
-			mcp.WithDescription("Get a supplier's profile: name, region, contact, lead time, and rating. Use when you need details about a specific supplier."),
-			mcp.WithString("supplier_id", mcp.Required(), mcp.Description("Supplier ID, e.g. SUP-001")),
+			mcp.WithDescription("Get a supplier's profile: name, region, contact, lead time, rating, product categories, payment terms."),
+			mcp.WithString("supplier_id", mcp.Required(), mcp.Description("e.g. SUP-001")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			result, err := ctrl.GetSupplier(stringArg(req.Params.Arguments, "supplier_id"))
+			r, err := ctrl.GetSupplier(stringArg(req.Params.Arguments, "supplier_id"))
 			if err != nil {
 				return errResult(err)
 			}
-			return jsonResult(result)
+			return jsonResult(r)
 		},
 	)
 
 	s.RegisterTool(
 		mcp.NewTool("srm_list_suppliers",
-			mcp.WithDescription("List all suppliers with their profiles. Use to discover available suppliers or before comparing them."),
+			mcp.WithDescription("List all suppliers."),
 		),
 		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 			return jsonResult(ctrl.ListSuppliers())
@@ -34,63 +33,97 @@ func registerProcurementTools(s *mcp.StdioServer, ctrl *controller.ProcurementCo
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("srm_get_purchase_order",
-			mcp.WithDescription("Get a purchase order's details: supplier, status, dates, line items. Use when investigating a specific PO."),
-			mcp.WithString("purchase_order_id", mcp.Required(), mcp.Description("Purchase order ID, e.g. PO-001")),
+		mcp.NewTool("srm_get_supplier_product",
+			mcp.WithDescription("Get a supplier product by ID. A supplier product is an item a supplier sells, with the supplier's unit cost. Use to find the purchase price for a product from a specific supplier."),
+			mcp.WithString("supplier_product_id", mcp.Required(), mcp.Description("e.g. SP-001")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			result, err := ctrl.GetPurchaseOrder(stringArg(req.Params.Arguments, "purchase_order_id"))
+			r, err := ctrl.GetSupplierProduct(stringArg(req.Params.Arguments, "supplier_product_id"))
 			if err != nil {
 				return errResult(err)
 			}
-			return jsonResult(result)
+			return jsonResult(r)
 		},
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("srm_list_purchase_orders_by_supplier",
-			mcp.WithDescription("List all purchase orders for a given supplier. Use to check what has been ordered from a supplier and delivery history."),
-			mcp.WithString("supplier_id", mcp.Required(), mcp.Description("Supplier ID, e.g. SUP-001")),
+		mcp.NewTool("srm_list_supplier_products_by_supplier",
+			mcp.WithDescription("List all products a specific supplier offers, with their unit costs."),
+			mcp.WithString("supplier_id", mcp.Required(), mcp.Description("e.g. SUP-001")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListPurchaseOrdersBySupplier(stringArg(req.Params.Arguments, "supplier_id")))
+			return jsonResult(ctrl.ListSupplierProductsBySupplier(stringArg(req.Params.Arguments, "supplier_id")))
 		},
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("srm_list_purchase_orders_by_status",
-			mcp.WithDescription("List purchase orders filtered by status. Use to find pending, shipped, or overdue POs."),
-			mcp.WithString("status", mcp.Required(), mcp.Description("PO status: pending, confirmed, shipped, received, or cancelled")),
+		mcp.NewTool("srm_list_supplier_products_by_product",
+			mcp.WithDescription("Find all suppliers that sell a given product, with their unit costs. Use to compare sourcing options."),
+			mcp.WithString("product_id", mcp.Required(), mcp.Description("Our product ID, e.g. PROD-001")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListPurchaseOrdersByStatus(stringArg(req.Params.Arguments, "status")))
+			return jsonResult(ctrl.ListSupplierProductsByProduct(stringArg(req.Params.Arguments, "product_id")))
 		},
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("srm_list_overdue_purchase_orders",
-			mcp.WithDescription("List purchase orders that are past their expected delivery date and not yet received. Use to identify supplier delays."),
+		mcp.NewTool("srm_get_supplier_order",
+			mcp.WithDescription("Get a supplier order (purchase order) by ID: supplier, status, dates, line items. Line items reference supplier products."),
+			mcp.WithString("supplier_order_id", mcp.Required(), mcp.Description("e.g. PO-001")),
+		),
+		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			r, err := ctrl.GetSupplierOrder(stringArg(req.Params.Arguments, "supplier_order_id"))
+			if err != nil {
+				return errResult(err)
+			}
+			return jsonResult(r)
+		},
+	)
+
+	s.RegisterTool(
+		mcp.NewTool("srm_list_all_supplier_orders",
+			mcp.WithDescription("List all supplier orders (purchase orders) with status, dates, and line items."),
 		),
 		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListOverduePurchaseOrders())
+			return jsonResult(ctrl.ListAllSupplierOrders())
+		},
+	)
+
+	s.RegisterTool(
+		mcp.NewTool("srm_list_supplier_orders_by_supplier",
+			mcp.WithDescription("List all supplier orders placed with a specific supplier."),
+			mcp.WithString("supplier_id", mcp.Required(), mcp.Description("e.g. SUP-001")),
+		),
+		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListSupplierOrdersBySupplier(stringArg(req.Params.Arguments, "supplier_id")))
+		},
+	)
+
+	s.RegisterTool(
+		mcp.NewTool("srm_list_supplier_orders_by_status",
+			mcp.WithDescription("List supplier orders filtered by status: pending, confirmed, shipped, received, or cancelled."),
+			mcp.WithString("status", mcp.Required(), mcp.Description("pending, confirmed, shipped, received, or cancelled")),
+		),
+		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListSupplierOrdersByStatus(stringArg(req.Params.Arguments, "status")))
+		},
+	)
+
+	s.RegisterTool(
+		mcp.NewTool("srm_list_overdue_supplier_orders",
+			mcp.WithDescription("List supplier orders past expected delivery and not yet received."),
+		),
+		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+			return jsonResult(ctrl.ListOverdueSupplierOrders())
 		},
 	)
 
 	s.RegisterTool(
 		mcp.NewTool("srm_compare_suppliers",
-			mcp.WithDescription("Compare all suppliers side by side: total POs, on-time delivery rate, average lead time. Use when evaluating supplier performance or choosing a supplier."),
+			mcp.WithDescription("Compare all suppliers: total orders, on-time rate, average lead time. Use for supplier evaluation."),
 		),
 		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 			return jsonResult(ctrl.CompareSuppliers())
-		},
-	)
-
-	s.RegisterTool(
-		mcp.NewTool("srm_list_all_purchase_orders",
-			mcp.WithDescription("List all purchase orders across all suppliers with their status, dates, and line items. Use for full procurement visibility."),
-		),
-		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListAllPurchaseOrders())
 		},
 	)
 }

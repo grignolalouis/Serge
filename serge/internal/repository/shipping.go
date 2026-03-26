@@ -19,21 +19,9 @@ func NewShippingRepository() *ShippingRepository {
 	}
 }
 
-// --- Loaders ---
-
-func (r *ShippingRepository) LoadCarrier(c domain.Carrier) {
-	r.carriers[c.ID] = c
-}
-
-func (r *ShippingRepository) LoadShipment(s domain.Shipment) {
-	r.shipments[s.ID] = s
-}
-
-func (r *ShippingRepository) LoadTrackingEvent(e domain.TrackingEvent) {
-	r.trackingEvents = append(r.trackingEvents, e)
-}
-
-// --- Queries ---
+func (r *ShippingRepository) LoadCarrier(c domain.Carrier)          { r.carriers[c.ID] = c }
+func (r *ShippingRepository) LoadShipment(s domain.Shipment)        { r.shipments[s.ID] = s }
+func (r *ShippingRepository) LoadTrackingEvent(e domain.TrackingEvent) { r.trackingEvents = append(r.trackingEvents, e) }
 
 func (r *ShippingRepository) GetCarrier(id string) (domain.Carrier, error) {
 	c, ok := r.carriers[id]
@@ -59,10 +47,10 @@ func (r *ShippingRepository) GetShipment(id string) (domain.Shipment, error) {
 	return s, nil
 }
 
-func (r *ShippingRepository) ListShipmentsByOrder(orderID string) []domain.Shipment {
+func (r *ShippingRepository) ListShipmentsByCustomerOrder(customerOrderID string) []domain.Shipment {
 	var out []domain.Shipment
 	for _, s := range r.shipments {
-		if s.OrderID == orderID {
+		if s.CustomerOrderID == customerOrderID {
 			out = append(out, s)
 		}
 	}

@@ -8,9 +8,8 @@
     "actual_delivery": "2026-01-05T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-001",
         "quantity": 100,
-        "unit_cost": 280
+        "supplier_product_id": "SP-001"
       }
     ]
   },
@@ -23,9 +22,8 @@
     "actual_delivery": "2026-01-13T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 80,
-        "unit_cost": 400
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -38,9 +36,8 @@
     "actual_delivery": "2026-01-12T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 120,
-        "unit_cost": 200
+        "supplier_product_id": "SP-007"
       }
     ]
   },
@@ -53,9 +50,8 @@
     "actual_delivery": "2026-01-14T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 50,
-        "unit_cost": 500
+        "supplier_product_id": "SP-003"
       }
     ]
   },
@@ -68,9 +64,8 @@
     "actual_delivery": "2026-01-24T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 60,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -83,9 +78,8 @@
     "actual_delivery": "2026-01-25T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-001",
         "quantity": 80,
-        "unit_cost": 280
+        "supplier_product_id": "SP-001"
       }
     ]
   },
@@ -98,9 +92,8 @@
     "actual_delivery": "2026-02-02T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 100,
-        "unit_cost": 200
+        "supplier_product_id": "SP-007"
       }
     ]
   },
@@ -112,9 +105,8 @@
     "expected_delivery": "2026-02-18T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-001",
         "quantity": 150,
-        "unit_cost": 280
+        "supplier_product_id": "SP-001"
       }
     ]
   },
@@ -126,9 +118,8 @@
     "expected_delivery": "2026-02-15T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 60,
-        "unit_cost": 400
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -140,9 +131,8 @@
     "expected_delivery": "2026-02-16T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 80,
-        "unit_cost": 300
+        "supplier_product_id": "SP-008"
       }
     ]
   },
@@ -155,14 +145,12 @@
     "actual_delivery": "2026-01-13T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-006",
         "quantity": 200,
-        "unit_cost": 90
+        "supplier_product_id": "SP-010"
       },
       {
-        "product_id": "PROD-007",
         "quantity": 80,
-        "unit_cost": 120
+        "supplier_product_id": "SP-011"
       }
     ]
   },
@@ -175,9 +163,8 @@
     "actual_delivery": "2026-01-22T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-001",
         "quantity": 60,
-        "unit_cost": 270
+        "supplier_product_id": "SP-009"
       }
     ]
   },
@@ -190,14 +177,12 @@
     "actual_delivery": "2026-01-26T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 30,
-        "unit_cost": 480
+        "supplier_product_id": "SP-013"
       },
       {
-        "product_id": "PROD-008",
         "quantity": 40,
-        "unit_cost": 180
+        "supplier_product_id": "SP-015"
       }
     ]
   },
@@ -210,9 +195,8 @@
     "actual_delivery": "2026-02-07T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 50,
-        "unit_cost": 290
+        "supplier_product_id": "SP-014"
       }
     ]
   },
@@ -224,14 +208,12 @@
     "expected_delivery": "2026-02-15T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-006",
         "quantity": 150,
-        "unit_cost": 90
+        "supplier_product_id": "SP-010"
       },
       {
-        "product_id": "PROD-008",
         "quantity": 30,
-        "unit_cost": 180
+        "supplier_product_id": "SP-012"
       }
     ]
   },
@@ -243,9 +225,8 @@
     "expected_delivery": "2026-02-18T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 100,
-        "unit_cost": 380
+        "supplier_product_id": "SP-006"
       }
     ]
   },
@@ -257,9 +238,8 @@
     "expected_delivery": "2026-02-19T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 25,
-        "unit_cost": 480
+        "supplier_product_id": "SP-013"
       }
     ]
   },
@@ -271,9 +251,8 @@
     "expected_delivery": "2026-02-02T00:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 40,
-        "unit_cost": 310
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -286,9 +265,8 @@
     "actual_delivery": "2025-11-11T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 127,
-        "unit_cost": 300
+        "supplier_product_id": "SP-014"
       }
     ]
   },
@@ -301,9 +279,8 @@
     "actual_delivery": "2025-10-12T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 20,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -316,9 +293,8 @@
     "actual_delivery": "2026-01-25T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 137,
-        "unit_cost": 210
+        "supplier_product_id": "SP-002"
       }
     ]
   },
@@ -331,14 +307,12 @@
     "actual_delivery": "2025-12-25T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 103,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       },
       {
-        "product_id": "PROD-002",
         "quantity": 23,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -351,14 +325,12 @@
     "actual_delivery": "2025-11-05T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 67,
-        "unit_cost": 480
+        "supplier_product_id": "SP-003"
       },
       {
-        "product_id": "PROD-001",
         "quantity": 56,
-        "unit_cost": 270
+        "supplier_product_id": "SP-001"
       }
     ]
   },
@@ -371,14 +343,12 @@
     "actual_delivery": "2025-11-11T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 125,
-        "unit_cost": 480
+        "supplier_product_id": "SP-013"
       },
       {
-        "product_id": "PROD-005",
         "quantity": 139,
-        "unit_cost": 300
+        "supplier_product_id": "SP-014"
       }
     ]
   },
@@ -391,9 +361,8 @@
     "actual_delivery": "2025-11-28T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-001",
         "quantity": 86,
-        "unit_cost": 270
+        "supplier_product_id": "SP-001"
       }
     ]
   },
@@ -406,14 +375,12 @@
     "actual_delivery": "2025-12-30T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 104,
-        "unit_cost": 210
+        "supplier_product_id": "SP-002"
       },
       {
-        "product_id": "PROD-004",
         "quantity": 129,
-        "unit_cost": 480
+        "supplier_product_id": "SP-003"
       }
     ]
   },
@@ -426,9 +393,8 @@
     "actual_delivery": "2026-01-23T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-008",
         "quantity": 54,
-        "unit_cost": 192
+        "supplier_product_id": "SP-015"
       }
     ]
   },
@@ -441,9 +407,8 @@
     "actual_delivery": "2026-01-13T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 140,
-        "unit_cost": 210
+        "supplier_product_id": "SP-002"
       }
     ]
   },
@@ -456,14 +421,12 @@
     "actual_delivery": "2025-12-01T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 46,
-        "unit_cost": 480
+        "supplier_product_id": "SP-003"
       },
       {
-        "product_id": "PROD-001",
         "quantity": 52,
-        "unit_cost": 270
+        "supplier_product_id": "SP-001"
       }
     ]
   },
@@ -476,9 +439,8 @@
     "actual_delivery": "2025-11-16T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 30,
-        "unit_cost": 390
+        "supplier_product_id": "SP-006"
       }
     ]
   },
@@ -491,9 +453,8 @@
     "actual_delivery": "2026-02-11T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 133,
-        "unit_cost": 210
+        "supplier_product_id": "SP-007"
       }
     ]
   },
@@ -506,9 +467,8 @@
     "actual_delivery": "2026-01-15T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 145,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -521,9 +481,8 @@
     "actual_delivery": "2026-01-23T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-008",
         "quantity": 52,
-        "unit_cost": 192
+        "supplier_product_id": "SP-012"
       }
     ]
   },
@@ -536,14 +495,12 @@
     "actual_delivery": "2026-01-29T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-001",
         "quantity": 113,
-        "unit_cost": 270
+        "supplier_product_id": "SP-009"
       },
       {
-        "product_id": "PROD-006",
         "quantity": 139,
-        "unit_cost": 108
+        "supplier_product_id": "SP-010"
       }
     ]
   },
@@ -556,9 +513,8 @@
     "actual_delivery": "2026-01-04T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 42,
-        "unit_cost": 300
+        "supplier_product_id": "SP-014"
       }
     ]
   },
@@ -571,9 +527,8 @@
     "actual_delivery": "2025-12-02T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 132,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -586,9 +541,8 @@
     "actual_delivery": "2025-12-27T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 132,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -601,14 +555,12 @@
     "actual_delivery": "2025-12-26T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 79,
-        "unit_cost": 390
+        "supplier_product_id": "SP-006"
       },
       {
-        "product_id": "PROD-003",
         "quantity": 78,
-        "unit_cost": 210
+        "supplier_product_id": "SP-007"
       }
     ]
   },
@@ -621,14 +573,12 @@
     "actual_delivery": "2025-11-14T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 147,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       },
       {
-        "product_id": "PROD-002",
         "quantity": 22,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -641,9 +591,8 @@
     "actual_delivery": "2026-01-01T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 45,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -656,9 +605,8 @@
     "actual_delivery": "2025-10-09T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 45,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -671,14 +619,12 @@
     "actual_delivery": "2025-10-31T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 41,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       },
       {
-        "product_id": "PROD-005",
         "quantity": 118,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -691,9 +637,8 @@
     "actual_delivery": "2026-02-05T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 41,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -706,9 +651,8 @@
     "actual_delivery": "2025-12-04T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 28,
-        "unit_cost": 480
+        "supplier_product_id": "SP-013"
       }
     ]
   },
@@ -721,9 +665,8 @@
     "actual_delivery": "2026-02-02T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-008",
         "quantity": 114,
-        "unit_cost": 192
+        "supplier_product_id": "SP-015"
       }
     ]
   },
@@ -736,9 +679,8 @@
     "actual_delivery": "2025-10-28T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-006",
         "quantity": 132,
-        "unit_cost": 108
+        "supplier_product_id": "SP-010"
       }
     ]
   },
@@ -751,9 +693,8 @@
     "actual_delivery": "2025-12-16T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 139,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -766,9 +707,8 @@
     "actual_delivery": "2026-02-03T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 119,
-        "unit_cost": 480
+        "supplier_product_id": "SP-013"
       }
     ]
   },
@@ -781,14 +721,12 @@
     "actual_delivery": "2026-02-04T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 32,
-        "unit_cost": 480
+        "supplier_product_id": "SP-003"
       },
       {
-        "product_id": "PROD-003",
         "quantity": 30,
-        "unit_cost": 210
+        "supplier_product_id": "SP-002"
       }
     ]
   },
@@ -801,14 +739,12 @@
     "actual_delivery": "2026-02-07T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 141,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       },
       {
-        "product_id": "PROD-002",
         "quantity": 125,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -821,14 +757,12 @@
     "actual_delivery": "2025-10-13T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 106,
-        "unit_cost": 210
+        "supplier_product_id": "SP-002"
       },
       {
-        "product_id": "PROD-001",
         "quantity": 140,
-        "unit_cost": 270
+        "supplier_product_id": "SP-001"
       }
     ]
   },
@@ -841,9 +775,8 @@
     "actual_delivery": "2025-10-08T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 121,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -856,9 +789,8 @@
     "actual_delivery": "2026-02-04T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 34,
-        "unit_cost": 390
+        "supplier_product_id": "SP-004"
       }
     ]
   },
@@ -871,14 +803,12 @@
     "actual_delivery": "2025-10-11T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-007",
         "quantity": 59,
-        "unit_cost": 132
+        "supplier_product_id": "SP-011"
       },
       {
-        "product_id": "PROD-008",
         "quantity": 135,
-        "unit_cost": 192
+        "supplier_product_id": "SP-012"
       }
     ]
   },
@@ -891,9 +821,8 @@
     "actual_delivery": "2026-01-02T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-004",
         "quantity": 78,
-        "unit_cost": 480
+        "supplier_product_id": "SP-003"
       }
     ]
   },
@@ -906,9 +835,8 @@
     "actual_delivery": "2026-01-19T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 65,
-        "unit_cost": 390
+        "supplier_product_id": "SP-006"
       }
     ]
   },
@@ -921,9 +849,8 @@
     "actual_delivery": "2025-11-09T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 100,
-        "unit_cost": 210
+        "supplier_product_id": "SP-007"
       }
     ]
   },
@@ -936,9 +863,8 @@
     "actual_delivery": "2025-11-13T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-005",
         "quantity": 74,
-        "unit_cost": 300
+        "supplier_product_id": "SP-005"
       }
     ]
   },
@@ -951,9 +877,8 @@
     "actual_delivery": "2025-10-24T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-003",
         "quantity": 86,
-        "unit_cost": 210
+        "supplier_product_id": "SP-002"
       }
     ]
   },
@@ -966,9 +891,8 @@
     "actual_delivery": "2025-10-26T08:00:00Z",
     "lines": [
       {
-        "product_id": "PROD-002",
         "quantity": 74,
-        "unit_cost": 390
+        "supplier_product_id": "SP-006"
       }
     ]
   }

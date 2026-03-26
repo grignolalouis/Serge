@@ -2,10 +2,14 @@ package domain
 
 import "time"
 
+// ---------------------------------------------------------------------------
+// Shipping domain — carriers, shipments, tracking
+// ---------------------------------------------------------------------------
+
 type Carrier struct {
 	ID             string  `json:"id"`
 	Name           string  `json:"name"`
-	Type           string  `json:"type"` // "ground", "refrigerated"
+	Type           string  `json:"type"`
 	CostPerKg      float64 `json:"cost_per_kg"`
 	AvgTransitDays int     `json:"avg_transit_days"`
 }
@@ -21,7 +25,7 @@ const (
 
 type Shipment struct {
 	ID               string         `json:"id"`
-	OrderID          string         `json:"order_id"`
+	CustomerOrderID  string         `json:"customer_order_id"`
 	CarrierID        string         `json:"carrier_id"`
 	Status           ShipmentStatus `json:"status"`
 	TrackingNumber   string         `json:"tracking_number"`

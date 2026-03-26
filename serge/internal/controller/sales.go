@@ -5,7 +5,6 @@ import (
 	"github.com/serge-music/serge/internal/service"
 )
 
-// SalesController exposes sales operations for MCP tools (oms_*).
 type SalesController struct {
 	svc *service.SalesService
 }
@@ -14,34 +13,11 @@ func NewSalesController(svc *service.SalesService) *SalesController {
 	return &SalesController{svc: svc}
 }
 
-func (c *SalesController) GetOrder(id string) (domain.Order, error) {
-	return c.svc.GetOrder(id)
-}
-
-func (c *SalesController) GetCustomer(id string) (domain.Customer, error) {
-	return c.svc.GetCustomer(id)
-}
-
-func (c *SalesController) ListOrdersByCustomer(customerID string) []domain.Order {
-	return c.svc.ListOrdersByCustomer(customerID)
-}
-
-func (c *SalesController) ListOrdersByStatus(status string) []domain.Order {
-	return c.svc.ListOrdersByStatus(domain.OrderStatus(status))
-}
-
-func (c *SalesController) ListOverdueOrders() []domain.Order {
-	return c.svc.ListOverdueOrders()
-}
-
-func (c *SalesController) ListAllOrders() []domain.Order {
-	return c.svc.ListAllOrders()
-}
-
-func (c *SalesController) ListCustomers() []domain.Customer {
-	return c.svc.ListCustomers()
-}
-
-func (c *SalesController) ListOrdersByProduct(productID string) []domain.Order {
-	return c.svc.ListOrdersByProduct(productID)
-}
+func (c *SalesController) GetCustomerOrder(id string) (domain.CustomerOrder, error) { return c.svc.GetCustomerOrder(id) }
+func (c *SalesController) GetCustomer(id string) (domain.Customer, error)           { return c.svc.GetCustomer(id) }
+func (c *SalesController) ListCustomerOrdersByCustomer(customerID string) []domain.CustomerOrder { return c.svc.ListCustomerOrdersByCustomer(customerID) }
+func (c *SalesController) ListCustomerOrdersByStatus(status string) []domain.CustomerOrder { return c.svc.ListCustomerOrdersByStatus(domain.CustomerOrderStatus(status)) }
+func (c *SalesController) ListOverdueCustomerOrders() []domain.CustomerOrder       { return c.svc.ListOverdueCustomerOrders() }
+func (c *SalesController) ListAllCustomerOrders() []domain.CustomerOrder           { return c.svc.ListAllCustomerOrders() }
+func (c *SalesController) ListCustomers() []domain.Customer                        { return c.svc.ListCustomers() }
+func (c *SalesController) ListCustomerOrdersByProduct(productID string) []domain.CustomerOrder { return c.svc.ListCustomerOrdersByProduct(productID) }

@@ -7,28 +7,19 @@ import (
 )
 
 type SalesRepository struct {
-	customers map[string]domain.Customer
-	orders    map[string]domain.Order
+	customers      map[string]domain.Customer
+	customerOrders map[string]domain.CustomerOrder
 }
 
 func NewSalesRepository() *SalesRepository {
 	return &SalesRepository{
-		customers: make(map[string]domain.Customer),
-		orders:    make(map[string]domain.Order),
+		customers:      make(map[string]domain.Customer),
+		customerOrders: make(map[string]domain.CustomerOrder),
 	}
 }
 
-// --- Loaders ---
-
-func (r *SalesRepository) LoadCustomer(c domain.Customer) {
-	r.customers[c.ID] = c
-}
-
-func (r *SalesRepository) LoadOrder(o domain.Order) {
-	r.orders[o.ID] = o
-}
-
-// --- Queries ---
+func (r *SalesRepository) LoadCustomer(c domain.Customer)           { r.customers[c.ID] = c }
+func (r *SalesRepository) LoadCustomerOrder(o domain.CustomerOrder) { r.customerOrders[o.ID] = o }
 
 func (r *SalesRepository) GetCustomer(id string) (domain.Customer, error) {
 	c, ok := r.customers[id]
@@ -46,25 +37,25 @@ func (r *SalesRepository) ListCustomers() []domain.Customer {
 	return out
 }
 
-func (r *SalesRepository) GetOrder(id string) (domain.Order, error) {
-	o, ok := r.orders[id]
+func (r *SalesRepository) GetCustomerOrder(id string) (domain.CustomerOrder, error) {
+	o, ok := r.customerOrders[id]
 	if !ok {
-		return domain.Order{}, fmt.Errorf("order %s not found", id)
+		return domain.CustomerOrder{}, fmt.Errorf("customer order %s not found", id)
 	}
 	return o, nil
 }
 
-func (r *SalesRepository) ListOrders() []domain.Order {
-	out := make([]domain.Order, 0, len(r.orders))
-	for _, o := range r.orders {
+func (r *SalesRepository) ListCustomerOrders() []domain.CustomerOrder {
+	out := make([]domain.CustomerOrder, 0, len(r.customerOrders))
+	for _, o := range r.customerOrders {
 		out = append(out, o)
 	}
 	return out
 }
 
-func (r *SalesRepository) ListOrdersByCustomer(customerID string) []domain.Order {
-	var out []domain.Order
-	for _, o := range r.orders {
+func (r *SalesRepository) ListCustomerOrdersByCustomer(customerID string) []domain.CustomerOrder {
+	var out []domain.CustomerOrder
+	for _, o := range r.customerOrders {
 		if o.CustomerID == customerID {
 			out = append(out, o)
 		}
@@ -72,9 +63,9 @@ func (r *SalesRepository) ListOrdersByCustomer(customerID string) []domain.Order
 	return out
 }
 
-func (r *SalesRepository) ListOrdersByStatus(status domain.OrderStatus) []domain.Order {
-	var out []domain.Order
-	for _, o := range r.orders {
+func (r *SalesRepository) ListCustomerOrdersByStatus(status domain.CustomerOrderStatus) []domain.CustomerOrder {
+	var out []domain.CustomerOrder
+	for _, o := range r.customerOrders {
 		if o.Status == status {
 			out = append(out, o)
 		}
@@ -82,9 +73,9 @@ func (r *SalesRepository) ListOrdersByStatus(status domain.OrderStatus) []domain
 	return out
 }
 
-func (r *SalesRepository) ListOverdueOrders() []domain.Order {
-	var out []domain.Order
-	for _, o := range r.orders {
+func (r *SalesRepository) ListOverdueCustomerOrders() []domain.CustomerOrder {
+	var out []domain.CustomerOrder
+	for _, o := range r.customerOrders {
 		if o.IsOverdue() {
 			out = append(out, o)
 		}
@@ -92,9 +83,9 @@ func (r *SalesRepository) ListOverdueOrders() []domain.Order {
 	return out
 }
 
-func (r *SalesRepository) ListOrdersByProduct(productID string) []domain.Order {
-	var out []domain.Order
-	for _, o := range r.orders {
+func (r *SalesRepository) ListCustomerOrdersByProduct(productID string) []domain.CustomerOrder {
+	var out []domain.CustomerOrder
+	for _, o := range r.customerOrders {
 		for _, l := range o.Lines {
 			if l.ProductID == productID {
 				out = append(out, o)

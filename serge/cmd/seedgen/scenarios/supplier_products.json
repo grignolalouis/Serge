@@ -1,0 +1,17 @@
+[
+  {"id": "SP-001", "supplier_id": "SUP-001", "product_id": "PROD-001", "name": "Fresh Nam Doc Mai Mango (Chanthaburi)", "unit_cost": 280.00},
+  {"id": "SP-002", "supplier_id": "SUP-001", "product_id": "PROD-003", "name": "Fresh Keaw Mango (Chanthaburi)", "unit_cost": 200.00},
+  {"id": "SP-003", "supplier_id": "SUP-001", "product_id": "PROD-004", "name": "Fresh Mahachanok Mango (Chanthaburi)", "unit_cost": 500.00},
+  {"id": "SP-004", "supplier_id": "SUP-002", "product_id": "PROD-002", "name": "Ok Rong Mango (Chiang Mai)", "unit_cost": 400.00},
+  {"id": "SP-005", "supplier_id": "SUP-002", "product_id": "PROD-005", "name": "Mixed Mango Selection (Chiang Mai)", "unit_cost": 300.00},
+  {"id": "SP-006", "supplier_id": "SUP-003", "product_id": "PROD-002", "name": "Ok Rong Mango (Prachuap)", "unit_cost": 380.00},
+  {"id": "SP-007", "supplier_id": "SUP-003", "product_id": "PROD-003", "name": "Keaw Mango (Prachuap)", "unit_cost": 200.00},
+  {"id": "SP-008", "supplier_id": "SUP-003", "product_id": "PROD-005", "name": "Mixed Mango (Prachuap)", "unit_cost": 300.00},
+  {"id": "SP-009", "supplier_id": "SUP-004", "product_id": "PROD-001", "name": "Premium Nam Doc Mai (Rayong)", "unit_cost": 270.00},
+  {"id": "SP-010", "supplier_id": "SUP-004", "product_id": "PROD-006", "name": "Dried Mango Slices (Rayong)", "unit_cost": 90.00},
+  {"id": "SP-011", "supplier_id": "SUP-004", "product_id": "PROD-007", "name": "Mango Puree Concentrate (Rayong)", "unit_cost": 120.00},
+  {"id": "SP-012", "supplier_id": "SUP-004", "product_id": "PROD-008", "name": "Sticky Rice Kit Components (Rayong)", "unit_cost": 180.00},
+  {"id": "SP-013", "supplier_id": "SUP-005", "product_id": "PROD-004", "name": "Organic Mahachanok Mango (Isaan)", "unit_cost": 480.00},
+  {"id": "SP-014", "supplier_id": "SUP-005", "product_id": "PROD-005", "name": "Organic Mixed Mango (Isaan)", "unit_cost": 290.00},
+  {"id": "SP-015", "supplier_id": "SUP-005", "product_id": "PROD-008", "name": "Organic Sticky Rice Kit (Isaan)", "unit_cost": 180.00}
+]

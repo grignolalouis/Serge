@@ -9,76 +9,75 @@ import (
 )
 
 func registerSalesTools(s *mcp.StdioServer, ctrl *controller.SalesController) {
-
 	s.RegisterTool(
-		mcp.NewTool("oms_get_order",
-			mcp.WithDescription("Get full order details: customer, status, dates, priority, and all line items with quantities and prices. This is usually the first tool to call when investigating an order."),
-			mcp.WithString("order_id", mcp.Required(), mcp.Description("Order ID, e.g. ORD-007")),
+		mcp.NewTool("oms_get_customer_order",
+			mcp.WithDescription("Get a customer order by ID: customer, status, dates, priority, notes, and line items. Line items reference products (price comes from the product entity). Usually the first tool to call when investigating an order."),
+			mcp.WithString("customer_order_id", mcp.Required(), mcp.Description("e.g. ORD-007")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			result, err := ctrl.GetOrder(stringArg(req.Params.Arguments, "order_id"))
+			r, err := ctrl.GetCustomerOrder(stringArg(req.Params.Arguments, "customer_order_id"))
 			if err != nil {
 				return errResult(err)
 			}
-			return jsonResult(result)
+			return jsonResult(r)
 		},
 	)
 
 	s.RegisterTool(
 		mcp.NewTool("oms_get_customer",
-			mcp.WithDescription("Get customer profile: name, company, segment, and region. Use when you need customer context for an order."),
-			mcp.WithString("customer_id", mcp.Required(), mcp.Description("Customer ID, e.g. CUST-001")),
+			mcp.WithDescription("Get customer profile: name, company, segment (retail/wholesale), address, delivery zone."),
+			mcp.WithString("customer_id", mcp.Required(), mcp.Description("e.g. CUST-001")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			result, err := ctrl.GetCustomer(stringArg(req.Params.Arguments, "customer_id"))
+			r, err := ctrl.GetCustomer(stringArg(req.Params.Arguments, "customer_id"))
 			if err != nil {
 				return errResult(err)
 			}
-			return jsonResult(result)
+			return jsonResult(r)
 		},
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("oms_list_orders_by_customer",
-			mcp.WithDescription("List all orders placed by a specific customer. Use to see a customer's order history."),
-			mcp.WithString("customer_id", mcp.Required(), mcp.Description("Customer ID, e.g. CUST-001")),
+		mcp.NewTool("oms_list_customer_orders_by_customer",
+			mcp.WithDescription("List all orders placed by a specific customer."),
+			mcp.WithString("customer_id", mcp.Required(), mcp.Description("e.g. CUST-001")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListOrdersByCustomer(stringArg(req.Params.Arguments, "customer_id")))
+			return jsonResult(ctrl.ListCustomerOrdersByCustomer(stringArg(req.Params.Arguments, "customer_id")))
 		},
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("oms_list_orders_by_status",
-			mcp.WithDescription("List orders filtered by status. Use to find all pending, processing, shipped, or delivered orders."),
-			mcp.WithString("status", mcp.Required(), mcp.Description("Order status: pending, processing, shipped, delivered, or cancelled")),
+		mcp.NewTool("oms_list_customer_orders_by_status",
+			mcp.WithDescription("List customer orders filtered by status: pending, processing, shipped, delivered, or cancelled."),
+			mcp.WithString("status", mcp.Required(), mcp.Description("pending, processing, shipped, delivered, or cancelled")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListOrdersByStatus(stringArg(req.Params.Arguments, "status")))
+			return jsonResult(ctrl.ListCustomerOrdersByStatus(stringArg(req.Params.Arguments, "status")))
 		},
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("oms_list_overdue_orders",
-			mcp.WithDescription("List orders that are past their required delivery date and not yet delivered or cancelled. Use to identify orders that need immediate attention."),
+		mcp.NewTool("oms_list_overdue_customer_orders",
+			mcp.WithDescription("List customer orders past their required date and not yet delivered or cancelled."),
 		),
 		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListOverdueOrders())
+			return jsonResult(ctrl.ListOverdueCustomerOrders())
 		},
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("oms_list_all_orders",
-			mcp.WithDescription("List all orders in the system with their status, customer, dates, and line items. Use to get a complete view of all orders or to discover order IDs."),
+		mcp.NewTool("oms_list_all_customer_orders",
+			mcp.WithDescription("List all customer orders in the system."),
 		),
 		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListAllOrders())
+			return jsonResult(ctrl.ListAllCustomerOrders())
 		},
 	)
 
 	s.RegisterTool(
 		mcp.NewTool("oms_list_customers",
-			mcp.WithDescription("List all customers with their profiles (company, segment, region, delivery zone). Use to discover customers or understand the customer base."),
+			mcp.WithDescription("List all customers with their profiles."),
 		),
 		func(_ context.Context, _ *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
 			return jsonResult(ctrl.ListCustomers())
@@ -86,12 +85,12 @@ func registerSalesTools(s *mcp.StdioServer, ctrl *controller.SalesController) {
 	)
 
 	s.RegisterTool(
-		mcp.NewTool("oms_search_orders_by_product",
-			mcp.WithDescription("Find all orders that contain a specific product. Use to understand demand for a product or to trace which orders are affected by a stock shortage."),
-			mcp.WithString("product_id", mcp.Required(), mcp.Description("Product ID, e.g. PROD-001")),
+		mcp.NewTool("oms_search_customer_orders_by_product",
+			mcp.WithDescription("Find all customer orders containing a specific product. Use to understand demand or trace orders affected by a stock shortage."),
+			mcp.WithString("product_id", mcp.Required(), mcp.Description("e.g. PROD-001")),
 		),
 		func(_ context.Context, req *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
-			return jsonResult(ctrl.ListOrdersByProduct(stringArg(req.Params.Arguments, "product_id")))
+			return jsonResult(ctrl.ListCustomerOrdersByProduct(stringArg(req.Params.Arguments, "product_id")))
 		},
 	)
 }

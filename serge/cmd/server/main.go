@@ -12,35 +12,25 @@ import (
 )
 
 func main() {
-	// Repositories
 	procRepo := repository.NewProcurementRepository()
 	invRepo := repository.NewInventoryRepository()
 	salesRepo := repository.NewSalesRepository()
 	shipRepo := repository.NewShippingRepository()
 
-	// Load seed data
 	dataDir := "data"
 	if len(os.Args) > 1 {
 		dataDir = os.Args[1]
 	}
 	if err := seed.LoadAll(dataDir, procRepo, invRepo, salesRepo, shipRepo); err != nil {
-		log.Fatalf("failed to load seed data: %v", err)
+		log.Fatalf("seed: %v", err)
 	}
 
-	// Services
-	procSvc := service.NewProcurementService(procRepo)
-	invSvc := service.NewInventoryService(invRepo)
-	salesSvc := service.NewSalesService(salesRepo)
-	shipSvc := service.NewShippingService(shipRepo)
-
-	// Controllers
-	procCtrl := controller.NewProcurementController(procSvc)
-	invCtrl := controller.NewInventoryController(invSvc)
-	salesCtrl := controller.NewSalesController(salesSvc)
-	shipCtrl := controller.NewShippingController(shipSvc)
-
-	// MCP server — registers all tools and serves over stdio
-	server := mcpserver.New(procCtrl, invCtrl, salesCtrl, shipCtrl)
+	server := mcpserver.New(
+		controller.NewProcurementController(service.NewProcurementService(procRepo)),
+		controller.NewInventoryController(service.NewInventoryService(invRepo)),
+		controller.NewSalesController(service.NewSalesService(salesRepo)),
+		controller.NewShippingController(service.NewShippingService(shipRepo)),
+	)
 
 	log.Println("SERGE MCP server starting on stdio...")
 	server.Start()

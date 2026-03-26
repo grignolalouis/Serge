@@ -13,34 +13,34 @@ func NewSalesService(repo *repository.SalesRepository) *SalesService {
 	return &SalesService{repo: repo}
 }
 
-func (s *SalesService) GetOrder(id string) (domain.Order, error) {
-	return s.repo.GetOrder(id)
+func (s *SalesService) GetCustomerOrder(id string) (domain.CustomerOrder, error) {
+	return s.repo.GetCustomerOrder(id)
 }
 
 func (s *SalesService) GetCustomer(id string) (domain.Customer, error) {
 	return s.repo.GetCustomer(id)
 }
 
-func (s *SalesService) ListOrdersByCustomer(customerID string) []domain.Order {
-	return s.repo.ListOrdersByCustomer(customerID)
+func (s *SalesService) ListCustomerOrdersByCustomer(customerID string) []domain.CustomerOrder {
+	return s.repo.ListCustomerOrdersByCustomer(customerID)
 }
 
-func (s *SalesService) ListOrdersByStatus(status domain.OrderStatus) []domain.Order {
-	return s.repo.ListOrdersByStatus(status)
+func (s *SalesService) ListCustomerOrdersByStatus(status domain.CustomerOrderStatus) []domain.CustomerOrder {
+	return s.repo.ListCustomerOrdersByStatus(status)
 }
 
-func (s *SalesService) ListOverdueOrders() []domain.Order {
-	return s.repo.ListOverdueOrders()
+func (s *SalesService) ListOverdueCustomerOrders() []domain.CustomerOrder {
+	return s.repo.ListOverdueCustomerOrders()
 }
 
-func (s *SalesService) ListAllOrders() []domain.Order {
-	return s.repo.ListOrders()
+func (s *SalesService) ListAllCustomerOrders() []domain.CustomerOrder {
+	return s.repo.ListCustomerOrders()
 }
 
 func (s *SalesService) ListCustomers() []domain.Customer {
 	return s.repo.ListCustomers()
 }
 
-func (s *SalesService) ListOrdersByProduct(productID string) []domain.Order {
-	return s.repo.ListOrdersByProduct(productID)
+func (s *SalesService) ListCustomerOrdersByProduct(productID string) []domain.CustomerOrder {
+	return s.repo.ListCustomerOrdersByProduct(productID)
 }

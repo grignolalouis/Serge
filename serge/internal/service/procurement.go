@@ -7,11 +7,11 @@ import (
 
 type SupplierStats struct {
 	domain.Supplier
-	TotalPOs    int     `json:"total_pos"`
-	ReceivedPOs int     `json:"received_pos"`
-	OnTimePOs   int     `json:"on_time_pos"`
-	OnTimeRate  float64 `json:"on_time_rate"`
-	AvgLeadDays float64 `json:"avg_lead_days"`
+	TotalOrders    int     `json:"total_orders"`
+	ReceivedOrders int     `json:"received_orders"`
+	OnTimeOrders   int     `json:"on_time_orders"`
+	OnTimeRate     float64 `json:"on_time_rate"`
+	AvgLeadDays    float64 `json:"avg_lead_days"`
 }
 
 type ProcurementService struct {
@@ -30,46 +30,62 @@ func (s *ProcurementService) ListSuppliers() []domain.Supplier {
 	return s.repo.ListSuppliers()
 }
 
-func (s *ProcurementService) GetPurchaseOrder(id string) (domain.PurchaseOrder, error) {
-	return s.repo.GetPurchaseOrder(id)
+func (s *ProcurementService) GetSupplierProduct(id string) (domain.SupplierProduct, error) {
+	return s.repo.GetSupplierProduct(id)
 }
 
-func (s *ProcurementService) ListPurchaseOrdersBySupplier(supplierID string) []domain.PurchaseOrder {
-	return s.repo.ListPurchaseOrdersBySupplier(supplierID)
+func (s *ProcurementService) ListSupplierProducts() []domain.SupplierProduct {
+	return s.repo.ListSupplierProducts()
 }
 
-func (s *ProcurementService) ListPurchaseOrdersByStatus(status domain.PurchaseOrderStatus) []domain.PurchaseOrder {
-	return s.repo.ListPurchaseOrdersByStatus(status)
+func (s *ProcurementService) ListSupplierProductsBySupplier(supplierID string) []domain.SupplierProduct {
+	return s.repo.ListSupplierProductsBySupplier(supplierID)
 }
 
-func (s *ProcurementService) ListOverduePurchaseOrders() []domain.PurchaseOrder {
-	return s.repo.ListOverduePurchaseOrders()
+func (s *ProcurementService) ListSupplierProductsByProduct(productID string) []domain.SupplierProduct {
+	return s.repo.ListSupplierProductsByProduct(productID)
 }
 
-func (s *ProcurementService) ListAllPurchaseOrders() []domain.PurchaseOrder {
-	return s.repo.ListPurchaseOrders()
+func (s *ProcurementService) GetSupplierOrder(id string) (domain.SupplierOrder, error) {
+	return s.repo.GetSupplierOrder(id)
+}
+
+func (s *ProcurementService) ListAllSupplierOrders() []domain.SupplierOrder {
+	return s.repo.ListSupplierOrders()
+}
+
+func (s *ProcurementService) ListSupplierOrdersBySupplier(supplierID string) []domain.SupplierOrder {
+	return s.repo.ListSupplierOrdersBySupplier(supplierID)
+}
+
+func (s *ProcurementService) ListSupplierOrdersByStatus(status domain.SupplierOrderStatus) []domain.SupplierOrder {
+	return s.repo.ListSupplierOrdersByStatus(status)
+}
+
+func (s *ProcurementService) ListOverdueSupplierOrders() []domain.SupplierOrder {
+	return s.repo.ListOverdueSupplierOrders()
 }
 
 func (s *ProcurementService) CompareSuppliers() []SupplierStats {
 	suppliers := s.repo.ListSuppliers()
 	var stats []SupplierStats
 	for _, sup := range suppliers {
-		pos := s.repo.ListPurchaseOrdersBySupplier(sup.ID)
-		st := SupplierStats{Supplier: sup, TotalPOs: len(pos)}
+		orders := s.repo.ListSupplierOrdersBySupplier(sup.ID)
+		st := SupplierStats{Supplier: sup, TotalOrders: len(orders)}
 		var totalLeadDays int
-		for _, po := range pos {
-			if po.Status == domain.POReceived && po.ActualDelivery != nil {
-				st.ReceivedPOs++
-				lead := int(po.ActualDelivery.Sub(po.OrderDate).Hours() / 24)
+		for _, so := range orders {
+			if so.Status == domain.SupplierOrderReceived && so.ActualDelivery != nil {
+				st.ReceivedOrders++
+				lead := int(so.ActualDelivery.Sub(so.OrderDate).Hours() / 24)
 				totalLeadDays += lead
-				if !po.ActualDelivery.After(po.ExpectedDelivery) {
-					st.OnTimePOs++
+				if !so.ActualDelivery.After(so.ExpectedDelivery) {
+					st.OnTimeOrders++
 				}
 			}
 		}
-		if st.ReceivedPOs > 0 {
-			st.OnTimeRate = float64(st.OnTimePOs) / float64(st.ReceivedPOs)
-			st.AvgLeadDays = float64(totalLeadDays) / float64(st.ReceivedPOs)
+		if st.ReceivedOrders > 0 {
+			st.OnTimeRate = float64(st.OnTimeOrders) / float64(st.ReceivedOrders)
+			st.AvgLeadDays = float64(totalLeadDays) / float64(st.ReceivedOrders)
 		}
 		stats = append(stats, st)
 	}

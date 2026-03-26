@@ -31,10 +31,10 @@ func (s *ShippingService) GetShipment(id string) (ShipmentDetail, error) {
 	return ShipmentDetail{Shipment: ship, Carrier: carrier, Events: events}, nil
 }
 
-func (s *ShippingService) TrackOrder(orderID string) ([]ShipmentDetail, error) {
-	shipments := s.repo.ListShipmentsByOrder(orderID)
+func (s *ShippingService) TrackCustomerOrder(customerOrderID string) ([]ShipmentDetail, error) {
+	shipments := s.repo.ListShipmentsByCustomerOrder(customerOrderID)
 	if len(shipments) == 0 {
-		return nil, fmt.Errorf("no shipment found for order %s", orderID)
+		return nil, fmt.Errorf("no shipment found for customer order %s", customerOrderID)
 	}
 	var out []ShipmentDetail
 	for _, ship := range shipments {
