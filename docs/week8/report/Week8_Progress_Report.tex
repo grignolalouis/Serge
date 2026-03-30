@@ -1,0 +1,537 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.4cm,top=2.8cm,bottom=2.8cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries\small}
+\renewcommand\theadgape{}
+
+\usepackage{graphicx}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+
+\setlist{nosep,leftmargin=1.5em}
+\titleformat{\section}{\Large\bfseries\color{MidnightBlue}}{}{0em}{}[\vspace{0.2em}\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{MidnightBlue!80}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{MidnightBlue!60}}{}{0em}{}
+\titlespacing*{\section}{0pt}{2em}{1em}
+\titlespacing*{\subsection}{0pt}{1.4em}{0.6em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.4em}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MidnightBlue,
+    urlcolor=RoyalBlue,
+    citecolor=MidnightBlue,
+    pdfauthor={Grignola, Schmitt, Tellus, Schwarz},
+    pdftitle={Week 8 Progress Report -- SERGE},
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\lhead{\small\color{gray} SE618-1 Logistics -- SIIT}
+\rhead{\small\color{gray} Week~8 -- Progress Report}
+\cfoot{\small\thepage}
+
+\newtcolorbox{keyinsight}{
+    colback=MidnightBlue!5, colframe=MidnightBlue!60,
+    fonttitle=\bfseries, title=Key Insight,
+    boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newtcolorbox{resultbox}{
+    colback=ForestGreen!5, colframe=ForestGreen!60,
+    fonttitle=\bfseries, title=Result,
+    boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newtcolorbox{notebox}[1][Note]{
+    colback=Goldenrod!8, colframe=Goldenrod!60,
+    fonttitle=\bfseries, title=#1,
+    boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\lstset{
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{gray!40},
+    backgroundcolor=\color{gray!5},
+    xleftmargin=0.5em,
+    framexleftmargin=0.5em,
+}
+
+% =====================================================================
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+\includegraphics[width=4cm]{siitlogo.png}
+
+\vspace{1cm}
+
+{\large\bfseries SE618 LOGISTIC CASE STUDY ANALYSIS}
+
+\vspace{0.5cm}
+
+{\normalsize WEEK 8 -- PROGRESS REPORT}
+
+\vspace{1.5cm}
+
+{\large\bfseries PROJECT TITLE: SERGE -- AI Agent for Supply Chain Operations}
+
+\vspace{0.5cm}
+
+{\normalsize Prototype Results, Modelisation Refinement \& First Evaluations}
+
+\vspace{1.5cm}
+
+\begin{tabular}{l l}
+Gauthier SCHMITT & 6822807466 \\
+Louis GRIGNOLA   & 6822807516 \\
+Matteo SCHWARZ   & 6822807557 \\
+Ma\"el TELLUS    & 6822807532 \\
+\end{tabular}
+
+\vspace{1.5cm}
+
+{\large SUBMITTED TO:}\\[0.5em]
+{\large AJARN WARUT}
+
+\vspace{1.5cm}
+
+{\large MARCH 2026}\\[0.3em]
+{\large SEMESTER 2/2025}
+
+\vspace{2cm}
+
+{\large
+SCHOOL OF MANUFACTURING SYSTEMS AND MECHANICAL ENGINEERING\\[0.3em]
+SIRINDHORN INTERNATIONAL INSTITUTE OF TECHNOLOGY\\[0.3em]
+THAMMASAT UNIVERSITY
+}
+
+\vfill
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Executive Summary}
+% =====================================================================
+
+This week marks a turning point: SERGE moved from design to \textbf{working prototype with measurable results}. The full supply chain was modelled, implemented as a Go monorepo, exposed as 35 MCP tools, seeded with 500 customer orders, and tested with Claude Code as the reasoning agent. Advisor feedback led to a significant modelisation refinement (SupplierProduct entity, explicit naming convention) that improved both code clarity and agent understanding.
+
+The agent successfully answered complex cross-system diagnostic questions across all four supply chain systems (SRM, WMS, OMS, TMS), achieving near-perfect factual accuracy on our evaluation scenarios.
+
+% =====================================================================
+\section{Advisor Feedback \& Modelisation Refinement}
+% =====================================================================
+
+\subsection{Feedback Received}
+
+Our advisor reviewed the initial prototype and identified three areas for improvement:
+
+\begin{enumerate}[itemsep=0.5em]
+    \item \textbf{Supplier--Product relationship:} The model lacked a proper link between what suppliers sell and what we sell. Suppliers should expose their own products (with their own pricing), and our products reference those.
+    \item \textbf{Price redundancy:} Unit costs and prices were duplicated on order lines. Instead, prices should live on the entities: \texttt{SupplierProduct.unit\_cost} for purchase cost, \texttt{Product.unit\_price} for selling price.
+    \item \textbf{Naming clarity:} Terms like ``Order'' and ``PurchaseOrder'' were ambiguous. The domain language should be explicit: \texttt{CustomerOrder}, \texttt{SupplierOrder}, \texttt{SupplierProduct}.
+\end{enumerate}
+
+\subsection{Changes Implemented}
+
+\begin{table}[H]
+\centering\small
+\caption{Modelisation changes following advisor feedback.}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\thead{Before} & \thead{After} & \thead{Rationale} \\
+\midrule
+\texttt{Order}          & \texttt{CustomerOrder}    & Explicit: this is a customer's order \\
+\texttt{PurchaseOrder}  & \texttt{SupplierOrder}    & Explicit: this is our order to a supplier \\
+\texttt{OrderLine.unit\_price} & Removed & Price comes from \texttt{Product.unit\_price} \\
+\texttt{POLine.unit\_cost}     & Removed & Cost comes from \texttt{SupplierProduct.unit\_cost} \\
+\texttt{Product.supplier\_ids} & Removed & Link goes through \texttt{SupplierProduct} \\
+(none) & \texttt{SupplierProduct} & New entity: what a supplier sells, at what cost \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{keyinsight}
+The \texttt{SupplierProduct} entity is the bridge between the procurement and inventory domains. A supplier doesn't sell ``our'' product -- they sell their own item (e.g., ``Fresh Nam Doc Mai Mango from Chanthaburi'' at 280~THB) which feeds into our product catalog (``Nam Doc Mai Box 5kg'' sold at 450~THB). This eliminates price redundancy: purchase cost lives on \texttt{SupplierProduct}, selling price on \texttt{Product}, and order lines only carry quantity.
+\end{keyinsight}
+
+% =====================================================================
+\section{Supply Chain Modelisation}
+% =====================================================================
+
+\subsection{Business Context: Siam Mango Co.}
+
+We model a \textbf{small B2B mango distribution company} based in Bangkok, Thailand. The company buys mangoes (fresh and processed) from Thai farms, stores them in a central warehouse, and delivers to B2B customers (hotels, restaurants, supermarkets).
+
+\subsection{Entity Model}
+
+The supply chain is modelled across \textbf{four bounded domains}, each corresponding to a real-world enterprise system:
+
+\begin{table}[H]
+\centering\small
+\caption{Four domains and their entities.}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\thead{Domain} & \thead{System} & \thead{Entities} \\
+\midrule
+Procurement & SRM & Supplier, SupplierProduct, SupplierOrder, SupplierOrderLine \\
+Inventory   & WMS & Product, Warehouse, InventoryRecord, StockMovement \\
+Sales       & OMS & Customer, CustomerOrder, CustomerOrderLine \\
+Shipping    & TMS & Carrier, Shipment, TrackingEvent \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Procurement Domain (SRM)}
+
+\textbf{Supplier} -- A Thai mango farm or processor. Key attributes: region, declared lead time, reliability rating (1.0--5.0), product categories, payment terms (\texttt{net\_15}, \texttt{net\_30}, \texttt{cod}).
+
+\textbf{SupplierProduct} -- An item a supplier offers for sale. Carries the \texttt{unit\_cost} (the price we pay). Links a supplier to one of our products. Multiple suppliers can offer the same product at different costs, enabling cost comparison.
+
+\textbf{SupplierOrder} -- A purchase order we place with a supplier to restock. Status flow: \texttt{pending} $\to$ \texttt{confirmed} $\to$ \texttt{shipped} $\to$ \texttt{received}. Lines reference SupplierProducts (no price on the line -- cost comes from the entity).
+
+\subsubsection{Inventory Domain (WMS)}
+
+\textbf{Product} -- What we sell to customers. Carries the \texttt{unit\_price} (our selling price). Key attributes for perishable goods: \texttt{shelf\_life\_days} (3--180 days), \texttt{storage\_type} (\texttt{refrigerated} or \texttt{ambient}), \texttt{reorder\_point}.
+
+\textbf{InventoryRecord} -- Current stock snapshot: quantity on hand, reserved units, available = quantity $-$ reserved. Alerts when available falls below reorder point.
+
+\textbf{StockMovement} -- Audit trail of every stock entry (from SupplierOrders) and exit (from CustomerOrders), with reference traceability.
+
+\subsubsection{Sales Domain (OMS)}
+
+\textbf{Customer} -- B2B buyer with segment (\texttt{retail} or \texttt{wholesale}), delivery address, and delivery zone (\texttt{central\_bkk} or \texttt{outer\_bkk}).
+
+\textbf{CustomerOrder} -- Sales order with priority levels: \texttt{normal} (5 business days), \texttt{high} (2--3 days), \texttt{urgent} (ship within 24h). Lines reference Products (no price on the line -- price comes from the entity).
+
+\subsubsection{Shipping Domain (TMS)}
+
+\textbf{Carrier} -- Transport company with type (\texttt{ground} or \texttt{refrigerated}), cost per kg, and average transit time. Critical business rule: products with \texttt{storage\_type: refrigerated} must use a refrigerated carrier.
+
+\textbf{Shipment} -- Physical delivery tied to a CustomerOrder. One order can have multiple shipments (split shipment). Statuses: \texttt{pending} $\to$ \texttt{in\_transit} $\to$ \texttt{delivered} or \texttt{exception}.
+
+\subsection{Cross-System Relationships}
+
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+SRM                      WMS                    OMS                TMS
+
+Supplier                 Product                Customer
+    |                      |                      |
+SupplierProduct -------> (product_id)             |
+    |                      |                      |
+SupplierOrder            StockMovement         CustomerOrder ----> Shipment
+  (lines -> SP)           (reference_id)        (lines -> Prod)     |
+    |                      |                      |              TrackingEvent
+    v                      v                      v
+  [inbound]           InventoryRecord         [outbound]
+\end{lstlisting}
+\caption{Entity relationships across the four systems. Arrows indicate foreign key references.}
+\end{figure}
+
+\subsection{Data Scale}
+
+\begin{table}[H]
+\centering\small
+\caption{Seed data volumes (generated with fixed seed for reproducibility).}
+\begin{tabularx}{\textwidth}{@{} l r l @{}}
+\toprule
+\thead{Entity} & \thead{Count} & \thead{Notes} \\
+\midrule
+Suppliers          & 5     & Thai farms across 5 regions \\
+Supplier Products  & 15    & Bridge entity: supplier $\times$ product \\
+Products           & 8     & 5 fresh (refrigerated) + 3 processed (ambient) \\
+Warehouse          & 1     & Bangkok Central Warehouse \\
+Customers          & 12    & Hotels, restaurants, supermarkets \\
+Carriers           & 3     & 1 ground + 2 refrigerated \\
+Customer Orders    & 500   & 3 months of order history (Oct 2025 -- Feb 2026) \\
+Supplier Orders    & 60    & Restocking purchase orders \\
+Shipments          & 493   & Including split shipments \\
+Tracking Events    & 1,431 & 3--4 events per shipment \\
+Stock Movements    & 965   & Inbound from POs + outbound from orders \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{notebox}[Ground Truth Preservation]
+The first 30 customer orders (ORD-001 to ORD-030) and first 18 supplier orders (PO-001 to PO-018) are hand-crafted evaluation scenarios with known ground truth. The remaining data (IDs $\geq$ 100) is generated for volume realism. This separation ensures evaluation ground truth is never affected by data regeneration.
+\end{notebox}
+
+% =====================================================================
+\section{Architecture \& Implementation}
+% =====================================================================
+
+\subsection{Clean Architecture in Go}
+
+The system follows a strict layered architecture inspired by Domain-Driven Design:
+
+\begin{table}[H]
+\centering\small
+\caption{Architecture layers and their responsibilities.}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\thead{Layer} & \thead{Package} & \thead{Responsibility} \\
+\midrule
+Domain      & \texttt{internal/domain/}     & Pure structs and business methods. Zero dependencies. \\
+Repository  & \texttt{internal/repository/} & In-memory data stores. Loaded from JSON at startup. \\
+Service     & \texttt{internal/service/}    & Business logic: aggregations, comparisons, computed views. \\
+Controller  & \texttt{internal/controller/} & Thin adapter: converts string params to typed calls. \\
+MCP Server  & \texttt{internal/mcpserver/}  & Registers MCP tools and wires handlers to controllers. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Call flow: \texttt{Agent $\to$ stdio $\to$ MCP Server $\to$ Controller $\to$ Service $\to$ Repository $\to$ Domain}
+
+The domain layer is organised by \textbf{business language}, not by system name:
+
+\begin{table}[H]
+\centering\small
+\caption{Domain files use business names; system names appear only at the MCP layer.}
+\begin{tabularx}{\textwidth}{@{} l l l @{}}
+\toprule
+\thead{Domain File} & \thead{Business Concept} & \thead{MCP Tool Prefix} \\
+\midrule
+\texttt{procurement.go} & Suppliers, purchasing   & \texttt{srm\_*} \\
+\texttt{inventory.go}   & Products, stock         & \texttt{wms\_*} \\
+\texttt{sales.go}       & Customers, orders       & \texttt{oms\_*} \\
+\texttt{shipping.go}    & Carriers, delivery      & \texttt{tms\_*} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{MCP Integration}
+
+The MCP layer wraps controllers as \textbf{35 read-only tools} accessible to any MCP-compatible agent via stdio transport. Each tool has a clear description following Anthropic's Agent-Computer Interface (ACI) guidelines, optimised for LLM comprehension.
+
+\begin{table}[H]
+\centering\small
+\caption{MCP tools by system (35 total).}
+\begin{tabularx}{\textwidth}{@{} l r X @{}}
+\toprule
+\thead{System} & \thead{Tools} & \thead{Key Capabilities} \\
+\midrule
+SRM & 11 & Get/list suppliers, supplier products, supplier orders; compare suppliers; find overdue POs; list products by supplier or by our product \\
+WMS & 8 & Get/list products; check inventory; list low stock; get stock movements; full inventory snapshot; warehouse details \\
+OMS & 8 & Get/list customer orders; search orders by product, customer, or status; list overdue orders; list customers \\
+TMS & 6 & Get/track shipments; list by status; list exceptions; get/list carriers \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Agent Configuration}
+
+The agent operates in a dedicated project folder containing:
+
+\begin{itemize}[itemsep=0.3em]
+    \item \textbf{\texttt{CLAUDE.md}} -- Business context document that provides the agent with domain knowledge: entity definitions, enum meanings (e.g., ``urgent = ship within 24h''), business rules (``refrigerated products must use refrigerated carriers''), and cross-system reasoning patterns.
+    \item \textbf{\texttt{.mcp.json}} -- Declares the MCP server binary and data path.
+\end{itemize}
+
+% =====================================================================
+\section{First Results: Agent Performance}
+% =====================================================================
+
+\subsection{Evaluation Framework}
+
+We designed 15 evaluation scenarios (5 per use case) stored as structured markdown files in \texttt{serge/eval/}. Each scenario defines:
+
+\begin{itemize}[itemsep=0.2em]
+    \item The natural language question
+    \item Expected MCP tool calls (ordered)
+    \item Ground truth answer derived from seed data
+    \item Must-contain and must-not-contain criteria
+    \item Evaluation checklist
+\end{itemize}
+
+\subsection{Qualitative Results}
+
+We tested the agent on four representative queries of increasing complexity. The following table summarises the results:
+
+\begin{table}[H]
+\centering\small
+\caption{Agent performance on four test queries (scored on 5-point scale).}
+\begin{tabularx}{\textwidth}{@{} L{3.5cm} c c c c c c @{}}
+\toprule
+\thead{Query} & \thead{Systems} & \thead{Tools} & \thead{Factual} & \thead{Complete} & \thead{Reasoning} & \thead{Score} \\
+\midrule
+Order status (ORD-005)              & 2 & 2 & 5 & 5 & 5 & 5.0 \\
+Carrier mismatch (SHP-009)          & 4 & 4 & 5 & 5 & 5 & 4.85 \\
+PROD-001 full history               & 4 & 6 & 5 & 5 & 5 & 5.0 \\
+ORD-028 fulfillment analysis        & 4 & 7--9 & 5 & 4--5 & 5 & 4.7--5.0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Detailed Results}
+
+\subsubsection{Cross-System Diagnostic (SHP-009 Carrier Mismatch)}
+
+\textbf{Question:} ``Shipment SHP-009 had a refrigeration failure but was shipped via Kerry Express (ground carrier). Was this the right carrier choice for perishable mangoes?''
+
+The agent chained 4 tool calls across TMS $\to$ OMS $\to$ WMS:
+
+\begin{enumerate}[nosep]
+    \item \texttt{tms\_get\_shipment("SHP-009")} -- found exception: refrigeration malfunction
+    \item \texttt{tms\_list\_carriers()} -- compared all carrier options
+    \item \texttt{oms\_get\_customer\_order("ORD-011")} -- identified the product (PROD-003)
+    \item \texttt{wms\_get\_product("PROD-003")} -- confirmed: \texttt{storage\_type=refrigerated}, \texttt{shelf\_life=10 days}
+\end{enumerate}
+
+\begin{resultbox}
+The agent correctly identified that Kerry Express (ground) was the wrong carrier for refrigerated mangoes, computed shipping costs for all 3 carriers (Kerry: 1,875~THB, SCG Cold Chain: 3,125~THB, Flash Express: 4,375~THB), and recommended SCG Cold Chain as the appropriate choice. It referenced the SHP-009 incident as evidence that ground carriers cannot reliably handle perishable goods.
+\end{resultbox}
+
+\subsubsection{Full Supply Chain Tracing (PROD-001 History)}
+
+\textbf{Question:} ``Show me the complete supply chain history for PROD-001 -- from purchase orders to inventory to customer orders.''
+
+The agent made 6 calls spanning all 4 systems and produced:
+
+\begin{itemize}[nosep]
+    \item A supplier comparison table (2 suppliers for PROD-001)
+    \item Chronological purchase order history with on-time status
+    \item Stock movement timeline with running balance
+    \item All customer orders consuming PROD-001
+    \item An ASCII flow diagram: Suppliers $\to$ Warehouse $\to$ Customers
+    \item Key findings: demand spike analysis, reorder point recommendation, margin calculation
+\end{itemize}
+
+\subsubsection{Complex Fulfillment Analysis (ORD-028)}
+
+\textbf{Question:} ``Order ORD-028 needs 12 units of PROD-001 and 6 units of PROD-004 for The Sukhothai Hotel by Feb~18. Can we fulfill it?''
+
+The agent checked stock for both products, identified a 4-unit shortage on PROD-001, found PO-008 arriving on the same day as the deadline, compared refrigerated carriers with computed costs, and proposed three fulfillment options (partial shipment now, wait for PO, priority allocation). It correctly recommended a partial shipment to maintain the hotel's weekly standing order.
+
+\subsection{Key Observations}
+
+\begin{enumerate}[itemsep=0.5em]
+    \item \textbf{Cross-system reasoning works.} The agent consistently chains tool calls across 3--4 systems to build complete diagnostic pictures. This is the core value proposition.
+
+    \item \textbf{The agent goes beyond retrieval.} It computes running balances, calculates shipping costs, identifies demand competition between orders, and makes business recommendations -- all from read-only data access.
+
+    \item \textbf{Business context matters.} The \texttt{CLAUDE.md} file significantly improved tool selection accuracy. Without it, the agent sometimes chose suboptimal tools; with it, tool selection matched our expected call sequences.
+
+    \item \textbf{Consistency varies.} Running the same query twice can produce different levels of detail. The agent sometimes mentions competing orders (ORD-007 vs ORD-028 for PROD-001 stock) and sometimes doesn't. This will be quantified in the formal evaluation.
+
+    \item \textbf{Time savings are dramatic.} A human operator checking 4 separate systems for the ORD-028 analysis would need 15--30 minutes. The agent produces a more thorough analysis in under 60 seconds.
+\end{enumerate}
+
+% =====================================================================
+\section{Evaluation Module}
+% =====================================================================
+
+\subsection{Structure}
+
+\begin{table}[H]
+\centering\small
+\caption{15 evaluation scenarios organised by use case.}
+\begin{tabularx}{\textwidth}{@{} l l l l @{}}
+\toprule
+\thead{UC} & \thead{Scenario} & \thead{Difficulty} & \thead{Key Test} \\
+\midrule
+\multirow{5}{*}{UC-1} & 01 Happy path (ORD-001)       & Easy   & Basic 2-system retrieval \\
+                       & 02 In transit (ORD-005)       & Easy   & Tracking events \\
+                       & 03 Exception (ORD-011)        & Medium & Exception handling \\
+                       & 04 Cancelled (ORD-014)        & Easy   & No shipment exists \\
+                       & 05 Late delivery (ORD-003)    & Medium & Date comparison \\
+\midrule
+\multirow{5}{*}{UC-2} & 01 Stock shortage (ORD-007)    & Hard   & 4-system causal chain \\
+                       & 02 Supplier delay pattern      & Medium & Pattern recognition \\
+                       & 03 Carrier exception (SHP-009) & Medium & Cross-system root cause \\
+                       & 04 Order stuck (ORD-012)       & Medium & Negative finding \\
+                       & 05 Operational overview         & Hard   & Full system scan \\
+\midrule
+\multirow{5}{*}{UC-3} & 01 Compare all suppliers       & Easy   & Structured comparison \\
+                       & 02 Best reliability             & Easy   & Ranking \\
+                       & 03 Spending by supplier         & Medium & Cost aggregation \\
+                       & 04 Fastest lead time            & Easy   & Metric comparison \\
+                       & 05 Late delivery history        & Medium & Pattern analysis \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Scenario Format}
+
+Each scenario is a markdown file containing:
+
+\begin{lstlisting}
+# [Title]
+## Use Case
+UC-X: [Name] | Difficulty: [easy/medium/hard]
+## Question
+"[Natural language query]"
+## Expected Tool Calls
+1. tool(param=value) -- [reason]
+## Ground Truth
+[Facts from seed data the answer MUST contain]
+## Must NOT Contain
+[Hallucinations or errors to check for]
+## Evaluation Checklist
+- [ ] Correct tools called
+- [ ] Factual accuracy
+- [ ] Completeness
+- [ ] Source attribution
+- [ ] No hallucination
+\end{lstlisting}
+
+% =====================================================================
+\section{Next Steps}
+% =====================================================================
+
+\begin{table}[H]
+\centering\small
+\caption{Remaining work (2 weeks).}
+\begin{tabularx}{\textwidth}{@{} c l X @{}}
+\toprule
+\thead{Week} & \thead{Dates} & \thead{Deliverables} \\
+\midrule
+9 & Mar 30 -- Apr 6 &
+    Implement LLM-as-Judge pipeline (judge prompt, scoring rubric).
+    Run 45 evaluation runs (3 per scenario).
+    Measure all 6 metrics (judge score, accuracy, pass rate, tool calls, time, consistency). \\
+10 & Apr 7 -- 16 &
+    Results analysis and visualisation.
+    Final report.
+    Presentation and demo preparation. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}
