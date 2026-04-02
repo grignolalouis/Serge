@@ -1,0 +1,27 @@
+{
+  "id": "uc3-02",
+  "use_case": "UC-3: Supplier Comparison",
+  "title": "Best Reliability",
+  "difficulty": "easy",
+  "question": "Which supplier has the best delivery reliability?",
+  "expected_tools": [
+    "srm_compare_suppliers"
+  ],
+  "ground_truth": {
+    "facts": [
+      "SUP-001 (Somchai Mango Farm) is the most reliable",
+      "100% on-time rate (3/3 received POs on time)",
+      "PO-001: expected Jan 5, received Jan 5 (on time)",
+      "PO-004: expected Jan 15, received Jan 14 (1 day early)",
+      "PO-006: expected Jan 25, received Jan 25 (on time)",
+      "Average lead time: ~3 days (matches declared)",
+      "Rating: 4.5/5.0",
+      "SUP-003 (Prachuap Harvest): 50% on-time",
+      "SUP-002 (Northern Fruits Co.): 0% on-time"
+    ],
+    "must_not_contain": [
+      "Wrong supplier identified as most reliable",
+      "Incorrect PO delivery dates"
+    ]
+  }
+}

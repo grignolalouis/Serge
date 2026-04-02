@@ -1,0 +1,30 @@
+{
+  "id": "uc2-01",
+  "use_case": "UC-2: Root Cause Analysis",
+  "title": "Stock Shortage — Order Blocked by Low Inventory",
+  "difficulty": "hard",
+  "question": "Why hasn't order ORD-007 shipped yet?",
+  "expected_tools": [
+    "oms_get_order",
+    "tms_track_order",
+    "wms_check_inventory",
+    "srm_list_purchase_orders_by_status"
+  ],
+  "ground_truth": {
+    "facts": [
+      "ORD-007 belongs to CUST-001 (Siam Paragon), status processing, priority urgent",
+      "Ordered 2026-02-05, required by 2026-02-12 — overdue",
+      "Needs 50x PROD-001 (Nam Doc Mai 5kg) @ 450 THB = 22,500 THB",
+      "No shipment created",
+      "PROD-001 has 8 units available, 0 reserved, reorder point 20 — critically low",
+      "PO-008 from SUP-001 (Somchai Mango Farm), status shipped, 150 units PROD-001, ETA 2026-02-18",
+      "Root cause: inventory shortage (8 available vs 50 needed)",
+      "PO-008 arrives Feb 18, 6 days after required date — order cannot be fulfilled until then"
+    ],
+    "must_not_contain": [
+      "Incorrect root cause (carrier issue, cancelled order)",
+      "Missing causal link between inventory and PO",
+      "Claim that order can be fulfilled from current stock"
+    ]
+  }
+}

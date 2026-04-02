@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["summary", "by_scenario", "by_use_case", "by_difficulty", "metrics"],
+  "properties": {
+    "summary": {
+      "type": "object",
+      "required": ["total_runs", "pass_rate", "avg_weighted_score", "avg_factual_accuracy", "avg_completeness", "avg_reasoning", "avg_source_attribution", "avg_structure"],
+      "properties": {
+        "total_runs": { "type": "integer" },
+        "pass_rate": { "type": "number" },
+        "avg_weighted_score": { "type": "number" },
+        "avg_factual_accuracy": { "type": "number" },
+        "avg_completeness": { "type": "number" },
+        "avg_reasoning": { "type": "number" },
+        "avg_source_attribution": { "type": "number" },
+        "avg_structure": { "type": "number" }
+      }
+    },
+    "by_scenario": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["scenario_id", "title", "use_case", "difficulty", "avg_score", "pass_rate", "consistency_std", "runs"],
+        "properties": {
+          "scenario_id": { "type": "string" },
+          "title": { "type": "string" },
+          "use_case": { "type": "string" },
+          "difficulty": { "type": "string" },
+          "avg_score": { "type": "number" },
+          "pass_rate": { "type": "number" },
+          "consistency_std": { "type": "number" },
+          "runs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "run": { "type": "integer" },
+                "weighted_score": { "type": "number" },
+                "pass": { "type": "boolean" },
+                "duration_ms": { "type": "integer" },
+                "tool_calls_count": { "type": "integer" },
+                "cost_usd": { "type": "number" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "by_use_case": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["use_case", "avg_score", "pass_rate", "avg_tool_calls", "avg_duration_ms"],
+        "properties": {
+          "use_case": { "type": "string" },
+          "avg_score": { "type": "number" },
+          "pass_rate": { "type": "number" },
+          "avg_tool_calls": { "type": "number" },
+          "avg_duration_ms": { "type": "number" }
+        }
+      }
+    },
+    "by_difficulty": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["difficulty", "avg_score", "pass_rate"],
+        "properties": {
+          "difficulty": { "type": "string" },
+          "avg_score": { "type": "number" },
+          "pass_rate": { "type": "number" }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["total_cost_usd", "total_duration_ms", "total_tool_calls"],
+      "properties": {
+        "total_cost_usd": { "type": "number" },
+        "total_duration_ms": { "type": "integer" },
+        "total_tool_calls": { "type": "integer" }
+      }
+    }
+  }
+}

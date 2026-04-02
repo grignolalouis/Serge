@@ -1,0 +1,27 @@
+{
+  "id": "uc1-04",
+  "use_case": "UC-1: Order Status Inquiry",
+  "title": "Cancelled Order",
+  "difficulty": "easy",
+  "question": "Can you check on order ORD-014?",
+  "expected_tools": [
+    "oms_get_order",
+    "tms_track_order"
+  ],
+  "ground_truth": {
+    "facts": [
+      "Order ORD-014 belongs to customer CUST-005 (Villa Market)",
+      "Order status is cancelled",
+      "Ordered 2026-01-22, required by 2026-01-28",
+      "Priority is normal",
+      "Lines: 20x PROD-002 (Ok Rong 10kg) @ 650 THB = 13,000 THB",
+      "No shipment exists",
+      "No shipped_date, no delivered_date"
+    ],
+    "must_not_contain": [
+      "Shipment details (none exist)",
+      "Status reported as anything other than cancelled",
+      "Fabricated cancellation reason"
+    ]
+  }
+}

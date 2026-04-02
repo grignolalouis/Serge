@@ -1,0 +1,17 @@
+{
+  "runs_per_scenario": 3,
+  "pass_threshold": 3.5,
+  "target_average": 4.0,
+  "target_accuracy": 0.90,
+  "model": "sonnet",
+  "judge_model": "sonnet",
+  "aggregation_model": "sonnet",
+  "max_budget_per_run_usd": 0.50,
+  "weights": {
+    "factual_accuracy": 0.30,
+    "completeness": 0.25,
+    "reasoning": 0.20,
+    "source_attribution": 0.15,
+    "structure": 0.10
+  }
+}

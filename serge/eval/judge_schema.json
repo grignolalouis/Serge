@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "factual_accuracy",
+    "completeness",
+    "reasoning",
+    "source_attribution",
+    "structure",
+    "weighted_score",
+    "pass",
+    "justification",
+    "facts_found",
+    "facts_missing",
+    "hallucinations"
+  ],
+  "properties": {
+    "factual_accuracy": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Are all stated facts correct? 5=perfect, 1=major errors"
+    },
+    "completeness": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Are all required ground truth facts present? 5=all present, 1=most missing"
+    },
+    "reasoning": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Is the causal chain / logic sound? 5=flawless reasoning, 1=illogical"
+    },
+    "source_attribution": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Does the agent cite which system data comes from? 5=all cited, 1=none"
+    },
+    "structure": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Is the response well-organized and readable? 5=excellent, 1=chaotic"
+    },
+    "weighted_score": {
+      "type": "number",
+      "minimum": 1,
+      "maximum": 5,
+      "description": "Weighted average: accuracy*0.30 + completeness*0.25 + reasoning*0.20 + attribution*0.15 + structure*0.10"
+    },
+    "pass": {
+      "type": "boolean",
+      "description": "true if weighted_score >= 3.5"
+    },
+    "justification": {
+      "type": "string",
+      "description": "2-3 sentence explanation of the score"
+    },
+    "facts_found": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Which ground truth facts the agent correctly included"
+    },
+    "facts_missing": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Which ground truth facts the agent missed"
+    },
+    "hallucinations": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Any fabricated information not in the data"
+    }
+  },
+  "additionalProperties": false
+}

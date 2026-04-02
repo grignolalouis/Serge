@@ -1,0 +1,28 @@
+{
+  "id": "uc1-01",
+  "use_case": "UC-1: Order Status Inquiry",
+  "title": "Happy Path — Delivered Order",
+  "difficulty": "easy",
+  "question": "What is the status of order ORD-001?",
+  "expected_tools": [
+    "oms_get_order",
+    "tms_track_order"
+  ],
+  "ground_truth": {
+    "facts": [
+      "Order ORD-001 belongs to customer CUST-001 (Siam Paragon Food Hall)",
+      "Order status is delivered",
+      "Ordered 2026-01-08, required by 2026-01-14, shipped 2026-01-10, delivered 2026-01-11",
+      "Priority is normal",
+      "Lines: 10x PROD-001 (Nam Doc Mai 5kg) @ 450 THB, 5x PROD-003 (Keaw 5kg) @ 350 THB",
+      "Total: 6,250 THB",
+      "Shipment SHP-001 via SCG Cold Chain (CAR-002)",
+      "Delivered on time (3 days before required date)"
+    ],
+    "must_not_contain": [
+      "Wrong carrier name",
+      "Incorrect quantities or prices",
+      "Fabricated tracking events"
+    ]
+  }
+}

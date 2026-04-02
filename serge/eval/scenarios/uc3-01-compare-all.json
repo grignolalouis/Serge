@@ -1,0 +1,24 @@
+{
+  "id": "uc3-01",
+  "use_case": "UC-3: Supplier Comparison",
+  "title": "Compare All Suppliers",
+  "difficulty": "easy",
+  "question": "Compare all our mango suppliers.",
+  "expected_tools": [
+    "srm_compare_suppliers"
+  ],
+  "ground_truth": {
+    "facts": [
+      "SUP-001 (Somchai Mango Farm): 4 POs, 3 received, 3 on-time, 100% on-time rate, ~3 days avg lead, rating 4.5",
+      "SUP-002 (Northern Fruits Co.): 3 POs, 2 received, 0 on-time, 0% on-time rate, ~8 days avg lead, rating 3.2",
+      "SUP-003 (Prachuap Harvest): 3 POs, 2 received, 1 on-time, 50% on-time rate, ~6 days avg lead, rating 2.8",
+      "SUP-001 is the best performer",
+      "SUP-002 is the worst performer"
+    ],
+    "must_not_contain": [
+      "Missing any of the 3 suppliers",
+      "Fabricated metrics",
+      "Incorrect on-time rates"
+    ]
+  }
+}

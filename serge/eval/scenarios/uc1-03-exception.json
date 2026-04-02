@@ -1,0 +1,28 @@
+{
+  "id": "uc1-03",
+  "use_case": "UC-1: Order Status Inquiry",
+  "title": "Exception — Carrier Delivery Failure",
+  "difficulty": "medium",
+  "question": "What's happening with order ORD-011? The customer is asking.",
+  "expected_tools": [
+    "oms_get_order",
+    "tms_track_order"
+  ],
+  "ground_truth": {
+    "facts": [
+      "Order ORD-011 belongs to customer CUST-003 (Tops Supermarket)",
+      "Order status is shipped but shipment has exception",
+      "Ordered 2026-02-04, required by 2026-02-10, shipped 2026-02-06",
+      "Lines: 25x PROD-003 (Keaw 5kg) @ 350 THB = 8,750 THB",
+      "Shipment SHP-009 via Kerry Express (CAR-001), status exception",
+      "Exception reason: Refrigeration unit malfunction on delivery vehicle",
+      "Tracking: Feb 6 picked up, Feb 6 departed sorting, Feb 7 in transit Nonthaburi, Feb 8 exception at Pathum Thani",
+      "Order is overdue (required Feb 10, not delivered)"
+    ],
+    "must_not_contain": [
+      "Status reported as delivered",
+      "Wrong exception reason",
+      "Fabricated resolution or new delivery date"
+    ]
+  }
+}

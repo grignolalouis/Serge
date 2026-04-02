@@ -1,0 +1,28 @@
+{
+  "id": "uc1-02",
+  "use_case": "UC-1: Order Status Inquiry",
+  "title": "In Transit — Active Shipment with Tracking",
+  "difficulty": "easy",
+  "question": "Where is order ORD-005 right now?",
+  "expected_tools": [
+    "oms_get_order",
+    "tms_track_order"
+  ],
+  "ground_truth": {
+    "facts": [
+      "Order ORD-005 belongs to customer CUST-005 (Villa Market)",
+      "Order status is shipped",
+      "Ordered 2026-02-08, required by 2026-02-14, shipped 2026-02-10",
+      "Lines: 15x PROD-002 (Ok Rong 10kg) @ 650 THB, 10x PROD-005 (Mixed 5kg) @ 500 THB",
+      "Total: 14,750 THB",
+      "Shipment SHP-005 via SCG Cold Chain (CAR-002), status in_transit, 200kg",
+      "ETA 2026-02-12 17:00",
+      "Tracking: Feb 10 picked up Bang Na, Feb 10 departed sorting, Feb 11 at local distribution center"
+    ],
+    "must_not_contain": [
+      "Status reported as delivered",
+      "Fabricated delivery date",
+      "Wrong carrier (must be SCG Cold Chain)"
+    ]
+  }
+}

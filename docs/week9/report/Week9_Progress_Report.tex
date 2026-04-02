@@ -1,0 +1,465 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.4cm,top=2.8cm,bottom=2.8cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries\small}
+\renewcommand\theadgape{}
+
+\usepackage{graphicx}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+\usepackage{listings}
+
+\setlist{nosep,leftmargin=1.5em}
+\titleformat{\section}{\Large\bfseries\color{MidnightBlue}}{}{0em}{}[\vspace{0.2em}\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{MidnightBlue!80}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{MidnightBlue!60}}{}{0em}{}
+\titlespacing*{\section}{0pt}{2em}{1em}
+\titlespacing*{\subsection}{0pt}{1.4em}{0.6em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.4em}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MidnightBlue,
+    urlcolor=RoyalBlue,
+    citecolor=MidnightBlue,
+    pdfauthor={Grignola, Schmitt, Tellus, Schwarz},
+    pdftitle={Week 9 Progress Report -- SERGE},
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\lhead{\small\color{gray} SE618-1 Logistics -- SIIT}
+\rhead{\small\color{gray} Week~9 -- Progress Report}
+\cfoot{\small\thepage}
+
+\newtcolorbox{keyinsight}{
+    colback=MidnightBlue!5, colframe=MidnightBlue!60,
+    fonttitle=\bfseries, title=Key Insight,
+    boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newtcolorbox{resultbox}{
+    colback=ForestGreen!5, colframe=ForestGreen!60,
+    fonttitle=\bfseries, title=Result,
+    boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newtcolorbox{notebox}[1][Note]{
+    colback=Goldenrod!8, colframe=Goldenrod!60,
+    fonttitle=\bfseries, title=#1,
+    boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+\lstset{
+    basicstyle=\small\ttfamily,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{gray!40},
+    backgroundcolor=\color{gray!5},
+    xleftmargin=0.5em,
+    framexleftmargin=0.5em,
+}
+
+% =====================================================================
+\begin{document}
+
+% -- Title Page -------------------------------------------------------
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+\includegraphics[width=4cm]{siitlogo.png}
+
+\vspace{1cm}
+
+{\large\bfseries SE618 LOGISTIC CASE STUDY ANALYSIS}
+
+\vspace{0.5cm}
+
+{\normalsize WEEK 9 -- PROGRESS REPORT}
+
+\vspace{1.5cm}
+
+{\large\bfseries PROJECT TITLE: SERGE -- AI Agent for Supply Chain Operations}
+
+\vspace{0.5cm}
+
+{\normalsize Automated Evaluation Pipeline \& LLM-as-Judge Implementation}
+
+\vspace{1.5cm}
+
+\begin{tabular}{l l}
+Gauthier SCHMITT & 6822807466 \\
+Louis GRIGNOLA   & 6822807516 \\
+Matteo SCHWARZ   & 6822807557 \\
+Ma\"el TELLUS    & 6822807532 \\
+\end{tabular}
+
+\vspace{1.5cm}
+
+{\large SUBMITTED TO:}\\[0.5em]
+{\large AJARN WARUT}
+
+\vspace{1.5cm}
+
+{\large APRIL 2026}\\[0.3em]
+{\large SEMESTER 2/2025}
+
+\vspace{2cm}
+
+{\large
+SCHOOL OF MANUFACTURING SYSTEMS AND MECHANICAL ENGINEERING\\[0.3em]
+SIRINDHORN INTERNATIONAL INSTITUTE OF TECHNOLOGY\\[0.3em]
+THAMMASAT UNIVERSITY
+}
+
+\vfill
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Executive Summary}
+% =====================================================================
+
+This week focused on building the \textbf{automated evaluation pipeline} for SERGE. The pipeline orchestrates end-to-end evaluation: it runs the agent on each scenario, captures structured outputs, sends them to an LLM-as-Judge for scoring, and aggregates results into a final report --- all from a single shell command. The pipeline has been validated end-to-end on a test scenario. The current 15 evaluation scenarios serve as a working draft; next week, they will be reviewed, refined with realistic business questions, and used for the full 45-run evaluation.
+
+% =====================================================================
+\section{Evaluation Pipeline Design}
+% =====================================================================
+
+\subsection{Motivation}
+
+Last week's qualitative testing showed that SERGE can perform cross-system reasoning, but results were evaluated manually and lacked reproducibility. To produce rigorous, publishable results for the final report, we need:
+
+\begin{enumerate}[itemsep=0.3em]
+    \item \textbf{Automation}: run all scenarios without manual intervention.
+    \item \textbf{Structured scoring}: consistent, repeatable evaluation using a fixed rubric.
+    \item \textbf{Consistency measurement}: run each scenario multiple times to measure variance.
+    \item \textbf{Cost tracking}: monitor API costs across the full evaluation.
+\end{enumerate}
+
+\subsection{Architecture Overview}
+
+The pipeline runs entirely via the Claude Code CLI (\texttt{claude -p}) --- no custom Go agent code is needed beyond the existing MCP server. The architecture has three sequential stages:
+
+\begin{figure}[H]
+\centering
+\begin{lstlisting}
+For each scenario (15) x each run (3) = 45 runs:
+
+  STEP 1: AGENT RUN
+  claude -p "<question>"
+    --mcp-config .mcp.json          (supply chain MCP server)
+    --allowedTools "mcp__serge-*"   (read-only SC tools only)
+    --output-format json            (structured capture)
+  -> {agent_answer, duration_ms, cost_usd, num_turns}
+
+  STEP 2: JUDGE RUN
+  claude -p "<agent_answer + ground_truth + rubric>"
+    --json-schema judge_schema.json (enforced JSON output)
+    --tools ""                      (no tools, pure evaluation)
+  -> {factual_accuracy, completeness, reasoning, ...}
+
+  STEP 3: AGGREGATION (Python, deterministic)
+  -> evaluation_report.json
+\end{lstlisting}
+\caption{Three-stage evaluation pipeline. Steps 1 and 2 use the Claude Code CLI; Step 3 is a deterministic Python aggregation script.}
+\end{figure}
+
+\begin{keyinsight}
+The aggregation step was initially designed as an LLM call, but we replaced it with a deterministic Python script. Aggregation is pure arithmetic (averages, standard deviations, pass rates) --- using an LLM would add cost and non-determinism for no benefit. The LLM is reserved for tasks that require judgement (Steps 1 and 2).
+\end{keyinsight}
+
+\subsection{Why Claude Code CLI, Not a Custom Agent}
+
+We evaluated two approaches for running the evaluation:
+
+\begin{table}[H]
+\centering\small
+\caption{Comparison of evaluation approaches.}
+\begin{tabularx}{\textwidth}{@{} l X X @{}}
+\toprule
+\thead{Criterion} & \thead{Custom Go Agent (trpc-agent-go)} & \thead{Claude Code CLI} \\
+\midrule
+MCP integration & Must implement MCP client & Built-in via \texttt{--mcp-config} \\
+Tool permissions & Must implement permission system & Built-in via \texttt{--allowedTools} \\
+Structured output & Must parse LLM responses & Built-in via \texttt{--json-schema} \\
+Cost tracking & Must implement token counting & Built-in in JSON output \\
+Development time & Days to weeks & Hours \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Claude Code CLI provides all the infrastructure we need out of the box: MCP server management, tool permissions, structured output validation, cost tracking, and session isolation. Building a custom agent would duplicate this functionality with significant development overhead and no added capability for our evaluation use case.
+
+% =====================================================================
+\section{LLM-as-Judge Implementation}
+% =====================================================================
+
+\subsection{Judge Design}
+
+The LLM-as-Judge evaluates each agent answer against a known ground truth using five weighted criteria:
+
+\begin{table}[H]
+\centering\small
+\caption{Evaluation rubric: five criteria with weights.}
+\begin{tabularx}{\textwidth}{@{} l c X @{}}
+\toprule
+\thead{Criterion} & \thead{Weight} & \thead{What it measures} \\
+\midrule
+Factual Accuracy    & 30\% & Are all stated facts correct? No errors or contradictions. \\
+Completeness        & 25\% & Are all ground truth facts present in the answer? \\
+Reasoning Quality   & 20\% & Is the causal chain sound? Logical connections between data? \\
+Source Attribution   & 15\% & Does the agent cite which system (SRM/WMS/OMS/TMS) data comes from? \\
+Response Structure   & 10\% & Is the response well-organized, scannable, with tables/lists? \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent Each criterion is scored 1--5. The weighted score is computed as:
+
+\[
+\text{score} = 0.30 \times \text{accuracy} + 0.25 \times \text{completeness} + 0.20 \times \text{reasoning} + 0.15 \times \text{attribution} + 0.10 \times \text{structure}
+\]
+
+A scenario \textbf{passes} if the weighted score $\geq 3.5$ out of 5.0.
+
+\subsection{Structured Output Enforcement}
+
+The judge is invoked with \texttt{--json-schema}, which forces the LLM to produce a valid JSON object matching our schema:
+
+\begin{lstlisting}
+{
+  "factual_accuracy": 4,
+  "completeness": 2,
+  "reasoning": 4,
+  "source_attribution": 2,
+  "structure": 4,
+  "weighted_score": 3.20,
+  "pass": false,
+  "justification": "All stated facts correct but missing...",
+  "facts_found": ["status is delivered", "dates correct"],
+  "facts_missing": ["total amount", "carrier name"],
+  "hallucinations": []
+}
+\end{lstlisting}
+
+This structured output enables automated aggregation without any manual parsing.
+
+\subsection{Scenario Format}
+
+Each evaluation scenario is stored as a JSON file containing the question, expected tool calls, and ground truth:
+
+\begin{lstlisting}
+{
+  "id": "uc2-01",
+  "use_case": "UC-2: Root Cause Analysis",
+  "title": "Stock Shortage - Order Blocked",
+  "difficulty": "hard",
+  "question": "Why hasn't order ORD-007 shipped yet?",
+  "expected_tools": ["oms_get_order", "tms_track_order",
+                     "wms_check_inventory", "srm_list_..."],
+  "ground_truth": {
+    "facts": [
+      "ORD-007 status is processing, priority urgent",
+      "Needs 50 units of PROD-001, only 8 available",
+      "PO-008 incoming with 150 units, ETA 2026-02-18",
+      "Root cause: inventory shortage"
+    ],
+    "must_not_contain": [
+      "Claim order can be fulfilled from current stock"
+    ]
+  }
+}
+\end{lstlisting}
+
+% =====================================================================
+\section{Pipeline Validation}
+% =====================================================================
+
+\subsection{End-to-End Test}
+
+We validated the pipeline on scenario \texttt{uc1-01} (Happy Path --- Delivered Order) with 1 run:
+
+\begin{table}[H]
+\centering\small
+\caption{E2E validation results on uc1-01.}
+\begin{tabularx}{\textwidth}{@{} l l @{}}
+\toprule
+\thead{Metric} & \thead{Value} \\
+\midrule
+Agent response time        & 12.1 seconds \\
+Agent cost                 & \$0.058 \\
+Agent tool calls (turns)   & 3 \\
+Judge: Factual Accuracy    & 4/5 (all stated facts correct) \\
+Judge: Completeness        & 2/5 (missing carrier, prices, total) \\
+Judge: Reasoning           & 4/5 \\
+Judge: Source Attribution   & 2/5 (only OMS cited, TMS not queried) \\
+Judge: Structure           & 4/5 \\
+\textbf{Weighted Score}    & \textbf{3.20/5.0} \\
+\textbf{Pass}              & \textbf{No} ($< 3.5$ threshold) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{resultbox}
+The pipeline successfully executed all three stages: agent run, judge evaluation, and aggregation. The judge correctly identified that the agent did not call \texttt{tms\_track\_order} (only OMS was queried), resulting in missing shipment details (SHP-001, carrier SCG Cold Chain). The structured JSON output was produced and aggregated without errors.
+\end{resultbox}
+
+\subsection{Observations from Validation}
+
+\begin{enumerate}[itemsep=0.5em]
+    \item \textbf{Agent tool selection varies across runs.} In some runs the agent calls both \texttt{oms\_get\_order} and \texttt{tms\_track\_order}; in others it stops after OMS. This is the consistency issue we will quantify with 3 runs per scenario.
+
+    \item \textbf{The judge is strict and fair.} It gave a high accuracy score (4/5) because every stated fact was correct, but penalised completeness (2/5) for missing ground truth facts. This aligns with our rubric design.
+
+    \item \textbf{Cost is manageable.} At \$0.06 per agent run + \$0.06 per judge run, the full evaluation (45 + 45 = 90 calls) should cost approximately \$5--8 total.
+
+    \item \textbf{Authentication matters.} The \texttt{--bare} flag (which skips all local configuration) also skips OAuth authentication. We switched to individual flags (\texttt{--strict-mcp-config}, \texttt{--disable-slash-commands}) to maintain authentication while still isolating the evaluation environment.
+\end{enumerate}
+
+% =====================================================================
+\section{Current Scenario Coverage}
+% =====================================================================
+
+The 15 draft scenarios cover three use cases across three difficulty levels:
+
+\begin{table}[H]
+\centering\small
+\caption{Current 15 evaluation scenarios (draft --- to be refined next week).}
+\begin{tabularx}{\textwidth}{@{} l l l l l @{}}
+\toprule
+\thead{ID} & \thead{Use Case} & \thead{Title} & \thead{Difficulty} & \thead{Systems} \\
+\midrule
+uc1-01 & Order Status   & Happy path (ORD-001)            & Easy   & OMS, TMS \\
+uc1-02 & Order Status   & In transit (ORD-005)            & Easy   & OMS, TMS \\
+uc1-03 & Order Status   & Exception (ORD-011)             & Medium & OMS, TMS \\
+uc1-04 & Order Status   & Cancelled (ORD-014)             & Easy   & OMS, TMS \\
+uc1-05 & Order Status   & Late delivery (ORD-003)         & Medium & OMS, TMS \\
+\midrule
+uc2-01 & Root Cause     & Stock shortage (ORD-007)        & Hard   & 4 systems \\
+uc2-02 & Root Cause     & Supplier delay pattern          & Medium & SRM \\
+uc2-03 & Root Cause     & Carrier exception (SHP-009)     & Medium & TMS, OMS \\
+uc2-04 & Root Cause     & Order stuck (ORD-012)           & Medium & OMS, WMS, TMS \\
+uc2-05 & Root Cause     & Operational overview            & Hard   & 4 systems \\
+\midrule
+uc3-01 & Supplier Comp. & Compare all suppliers           & Easy   & SRM \\
+uc3-02 & Supplier Comp. & Best reliability                & Easy   & SRM \\
+uc3-03 & Supplier Comp. & Spending by supplier            & Medium & SRM \\
+uc3-04 & Supplier Comp. & Fastest lead time               & Easy   & SRM \\
+uc3-05 & Supplier Comp. & Late delivery history           & Medium & SRM \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{notebox}[Draft Status]
+These scenarios were designed alongside the seed data and serve as a functional proof-of-concept. Next week, we will review and refine them to ensure they reflect realistic business questions that a supply chain operator would actually ask, with accurate and complete ground truth derived from the seed data.
+\end{notebox}
+
+% =====================================================================
+\section{Metrics Framework}
+% =====================================================================
+
+The full evaluation will measure six metrics:
+
+\begin{table}[H]
+\centering\small
+\caption{Six evaluation metrics.}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\thead{Metric} & \thead{Source} & \thead{Description} \\
+\midrule
+Judge Score         & Judge output         & Weighted average of 5 criteria (1--5 scale) \\
+Factual Accuracy    & Judge: facts\_found  & \% of ground truth facts correctly stated \\
+Pass Rate           & Judge: pass          & \% of runs scoring $\geq 3.5$ \\
+Tool Efficiency     & Agent: num\_turns    & Number of tool calls vs.\ expected \\
+Response Time       & Agent: duration\_ms  & Median response time by difficulty \\
+Consistency         & Std.\ deviation      & $\sigma$ of weighted scores across 3 runs per scenario \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The aggregation script computes these automatically, grouped by scenario, use case, and difficulty level.
+
+% =====================================================================
+\section{File Structure}
+% =====================================================================
+
+\begin{lstlisting}
+serge/eval/
+  config.json              Config (runs, models, budgets, weights)
+  judge_prompt.md          LLM-as-Judge system prompt
+  judge_schema.json        JSON Schema for structured judge output
+  aggregate.py             Deterministic Python aggregation
+  run.sh                   Orchestrator (bash)
+  scenarios/               15 JSON scenario files
+    uc1-01-happy-path.json ... uc3-05-late-delivery-history.json
+  results/                 Generated per run (gitignored)
+    <scenario_id>/run_N.json + run_N_judge.json
+  report/
+    evaluation_report.json Aggregated report (gitignored)
+\end{lstlisting}
+
+\noindent Pipeline commands:
+
+\begin{lstlisting}
+./eval/run.sh                              # Full: 15x3 = 45 runs
+./eval/run.sh --scenario uc1-01-happy-path # Single scenario
+./eval/run.sh --judge-only                 # Re-judge existing results
+./eval/run.sh --aggregate-only             # Re-aggregate only
+./eval/run.sh --dry-run                    # Preview without API calls
+\end{lstlisting}
+
+% =====================================================================
+\section{Next Steps}
+% =====================================================================
+
+\begin{table}[H]
+\centering\small
+\caption{Remaining work (1 week).}
+\begin{tabularx}{\textwidth}{@{} c l X @{}}
+\toprule
+\thead{Week} & \thead{Dates} & \thead{Deliverables} \\
+\midrule
+10 & Apr 7 -- 16 &
+    \textbf{1. Scenario refinement:} Review all 15 scenarios with the team. Ensure questions reflect realistic operator needs. Verify ground truth against seed data. Add edge cases if needed. \newline
+    \textbf{2. Full evaluation run:} Execute 45 runs (15 scenarios $\times$ 3 runs). \newline
+    \textbf{3. Results analysis:} Analyse pass rates, consistency, failure modes. Produce visualisations (score distributions, per-UC breakdown). \newline
+    \textbf{4. Final report \& presentation:} Write final report with methodology, results, and conclusions. Prepare demo. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{notebox}[Priority for Next Week]
+The most critical task is \textbf{scenario refinement}. The pipeline is ready --- the quality of the evaluation now depends entirely on the quality of the questions and ground truth. Each scenario must be reviewed for: (1) realistic business framing, (2) accurate ground truth numbers verified against the seed JSON, (3) appropriate difficulty calibration, and (4) clear expected tool call sequences.
+\end{notebox}
+
+\end{document}

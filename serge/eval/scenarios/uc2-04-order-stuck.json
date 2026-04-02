@@ -1,0 +1,26 @@
+{
+  "id": "uc2-04",
+  "use_case": "UC-2: Root Cause Analysis",
+  "title": "Order Stuck in Processing",
+  "difficulty": "medium",
+  "question": "Order ORD-012 has been in processing for a while. What's holding it up?",
+  "expected_tools": [
+    "oms_get_order",
+    "wms_check_inventory",
+    "tms_track_order"
+  ],
+  "ground_truth": {
+    "facts": [
+      "ORD-012: CUST-004 (Mandarin Oriental), status processing, priority high",
+      "Ordered 2026-02-11, required by 2026-02-17",
+      "Lines: 8x PROD-002 (Ok Rong 10kg) @ 650 THB = 5,200 THB",
+      "PROD-002 has 45 qty, 10 reserved = 35 available — stock is sufficient (needs only 8)",
+      "No shipment created yet",
+      "Stock is NOT the issue — bottleneck may be operational (picking/packing)"
+    ],
+    "must_not_contain": [
+      "Claim that stock shortage is the cause",
+      "Fabricated reasons not in the data"
+    ]
+  }
+}
