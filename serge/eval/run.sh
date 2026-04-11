@@ -13,7 +13,6 @@
 
 set -euo pipefail
 
-# ── Configuration ──────────────────────────────────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 EVAL_DIR="$SCRIPT_DIR"
@@ -35,7 +34,6 @@ JUDGE_MODEL=$(jq -r '.judge_model' "$CONFIG")
 AGGREGATION_MODEL=$(jq -r '.aggregation_model' "$CONFIG")
 MAX_BUDGET=$(jq -r '.max_budget_per_run_usd' "$CONFIG")
 
-# ── CLI Arguments ──────────────────────────────────────────────────────────────
 FILTER_SCENARIO=""
 DRY_RUN=false
 JUDGE_ONLY=false
@@ -51,7 +49,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# ── Helpers ────────────────────────────────────────────────────────────────────
 timestamp() { date +"%Y-%m-%d %H:%M:%S"; }
 
 log() { echo "[$(timestamp)] $*"; }
@@ -60,7 +57,7 @@ ensure_dirs() {
   mkdir -p "$RESULTS_DIR" "$REPORT_DIR"
 }
 
-# ── Step 1: Agent Run ─────────────────────────────────────────────────────────
+# Step 1: Agent Run 
 # Sends the scenario question to Claude with MCP access, captures full JSON output.
 run_agent() {
   local scenario_file="$1"
@@ -134,7 +131,7 @@ run_agent() {
   log "  AGENT [$scenario_id] done (${duration_ms}ms, \$${cost})"
 }
 
-# ── Step 2: Judge Run ─────────────────────────────────────────────────────────
+# Step 2: Judge Run
 # Sends the agent answer + ground truth to a judge LLM, gets structured scores.
 run_judge() {
   local scenario_file="$1"
@@ -230,7 +227,7 @@ print(json.dumps({'factual_accuracy':0,'completeness':0,'reasoning':0,'source_at
   log "  JUDGE [$scenario_id] done (score: $score, pass: $pass)"
 }
 
-# ── Step 3: Aggregation ──────────────────────────────────────────────────────
+# Step 3: Aggregation
 run_aggregation() {
   log "AGGREGATION: collecting all results..."
 
@@ -247,15 +244,13 @@ run_aggregation() {
   log "AGGREGATION: report written to $REPORT_DIR/evaluation_report.json"
 }
 
-# ── Print Summary ─────────────────────────────────────────────────────────────
+# Print Summary
 print_summary() {
   local report="$REPORT_DIR/evaluation_report.json"
   [ -f "$report" ] || return
 
   echo ""
-  echo "═══════════════════════════════════════════════════════════════"
   echo "  SERGE EVALUATION REPORT"
-  echo "═══════════════════════════════════════════════════════════════"
 
   local avg_score pass_rate total_runs total_cost
   avg_score=$(jq -r '.summary.avg_weighted_score // "N/A"' "$report")
@@ -278,10 +273,9 @@ print_summary() {
   jq -r '.by_difficulty[] | "    \(.difficulty): score=\(.avg_score) pass=\(.pass_rate)"' "$report" 2>/dev/null || true
 
   echo ""
-  echo "═══════════════════════════════════════════════════════════════"
 }
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+# Main
 main() {
   ensure_dirs
 

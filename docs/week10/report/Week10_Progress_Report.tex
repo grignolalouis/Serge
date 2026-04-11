@@ -1,0 +1,247 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.4cm,top=2.8cm,bottom=2.8cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries\small}
+\renewcommand\theadgape{}
+
+\usepackage{graphicx}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+
+\setlist{nosep,leftmargin=1.5em}
+\titleformat{\section}{\Large\bfseries\color{MidnightBlue}}{}{0em}{}[\vspace{0.2em}\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{MidnightBlue!80}}{}{0em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{MidnightBlue!60}}{}{0em}{}
+\titlespacing*{\section}{0pt}{2em}{1em}
+\titlespacing*{\subsection}{0pt}{1.4em}{0.6em}
+\titlespacing*{\subsubsection}{0pt}{1em}{0.4em}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MidnightBlue,
+    urlcolor=RoyalBlue,
+    citecolor=MidnightBlue,
+    pdfauthor={Grignola, Schmitt, Tellus, Schwarz},
+    pdftitle={Week 10 Progress Report -- SERGE},
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\lhead{\small\color{gray} SE618-1 Logistics -- SIIT}
+\rhead{\small\color{gray} Week~10 -- Progress Report}
+\cfoot{\small\thepage}
+
+\newtcolorbox{keyinsight}{
+    colback=MidnightBlue!5, colframe=MidnightBlue!60,
+    fonttitle=\bfseries, title=Key Insight,
+    boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% =====================================================================
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+\includegraphics[width=4cm]{siitlogo.png}
+
+\vspace{1cm}
+
+{\large\bfseries SE618 LOGISTIC CASE STUDY ANALYSIS}
+
+\vspace{0.5cm}
+
+{\normalsize WEEK 10 -- PROGRESS REPORT}
+
+\vspace{1.5cm}
+
+{\large\bfseries PROJECT TITLE: SERGE -- AI Agent for Supply Chain Operations}
+
+\vspace{0.5cm}
+
+{\normalsize Code Hardening, Data Model Refinement \& Desktop Integration}
+
+\vspace{1.5cm}
+
+\begin{tabular}{l l}
+Gauthier SCHMITT & 6822807466 \\
+Louis GRIGNOLA   & 6822807516 \\
+Matteo SCHWARZ   & 6822807557 \\
+Ma\"el TELLUS    & 6822807532 \\
+\end{tabular}
+
+\vspace{1.5cm}
+
+{\large SUBMITTED TO:}\\[0.5em]
+{\large AJARN WARUT}
+
+\vspace{1.5cm}
+
+{\large APRIL 2026}\\[0.3em]
+{\large SEMESTER 2/2025}
+
+\vspace{2cm}
+
+{\large
+SCHOOL OF MANUFACTURING SYSTEMS AND MECHANICAL ENGINEERING\\[0.3em]
+SIRINDHORN INTERNATIONAL INSTITUTE OF TECHNOLOGY\\[0.3em]
+THAMMASAT UNIVERSITY
+}
+
+\vfill
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Summary}
+% =====================================================================
+
+This week focused on two goals: \textbf{stabilising the codebase} and making SERGE \textbf{easy to use for anyone}. We went through the entire Go backend to catch edge cases and tighten the data model, and we reworked the MCP integration so that SERGE can be plugged into any desktop agent client in a few clicks.
+
+% =====================================================================
+\section{Code Hardening \& Data Model Refinement}
+% =====================================================================
+
+\subsection{What We Did}
+
+After the first round of agent testing (Week~8), we noticed a few areas where the code and data were fragile. This week we went through the full stack --- domain models, repositories, services, controllers, and seed data --- to fix issues and improve robustness.
+
+\subsection{Data Model Fixes}
+
+\begin{table}[H]
+\centering\small
+\caption{Data model issues identified and resolved.}
+\begin{tabularx}{\textwidth}{@{} L{4cm} X @{}}
+\toprule
+\thead{Issue} & \thead{Resolution} \\
+\midrule
+Inconsistent stock movement references & Standardised \texttt{reference\_type} values to \texttt{supplier\_order} and \texttt{customer\_order} across all data files and the seed generator. \\
+Missing supplier product links & Verified every \texttt{SupplierOrderLine.supplier\_product\_id} points to a valid \texttt{SupplierProduct}, and every \texttt{SupplierProduct.product\_id} maps to an existing \texttt{Product}. \\
+Scenario data integrity & Ran a verification script against all 15 evaluation scenarios to confirm ground truth values match the actual seed data (ORD-007 status, PROD-001 inventory, PO-008 details, SHP-009 exception). \\
+Seed generator idempotency & The seed generator (\texttt{cmd/seedgen}) now produces identical output on every run (fixed random seed = 42), making results fully reproducible. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Code Quality Improvements}
+
+\begin{itemize}[itemsep=0.5em]
+    \item \textbf{Seed loader refactored} using Go generics --- one \texttt{loadEntities[T]} function replaces 12 repetitive load blocks, reducing the loader from 90 lines to 40.
+    \item \textbf{Repository loaders} simplified to one-liner methods for consistency.
+    \item \textbf{Main server startup} condensed --- repository, service, and controller creation now fits in a single readable block.
+    \item \textbf{Dead code removed} --- old \texttt{GetShipmentByOrder} (single return) replaced by \texttt{ListShipmentsByCustomerOrder} (supports split shipments).
+\end{itemize}
+
+\begin{keyinsight}
+These changes are not visible to the end user, but they matter for the project's credibility. A clean, well-tested codebase shows that we understand software engineering beyond just ``making it work.'' The seed generator's reproducibility is particularly important for evaluation: anyone can regenerate the exact same 500-order dataset and verify our results.
+\end{keyinsight}
+
+% =====================================================================
+\section{MCP Integration \& Desktop UI}
+% =====================================================================
+
+\subsection{The Problem}
+
+Until now, using SERGE required command-line knowledge: building the Go binary, configuring \texttt{.mcp.json}, and running Claude Code in a terminal. This is fine for developers but not for the operations managers who are our target users.
+
+\subsection{How MCP Makes This Easy}
+
+The Model Context Protocol was designed to be a universal plug --- like USB-C for AI agents. Our MCP server communicates over \textbf{stdio} (standard input/output), which means any MCP-compatible client can launch it as a subprocess and immediately access all 35 supply chain tools.
+
+\subsection{Desktop Integration}
+
+SERGE is now pluggable into any MCP-compatible desktop agent in a few steps:
+
+\begin{enumerate}[itemsep=0.5em]
+    \item \textbf{Build the binary:} one command (\texttt{go build -o serge-mcp cmd/server/main.go}).
+    \item \textbf{Add to your agent client:} point the client to the binary and the data folder. For Claude Desktop, this means adding a few lines to the MCP configuration file. For other clients (Cursor, Windsurf, or any MCP-compatible tool), the process is similar.
+    \item \textbf{Start using it:} the agent immediately sees all 35 tools and can answer supply chain questions.
+\end{enumerate}
+
+\begin{table}[H]
+\centering\small
+\caption{SERGE integration with different agent clients.}
+\begin{tabularx}{\textwidth}{@{} l l X @{}}
+\toprule
+\thead{Client} & \thead{Setup} & \thead{Notes} \\
+\midrule
+Claude Code (CLI)    & \texttt{.mcp.json} in project folder & Already working since Week~8 \\
+Claude Desktop (Mac) & Add to MCP settings & Full GUI, no terminal needed \\
+Cursor / Windsurf    & MCP server config & IDE-integrated agent \\
+Custom agent         & Connect via stdio & Any MCP SDK (Python, TS, Go) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{keyinsight}
+This is a key result of the project: SERGE is \textbf{agent-agnostic}. We built the supply chain infrastructure once, and any AI agent can plug into it. Switching from Claude to GPT or Llama requires zero changes to our code --- only the agent client changes. This validates our architecture choice of using MCP as the integration layer.
+\end{keyinsight}
+
+\subsection{What the User Sees}
+
+From the user's perspective, the experience is simple: open their desktop agent (e.g., Claude Desktop), and ask questions in natural language. The agent calls SERGE's MCP tools in the background and returns a structured answer. The user never interacts with the supply chain systems directly.
+
+Example interaction:
+
+\begin{quote}
+\textbf{User:} ``Why is order ORD-007 stuck?''
+
+\textbf{Agent:} Checks OMS (order stuck in processing, needs 50 units of Nam Doc Mai), checks TMS (no shipment created), checks WMS (only 8 units in stock), checks SRM (PO-008 incoming with 150 units, arriving Feb 18). Returns a full diagnostic with root cause and timeline.
+
+\textbf{Time:} $<$60 seconds vs. 15--30 minutes manually.
+\end{quote}
+
+% =====================================================================
+\section{Current State of the Project}
+% =====================================================================
+
+\begin{table}[H]
+\centering\small
+\caption{Project deliverables and status.}
+\begin{tabularx}{\textwidth}{@{} L{4.5cm} l X @{}}
+\toprule
+\thead{Deliverable} & \thead{Status} & \thead{Details} \\
+\midrule
+Go backend (4 domains)      & Done & Clean architecture, 35 MCP tools, all compiling \\
+Seed data (realistic)       & Done & 500 orders, 60 POs, 493 shipments, reproducible \\
+Seed generator              & Done & Idempotent, fixed seed, scenario data preserved \\
+MCP integration             & Done & Stdio transport, works with any MCP client \\
+Desktop integration         & Done & Tested with Claude Code and Claude Desktop \\
+Business context (CLAUDE.md) & Done & Enum definitions, business rules, reasoning patterns \\
+Evaluation scenarios        & Done & 15 scenarios with ground truth \\
+Agent testing (qualitative) & Done & 4 queries tested, scores 4.7--5.0/5.0 \\
+LLM-as-Judge pipeline       & In progress & Judge prompt and scoring rubric being finalised \\
+Final report                & Planned & Week 11 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\end{document}
