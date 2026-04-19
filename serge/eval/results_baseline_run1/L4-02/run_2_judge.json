@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 4,
+  "completeness": 3,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 3.95,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies SHP-009, CAR-001 (Kerry Express, ground), PROD-003 (refrigerated) and the mismatch violation. However, it never mentions the associated order ORD-011 by ID, and critically omits the existence of refrigerated carrier alternatives (SCG Cold Chain or Flash Express), which is a required critical fact. All stated facts appear accurate with no hallucinations.",
+  "facts_found": [
+    "SHP-009 uses Kerry Express (CAR-001, ground type)",
+    "PROD-003 has storage_type: refrigerated",
+    "Ground carrier used for refrigerated product = policy violation/mismatch",
+    "Exception reason: refrigeration unit malfunction"
+  ],
+  "facts_missing": [
+    "Associated order explicitly identified as ORD-011",
+    "Refrigerated alternatives named (SCG Cold Chain or Flash Express)",
+    "Affected customer Tops Supermarket (CUST-003)",
+    "Order is now overdue"
+  ],
+  "hallucinations": []
+}

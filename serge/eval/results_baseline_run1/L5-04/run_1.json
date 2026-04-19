@@ -1,0 +1,24 @@
+{
+  "scenario_id": "L5-04",
+  "question": "We want to rethink our sourcing for Nam Doc Mai mangoes. Based on our data, which supplier should we rely on and why? What's the risk if we stop using the other one?",
+  "agent_answer": "Here's the full sourcing picture for **Nam Doc Mai Mango Box 5kg (PROD-001)**:\n\n---\n\n## Supplier Comparison\n\n| | **SUP-001 Somchai Mango Farm** | **SUP-004 Rayong Tropical** |\n|---|---|---|\n| Product offered | SP-001 (Chanthaburi) | SP-009 (Rayong) |\n| Unit cost | 280 THB | 270 THB |\n| Margin on 450 THB sell price | 170 THB (37.8%) | 180 THB (40%) |\n| Rating | **4.5** | 4.0 |\n| Declared lead time | 3 days | 3 days |\n| Actual avg lead time | **2.9 days** | **2.8 days** |\n| On-time rate (all products) | **100%** (13/13) | **100%** (6/6) |\n| Payment terms | net_30 | net_30 |\n| POs containing Nam Doc Mai (SP-001/SP-009) | **7 POs** | 2 POs |\n\n*Source: SRM \u2014 srm_compare_suppliers, srm_list_supplier_products_by_product, srm_list_supplier_orders_by_supplier*\n\n---\n\n## Recommendation: Keep Somchai as primary\n\nBoth suppliers have perfect on-time rates, but **Somchai Mango Farm is clearly the more battle-tested partner for this specific product** \u2014 7 Nam Doc Mai POs vs Rayong's 2. Somchai's rating of 4.5 (highest in the network) reflects a broader and more consistent delivery track record. There's also already an active shipment inbound from Somchai right now (PO-008, 150 units, status: shipped) \u2014 critical because current stock is dangerously low at **8 units against a reorder point of 20** *(WMS \u2014 wms_check_inventory)*.\n\nRayong Tropical is 10 THB/box cheaper (270 vs 280), but with only 2 Nam Doc Mai POs on record, you don't yet have enough data to trust them as sole source for a premium refrigerated product with a 7-day shelf life.\n\n---\n\n## Risk of Dropping Rayong Tropical\n\nThis is the key concern. If you drop Rayong:\n\n1. **Single-source exposure on your highest-margin fresh product.** Nam Doc Mai at 450 THB/box is premium and perishable (7-day shelf life). Any disruption at Somchai \u2014 weather in Chanthaburi, a harvest shortfall, vehicle issue \u2014 leaves you with zero supply and no fallback.\n2. **You give up a useful cost lever.** 10 THB/box is modest today, but if volumes grow, having a cheaper backup you can shift volume to matters.\n3. **Rayong Tropical shows real promise.** 100% on-time, slightly faster actual delivery (2.8 days), and they already supply other premium products (Mahachanok, Mango Puree). Dropping them now discards a relationship worth developing.\n\n**Bottom line:** Designate Somchai as primary sourcing partner, but keep Rayong Tropical as an active secondary \u2014 place occasional POs with them to maintain the relationship and build data. Do not consolidate to a single supplier for a perishable premium product.\n\n> **Immediate action needed:** Stock is at 8 units (reorder point: 20). PO-008 from Somchai is inbound \u2014 operations should confirm its ETA and verify refrigerated handling is arranged on arrival.",
+  "duration_ms": 51507,
+  "cost_usd": 0.14135725,
+  "num_turns": 9,
+  "session_id": "4414a877-9845-4e89-8b21-f327cb25f57a",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_products",
+    "mcp__serge-supply-chain__srm_compare_suppliers",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+    "mcp__serge-supply-chain__wms_check_inventory"
+  ],
+  "tool_calls_count": 8,
+  "systems_touched": [
+    "SRM",
+    "WMS"
+  ]
+}

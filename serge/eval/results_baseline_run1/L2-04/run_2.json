@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-04",
+  "question": "What products are below their reorder point right now?",
+  "agent_answer": "**3 products are below their reorder point** (WMS \u2014 WH-BKK):\n\n| Product | SKU | Available | Reorder Point | Gap | Shelf Life |\n|---------|-----|-----------|---------------|-----|------------|\n| Nam Doc Mai Mango Box 5kg | MANGO-NDM-5 | 8 | 20 | \u221212 | 7 days |\n| Mixed Mango Assortment 5kg | MANGO-MIX-5 | 12 | 15 | \u22123 | 7 days |\n| Mango Sticky Rice Kit 2-person | MANGO-STICKY-KIT | 6 | 15 | \u22129 | 3 days |\n\nAll three are `refrigerated` with short shelf lives (3\u20137 days). The Sticky Rice Kit is the most critical \u2014 only 6 units available against a reorder point of 15, and it expires in just 3 days. Reorders should be placed immediately and routed through refrigerated carriers only.",
+  "duration_ms": 10034,
+  "cost_usd": 0.031748099999999994,
+  "num_turns": 3,
+  "session_id": "fe19aeae-c83e-45b6-bea0-68440c820537",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_low_stock"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "WMS"
+  ]
+}

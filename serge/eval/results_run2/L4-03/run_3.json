@@ -1,0 +1,18 @@
+{
+  "scenario_id": "L4-03",
+  "question": "Does Northern Fruits Co. (SUP-002) have a chronic delivery problem, or is it an isolated issue?",
+  "agent_answer": "This is a **chronic problem**. Here's the full breakdown across all 17 received POs (SRM):\n\n| PO | Expected | Actual | Days Late |\n|----|----------|--------|-----------|\n| PO-133 | 2025-10-07 | 2025-10-08 | 1 |\n| PO-122 | 2025-10-08 | 2025-10-09 | 1 |\n| PO-101 | 2025-10-11 | 2025-10-12 | 1 |\n| PO-123 | 2025-10-31 | 2025-10-31 | **On time** |\n| PO-139 | 2025-11-12 | 2025-11-13 | 1 |\n| PO-120 | 2025-11-14 | 2025-11-14 | **On time** |\n| PO-117 | 2025-12-02 | 2025-12-02 | **On time** |\n| PO-128 | 2025-12-15 | 2025-12-16 | 1 |\n| PO-103 | 2025-12-23 | 2025-12-25 | 2 |\n| PO-118 | 2025-12-25 | 2025-12-27 | 2 |\n| PO-121 | 2026-01-01 | 2026-01-01 | **On time** |\n| PO-113 | 2026-01-14 | 2026-01-15 | 1 |\n| PO-002 | 2026-01-10 | 2026-01-13 | 3 |\n| PO-005 | 2026-01-20 | 2026-01-24 | 4 |\n| PO-124 | 2026-02-04 | 2026-02-05 | 1 |\n| PO-134 | 2026-02-02 | 2026-02-04 | 2 |\n| PO-131 | 2026-02-05 | 2026-02-07 | 2 |\n\n**On-time rate: 4/17 = 24%** \u2014 13 of 17 POs arrived late.\n\n| Metric | Value |\n|--------|-------|\n| Total received POs | 17 |\n| On time | 4 (24%) |\n| Late | 13 (76%) |\n| Avg days late (when late) | 1.5 days |\n| Worst delay | 4 days (PO-005) |\n| System rating | 3.2/5 (SRM) |\n| Also: 1 cancelled PO | PO-018 |\n\n**Verdict: chronic.** Northern Fruits Co. is late on 3 out of 4 deliveries, consistently across Oct 2025\u2013Feb 2026 with no improvement trend. The 3.2/5 rating (SRM) reflects this pattern. Delays are mostly 1\u20132 days but spiked to 4 days in January. Their declared 5-day lead time should be treated as 6\u20137 days in practice when planning reorder schedules.",
+  "duration_ms": 25769,
+  "cost_usd": 0.06420265,
+  "num_turns": 4,
+  "session_id": "159144e3-45c7-4982-883b-2567ccbcaf15",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_get_supplier",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "SRM"
+  ]
+}

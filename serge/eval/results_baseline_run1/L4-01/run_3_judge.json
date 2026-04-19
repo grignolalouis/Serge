@@ -1,0 +1,26 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 4,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 4.70,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies all critical facts: ORD-007 stock shortage (8 units available vs 50 needed for PROD-001 Nam Doc Mai), PO-008 in shipped/in-transit status expected 2026-02-18 which is after the required date of 2026-02-12, and no shipment created yet. The 'processing' status is not explicitly stated but strongly implied by 'no shipment was ever created.' The PO-008 arriving after the required date is present (dates are shown) though the agent's framing focuses on the PO not being received rather than highlighting the late-arrival point explicitly. No hallucinations detected; all IDs and values match seed data.",
+  "facts_found": [
+    "ORD-007 is overdue (65 days past required date 2026-02-12)",
+    "50 units of PROD-001 (Nam Doc Mai Mango Box 5kg) needed",
+    "Only 8 units available — 42 units short",
+    "Root cause: stock shortage",
+    "PO-008 shipped status, expected 2026-02-18 (after required date)",
+    "Customer CUST-001, priority urgent",
+    "No shipment created in TMS",
+    "PO-008 from SUP-001 for 150 units"
+  ],
+  "facts_missing": [
+    "Explicit mention that ORD-007 is in 'processing' status"
+  ],
+  "hallucinations": []
+}

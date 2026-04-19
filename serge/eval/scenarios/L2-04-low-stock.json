@@ -1,0 +1,26 @@
+{
+  "id": "L2-04",
+  "level": "L2",
+  "use_case": "UC-4",
+  "title": "Low Stock Alert",
+  "expected_systems": [
+    "WMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 5,
+  "question": "What products are below their reorder point right now?",
+  "ground_truth": {
+    "critical_facts": [
+      "PROD-001 (Nam Doc Mai): 8 available, reorder point 20",
+      "PROD-005 (Mixed Mango): 12 available, reorder point 15",
+      "PROD-008 (Sticky Rice Kit): 6 available, reorder point 15"
+    ],
+    "important_facts": [
+      "The gap between available and reorder point is given for each"
+    ],
+    "must_not_contain": [
+      "Products not below reorder point (PROD-002, PROD-003, PROD-004, PROD-006, PROD-007)",
+      "Wrong available quantities"
+    ]
+  }
+}

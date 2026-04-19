@@ -1,0 +1,26 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 2,
+  "no_hallucination": 3,
+  "reasoning": 3,
+  "weighted_score": 2.70,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies the current state (8 available, reorder point 20, below threshold) and the general diagnosis that the reorder point is too low. However, it completely misses the critical specific evidence: ORD-007 requesting 50 units (the single oversized order that is the core of the scenario), and it never confirms the 3-day supplier lead time from SRM. Instead, the agent discusses 29-unit orders from stock movement history and speculates 'likely 3–7 days (check SRM)', missing the concrete data that grounds the scenario's conclusion.",
+  "facts_found": [
+    "8 available, reorder point 20, needs_reorder: true",
+    "Reorder point is insufficient and must be raised",
+    "Recommendation to flag large orders / different workflow for oversized orders",
+    "7-day shelf life creates structural tension with safety stocking"
+  ],
+  "facts_missing": [
+    "ORD-007 specifically requesting 50 units — more than the reorder point itself",
+    "Confirmed 3-day supplier lead time from SRM",
+    "PO-008 (150 units) exists but too late for ORD-007"
+  ],
+  "hallucinations": [
+    "Specific orders cited as shipping '29 units each' (ORD-343, ORD-235, ORD-438, ORD-495, ORD-518) and calculated '8–10 units/day' demand rate are presented as confirmed facts but not verifiable and contradict the ground truth's emphasis on ORD-007 at 50 units"
+  ]
+}

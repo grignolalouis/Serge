@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: ORD-007 and ORD-011 are identified as overdue, SHP-009 exception is flagged, and all three low-stock products (PROD-001, PROD-005, PROD-008) are listed. The connection between ORD-007 being stuck and PROD-001 low stock is explicitly made. Additional orders, POs, and analysis follow valid ID patterns and represent legitimate extra data from tool calls.",
+  "facts_found": [
+    "ORD-007 overdue/stuck in processing",
+    "ORD-011 referenced via SHP-009 exception",
+    "SHP-009 in exception status",
+    "PROD-001 low stock (8 available vs reorder point 20)",
+    "PROD-005 low stock (12 available vs reorder point 15)",
+    "PROD-008 low stock (6 available vs reorder point 15)",
+    "Connection between ORD-007 and PROD-001 shortage explicitly stated",
+    "Multiple overdue supplier POs flagged",
+    "Priority tiers with actionable recommendations"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

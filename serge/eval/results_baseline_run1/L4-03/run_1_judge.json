@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 4.5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.55,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies all four critical facts: SUP-002's chronic late delivery pattern, PO-002 (expected 2026-01-10, received 2026-01-13, +3 days), PO-005 (expected 2026-01-20, received 2026-01-24, +4 days), and the overall chronic nature of the problem. The '0% on-time rate among scenario POs' in ground truth refers specifically to PO-002 and PO-005 which the agent confirms as late. The agent additionally found other POs with some on-time deliveries (showing ~76% late overall), which is extra data beyond the scenario scope but doesn't contradict the critical facts. The PO-009 overdue finding is a valuable bonus insight. Rating 3.2 is correctly cited.",
+  "facts_found": [
+    "SUP-002 rating 3.2/5.0",
+    "PO-002: expected 2026-01-10, received 2026-01-13 (+3 days)",
+    "PO-005: expected 2026-01-20, received 2026-01-24 (+4 days)",
+    "Chronic pattern identified across multiple orders",
+    "PO-009 critically stalled 62 days overdue",
+    "Declared lead time 5 days vs ~1.8 day average delays on late orders"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

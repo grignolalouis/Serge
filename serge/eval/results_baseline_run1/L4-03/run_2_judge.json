@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 4.5,
+  "completeness": 5,
+  "no_hallucination": 4.5,
+  "reasoning": 5,
+  "weighted_score": 4.70,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are explicitly present: SUP-002's chronic late delivery pattern, PO-002 (+3 days) and PO-005 (+4 days) with correct dates, and a clear chronic/systemic conclusion. The ground truth states '0% on-time rate among received scenario POs' which may refer only to the featured benchmark POs; the agent's broader 76% late rate across 17 orders still firmly establishes the chronic pattern and does not contradict the key scenario POs. No fabricated data is evident, and the reasoning is thorough and well-structured.",
+  "facts_found": [
+    "SUP-002 has repeated late deliveries — chronic pattern",
+    "PO-002: expected 2026-01-10, received 2026-01-13 (+3 days)",
+    "PO-005: expected 2026-01-20, received 2026-01-24 (+4 days)",
+    "Rating 3.2 consistent with poor performance",
+    "Pattern spans Oct 2025 to Feb 2026 — systemic, not one-off",
+    "PO-009 currently severely overdue (62+ days)"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

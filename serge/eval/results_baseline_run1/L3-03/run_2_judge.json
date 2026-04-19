@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 2,
+  "completeness": 2,
+  "no_hallucination": 3,
+  "reasoning": 3,
+  "weighted_score": 2.30,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "wrong_value",
+  "justification": "The agent states SUP-002 (Northern Fruits Co.) has a 24% on-time rate (4/17), but the ground truth says 0% on-time — a critical factual error. Similarly, SUP-003 (Prachuap Harvest) is stated at 25% (2/8), but the ground truth says ~50%. These are two critical facts stated with wrong values, undermining the overall ranking and conclusions.",
+  "facts_found": [
+    "SUP-001 is most reliable with 100% on-time rate",
+    "All 5 suppliers are present in the answer",
+    "A clear ranking is provided with lead time comparisons"
+  ],
+  "facts_missing": [
+    "SUP-002 on-time rate should be 0% not 24%",
+    "SUP-003 on-time rate should be ~50% not 25%"
+  ],
+  "hallucinations": []
+}

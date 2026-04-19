@@ -1,0 +1,27 @@
+{
+  "factual_accuracy": 2,
+  "completeness": 2,
+  "no_hallucination": 3,
+  "reasoning": 3,
+  "weighted_score": 2.30,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "wrong_value",
+  "justification": "The agent reports SUP-002 (Northern Fruits Co.) at 24% on-time when the ground truth states 0%, and SUP-003 (Prachuap Harvest) at 25% when the ground truth states ~50%. These are critical factual errors that invert the relative standing of the two worst performers — the agent incorrectly identifies Prachuap (SUP-003) as worst rather than Northern Fruits (SUP-002), contradicting the ground truth's core verdict.",
+  "facts_found": [
+    "SUP-001 Somchai Mango Farm identified as most reliable with 100% on-time rate",
+    "All 5 suppliers present in the ranking",
+    "SUP-004 Rayong Tropical correctly noted as high performer",
+    "Average lead times provided per supplier"
+  ],
+  "facts_missing": [
+    "SUP-002 Northern Fruits Co. should have 0% on-time rate (agent states 24%)",
+    "SUP-003 Prachuap Harvest should be ~50% on-time (agent states 25%)",
+    "Correct worst-performer identification: SUP-002 not SUP-003"
+  ],
+  "hallucinations": [
+    "24% on-time rate (4/17) for SUP-002 — ground truth is 0%",
+    "25% on-time rate (2/8) for SUP-003 — ground truth is ~50%"
+  ]
+}

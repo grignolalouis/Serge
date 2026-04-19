@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correctly stated: ORD-007 and ORD-011 are in the overdue orders list, SHP-009 exception is clearly flagged, and PROD-001/PROD-005/PROD-008 are all identified as low stock. The agent also correctly links ORD-007's stuck-in-processing status to PROD-001's stock shortage, satisfying the important fact. No hallucinations detected — all IDs follow valid patterns and values are internally consistent.",
+  "facts_found": [
+    "ORD-007 listed as overdue, urgent, processing, with PROD-001 shortage clearly explained",
+    "ORD-011 listed as overdue, shipped, normal priority",
+    "SHP-009 flagged as exception with refrigeration malfunction context",
+    "PROD-001 available=8, reorder_point=20 — low stock",
+    "PROD-005 available=12, reorder_point=15 — low stock",
+    "PROD-008 available=6, reorder_point=15 — low stock",
+    "Connection between ORD-007 stuck and PROD-001 shortage explicitly noted",
+    "13 overdue orders listed with status and priority",
+    "6 overdue supplier POs listed with actionable follow-up recommendations"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

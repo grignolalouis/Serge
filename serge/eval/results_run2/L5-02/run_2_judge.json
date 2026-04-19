@@ -1,0 +1,26 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent's answer covers all five critical facts: ORD-007 and ORD-011 are both surfaced (ORD-011 via SHP-009 exception), SHP-009 refrigeration failure is explicitly flagged, all three low-stock products (PROD-001, PROD-005, PROD-008) are listed with quantities, SUP-002 is noted with PO-009 overdue and medium risk rating, and a strong cross-system insight connects ORD-007 → PROD-001 shortage → overdue PO-008. No fabricated data detected; all cited IDs and values follow known patterns and are consistent with ground truth.",
+  "facts_found": [
+    "ORD-007 surfaced as urgent and 60+ days overdue",
+    "ORD-011 surfaced via SHP-009 exception",
+    "SHP-009 refrigeration malfunction identified with remediation options (CAR-002/CAR-003)",
+    "PROD-001 low stock: 8 available vs 67 units demand",
+    "PROD-005 below reorder point",
+    "PROD-008 below reorder point",
+    "SUP-002 noted with overdue PO-009 and medium risk (rating 3.2)",
+    "Cross-system insight: ORD-007 blocked by PROD-001 shortage, replenishment PO-008 itself overdue",
+    "SUP-003 flagged with 2 overdue POs and lowest rating (2.8)",
+    "Prioritized action table provided"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

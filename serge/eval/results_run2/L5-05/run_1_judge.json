@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 4,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 4.70,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are clearly present and correctly stated: 8 available vs reorder point of 20, ORD-007 demanding 50 units (well above the threshold), 3-day supplier lead times from SUP-001 and SUP-004, and a diagnosis that correctly attributes the problem to reorder point/demand mismatch rather than supplier failure. The only notable omission is the important (non-critical) fact about PO-008 in transit with 150 units arriving after ORD-007's required date. All other data points, IDs, and values are consistent with the ground truth.",
+  "facts_found": [
+    "Available stock: 8 units, reorder point: 20, needs_reorder: true",
+    "ORD-007 processing/urgent with 50 units of PROD-001, overdue (required 2026-02-12)",
+    "SUP-001 lead time 3 days, SUP-004 lead time 3 days",
+    "Diagnosis explicitly links shortfall to reorder point vs large single-order demand spike",
+    "Recommendation to raise reorder point to 60-70 units and add workflow for large urgent orders",
+    "Suppliers not blamed; both rated reliable (4.0-4.5/5)"
+  ],
+  "facts_missing": [
+    "PO-008 in transit with 150 units and its expected arrival relative to ORD-007's required date"
+  ],
+  "hallucinations": []
+}

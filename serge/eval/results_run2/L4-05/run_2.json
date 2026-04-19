@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-05",
+  "question": "Given our PROD-001 shortage, which customers are at risk of being impacted?",
+  "agent_answer": "Here is the full risk picture for the PROD-001 shortage:\n\n**PROD-001 \u2014 Nam Doc Mai Mango Box 5kg** (refrigerated) | Source: WMS\n\n| Metric | Value |\n|--------|-------|\n| Available stock | **8 units** |\n| Reserved | 0 |\n| Reorder point | 20 |\n| Status | **Needs reorder** |\n\n---\n\n**Customers at risk** (pending/processing orders) | Source: OMS\n\n| Order | Customer | Status | Priority | Required Date | Qty needed | Fulfillable? |\n|-------|----------|--------|----------|---------------|-----------|--------------|\n| ORD-007 | CUST-001 | processing | **urgent** | 2026-02-12 | 50 | No \u2014 shortfall 42 |\n| ORD-028 | CUST-006 | processing | high | 2026-02-18 | 12 | No \u2014 shortfall 4 |\n| ORD-009 | CUST-008 | pending | high | 2026-02-18 | 5 | Yes (if ORD-007/028 don't consume stock) |\n\n**Total active demand: 67 units vs 8 available \u2192 59-unit shortfall.**\n\n---\n\n**Summary & recommendations:**\n\n1. **CUST-001 / ORD-007 is the critical case** \u2014 urgent priority, already overdue (required 2026-02-12), needs 50 units alone. Contact this customer immediately.\n2. Even if stock is allocated to ORD-009 first (5 units, smallest order), only 3 units would remain \u2014 nowhere near covering ORD-028 (12 units).\n3. An emergency purchase order to a PROD-001 supplier should be raised immediately. Note: PROD-001 is refrigerated with a 7-day shelf life, so lead time is critical.\n4. ORD-023 (CUST-004) is already shipped \u2014 no impact there.",
+  "duration_ms": 65682,
+  "cost_usd": 0.28462544999999995,
+  "num_turns": 5,
+  "session_id": "19edd6e8-42f5-47b1-aabd-7f718c2cdb16",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

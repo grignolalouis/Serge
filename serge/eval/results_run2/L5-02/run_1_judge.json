@@ -1,0 +1,26 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.80,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All five critical facts are clearly present: ORD-007 and ORD-011 are surfaced as overdue, SHP-009 exception is prominently featured with refrigeration malfunction detail, all three low-stock products (PROD-001, PROD-005, PROD-008) are identified, SUP-002's reliability concern is noted (rating 3.2, overdue PO-009), and the cross-system insight linking ORD-007's stuck processing status to PROD-001 stock crisis is explicitly drawn. The answer also goes beyond minimum requirements with concrete prioritized actions and positive supplier acknowledgment. Minor concern: '13 total overdue orders' is stated but only 7 are listed in the table — however this likely reflects valid additional data from tool calls not shown, and doesn't contradict the ground truth.",
+  "facts_found": [
+    "ORD-007 overdue, urgent, stuck in processing ~35 days",
+    "ORD-011 surfaced via SHP-009 exception",
+    "SHP-009 refrigeration malfunction exception identified",
+    "PROD-001 critically low (8 available vs 67 demanded)",
+    "PROD-005 below reorder point (12 available, reorder at 15)",
+    "PROD-008 below reorder point with shelf life risk",
+    "SUP-002 noted as below average (3.2 rating) with overdue PO-009",
+    "Cross-system insight: ORD-007 blocked by PROD-001 shortage",
+    "Prioritized P1/P2/P3 action plan provided",
+    "SUP-001 noted as best performer (positive acknowledgment)"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

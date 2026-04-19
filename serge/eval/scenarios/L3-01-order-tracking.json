@@ -1,0 +1,30 @@
+{
+  "id": "L3-01",
+  "level": "L3",
+  "use_case": "UC-1",
+  "title": "Order Tracking with Current Location",
+  "expected_systems": [
+    "OMS",
+    "TMS"
+  ],
+  "expected_tool_count_min": 2,
+  "estimated_human_minutes": 10,
+  "question": "Where is order ORD-005 right now?",
+  "ground_truth": {
+    "critical_facts": [
+      "Order is in transit (shipped status)",
+      "Carrier is SCG Cold Chain (CAR-002, refrigerated)",
+      "Tracking number is SCG-20260210-005",
+      "ETA is 2026-02-12"
+    ],
+    "important_facts": [
+      "Shipped on 2026-02-10",
+      "Destination is Villa Market, Bangkok",
+      "Most recent tracking event is at local distribution center on 2026-02-11"
+    ],
+    "must_not_contain": [
+      "Claim that the order is already delivered",
+      "Fabricated tracking events"
+    ]
+  }
+}

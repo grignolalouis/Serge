@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All critical facts are present and correct: product name 'Nam Doc Mai Mango Box 5kg', SKU 'MANGO-NDM-5', category 'Premium', and unit price ฿450 THB. All important facts (weight 5kg, shelf life 7 days, refrigerated storage, reorder point 20) are also correctly stated. No hallucinations detected.",
+  "facts_found": [
+    "Name: Nam Doc Mai Mango Box 5kg",
+    "SKU: MANGO-NDM-5",
+    "Category: Premium",
+    "Unit price: ฿450 THB",
+    "Weight: 5 kg",
+    "Shelf life: 7 days",
+    "Storage type: Refrigerated",
+    "Reorder point: 20 units",
+    "Current inventory data from WH-BKK"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

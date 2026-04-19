@@ -1,0 +1,29 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 2,
+  "no_hallucination": 2,
+  "reasoning": 3,
+  "weighted_score": 2.50,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "hallucination",
+  "justification": "The agent gets the current stock (8 units) and reorder point (20) correct and mentions the 3-day lead time, but critically misses the key finding that ORD-007 alone requests 50 units (exceeding the reorder point in a single order). Instead it invents specific order IDs (ORD-235, ORD-422, ORD-438, ORD-334, ORD-344) and a PO (PO-115) with fabricated quantities and dates not present in the ground truth, and constructs a demand velocity analysis (~11 units/day, 127 units over 9 orders) based on this hallucinated data. PO-008 (150 units incoming) is also not mentioned.",
+  "facts_found": [
+    "8 units available, reorder point 20, needs_reorder: true",
+    "Reorder point is insufficient relative to demand",
+    "3-day lead time mentioned in recommendation section",
+    "Suggests raising reorder point or adding an oversized-order workflow"
+  ],
+  "facts_missing": [
+    "ORD-007 specifically requesting 50 units — a single order larger than the reorder point",
+    "PO-008 with 150 units exists but arrives too late for ORD-007",
+    "The core insight that rare large single orders can jump over any modest reorder threshold"
+  ],
+  "hallucinations": [
+    "PO-115 delivering 113 units on Jan 29",
+    "ORD-235 (29 units), ORD-422 (29 units), ORD-438 (29 units), ORD-334 (26 units), ORD-344 (26 units) — all fabricated order IDs with fabricated quantities",
+    "'−127 units shipped across 9 orders Jan 30–Feb 9' — fabricated demand history",
+    "'~11 units/day at peak' — calculated from hallucinated data"
+  ]
+}

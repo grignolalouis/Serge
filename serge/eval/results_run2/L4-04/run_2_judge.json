@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are clearly present: ORD-007 and ORD-011 are listed as overdue, SHP-009 is flagged as an exception with correct detail (refrigeration malfunction), and all three low-stock products (PROD-001, PROD-005, PROD-008) appear in the WMS table. The connection between ORD-007 blockage and PROD-001 shortage is explicitly noted, satisfying the important fact. No IDs or values contradict the ground truth, and all cited IDs follow valid patterns.",
+  "facts_found": [
+    "ORD-007 overdue (urgent, processing, PROD-001 shortage link)",
+    "ORD-011 overdue (shipped exception via SHP-009)",
+    "SHP-009 exception with refrigeration malfunction on CAR-001",
+    "PROD-001 low stock (available 6, reorder 20)",
+    "PROD-005 low stock (available 12, reorder 15)",
+    "PROD-008 low stock (available 6, reorder 15)",
+    "6 overdue supplier orders including PO-009 (pending, 2 months late) and PO-008 (SP-001 feeds PROD-001)"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

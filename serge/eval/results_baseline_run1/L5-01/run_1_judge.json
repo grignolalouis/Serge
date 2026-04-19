@@ -1,0 +1,28 @@
+{
+  "factual_accuracy": 2,
+  "completeness": 2,
+  "no_hallucination": 3,
+  "reasoning": 3,
+  "weighted_score": 2.30,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "The agent completely misses PO-008 (150 units arriving 2026-02-18), which is a critical fact, and incorrectly concludes 'No active PO on the horizon' — directly contradicting the ground truth. The agent also omits PO-004 from the replenishment history. The listed POs (PO-132, PO-104, PO-106, PO-110, PO-115) differ significantly from the ground truth's enumerated set (PO-001, PO-004, PO-006, PO-008, PO-012), raising hallucination concerns about the stock movement references, though PO-001, PO-006, and PO-012 are correctly present.",
+  "facts_found": [
+    "Nam Doc Mai Mango Box 5kg, premium, 450 THB, refrigerated, 7-day shelf life",
+    "SUP-001 at 280 THB and SUP-004 at 270 THB correctly identified",
+    "Current inventory 8 units available (correct)",
+    "ORD-007, ORD-009, ORD-023 all mentioned",
+    "PO-001, PO-006, PO-012 present in replenishment list"
+  ],
+  "facts_missing": [
+    "PO-008 (150 units arriving 2026-02-18) — entirely absent",
+    "PO-004 not mentioned in replenishment history",
+    "Active demand across ORD-007, ORD-009, ORD-023 exceeds 8 available units — not explicitly stated"
+  ],
+  "hallucinations": [
+    "PO-132, PO-104, PO-106, PO-110, PO-115 listed as replenishment POs — not in ground truth enumerated set",
+    "Conclusion 'No active PO on the horizon' is factually wrong given PO-008 exists in ground truth"
+  ]
+}

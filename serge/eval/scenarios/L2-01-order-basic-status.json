@@ -1,0 +1,29 @@
+{
+  "id": "L2-01",
+  "level": "L2",
+  "use_case": "UC-1",
+  "title": "Basic Order Status",
+  "expected_systems": [
+    "OMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 5,
+  "question": "What's the current status of order ORD-005?",
+  "ground_truth": {
+    "critical_facts": [
+      "Status is shipped",
+      "Customer is CUST-005 (Villa Market)",
+      "Ordered on 2026-02-08",
+      "Required by 2026-02-14",
+      "Shipped on 2026-02-10"
+    ],
+    "important_facts": [
+      "Line items include 15 units of PROD-002 and 10 units of PROD-005",
+      "Priority is normal"
+    ],
+    "must_not_contain": [
+      "Claim the order is delivered or cancelled",
+      "Wrong customer"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-03",
+  "question": "Which customer orders are currently overdue?",
+  "agent_answer": "Here are **13 overdue orders** from OMS, grouped by severity:\n\n---\n\n### Most Critical \u2014 Not Yet Shipped (stuck in pending/processing)\n\n| Order | Customer | Priority | Status | Due Date | Products |\n|-------|----------|----------|--------|----------|----------|\n| ORD-007 | CUST-001 | **urgent** | processing | Feb 12 | PROD-001 \u00d750 |\n| ORD-028 | CUST-006 | **high** | processing | Feb 18 | PROD-001 \u00d712, PROD-004 \u00d76 |\n| ORD-012 | CUST-004 | **high** | processing | Feb 17 | PROD-002 \u00d78 |\n| ORD-009 | CUST-008 | **high** | pending | Feb 18 | PROD-004 \u00d73, PROD-001 \u00d75 |\n| ORD-020 | CUST-009 | normal | processing | Feb 18 | PROD-006 \u00d7100 |\n| ORD-021 | CUST-010 | normal | pending | Feb 19 | PROD-007 \u00d720, PROD-008 \u00d715 |\n| ORD-025 | CUST-011 | normal | pending | Feb 20 | PROD-003 \u00d740 |\n\n**ORD-007** is the most alarming \u2014 urgent priority, stuck in processing since Feb 5, required by Feb 12 (over 2 months ago as of today).\n\n---\n\n### Shipped but Not Yet Delivered\n\n| Order | Customer | Priority | Shipped | Due Date | Notes |\n|-------|----------|----------|---------|----------|-------|\n| ORD-023 | CUST-004 | **urgent** | Feb 12 | Feb 15 | Split shipment (fresh + ambient) |\n| ORD-019 | CUST-012 | **high** | Feb 11 | Feb 13 | VIP guest dinner |\n| ORD-027 | CUST-002 | normal | Feb 13 | Feb 16 | \u2014 |\n| ORD-018 | CUST-011 | normal | Feb 10 | Feb 14 | Deliver before 9am |\n| ORD-005 | CUST-005 | normal | Feb 10 | Feb 14 | \u2014 |\n| ORD-011 | CUST-003 | normal | Feb 6 | Feb 10 | \u2014 |\n\n---\n\n### Recommended Actions\n\n1. **ORD-007** (urgent, processing) \u2014 investigate immediately why 50 units of PROD-001 haven't shipped since Feb 5. Likely a stock shortage.\n2. **ORD-023 & ORD-019** (urgent/high, shipped) \u2014 check TMS for shipment tracking; these may be delivery exceptions.\n3. **ORD-028** (high, hotel buffet) \u2014 standing order stuck in processing, likely a stock issue on PROD-001 or PROD-004.\n\nWould you like me to drill into any of these orders to find the root cause?",
+  "duration_ms": 24463,
+  "cost_usd": 0.050997150000000005,
+  "num_turns": 3,
+  "session_id": "bb85b8e4-06c8-47f8-b007-7ab3a6ad27c7",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "OMS"
+  ]
+}

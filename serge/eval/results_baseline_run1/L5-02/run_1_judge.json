@@ -1,0 +1,30 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.80,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All five critical facts are clearly surfaced: ORD-007 and ORD-011 as overdue, SHP-009 as an exception shipment with cold-chain detail, PROD-001/PROD-005/PROD-008 as low stock, SUP-002 reliability concern with rating and overdue PO, and multiple strong cross-system insights (stock shortage blocking ORD-007, refrigerated product on ground carrier causing SHP-009 exception). One minor concern is the specific supplier cost comparison (THB 380 vs 400) which is a specific claim that cannot be fully verified from the answer alone, hence a slight deduction on hallucination, but no major fabrications are evident.",
+  "facts_found": [
+    "ORD-007 surfaced as urgent and overdue (required Feb 12, 65 days late)",
+    "ORD-011 surfaced as overdue with exception shipment SHP-009",
+    "SHP-009 exception due to refrigeration malfunction on ground carrier CAR-001",
+    "PROD-001 low stock: 8 available vs 20 reorder point, 67 units demanded",
+    "PROD-005 low stock: 12 available vs 15 reorder point",
+    "PROD-008 low stock: 6 available vs 15 reorder point, 3-day shelf life",
+    "SUP-002 reliability concern: rating 3.2, PO-009 pending and overdue",
+    "Cross-system insight: PROD-001 stockout blocking ORD-007 processing",
+    "Cross-system insight: refrigerated PROD-003 shipped on ground carrier CAR-001 (policy violation)",
+    "PO-008 shipped from SUP-001 as rescue supply for PROD-001",
+    "Prioritized action list with concrete steps",
+    "Positive suppliers (SUP-001 rating 4.5, SUP-004 rating 4.0) acknowledged"
+  ],
+  "facts_missing": [],
+  "hallucinations": [
+    "Specific THB cost comparison (380 vs 400) stated without explicit sourcing in the answer narrative — minor risk"
+  ]
+}

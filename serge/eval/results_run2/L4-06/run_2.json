@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-06",
+  "question": "Order ORD-023 was split into two shipments. Give me the status of each and explain why it was split.",
+  "agent_answer": "Here's the full picture for ORD-023 (OMS: status **shipped**, priority **urgent**, customer CUST-004 / Mandarin Oriental):\n\n## Shipments\n\n| | SHP-017 | SHP-018 |\n|---|---|---|\n| **Status** | in_transit | in_transit |\n| **Carrier** | SCG Cold Chain (CAR-002) | Kerry Express (CAR-001) |\n| **Carrier type** | Refrigerated | Ground |\n| **Product** | PROD-001 \u2014 Nam Doc Mai Mango Box 5kg | PROD-006 \u2014 Dried Mango Slices 500g |\n| **Tracking** | SCG-20260212-017A | KRY-20260212-017B |\n| **Dispatched** | 2026-02-12 08:00 | 2026-02-12 08:00 |\n| **ETA** | 2026-02-13 17:00 | 2026-02-14 17:00 |\n\n*Source: TMS*\n\n## Why it was split\n\nThe two line items require incompatible carrier types (WMS):\n\n- **PROD-001** (Nam Doc Mai fresh mango, shelf life 7 days) has `storage_type: refrigerated` \u2192 **must** use a cold chain carrier\n- **PROD-006** (Dried Mango Slices, shelf life 180 days) has `storage_type: ambient` \u2192 can use a cheaper ground carrier\n\nShipping them together on a single carrier would either spoil the fresh mangoes (ground truck) or unnecessarily increase cost (cold chain for dried goods). The split is the correct call per the refrigerated-carrier business rule.\n\n**Note:** SHP-017 (fresh mangoes) arrives Feb 13, SHP-018 (dried) arrives Feb 14 \u2014 the urgent required date is Feb 15, so both are on track.",
+  "duration_ms": 24018,
+  "cost_usd": 0.06138795,
+  "num_turns": 7,
+  "session_id": "89988f5f-2383-4c65-b74d-4a33d1ba6c2b",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 6,
+  "systems_touched": [
+    "OMS",
+    "TMS",
+    "WMS"
+  ]
+}

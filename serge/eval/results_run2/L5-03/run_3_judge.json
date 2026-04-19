@@ -1,0 +1,26 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies all four critical facts: PROD-004 has 19 available (sufficient for 6 needed), PROD-001 has only 8 available (4 short of 12 needed), PO-008 brings 150 units arriving Feb 18 (same day as deadline — tight), and correctly mandates a refrigerated carrier recommending CAR-002 over CAR-003. All important facts are also present including the 120 kg total weight, ฿3,000 and ฿4,200 carrier costs, and recommendation for SCG Cold Chain. No hallucinations detected.",
+  "facts_found": [
+    "PROD-001: 8 available, 4 short of 12 needed",
+    "PROD-004: 19 available, sufficient for 6 needed",
+    "PO-008 ships 150 units of PROD-001, arriving Feb 18 (same day as deadline — tight)",
+    "Refrigerated carrier mandatory; Kerry Express (CAR-001, ground) excluded",
+    "SCG Cold Chain (CAR-002): 1-day transit, ฿25/kg",
+    "Flash Express (CAR-003): 1-day transit, ฿35/kg",
+    "Total weight: 120 kg",
+    "SCG Cold Chain cost: ฿3,000",
+    "Flash Express cost: ฿4,200",
+    "Recommendation: CAR-002 SCG Cold Chain (same transit, ฿1,200 cheaper)"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

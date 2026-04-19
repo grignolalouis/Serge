@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical POs (PO-001, PO-004, PO-006, PO-008) are present with correct statuses, dates, and delivery data. The additional historical POs follow valid ID patterns and represent legitimate data from the live dataset, not fabrications. The on-time delivery summary is accurate and internally consistent.",
+  "facts_found": [
+    "PO-001 received on 2026-01-05 (on time)",
+    "PO-004 received on 2026-01-14 (1 day early)",
+    "PO-006 received on 2026-01-25 (on time)",
+    "PO-008 status shipped, expected 2026-02-18",
+    "All 14 POs from SUP-001 listed with status, order date, expected and actual delivery"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

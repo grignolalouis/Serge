@@ -1,0 +1,18 @@
+{
+  "scenario_id": "L3-06",
+  "question": "Full inventory status for PROD-004 \u2014 what's on hand and do we need to reorder?",
+  "agent_answer": "**PROD-004 \u2014 Mahachanok Mango Box 10kg** (WMS)\n\n| Field | Value |\n|---|---|\n| SKU | MANGO-MHC-10 |\n| Category | Premium |\n| Sell price | 800 THB |\n| Storage | Refrigerated |\n| Shelf life | 5 days |\n\n**Inventory at WH-BKK:**\n\n| | Units |\n|---|---|\n| On hand | 22 |\n| Reserved | 3 |\n| **Available** | **19** |\n| Reorder point | 10 |\n\n**No reorder needed.** Available stock (19) is comfortably above the reorder point (10), with a 9-unit buffer. One caution: shelf life is only 5 days, so if the 19 available units aren't moving fast, spoilage risk is real \u2014 worth checking recent outbound movement.",
+  "duration_ms": 11569,
+  "cost_usd": 0.068465,
+  "num_turns": 4,
+  "session_id": "2349ba3b-af6c-4608-adf1-84aab545376e",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_check_inventory"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "WMS"
+  ]
+}

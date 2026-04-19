@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L3-05",
+  "question": "Was order ORD-003 delivered on time?",
+  "agent_answer": "**ORD-003 was delivered late.**\n\n| Field | Value | Source |\n|---|---|---|\n| Order date | 2026-01-15 | OMS |\n| Required date | **2026-01-18** | OMS |\n| Delivered date | **2026-01-20** | OMS / TMS |\n\nThe order was delivered 2 days past the required date. Shipment SHP-003 (Kerry Express) was dispatched on 2026-01-17 \u2014 just one day before the deadline \u2014 and arrived on 2026-01-20, after the estimated arrival of 2026-01-19 was already past due.",
+  "duration_ms": 11926,
+  "cost_usd": 0.03330635,
+  "num_turns": 4,
+  "session_id": "adc92a4d-b550-4544-93ba-f8c6cd7c4cbf",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "OMS",
+    "TMS"
+  ]
+}

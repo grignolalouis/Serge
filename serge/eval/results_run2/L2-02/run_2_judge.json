@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are explicitly present: multiple orders are listed for CUST-004, ORD-004 is marked delivered, ORD-012 is marked processing, and ORD-023 is marked shipped. Order IDs follow valid patterns, dates are included for all 35 entries, and the summary accurately reflects the statuses. No fabricated or contradictory data detected.",
+  "facts_found": [
+    "Multiple orders (35) listed for CUST-004",
+    "ORD-004 present and marked delivered (2026-01-19)",
+    "ORD-012 present and marked processing (2026-02-11)",
+    "ORD-023 present and marked shipped (2026-02-10)",
+    "Dates present for every order",
+    "Status summary: 33 delivered, 1 shipped, 1 processing"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

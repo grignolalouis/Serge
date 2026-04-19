@@ -1,0 +1,20 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All critical facts (Mandarin Oriental Bangkok, wholesale segment) and important facts (Arunee Thongchai, central Bangkok zone) are correctly stated. No fabricated data.",
+  "facts_found": [
+    "Company: Mandarin Oriental Bangkok",
+    "Segment: wholesale",
+    "Contact: Arunee Thongchai",
+    "Zone: central_bkk / Central Bangkok"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

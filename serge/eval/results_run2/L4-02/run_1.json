@@ -1,0 +1,21 @@
+{
+  "scenario_id": "L4-02",
+  "question": "Shipment SHP-009 had a refrigeration failure. Was choosing Kerry Express a mistake given the product?",
+  "agent_answer": "**Yes, choosing Kerry Express was a mistake.**\n\nHere's the full picture:\n\n| Attribute | Value | Source |\n|---|---|---|\n| Shipment | SHP-009, status: `exception` | TMS |\n| Carrier | Kerry Express (CAR-001), type: **ground** | TMS |\n| Exception reason | Refrigeration unit malfunction | TMS |\n| Product | PROD-003 Keaw Mango Box 5kg | WMS |\n| Storage type | **refrigerated** | WMS |\n| Shelf life | 10 days | WMS |\n\n**Verdict:** This is a carrier mismatch. PROD-003 requires cold-chain transport (`storage_type: refrigerated`), but Kerry Express is a `ground` carrier with no guaranteed refrigeration. The \"refrigeration unit malfunction\" exception is a direct consequence \u2014 a ground carrier should never have been assigned this shipment in the first place.\n\n**Recommendation:** For any order containing refrigerated products, dispatch must use a refrigerated carrier instead:\n- **SCG Cold Chain** (CAR-002) \u2014 dedicated cold chain\n- **Flash Express** (CAR-003) \u2014 also refrigerated\n\nThe 125 kg shipment of fresh mangoes (10-day shelf life) is now at spoilage risk.",
+  "duration_ms": 22749,
+  "cost_usd": 0.09750645,
+  "num_turns": 5,
+  "session_id": "9f10d736-d4d2-4ba3-b193-e8b4401688cb",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_get_shipment",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "OMS",
+    "TMS",
+    "WMS"
+  ]
+}

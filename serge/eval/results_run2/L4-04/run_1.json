@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-04",
+  "question": "Give me a quick scan of everything that needs my attention right now.",
+  "agent_answer": "Here's your operational snapshot as of today (2026-04-18):\n\n---\n\n## \ud83d\udd34 Critical \u2014 Act Now\n\n**SHP-009 \u2014 Refrigeration unit malfunction** (TMS)\nShipment for ORD-011, carrier CAR-001. Vehicle fridge failed mid-delivery to Tops Supermarket. Cargo likely spoiled. Needs immediate carrier contact and potential replacement shipment.\n\n**ORD-007 \u2014 Urgent order, 6+ days overdue, stuck in processing** (OMS)\nCUST-001 needs 50\u00d7 PROD-001 (Nam Doc Mai 5kg). Only **8 units available** in WMS \u2014 a 42-unit shortfall. Tied to low stock below.\n\n---\n\n## \ud83d\udfe0 Overdue Customer Orders \u2014 13 total (OMS)\n\n| Order | Priority | Status | Key Products | Required Date |\n|-------|----------|--------|-------------|---------------|\n| ORD-007 | **urgent** | processing | PROD-001 \u00d750 | 2026-02-12 |\n| ORD-023 | urgent | shipped | PROD-001 \u00d710, PROD-006 \u00d760 | 2026-02-15 |\n| ORD-019 | high | shipped | PROD-004 \u00d76, PROD-008 \u00d710 (VIP dinner) | 2026-02-13 |\n| ORD-009 | high | pending | PROD-004 \u00d73, PROD-001 \u00d75 | 2026-02-18 |\n| ORD-028 | high | processing | PROD-001 \u00d712, PROD-004 \u00d76 (hotel buffet) | 2026-02-18 |\n| ORD-012 | high | processing | PROD-002 \u00d78 | 2026-02-17 |\n| ORD-021 | normal | pending | PROD-007 \u00d720, PROD-008 \u00d715 | 2026-02-19 |\n| ORD-025 | normal | pending | PROD-003 \u00d740 | 2026-02-20 |\n| ORD-027 | normal | shipped | PROD-004 \u00d73, PROD-003 \u00d78 | 2026-02-16 |\n| ORD-020 | normal | processing | PROD-006 \u00d7100 | 2026-02-18 |\n| ORD-018 | normal | shipped | PROD-002 \u00d730, PROD-006 \u00d740 | 2026-02-14 |\n| ORD-005 | normal | shipped | PROD-002 \u00d715, PROD-005 \u00d710 | 2026-02-14 |\n| ORD-011 | normal | shipped | PROD-003 \u00d725 | 2026-02-10 |\n\n4 orders are stuck in **processing** \u2014 likely stock-blocked. 3 are still **pending** and unstarted.\n\n---\n\n## \ud83d\udfe0 Low Stock \u2014 3 products (WMS)\n\nAll three are **refrigerated** with short shelf lives:\n\n| Product | Available | Reorder Point | Gap | Shelf Life |\n|---------|-----------|---------------|-----|------------|\n| PROD-001 Nam Doc Mai 5kg | 8 | 20 | \u221212 | 7 days |\n| PROD-005 Mixed Mango 5kg | 12 | 15 | \u22123 | 7 days |\n| PROD-008 Mango Sticky Rice Kit | 6 | 15 | \u22129 | **3 days** |\n\nPROD-001 is the most critical \u2014 4 overdue orders are competing for only 8 units.\n\n---\n\n## \ud83d\udfe1 Overdue Supplier Orders \u2014 6 POs (SRM)\n\n| PO | Supplier | Status | Expected | Items |\n|----|----------|--------|----------|-------|\n| PO-009 | SUP-002 | **pending** | 2026-02-15 | SP-004 \u00d760 |\n| PO-015 | SUP-004 | shipped | 2026-02-15 | SP-010 \u00d7150, SP-012 \u00d730 |\n| PO-010 | SUP-003 | confirmed | 2026-02-16 | SP-008 \u00d780 |\n| PO-016 | SUP-003 | **pending** | 2026-02-18 | SP-006 \u00d7100 |\n| PO-008 | SUP-001 | shipped | 2026-02-18 | SP-001 \u00d7150 |\n| PO-017 | SUP-005 | confirmed | 2026-02-19 | SP-013 \u00d725 |\n\nPO-009 and PO-016 are still **pending** (supplier hasn't confirmed), which is the most concerning status \u2014 follow up with SUP-002 and SUP-003 immediately.\n\n---\n\n**Top 3 actions:**\n1. Resolve SHP-009 refrigeration exception \u2014 check cargo condition, reschedule if spoiled.\n2. Escalate ORD-007 (urgent, 50\u00d7 PROD-001 needed) \u2014 check if PO-008 (SP-001 \u00d7150, en route from SUP-001) covers PROD-001 restocking.\n3. Chase SUP-002 (PO-009) and SUP-003 (PO-016) \u2014 both POs are overdue and still unconfirmed.",
+  "duration_ms": 41183,
+  "cost_usd": 0.1181003,
+  "num_turns": 6,
+  "session_id": "d59c7e9d-d65c-4de2-b768-a7152e7b346b",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_low_stock",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+    "mcp__serge-supply-chain__tms_list_exception_shipments",
+    "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+  ],
+  "tool_calls_count": 5,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

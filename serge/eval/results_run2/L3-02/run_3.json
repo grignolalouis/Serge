@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L3-02",
+  "question": "Which orders are requesting PROD-001 and do we have enough stock to cover them?",
+  "agent_answer": "## PROD-001 \u2014 Nam Doc Mai Mango Box 5kg\n\n**Inventory (WMS):** 8 units available, 0 reserved \u2014 `needs_reorder: true` (reorder point: 20)\n\n### Active Orders (OMS)\n\n| Order ID | Customer | Status | Priority | PROD-001 Qty |\n|----------|----------|--------|----------|-------------|\n| ORD-007 | CUST-001 | processing | **urgent** | 50 |\n| ORD-028 | CUST-006 | processing | high | 12 |\n| ORD-009 | CUST-008 | pending | high | 5 |\n\n**Total active demand: 67 units**\n\n### Stock Coverage\n\n| | Units |\n|--|--|\n| Available stock | 8 |\n| Active demand | 67 |\n| **Shortfall** | **\u221259** |\n\n**No, stock is critically insufficient.** We can cover only 12% of active demand. Notably, ORD-007 (CUST-001, **urgent**, 50 units) alone is 6\u00d7 the available stock. A reorder of PROD-001 should be placed immediately \u2014 note it requires **refrigerated** storage and carrier handling.",
+  "duration_ms": 40882,
+  "cost_usd": 0.11473645000000002,
+  "num_turns": 5,
+  "session_id": "65b5c653-3c3f-43e7-bf25-f3f2797ddd21",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

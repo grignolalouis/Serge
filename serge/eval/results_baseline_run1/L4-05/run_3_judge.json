@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 2,
+  "no_hallucination": 3,
+  "reasoning": 4,
+  "weighted_score": 2.80,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies PROD-001 stock at 8 units, ORD-007 (CUST-001, 50 units, blocked) and ORD-009 (CUST-008, 5 units, at risk), but completely misses the critical fact about ORD-023 (CUST-004 Mandarin Oriental, 10 units, already shipped). Additionally, the agent introduces ORD-028 (CUST-006) which does not appear in the ground truth's impact list, suggesting either a fabrication or a misidentified order — casting doubt on the completeness of the analysis. The absence of ORD-023 is a critical omission since it represents already-shipped demand that affects the full picture of stock consumed.",
+  "facts_found": [
+    "PROD-001 stock is 8 units available",
+    "ORD-007 (CUST-001) needs 50 units, status processing — blocked",
+    "ORD-009 (CUST-008) needs 5 units, status pending — at risk",
+    "Reorder point is 20, stock is below reorder point",
+    "Total demand exceeds available stock"
+  ],
+  "facts_missing": [
+    "ORD-023 (CUST-004 Mandarin Oriental) needs 10 units and has already shipped — critical context for the impact assessment"
+  ],
+  "hallucinations": [
+    "ORD-028 (CUST-006) listed as a PROD-001 affected order with 12 units — not present in ground truth impact list, likely fabricated or incorrectly attributed"
+  ]
+}

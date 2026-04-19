@@ -1,0 +1,34 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 2,
+  "no_hallucination": 1,
+  "reasoning": 4,
+  "weighted_score": 2.40,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "hallucination",
+  "justification": "The agent fabricates multiple PO IDs (PO-132, PO-115, PO-106, PO-110, PO-104) not present in the ground truth scenario POs; lists ORD-028 instead of the critical ORD-023; and entirely omits the most operationally critical fact — that PO-008 is inbound with 150 units arriving 2026-02-18, which directly changes the stock outlook for the urgent pending orders.",
+  "facts_found": [
+    "Nam Doc Mai Mango Box 5kg, premium, 450 THB, refrigerated, 7-day shelf life",
+    "SUP-001 at 280 THB and SUP-004 at 270 THB",
+    "8 units available, below reorder point of 20",
+    "PO-001, PO-006, PO-012 referenced",
+    "ORD-007 (urgent, 50 units) and ORD-009 mentioned",
+    "High-velocity SKU with urgent/high-priority demand concentration"
+  ],
+  "facts_missing": [
+    "PO-004 not mentioned",
+    "PO-008 not mentioned (critical: 150 units inbound, arriving 2026-02-18)",
+    "ORD-023 not mentioned (ORD-028 listed instead, which may be fabricated)",
+    "Conclusion that incoming PO-008 could resolve the stock shortfall"
+  ],
+  "hallucinations": [
+    "PO-132 — not in ground truth scenario POs",
+    "PO-115 — not in ground truth scenario POs",
+    "PO-106 — not in ground truth scenario POs",
+    "PO-110 — not in ground truth scenario POs",
+    "PO-104 — not in ground truth scenario POs",
+    "ORD-028 listed as processing/high-priority demand order — ground truth specifies ORD-023"
+  ]
+}

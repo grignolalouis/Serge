@@ -1,0 +1,27 @@
+{
+  "scenario_id": "L4-01",
+  "question": "Why hasn't order ORD-007 shipped yet? The customer is chasing us.",
+  "agent_answer": "Here is the full diagnostic for ORD-007:\n\n---\n\n## ORD-007 \u2014 Why It Hasn't Shipped\n\n**Root cause: stock shortage on PROD-001.** The order is stuck in `processing` with no shipment created (TMS returned no shipment).\n\n### Order Summary (OMS)\n| Field | Value |\n|-------|-------|\n| Customer | CUST-001 |\n| Status | **processing** (stuck) |\n| Priority | **urgent** |\n| Order date | 2026-02-05 |\n| Required date | 2026-02-12 (**overdue by 65 days**) |\n| Product needed | PROD-001 \u00d7 50 units |\n\n### Stock Position (WMS)\n| Metric | Value |\n|--------|-------|\n| Product | Nam Doc Mai Mango Box 5kg (SKU: MANGO-NDM-5) |\n| Storage type | **refrigerated** |\n| On hand | 8 units |\n| Reserved | 0 |\n| Available | **8 units** |\n| Needed | 50 units |\n| **Shortfall** | **\u221242 units** |\n\n### Incoming Replenishment (SRM)\nPO-008 (SUP-001, SP-001 \u2192 PROD-001) was due to deliver **150 units on 2026-02-18** \u2014 but it still shows status `shipped` and has **not been received**, now **59 days overdue**. This PO would have covered the shortfall, but it has not arrived.\n\nNo other confirmed or shipped POs cover PROD-001.\n\n---\n\n## Summary & Recommended Actions\n\n1. **Escalate PO-008 immediately** \u2014 contact SUP-001 (Chanthaburi supplier) to locate the 150-unit shipment. It is 59 days past expected delivery with no receipt recorded.\n2. **Emergency sourcing** \u2014 SUP-004 also supplies PROD-001 (SP-009, cost 270 THB/unit vs SUP-001's 280 THB/unit) and may be able to fulfill urgently.\n3. **Cold chain reminder** \u2014 PROD-001 is `refrigerated`; any shipment must use a refrigerated carrier (e.g., SCG Cold Chain CAR-002 or Flash Express CAR-003), not a ground carrier.\n4. This order is urgent priority and 65 days past its required date \u2014 it should be the top escalation priority.",
+  "duration_ms": 44717,
+  "cost_usd": 0.0970772,
+  "num_turns": 10,
+  "session_id": "6d0ebcef-cbc1-4fce-a4d2-ade4dadbd01e",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+  ],
+  "tool_calls_count": 9,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

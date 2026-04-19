@@ -1,0 +1,25 @@
+{
+  "id": "L2-03",
+  "level": "L2",
+  "use_case": "UC-4",
+  "title": "Overdue Orders",
+  "expected_systems": [
+    "OMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 5,
+  "question": "Which customer orders are currently overdue?",
+  "ground_truth": {
+    "critical_facts": [
+      "ORD-007 is overdue (processing, required 2026-02-12)",
+      "ORD-011 is overdue (shipped with exception, required 2026-02-10)"
+    ],
+    "important_facts": [
+      "Each overdue order includes ID, customer, required date, and status"
+    ],
+    "must_not_contain": [
+      "Orders that are delivered or cancelled",
+      "Orders not yet past required date listed as overdue"
+    ]
+  }
+}

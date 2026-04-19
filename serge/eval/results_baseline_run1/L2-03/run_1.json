@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-03",
+  "question": "Which customer orders are currently overdue?",
+  "agent_answer": "Here are the **13 overdue customer orders** (source: OMS), grouped by urgency:\n\n---\n\n### Critical \u2014 Stuck in Processing (not yet shipped)\n\n| Order | Customer | Priority | Required Date | Days Overdue | Products |\n|-------|----------|----------|---------------|-------------|---------|\n| ORD-007 | CUST-001 | **urgent** | Feb 12 | 65 days | PROD-001 \u00d750 |\n| ORD-028 | CUST-006 | **high** | Feb 18 | 59 days | PROD-001 \u00d712, PROD-004 \u00d76 |\n| ORD-012 | CUST-004 | **high** | Feb 17 | 60 days | PROD-002 \u00d78 |\n| ORD-020 | CUST-009 | normal | Feb 18 | 59 days | PROD-006 \u00d7100 |\n\n> ORD-007 is the most critical \u2014 urgent priority, 65 days overdue, still in `processing`. Likely stuck due to stock shortage on PROD-001.\n\n---\n\n### Not Yet Processed (pending)\n\n| Order | Customer | Priority | Required Date |\n|-------|----------|----------|---------------|\n| ORD-009 | CUST-008 | **high** | Feb 18 |\n| ORD-025 | CUST-011 | normal | Feb 20 |\n| ORD-021 | CUST-010 | normal | Feb 19 |\n\n---\n\n### Shipped but Not Yet Delivered\n\n| Order | Customer | Priority | Required Date | Shipped Date |\n|-------|----------|----------|---------------|-------------|\n| ORD-023 | CUST-004 | **urgent** | Feb 15 | Feb 12 |\n| ORD-019 | CUST-012 | **high** | Feb 13 | Feb 11 |\n| ORD-027 | CUST-002 | normal | Feb 16 | Feb 13 |\n| ORD-018 | CUST-011 | normal | Feb 14 | Feb 10 |\n| ORD-005 | CUST-005 | normal | Feb 14 | Feb 10 |\n| ORD-011 | CUST-003 | normal | Feb 10 | Feb 06 |\n\n---\n\n**Top recommended actions:**\n1. **Investigate ORD-007** (urgent, 65 days overdue, still processing) \u2014 check stock for PROD-001\n2. **Escalate ORD-009 & ORD-028** (high priority, never shipped)\n3. **Track shipments** for ORD-023 and ORD-019 (urgent/high, shipped but undelivered) \u2014 possible carrier exceptions",
+  "duration_ms": 17523,
+  "cost_usd": 0.1152237,
+  "num_turns": 3,
+  "session_id": "7a8dbdb8-adba-4766-ae4f-0aeedc4d8d66",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "OMS"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 2,
+  "no_hallucination": 3,
+  "reasoning": 3,
+  "weighted_score": 2.80,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly captures the product profile, both suppliers with correct costs, and the 8-unit inventory level, but completely omits PO-008 (150 units arriving 2026-02-18), which is a critical critical fact. This omission leads to a materially wrong conclusion — the agent states 'there has been no recorded replenishment since Jan 29' and urgently recommends placing a new PO, when in fact a significant inbound order already exists. Additionally, ORD-009 and ORD-023 (mentioned in ground truth as active demand) are absent; instead the agent references ORD-028 which is not in the ground truth. PO-004 is also missing from replenishment history while extra POs (PO-132, PO-104, PO-106, PO-110) not in the ground truth list appear.",
+  "facts_found": [
+    "PROD-001 is Nam Doc Mai Mango Box 5kg, premium category, 450 THB, refrigerated, 7-day shelf life",
+    "SUP-001 at 280 THB/unit (rating 4.5, net_30, 3-day lead time)",
+    "SUP-004 at 270 THB/unit (rating 4.0, net_30, 3-day lead time)",
+    "Current inventory: 8 units on hand, 0 reserved, 8 available — below reorder point of 20",
+    "ORD-007 identified as stuck/processing (urgent, 50 units, required 2026-02-12)",
+    "PO-001, PO-006, PO-012 referenced as replenishment POs",
+    "161 total customer orders identified with high demand frequency"
+  ],
+  "facts_missing": [
+    "PO-008 (150 units arriving 2026-02-18) — entirely omitted, changes situation dramatically",
+    "PO-004 missing from replenishment history",
+    "ORD-009 and ORD-023 not identified as active demand orders exceeding stock"
+  ],
+  "hallucinations": [
+    "PO-132, PO-104, PO-106, PO-110 listed as PROD-001 replenishment POs — not present in ground truth scenario PO list",
+    "ORD-028 cited as a stuck order — not mentioned in ground truth active demand orders"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L4-03",
+  "question": "Does Northern Fruits Co. (SUP-002) have a chronic delivery problem, or is it an isolated issue?",
+  "agent_answer": "**Verdict: Chronic \u2014 this is a systemic pattern, not a one-off.**\n\nHere's the full breakdown from **SRM**:\n\n---\n\n### SUP-002 Profile\n| Field | Value |\n|---|---|\n| Rating | **3.2 / 5.0** (below average) |\n| Declared lead time | 5 days |\n| Region | Chiang Mai |\n| Payment | net_15 |\n\n---\n\n### Delivery Performance \u2014 17 completed orders\n\n| PO | Expected | Actual | Days Late |\n|---|---|---|---|\n| PO-122 | 2025-10-08 | 2025-10-09 | +1 |\n| PO-133 | 2025-10-07 | 2025-10-08 | +1 |\n| PO-101 | 2025-10-11 | 2025-10-12 | +1 |\n| PO-123 | 2025-10-31 | 2025-10-31 | \u2713 on time |\n| PO-139 | 2025-11-12 | 2025-11-13 | +1 |\n| PO-120 | 2025-11-14 | 2025-11-14 | \u2713 on time |\n| PO-117 | 2025-12-02 | 2025-12-02 | \u2713 on time |\n| PO-128 | 2025-12-15 | 2025-12-16 | +1 |\n| PO-103 | 2025-12-23 | 2025-12-25 | +2 |\n| PO-118 | 2025-12-25 | 2025-12-27 | +2 |\n| PO-121 | 2026-01-01 | 2026-01-01 | \u2713 on time |\n| PO-113 | 2026-01-14 | 2026-01-15 | +1 |\n| PO-002 | 2026-01-10 | 2026-01-13 | **+3** |\n| PO-005 | 2026-01-20 | 2026-01-24 | **+4** |\n| PO-124 | 2026-02-04 | 2026-02-05 | +1 |\n| PO-134 | 2026-02-02 | 2026-02-04 | +2 |\n| PO-131 | 2026-02-05 | 2026-02-07 | +2 |\n\n**Late rate: 13/17 = 76%**\n\n---\n\n### Active Alert\n**PO-009** is currently in the overdue list \u2014 placed 2026-02-10, expected 2026-02-15, still **pending** as of today (2026-04-18). That's **62+ days overdue with no confirmation** \u2014 the worst case in the record.\n\n---\n\n### Conclusion\n\nThis is a **chronic, structural problem**:\n- 76% of deliveries arrive late\n- Delays are consistent across Oct 2025 \u2192 Feb 2026, ruling out a one-time incident\n- The 3.2 rating reflects this history\n- Delays tend to be small (1\u20132 days) but occasional spikes to 4+ days, and PO-009's current state is a serious escalation\n- One cancellation (PO-018) may also indicate instability\n\n**Recommended human actions:** escalate PO-009 immediately (contact info@northernfruits.th), add a +2-day buffer when planning reorder points for SP-004 and SP-005, and evaluate whether a more reliable supplier should be qualified as a backup for those products.",
+  "duration_ms": 33268,
+  "cost_usd": 0.07241975,
+  "num_turns": 5,
+  "session_id": "e964e52a-5f79-435f-9442-317358e828df",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_get_supplier",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+    "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "SRM"
+  ]
+}

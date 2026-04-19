@@ -1,0 +1,27 @@
+{
+  "scenario_id": "L4-01",
+  "question": "Why hasn't order ORD-007 shipped yet? The customer is chasing us.",
+  "agent_answer": "Here's the full diagnosis for ORD-007:\n\n---\n\n**Root Cause: Stock shortage on PROD-001**\n\n| Factor | Detail |\n|--------|--------|\n| **OMS** \u2014 Order status | `processing` (stuck) \u2014 **urgent** priority, placed 2026-02-05, due 2026-02-12 |\n| **TMS** \u2014 Shipment | None created \u2014 order never left the warehouse |\n| **WMS** \u2014 PROD-001 stock | Only **8 units** available; order requires **50** \u2192 shortfall of 42 units |\n| **WMS** \u2014 Reorder flag | `needs_reorder: true` |\n\n**Incoming replenishment (SRM):** PO-008 from SUP-001 (SP-001 \u2014 Fresh Nam Doc Mai, Chanthaburi) has **150 units shipped**, expected delivery **2026-02-18**.\n\n---\n\n**Critical flags to raise with the team:**\n\n1. **Severely overdue** \u2014 required date was 2026-02-12, today is 2026-04-18. This order has been stuck for over 2 months.\n2. **Shelf life risk** \u2014 PROD-001 is a refrigerated fresh mango with only a **7-day shelf life**. Any stock that was on hand in February is long expired. Even the incoming PO-008 stock (expected Feb 18) would be expired by now.\n3. **Urgent priority unhandled** \u2014 this should have triggered immediate escalation when stock ran out.\n\n**Recommended actions for the team:**\n- Contact CUST-001 immediately to explain the situation and discuss whether they still need the order or want a substitute product.\n- Verify whether PO-008 stock actually arrived and if any usable inventory exists (WMS last updated 2026-02-10).\n- If the customer still wants the order, place an emergency PO with SUP-004 (SP-009 at 270 THB/unit \u2014 cheaper than SUP-001's 280 THB) for fresh stock, and ensure a **refrigerated carrier** is used (PROD-001 requires cold chain).",
+  "duration_ms": 43601,
+  "cost_usd": 0.09045800000000001,
+  "num_turns": 10,
+  "session_id": "f8d39e87-d3e1-4b4f-a4a7-cc9931e868ff",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status"
+  ],
+  "tool_calls_count": 9,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

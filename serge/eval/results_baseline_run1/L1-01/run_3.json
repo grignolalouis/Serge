@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L1-01",
+  "question": "Can you tell me about product PROD-001?",
+  "agent_answer": "Here's what WMS has on **PROD-001**:\n\n| Field | Value |\n|---|---|\n| **Name** | Nam Doc Mai Mango Box 5kg |\n| **SKU** | MANGO-NDM-5 |\n| **Category** | Premium |\n| **Unit Price** | 450 THB |\n| **Weight** | 5 kg |\n| **Shelf Life** | 7 days |\n| **Storage Type** | Refrigerated |\n| **Reorder Point** | 20 units |\n\nKey notes: this is a premium fresh mango product requiring cold-chain handling \u2014 any shipment must use a **refrigerated carrier**. With only 7 days shelf life, stock turnover needs to be closely monitored. Would you like to check current inventory levels or supplier costs for this product?",
+  "duration_ms": 10988,
+  "cost_usd": 0.029183599999999997,
+  "num_turns": 3,
+  "session_id": "46f16a2e-0140-4e0d-a310-b5dd116f01fd",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "WMS"
+  ]
+}

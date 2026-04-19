@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-06",
+  "question": "Any shipments with problems right now?",
+  "agent_answer": "Yes \u2014 1 active exception (from TMS):\n\n**SHP-009** \u2014 shipment for ORD-011 to Tops Supermarket, Bangkok\n- **Issue:** Refrigeration unit malfunction on delivery vehicle\n- **Carrier:** CAR-001\n- **Shipped:** Feb 6, estimated arrival was Feb 8 (now overdue)\n\nThis is critical \u2014 the shipment is 125 kg and the vehicle's refrigeration is broken. If the products are refrigerated mangoes, they're at spoilage risk. Recommend contacting CAR-001 immediately to divert to a working refrigerated vehicle.",
+  "duration_ms": 11872,
+  "cost_usd": 0.028252399999999997,
+  "num_turns": 3,
+  "session_id": "ad393b05-d373-4600-abeb-28775bbefe60",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_exception_shipments"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "TMS"
+  ]
+}

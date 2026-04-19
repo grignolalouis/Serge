@@ -1,0 +1,27 @@
+{
+  "scenario_id": "L5-01",
+  "question": "Give me the complete supply chain history for PROD-001 \u2014 from purchase orders to inventory to customer demand. What does it tell you?",
+  "agent_answer": "Here is the complete picture across all four systems.\n\n---\n\n## PROD-001 Supply Chain History \u2014 Nam Doc Mai Mango Box 5kg\n\n### Product Profile (WMS)\n| Attribute | Value |\n|-----------|-------|\n| SKU | MANGO-NDM-5 |\n| Category | Premium |\n| Sell price | **450 THB/unit** |\n| Shelf life | **7 days** |\n| Storage | **Refrigerated** |\n| Reorder point | 20 units |\n\n---\n\n### Sourcing (SRM)\nTwo suppliers offer this product:\n\n| Supplier Product | Supplier | Origin | Unit Cost | Margin |\n|-----------------|----------|--------|-----------|--------|\n| SP-001 | SUP-001 | Chanthaburi | 280 THB | 170 THB (37.8%) |\n| SP-009 | SUP-004 | Rayong | **270 THB** | **180 THB (40%)** |\n\nSUP-004 is 10 THB/unit cheaper \u2014 at the observed demand volume (~630 units/month), that's **~6,300 THB/month** in potential savings if consistently sourced from SUP-004.\n\n---\n\n### Replenishment History (WMS \u2014 inbound movements)\n8 purchase orders received, totalling **687 units**:\n\n| PO | Units | Date Received |\n|----|-------|--------------|\n| PO-132 | 140 | 2025-10-13 |\n| PO-104 | 56 | 2025-11-05 |\n| PO-106 | 86 | 2025-11-28 |\n| PO-110 | 52 | 2025-12-01 |\n| PO-001 | 100 | 2026-01-05 |\n| PO-012 | 60 | 2026-01-22 |\n| PO-006 | 80 | 2026-01-25 |\n| PO-115 | 113 | 2026-01-29 |\n\nReplenishment cadence is irregular \u2014 gaps of weeks between POs, with batch sizes ranging from 52 to 140 units.\n\n---\n\n### Customer Demand (OMS)\n- **173 orders** over 4.5 months (Oct 2025 \u2013 Feb 2026)\n- **2,847 total units** ordered \u2248 **~633 units/month**\n- Demand mix: 68% normal, 20% high priority, 12% urgent\n\n**Status breakdown:**\n- Delivered: 168 (97.1%)\n- **Processing (stuck): 2 active** \u2014 ORD-007, ORD-028\n- Shipped: 1 (ORD-023)\n- Pending: 1 (ORD-009)\n\n---\n\n### Current Inventory (WMS)\n- **On hand: 8 units** | Reserved: 0 | Available: 8\n- **Reorder triggered: YES** (8 < 20 reorder point)\n- Last updated: **2026-02-10**\n\n---\n\n## What the Data Tells You\n\n### 1. CRITICAL \u2014 Inventory data is 67 days stale\nThe last WMS update was 2026-02-10; today is 2026-04-18. PROD-001 has a **7-day shelf life** and requires refrigeration. The 8 units on record are certainly expired. The real available stock is unknown \u2014 a physical warehouse count is urgently needed.\n\n### 2. CRITICAL \u2014 Two stuck orders are massively overdue\nBoth were processing during the Feb 2026 stock gap:\n- **ORD-007**: 50 units, **urgent** priority, CUST-001 \u2014 required by 2026-02-12 (66 days overdue)\n- **ORD-028**: 12 units, **high** priority, CUST-006 (\"hotel breakfast buffet\") \u2014 required by 2026-02-18\n\nThese customers need to be contacted immediately. If stock was never restocked after Feb 10, these orders are still blocked.\n\n### 3. Reorder point is dangerously low for this velocity\nAt ~633 units/month (~21 units/day), a reorder point of **20 units** gives roughly **22 hours of runway**. Combined with the 7-day shelf life and irregular PO cadence, any sourcing delay creates a stockout in under a day. The reorder point should realistically be set to cover at least one full PO lead time of demand.\n\n### 4. SUP-004 is the better sourcing option\n10 THB/unit cheaper than SUP-001 \u2014 worth confirming SUP-004's reliability rating and lead time before consolidating, but at this volume the cost advantage is meaningful.\n\n### 5. No active PO on the horizon (within visible data)\nThe most recent recorded inbound was PO-115 on 2026-01-29. There is no inbound movement after that date, meaning if stock ran out post-Feb 10 there has been no visible replenishment in the tracked history.\n\n**Immediate actions for the team:**\n1. Conduct a physical count at WH-BKK for PROD-001 today\n2. Place a new PO with SUP-004 (lower cost) immediately\n3. Contact CUST-001 and CUST-006 about ORD-007 and ORD-028\n4. Review and raise the reorder point \u2014 recommend minimum 150 units given daily velocity",
+  "duration_ms": 102953,
+  "cost_usd": 0.2883063,
+  "num_turns": 8,
+  "session_id": "00f7d8fa-ffe1-427d-a4ef-7a75e94a248d",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__wms_get_stock_movements",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 10,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "WMS"
+  ]
+}

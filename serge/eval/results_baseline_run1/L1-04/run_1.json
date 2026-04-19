@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L1-04",
+  "question": "What carriers do we work with?",
+  "agent_answer": "We work with 3 carriers (TMS):\n\n| ID | Name | Type | Cost/kg | Transit |\n|----|------|------|---------|---------|\n| CAR-001 | Kerry Express | Ground | \u0e3f15 | 2 days |\n| CAR-002 | SCG Cold Chain | Refrigerated | \u0e3f25 | 1 day |\n| CAR-003 | Flash Express Premium | Refrigerated | \u0e3f35 | 1 day |\n\nTwo refrigerated carriers (required for fresh mangoes) and one ground carrier for ambient/processed products. Flash Express is the most expensive but matches SCG on transit time.",
+  "duration_ms": 11186,
+  "cost_usd": 0.06355464999999999,
+  "num_turns": 3,
+  "session_id": "c48c5a1d-8ffd-40ee-be90-aaec36920c0a",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_carriers"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "TMS"
+  ]
+}

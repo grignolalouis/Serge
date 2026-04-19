@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-06",
+  "question": "Order ORD-023 was split into two shipments. Give me the status of each and explain why it was split.",
+  "agent_answer": "Here's the full picture for ORD-023 (urgent, shipped 2026-02-12 to Mandarin Oriental Bangkok):\n\n## Shipment Status\n\n| Shipment | Carrier | Type | Status | Products Carried | ETA |\n|----------|---------|------|--------|-----------------|-----|\n| SHP-017 | SCG Cold Chain (CAR-002) | Refrigerated | In transit | PROD-001 \u2014 Nam Doc Mai Mango Box 5kg \u00d710 | 2026-02-13 |\n| SHP-018 | Kerry Express (CAR-001) | Ground | In transit | PROD-006 \u2014 Dried Mango Slices 500g \u00d760 | 2026-02-14 |\n\n*Sources: OMS (order), TMS (shipments/carriers), WMS (products)*\n\n## Why It Was Split\n\nThe order contains two products with incompatible storage requirements:\n\n- **PROD-001** (Nam Doc Mai Mango Box 5kg) \u2014 `storage_type: refrigerated`, shelf life 7 days. **Must** travel via cold chain.\n- **PROD-006** (Dried Mango Slices 500g) \u2014 `storage_type: ambient`, shelf life 180 days. Can travel via standard ground.\n\nSending them together on a single carrier would force a compromise: either risk spoiling the fresh mangoes on a ground truck, or pay cold-chain rates unnecessarily for the dried product. The split is operationally correct and cost-optimal. The order notes confirm this explicitly: *\"Split into 2 shipments \u2014 fresh and ambient\"* (OMS).\n\nBoth shipments are in transit and within the required date of 2026-02-15.",
+  "duration_ms": 27675,
+  "cost_usd": 0.10186349999999998,
+  "num_turns": 7,
+  "session_id": "69e809ba-3628-4794-8172-65dadd36524b",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 6,
+  "systems_touched": [
+    "OMS",
+    "TMS",
+    "WMS"
+  ]
+}

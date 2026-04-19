@@ -1,0 +1,30 @@
+{
+  "id": "L3-06",
+  "level": "L3",
+  "use_case": "UC-4",
+  "title": "Product With Current Inventory",
+  "expected_systems": [
+    "WMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 5,
+  "question": "Full inventory status for PROD-004 \u2014 what's on hand and do we need to reorder?",
+  "ground_truth": {
+    "critical_facts": [
+      "Quantity on hand is 22",
+      "Reserved is 3",
+      "Available is 19",
+      "Reorder point is 10",
+      "No reorder is needed"
+    ],
+    "important_facts": [
+      "Product name is Mahachanok Mango Box 10kg",
+      "Category is premium",
+      "Shelf life is 5 days"
+    ],
+    "must_not_contain": [
+      "Claim that reorder is needed",
+      "Wrong inventory figures"
+    ]
+  }
+}

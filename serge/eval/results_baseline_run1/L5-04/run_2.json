@@ -1,0 +1,20 @@
+{
+  "scenario_id": "L5-04",
+  "question": "We want to rethink our sourcing for Nam Doc Mai mangoes. Based on our data, which supplier should we rely on and why? What's the risk if we stop using the other one?",
+  "agent_answer": "Here's the full picture for **Nam Doc Mai Mango Box 5kg** (PROD-001, sell price: THB 450):\n\n---\n\n## Supplier Comparison\n\n| | **SUP-001 \u2014 Somchai Mango Farm** | **SUP-004 \u2014 Rayong Tropical** |\n|---|---|---|\n| Region | Chanthaburi | Rayong |\n| Unit cost | THB 280 | THB 270 |\n| Margin/box | THB 170 (37.8%) | THB 180 (40.0%) |\n| Rating | **4.5 / 5.0** | 4.0 / 5.0 |\n| On-time rate | **100%** (13/13) | 100% (6/6) |\n| Avg lead time | **2.9 days** | 2.8 days |\n| Order history | **14 orders** | 7 orders |\n| Payment terms | net_30 | net_30 |\n\n---\n\n## Recommendation: **Primary \u2192 SUP-001, Backup \u2192 SUP-004**\n\nBoth suppliers have a perfect on-time record and near-identical lead times. The difference is confidence: **Somchai (SUP-001) has double the order history**, making its 100% on-time rate statistically more meaningful. Its rating (4.5 vs 4.0) reflects that broader track record. Rayong Tropical saves you THB 10/box, but that's only a 2.2% cost difference \u2014 not worth staking your primary sourcing on thinner data.\n\n---\n\n## Risk: Dropping Either Supplier\n\n**If you drop Rayong Tropical (SUP-004):**\n- You lose THB 10/box in cost savings (minor)\n- **Critical risk: single-source exposure.** Nam Doc Mai has a 7-day shelf life and is refrigerated \u2014 any disruption (weather in Chanthaburi, harvest failure, transport issue) leaves you with zero fallback for a premium SKU. You'd be scrambling with no buffer.\n\n**If you drop Somchai (SUP-001):**\n- You save THB 10/box but rely on a supplier with half the order history and a lower rating\n- Higher uncertainty risk on a product where delays = spoilage\n\n**Bottom line:** Keep both, use Somchai as your default, and activate Rayong Tropical when Somchai is backlogged or at risk. Single-sourcing a perishable premium product is the real danger here \u2014 the THB 10 difference doesn't justify it.",
+  "duration_ms": 33199,
+  "cost_usd": 0.0661819,
+  "num_turns": 5,
+  "session_id": "a52e29b0-483c-4381-b010-dc358dcffa96",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_products",
+    "mcp__serge-supply-chain__srm_compare_suppliers",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "SRM",
+    "WMS"
+  ]
+}

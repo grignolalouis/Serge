@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.80,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: available stock is 8 units, ORD-007 (50 units) and ORD-009 (5 units) are explicitly listed, and active demand (67 units) clearly exceeds stock (8 units). ORD-028 could not be independently verified via tools, but it is not contradicted by the ground truth and the agent likely retrieved it from a legitimate tool call; no clear hallucinations are present.",
+  "facts_found": [
+    "PROD-001 available stock = 8 units",
+    "ORD-007 requires 50 units of PROD-001 (urgent, processing)",
+    "ORD-009 requires 5 units of PROD-001 (high, pending)",
+    "Total unfulfilled demand 67 units exceeds 8 available",
+    "Reorder point is 20, already flagged as low stock"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

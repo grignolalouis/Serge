@@ -1,0 +1,31 @@
+{
+  "id": "L4-02",
+  "level": "L4",
+  "use_case": "UC-2",
+  "title": "Carrier Mismatch Diagnosis",
+  "expected_systems": [
+    "TMS",
+    "OMS",
+    "WMS"
+  ],
+  "expected_tool_count_min": 3,
+  "estimated_human_minutes": 20,
+  "question": "Shipment SHP-009 had a refrigeration failure. Was choosing Kerry Express a mistake given the product?",
+  "ground_truth": {
+    "critical_facts": [
+      "SHP-009 uses Kerry Express (CAR-001, ground type)",
+      "Associated order is ORD-011 with product PROD-003 (refrigerated)",
+      "This is a mismatch — ground carrier should not carry refrigerated product"
+    ],
+    "important_facts": [
+      "Refrigerated alternatives exist (SCG Cold Chain CAR-002 or Flash Express CAR-003)",
+      "Exception reason recorded: refrigeration unit malfunction on delivery vehicle",
+      "Affected customer is Tops Supermarket (CUST-003)",
+      "Order is now overdue"
+    ],
+    "must_not_contain": [
+      "Claim Kerry Express was correct",
+      "Missing the storage_type mismatch"
+    ]
+  }
+}

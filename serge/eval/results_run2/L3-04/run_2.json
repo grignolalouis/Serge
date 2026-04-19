@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L3-04",
+  "question": "Who can supply us Nam Doc Mai mangoes and at what price?",
+  "agent_answer": "Two suppliers can provide **Nam Doc Mai Mango Box 5kg** (PROD-001, sell price: **450 THB**):\n\n| Supplier ID | Product Listing | Unit Cost | Margin |\n|---|---|---|---|\n| SUP-004 | Premium Nam Doc Mai (Rayong) | **270 THB** | 180 THB |\n| SUP-001 | Fresh Nam Doc Mai (Chanthaburi) | **280 THB** | 170 THB |\n\n*Source: SRM (supplier products), WMS (sell price)*\n\nSUP-004 is the cheaper option by 10 THB/box. To factor in reliability, I can pull their supplier ratings and lead times if needed.",
+  "duration_ms": 14128,
+  "cost_usd": 0.043907049999999996,
+  "num_turns": 4,
+  "session_id": "3edbe4f3-424c-417c-8e5a-6478ea71c901",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_products",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "SRM",
+    "WMS"
+  ]
+}

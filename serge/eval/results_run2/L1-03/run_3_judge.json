@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All critical facts are present and correct: name (Somchai Mango Farm), region (Chanthaburi), lead time (3 days), and rating (4.5/5.0). Important facts (product categories, payment terms) are also correctly stated. No fabricated data.",
+  "facts_found": [
+    "Name: Somchai Mango Farm",
+    "Region: Chanthaburi",
+    "Lead time: 3 days",
+    "Rating: 4.5/5.0",
+    "Payment terms: net_30",
+    "Product categories: premium, standard"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

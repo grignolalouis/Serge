@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are present and correct: 8 units available, ORD-007/CUST-001 needing 50 units as the most severe case, ORD-009/CUST-008 needing 5 units as at-risk, and additional active/shipped orders (ORD-023 and ORD-028) correctly surfaced. The agent correctly distinguishes shipped orders (ORD-023) from at-risk ones and quantifies the full 59-unit shortfall.",
+  "facts_found": [
+    "PROD-001 available stock = 8 units",
+    "ORD-007 CUST-001 processing urgent needs 50 units — shortfall 42",
+    "ORD-009 CUST-008 pending needs 5 units",
+    "ORD-028 CUST-006 processing needs 12 units",
+    "ORD-023 CUST-004 already shipped — not at risk",
+    "Total active demand 67 units vs 8 available = 59-unit shortfall",
+    "PROD-001 is refrigerated with 7-day shelf life"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

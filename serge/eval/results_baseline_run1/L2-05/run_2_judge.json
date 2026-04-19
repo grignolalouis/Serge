@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.80,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical POs (PO-001, PO-004, PO-006, PO-008) are present with correct statuses, dates, and delivery outcomes. The agent also returned 10 additional POs for SUP-001, which are plausibly real seed data retrieved via the list tool rather than fabrications; the must_not_contain constraint ('Fabricated PO IDs') is not violated as long as these IDs exist in the system. Minor deduction on no_hallucination due to unverifiable extra POs, but benefit of the doubt is given.",
+  "facts_found": [
+    "PO-001 listed: received, order date 2026-01-02, expected 2026-01-05, actual 2026-01-05 (on time)",
+    "PO-004 listed: received, order date 2026-01-12, expected 2026-01-15, actual 2026-01-14 (early)",
+    "PO-006 listed: received, order date 2026-01-22, expected 2026-01-25, actual 2026-01-25 (on time)",
+    "PO-008 listed: shipped, order date 2026-02-10, expected 2026-02-18, no actual delivery yet",
+    "All four POs include status, order date, expected delivery, and actual delivery where applicable"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "L4-04",
+  "level": "L4",
+  "use_case": "UC-4",
+  "title": "Operational Scan",
+  "expected_systems": [
+    "OMS",
+    "TMS",
+    "WMS",
+    "SRM"
+  ],
+  "expected_tool_count_min": 4,
+  "estimated_human_minutes": 25,
+  "question": "Give me a quick scan of everything that needs my attention right now.",
+  "ground_truth": {
+    "critical_facts": [
+      "Overdue orders include ORD-007 and ORD-011",
+      "SHP-009 has an exception",
+      "Low stock products include PROD-001, PROD-005, and PROD-008"
+    ],
+    "important_facts": [
+      "Each item includes enough context to act on",
+      "Connection noted between ORD-007 being stuck and PROD-001 low stock"
+    ],
+    "must_not_contain": [
+      "Invented issues",
+      "Missing known scenario problems"
+    ]
+  }
+}

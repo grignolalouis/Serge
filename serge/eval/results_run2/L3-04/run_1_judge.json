@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: two suppliers (SUP-001 and SUP-004), SUP-001 cost 280 THB (SP-001), SUP-004 cost 270 THB (SP-009). The agent correctly identifies SUP-004 as the cheaper option and provides accurate margin calculations. No hallucinations detected.",
+  "facts_found": [
+    "Two suppliers: SUP-001 and SUP-004",
+    "SUP-001 unit cost 280 THB via SP-001",
+    "SUP-004 unit cost 270 THB via SP-009",
+    "Correct margin calculations (170 and 180 THB respectively)",
+    "SUP-001 identified as Chanthaburi origin",
+    "SUP-004 identified as Rayong origin"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

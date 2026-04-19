@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 3,
+  "no_hallucination": 3,
+  "reasoning": 4,
+  "weighted_score": 3.10,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies the 8-unit stock level, ORD-007 (Siam Paragon, 50 units, blocked), and ORD-009 (Gaggan Anand, 5 units, at risk), but critically omits ORD-023 (Mandarin Oriental, 10 units, already shipped) which is a required critical fact for a complete impact assessment. Additionally, ORD-028 (Sukhothai Hotel, 12 units) appears in the agent's answer but is not present in the ground truth, raising a hallucination concern.",
+  "facts_found": [
+    "PROD-001 stock is 8 units available",
+    "ORD-007 blocked — Siam Paragon needs 50 units, urgent priority",
+    "ORD-009 at risk — Gaggan Anand needs 5 units, high priority",
+    "Total demand quantified at 67 units vs 8 available (shortfall 59 units)",
+    "PROD-001 is refrigerated with 7-day shelf life"
+  ],
+  "facts_missing": [
+    "ORD-023 (CUST-004 Mandarin Oriental) needs 10 units — already shipped (critical context)"
+  ],
+  "hallucinations": [
+    "ORD-028 (Sukhothai Hotel, Kanokwan Meesuk, 12 units) — not present in ground truth critical or important facts"
+  ]
+}

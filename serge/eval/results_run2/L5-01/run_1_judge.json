@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 2,
+  "no_hallucination": 4,
+  "reasoning": 3,
+  "weighted_score": 2.90,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies the product details, both suppliers with correct costs, and the 8-unit available stock. However, it completely misses the critical PO-008 (150 units from SUP-001, in transit, expected 2026-02-18), which fundamentally changes the diagnosis — the agent incorrectly concludes no replenishment is coming and recommends an emergency PO, when in fact a large inbound shipment is already on its way.",
+  "facts_found": [
+    "PROD-001 = Nam Doc Mai Mango Box 5kg, premium, 450 THB, refrigerated, 7-day shelf life",
+    "SUP-001 at 280 THB/unit",
+    "SUP-004 at 270 THB/unit",
+    "Current inventory 8 units available",
+    "Active demand (67 units) exceeds available stock (8 units)",
+    "Reorder point of 20 may be too low"
+  ],
+  "facts_missing": [
+    "PO-008 (150 units from SUP-001) is currently in transit with expected delivery 2026-02-18 — this is a critical fact that changes the entire replenishment picture"
+  ],
+  "hallucinations": []
+}

@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are correctly stated: both suppliers identified with correct IDs and costs (280 vs 270 THB), correct ratings (4.5 and 4.0), matching lead times (3 days each), and on-time performance for both. The agent correctly concludes both are reliable with SUP-004 being 10 THB cheaper, recommends Somchai as primary and Rayong as secondary, and warns against single-sourcing — fully aligned with the ground truth's implicit conclusion.",
+  "facts_found": [
+    "SUP-001 Somchai Mango Farm: 280 THB, rating 4.5, 3-day lead, 100% on-time",
+    "SUP-004 Rayong Tropical: 270 THB, rating 4.0, 3-day lead, 100% on-time",
+    "Both reliable; SUP-004 is 10 THB cheaper",
+    "SUP-001 has more PO volume/history (7 POs vs 2)",
+    "Single-sourcing risk identified",
+    "Recommendation: Somchai as primary, Rayong as secondary"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-05",
+  "question": "Given our PROD-001 shortage, which customers are at risk of being impacted?",
+  "agent_answer": "Here's the at-risk picture for PROD-001 (Nam Doc Mai Mango Box 5kg):\n\n**Stock position (WMS):** 8 units available / reorder point 20 \u2192 already in shortage\n\n| Order | Customer | Status | Priority | Required Date | PROD-001 Qty | Covered? |\n|-------|----------|--------|----------|---------------|--------------|----------|\n| ORD-007 | CUST-001 | processing | **urgent** | 2026-02-12 | 50 | No \u2014 8 units short by 42 |\n| ORD-028 | CUST-006 | processing | high | 2026-02-18 | 12 | No \u2014 fully unfulfillable after ORD-007 |\n| ORD-009 | CUST-008 | pending | high | 2026-02-18 | 5 | No \u2014 fully unfulfillable after ORD-007 |\n\n**Total demand: 67 units vs. 8 available \u2192 shortfall of 59 units**\n\n**Key risks:**\n- **ORD-007 / CUST-001** is the most critical: urgent priority, earliest deadline (2026-02-12), and consumes all 8 available units alone \u2014 still 42 short.\n- **ORD-028 and ORD-009** will receive nothing unless stock is replenished before their 2026-02-18 deadlines.\n\n**Recommended actions for the team:**\n1. Place an emergency supplier order for PROD-001 immediately \u2014 check SRM for the fastest/cheapest supplier option.\n2. Proactively notify CUST-006 and CUST-008 of potential delays.\n3. Prioritize the 8 available units toward ORD-007 (urgent) as a partial fulfillment.",
+  "duration_ms": 48248,
+  "cost_usd": 0.1763352,
+  "num_turns": 5,
+  "session_id": "ac7dbcc4-837f-4da4-b22f-8180ba5a7838",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical products are correctly identified with exact available quantities and reorder points. No fabricated products or wrong values; extra context (shelf life, storage type) is consistent with the seed data.",
+  "facts_found": [
+    "PROD-001 Nam Doc Mai: 8 available, reorder point 20",
+    "PROD-005 Mixed Mango: 12 available, reorder point 15",
+    "PROD-008 Sticky Rice Kit: 6 available, reorder point 15",
+    "Gaps correctly computed: −12, −3, −9"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

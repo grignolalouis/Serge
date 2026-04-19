@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L3-02",
+  "question": "Which orders are requesting PROD-001 and do we have enough stock to cover them?",
+  "agent_answer": "Here's the full picture for PROD-001 (Nam Doc Mai Mango Box 5kg):\n\n---\n\n## Inventory vs. Demand \u2014 PROD-001\n\n**WMS (Inventory):** 8 units available, 0 reserved. Reorder point: 20. Status: **needs reorder**.\n\n---\n\n## Active Unfulfilled Orders (OMS)\n\n| Order | Customer | Status | Priority | Qty Needed | Required By |\n|-------|----------|--------|----------|------------|-------------|\n| ORD-007 | CUST-001 | processing | **urgent** | 50 | 2026-02-12 |\n| ORD-028 | CUST-006 | processing | high | 12 | 2026-02-18 |\n| ORD-009 | CUST-008 | pending | high | 5 | 2026-02-18 |\n\n**Total demand: 67 units**\n\n---\n\n## Stock Gap Analysis\n\n| | Units |\n|---|---|\n| Available stock | 8 |\n| Total demand (active orders) | 67 |\n| **Shortfall** | **-59 units** |\n\n---\n\n## Key Alerts\n\n1. **ORD-007 is overdue** \u2014 urgent priority, required 2026-02-12 (6 days ago), needs 50 units. Only 8 are available. This order is stuck in `processing`.\n2. **ORD-028 and ORD-009** are high priority, both due 2026-02-18 (also past due), collectively needing 17 more units on top of the above.\n3. Stock is well below reorder point (8 vs. 20) \u2014 a restock purchase order to a PROD-001 supplier should be raised immediately.\n\n**Recommended action:** Check SRM for any incoming supplier orders for PROD-001, and if none exist, place a purchase order urgently \u2014 especially given the overdue urgent order ORD-007.",
+  "duration_ms": 52740,
+  "cost_usd": 0.12697635000000002,
+  "num_turns": 5,
+  "session_id": "5155cc91-465a-4ff1-92bc-6cdeb1058e01",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

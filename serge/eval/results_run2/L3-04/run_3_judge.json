@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All critical facts are present and correct: both suppliers (SUP-001 and SUP-004) identified, unit costs match ground truth (280 THB and 270 THB respectively), and supplier details align perfectly. The recommendation is well-reasoned and internally consistent.",
+  "facts_found": [
+    "SUP-001 (Somchai Mango Farm) identified with cost 280 THB",
+    "SUP-004 (Rayong Tropical) identified with cost 270 THB",
+    "Sell price 450 THB correct",
+    "Margins correctly computed (170 and 180 THB)",
+    "Ratings (4.5 and 4.0) and lead times (3 days) correct",
+    "Payment terms (net_30) correct for both"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

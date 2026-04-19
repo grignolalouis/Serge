@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are present and correct: ORD-023 has SHP-017 (in_transit, SCG Cold Chain CAR-002, refrigerated, PROD-001) and SHP-018 (in_transit, Kerry Express CAR-001, ground, PROD-006). The agent also correctly explains the split rationale, identifies the customer (CUST-004 Mandarin Oriental), and confirms the split is appropriate — not an error. No hallucinations detected.",
+  "facts_found": [
+    "ORD-023 has two shipments SHP-017 and SHP-018",
+    "SHP-017 uses SCG Cold Chain CAR-002 (refrigerated) for PROD-001",
+    "SHP-018 uses Kerry Express CAR-001 (ground) for PROD-006 (ambient)",
+    "Both shipments are in_transit",
+    "Split justified by incompatible storage types",
+    "Customer is Mandarin Oriental CUST-004",
+    "ETAs are within the required date of Feb 15"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "L3-05",
+  "level": "L3",
+  "use_case": "UC-1",
+  "title": "Late Delivery Check",
+  "expected_systems": [
+    "OMS",
+    "TMS"
+  ],
+  "expected_tool_count_min": 2,
+  "estimated_human_minutes": 8,
+  "question": "Was order ORD-003 delivered on time?",
+  "ground_truth": {
+    "critical_facts": [
+      "Required date was 2026-01-18",
+      "Delivered date was 2026-01-20",
+      "Delivery was 2 days late"
+    ],
+    "important_facts": [
+      "Customer is Tops Supermarket (CUST-003)",
+      "Carrier is Kerry Express (ground)",
+      "Shipment ID is SHP-003"
+    ],
+    "must_not_contain": [
+      "Claim delivery was on time",
+      "Wrong dates"
+    ]
+  }
+}

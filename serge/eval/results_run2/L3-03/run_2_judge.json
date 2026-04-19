@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All 5 suppliers are present, SUP-001 is correctly identified as most reliable (100% on-time, 14 POs, highest rating), SUP-002 as least reliable (24% on-time, most orders), with quantitative metrics backing the ranking. No fabricated data detected.",
+  "facts_found": [
+    "All 5 suppliers listed: SUP-001, SUP-002, SUP-003, SUP-004, SUP-005",
+    "SUP-001 (Somchai Mango Farm) identified as most reliable with 100% on-time rate",
+    "SUP-002 (Northern Fruits Co.) identified as least reliable with 24% on-time rate",
+    "Quantitative on-time rates provided for all suppliers",
+    "Average lead times and ratings reported for all suppliers",
+    "Clear ranking/verdict provided"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

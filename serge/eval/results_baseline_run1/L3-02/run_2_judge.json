@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: 8 available units for PROD-001, multiple active orders including ORD-007 (50 units) and ORD-009 (5 units), and total demand (67 units) far exceeds current stock (8 units). No fabricated data detected.",
+  "facts_found": [
+    "PROD-001 available stock = 8 units",
+    "ORD-007 needs 50 units of PROD-001, status processing, urgent, overdue",
+    "ORD-028 needs 12 units of PROD-001, processing, high priority",
+    "ORD-009 needs 5 units of PROD-001, pending, high priority",
+    "Total demand 67 units vs 8 available = shortfall of 59 units",
+    "Reorder point is 20, stock is below reorder point"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

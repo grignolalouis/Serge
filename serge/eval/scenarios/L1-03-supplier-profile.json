@@ -1,0 +1,28 @@
+{
+  "id": "L1-03",
+  "level": "L1",
+  "use_case": "UC-3",
+  "title": "Supplier Profile",
+  "expected_systems": [
+    "SRM"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 2,
+  "question": "Give me the profile for supplier SUP-001.",
+  "ground_truth": {
+    "critical_facts": [
+      "Name is Somchai Mango Farm",
+      "Region is Chanthaburi",
+      "Lead time is 3 days",
+      "Rating is 4.5"
+    ],
+    "important_facts": [
+      "Product categories are premium and standard",
+      "Payment terms are net_30"
+    ],
+    "must_not_contain": [
+      "Wrong rating or lead time",
+      "Fabricated PO history"
+    ]
+  }
+}

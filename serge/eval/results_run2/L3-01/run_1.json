@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L3-01",
+  "question": "Where is order ORD-005 right now?",
+  "agent_answer": "**ORD-005 is currently in transit.**\n\n| Field | Detail |\n|---|---|\n| **Order status** (OMS) | `shipped` \u2014 dispatched 2026-02-10 |\n| **Priority** | normal |\n| **Required by** | 2026-02-14 |\n| **Shipment** (TMS) | SHP-005 via SCG Cold Chain (CAR-002) \u2014 refrigerated \u2713 |\n| **Tracking #** | SCG-20260210-005 |\n| **Destination** | Villa Market, Bangkok |\n| **Est. arrival** | 2026-02-12 17:00 |\n\n**Last tracking event:** 2026-02-11 10:00 \u2014 at local distribution center, scheduled for delivery.\n\nThe shipment is on track to arrive by Feb 12, well before the Feb 14 deadline. Carrier type (refrigerated) is appropriate for the order contents.",
+  "duration_ms": 13436,
+  "cost_usd": 0.07583714999999999,
+  "num_turns": 4,
+  "session_id": "48a51233-199f-4d63-adf7-7b6d07e1da9e",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "OMS",
+    "TMS"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L5-05",
+  "question": "Our reorder point for PROD-001 is 20 units, but we still ran out. Is the threshold wrong, or is something else going on?",
+  "agent_answer": "Here's the diagnosis across WMS data.\n\n---\n\n## PROD-001: Why the Reorder Point Failed\n\n**Product (WMS):** Nam Doc Mai Mango Box 5kg \u2014 refrigerated, 7-day shelf life, reorder point = 20  \n**Current state:** 8 units available, `needs_reorder: true`\n\n---\n\n### Root Cause: The threshold is too low \u2014 in two compounding ways\n\n**1. Single orders routinely exceed the threshold**\n\nThe movement history shows individual outbound orders of **21, 22, 23, 24, 26, 27, 28, 29 units** throughout the period. A reorder point of 20 means a single large order can drop stock to zero without ever triggering a reorder \u2014 because the reorder check fires *after* the movement is recorded.\n\n**2. Demand during lead time far outpaces the threshold**\n\nLooking at inbound POs, replenishments arrive roughly every 2\u20134 weeks (PO-132, PO-104, PO-106, PO-110, PO-001/006/012, PO-115). Between Jan 29 restock (+113 units, PO-115) and Feb 10 (last WMS update), **~179 units shipped out in ~12 days** \u2014 including single-day bursts of 21+23+26 units. At ~15 units/day demand velocity, a 20-unit buffer covers barely **1.3 days of lead time**.\n\nA proper reorder point formula:\n> **ROP = (avg daily demand \u00d7 supplier lead time) + safety stock**\n\nWith ~15 units/day and a typical lead time of 7\u201310 days, the ROP should be closer to **125\u2013180 units** \u2014 but PROD-001's 7-day shelf life prevents holding that much.\n\n---\n\n### The Real Tension: Short Shelf Life vs. High Demand\n\n| Factor | Value |\n|--------|-------|\n| Shelf life | 7 days |\n| Avg outbound/day (est.) | ~15 units |\n| Max safe stock to hold | ~100 units (7 days \u00d7 15/day) |\n| Single-order max observed | 29 units |\n| Current reorder point | 20 units |\n\nThe 7-day shelf life makes large safety buffers risky, so the solution isn't just \"raise the reorder point\" \u2014 it's **more frequent, smaller POs** triggered earlier.\n\n---\n\n### Recommendation for the team\n\n1. **Raise the reorder point** to at least **60\u201380 units** \u2014 enough to cover 4\u20135 days of demand while a PO is incoming, without holding more than shelf life allows.\n2. **Place POs more frequently** (weekly rather than bi-weekly) with smaller quantities (~80\u2013100 units each) to reduce the gap between restock events.\n3. **Review large-order handling**: orders over 20 units should flag a stock availability check proactively at order entry time, before confirmation.\n\nThe threshold of 20 is the immediate trigger \u2014 but the underlying issue is that replenishment cadence isn't matched to demand velocity for a short-shelf-life SKU.",
+  "duration_ms": 80481,
+  "cost_usd": 0.19423185000000004,
+  "num_turns": 5,
+  "session_id": "17f410df-314d-460c-81f0-0b2eb2dd3306",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__wms_get_stock_movements",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "WMS"
+  ]
+}

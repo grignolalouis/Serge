@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L3-05",
+  "question": "Was order ORD-003 delivered on time?",
+  "agent_answer": "**ORD-003 was delivered late.**\n\n| | Date |\n|---|---|\n| Required by | 2026-01-18 |\n| Actually delivered | 2026-01-20 |\n| **Delay** | **2 days** |\n\n**Sources:** OMS (order dates), TMS (shipment SHP-003 via Kerry Express)\n\nThe shipment left the warehouse on Jan 17 \u2014 within the deadline \u2014 but arrived Jan 20, two days past the required date of Jan 18. Kerry Express's estimated arrival was Jan 19, so it also missed that internal estimate by one day.",
+  "duration_ms": 11176,
+  "cost_usd": 0.06779045,
+  "num_turns": 4,
+  "session_id": "53fd3963-834e-4fed-a6fd-529769d7dc74",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "OMS",
+    "TMS"
+  ]
+}

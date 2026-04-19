@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-06",
+  "question": "Any shipments with problems right now?",
+  "agent_answer": "One shipment with a problem (from TMS):\n\n**SHP-009** \u2014 `exception`\n- **Order:** ORD-011 \u2192 Tops Supermarket, Bangkok\n- **Carrier:** CAR-001\n- **Issue:** Refrigeration unit malfunction on delivery vehicle\n- **Shipped:** Feb 6 | **Est. arrival was:** Feb 8\n\nThis is critical \u2014 the vehicle carries refrigerated goods and the cold chain is broken. The team should contact CAR-001 immediately to arrange a replacement vehicle or emergency transfer of cargo before the mangoes spoil.",
+  "duration_ms": 11665,
+  "cost_usd": 0.02872865,
+  "num_turns": 3,
+  "session_id": "8b7f2091-5ebe-4997-8a79-2013919cb00b",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_exception_shipments"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "TMS"
+  ]
+}

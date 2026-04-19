@@ -1,0 +1,30 @@
+{
+  "id": "L1-01",
+  "level": "L1",
+  "use_case": "UC-4",
+  "title": "Product Lookup",
+  "expected_systems": [
+    "WMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 2,
+  "question": "Can you tell me about product PROD-001?",
+  "ground_truth": {
+    "critical_facts": [
+      "Name is Nam Doc Mai Mango Box 5kg",
+      "SKU is MANGO-NDM-5",
+      "Category is premium",
+      "Unit price is 450 THB"
+    ],
+    "important_facts": [
+      "Weight is 5 kg",
+      "Shelf life is 7 days",
+      "Storage type is refrigerated",
+      "Reorder point is 20"
+    ],
+    "must_not_contain": [
+      "Wrong price, SKU, or product name",
+      "Fabricated supplier info not grounded in tool results"
+    ]
+  }
+}

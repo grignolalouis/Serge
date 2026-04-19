@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies both suppliers with exact costs (SUP-001 at 280 THB, SUP-004 at 270 THB), accurate ratings (4.5 vs 4.0), near-identical lead times (~3 days), and perfect on-time rates for both. All four critical facts are present and accurate, important facts about diversification and volume history are also included, and the recommendation logically follows from the data.",
+  "facts_found": [
+    "SUP-001 Somchai Mango Farm, unit cost 280 THB, rating 4.5, ~3-day lead time, 100% on-time",
+    "SUP-004 Rayong Tropical, unit cost 270 THB, rating 4.0, ~3-day lead time, 100% on-time",
+    "Both suppliers are reliable; SUP-004 is 10 THB cheaper per unit",
+    "SUP-001 has more order history (14 orders vs 7), strengthening statistical confidence",
+    "Single-sourcing risk identified as primary concern"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

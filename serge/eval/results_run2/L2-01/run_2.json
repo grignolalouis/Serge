@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-01",
+  "question": "What's the current status of order ORD-005?",
+  "agent_answer": "**ORD-005** (OMS) \u2014 current status: **Shipped**\n\n| Field | Value |\n|---|---|\n| Customer | CUST-005 |\n| Priority | Normal |\n| Order date | 2026-02-08 |\n| Shipped date | 2026-02-10 |\n| Required by | 2026-02-14 |\n| Status | **shipped** |\n\n**Lines:**\n- PROD-002 \u00d7 15 units\n- PROD-005 \u00d7 10 units\n\nShipped on Feb 10, two days before the Feb 14 deadline \u2014 on track. Would you like me to check the shipment tracking in TMS?",
+  "duration_ms": 10146,
+  "cost_usd": 0.0314083,
+  "num_turns": 3,
+  "session_id": "d62728d9-24fc-43ea-8225-6524fd7a8d7e",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "OMS"
+  ]
+}

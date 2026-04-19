@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All five critical facts are present and accurate: ORD-007 is processing and overdue, needs 50 units of PROD-001 (Nam Doc Mai), only 8 units available, root cause is stock shortage, and PO-008 expected 2026-02-18 (after the 2026-02-12 required date). The agent correctly notes PO-008 is 'shipped' (in transit) and not yet received. No fabricated IDs or values detected.",
+  "facts_found": [
+    "ORD-007 status: processing and overdue",
+    "50 units of PROD-001 (Nam Doc Mai) needed",
+    "8 units available (shortfall of 42)",
+    "Root cause: stock shortage",
+    "PO-008 expected 2026-02-18 (after required date 2026-02-12)",
+    "CUST-001, urgent priority",
+    "PO-008 from SUP-001 for 150 units",
+    "No shipment exists for ORD-007"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

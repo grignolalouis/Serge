@@ -1,0 +1,27 @@
+{
+  "id": "L1-02",
+  "level": "L1",
+  "use_case": "UC-4",
+  "title": "Customer Lookup",
+  "expected_systems": [
+    "OMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 2,
+  "question": "Who is customer CUST-004?",
+  "ground_truth": {
+    "critical_facts": [
+      "Company is Mandarin Oriental Bangkok",
+      "Segment is wholesale"
+    ],
+    "important_facts": [
+      "Contact name is Arunee Thongchai",
+      "Region is Bangkok",
+      "Delivery zone is central_bkk"
+    ],
+    "must_not_contain": [
+      "Wrong company name or segment",
+      "Fabricated order history"
+    ]
+  }
+}

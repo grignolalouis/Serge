@@ -1,0 +1,27 @@
+{
+  "scenario_id": "L4-05",
+  "question": "Given our PROD-001 shortage, which customers are at risk of being impacted?",
+  "agent_answer": "Here's the full risk picture for the PROD-001 (Nam Doc Mai Mango Box 5kg) shortage:\n\n---\n\n## PROD-001 Stock Alert \u2014 8 units available vs. 67 demanded\n\n**Source: WMS**\n\n| Field | Value |\n|---|---|\n| Available | 8 units |\n| Reorder point | 20 units |\n| Storage type | Refrigerated |\n| Shelf life | 7 days |\n\n---\n\n## At-Risk Customers (OMS + WMS)\n\n| Order | Customer | Company | Segment | Priority | Required Date | Qty Needed | Fulfillable? |\n|---|---|---|---|---|---|---|---|\n| ORD-007 | CUST-001 | Siam Paragon Food Hall | Retail | **Urgent** | 2026-02-12 | 50 | No \u2014 severely overdue |\n| ORD-028 | CUST-006 | The Sukhothai Hotel | Wholesale | High | 2026-02-18 | 12 | No |\n| ORD-009 | CUST-008 | Gaggan Anand Restaurant | Wholesale | High | 2026-02-18 | 5 | Partial only |\n\n**Total unfulfilled demand: 67 units | Shortfall: 59 units**\n\n---\n\n## Key Findings\n\n1. **ORD-007 / Siam Paragon Food Hall** is the most critical: `urgent` priority, required 2026-02-12 \u2014 already **66 days overdue** as of today. The 8 available units cover only 16% of their 50-unit need. This is a VIP retail account and a service failure is already in progress.\n\n2. **ORD-028 / The Sukhothai Hotel** (wholesale, standing hotel order) cannot be fulfilled from current stock at all.\n\n3. **ORD-009 / Gaggan Anand Restaurant** is the only order the current stock could cover in full (5 units), but doing so would leave the other two with nothing.\n\n---\n\n## Recommended Actions for the Team\n\n- **Prioritize ORD-007** given its urgent status and overdue date \u2014 contact Siam Paragon Food Hall immediately to communicate the delay.\n- **Check SRM** for any incoming supplier order for PROD-001 (pending/confirmed/shipped POs) to determine when restocking will arrive.\n- **Do not allocate** the 8 units to ORD-009 without first confirming no inbound stock can partially cover ORD-007.\n\nWould you like me to check if there are any open supplier orders for PROD-001 incoming?",
+  "duration_ms": 69957,
+  "cost_usd": 0.30889505,
+  "num_turns": 9,
+  "session_id": "3e2aacb9-7c7e-4a2d-a2ec-44ff8c0aa1ae",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read",
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer",
+    "mcp__serge-supply-chain__oms_get_customer",
+    "mcp__serge-supply-chain__oms_get_customer"
+  ],
+  "tool_calls_count": 11,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

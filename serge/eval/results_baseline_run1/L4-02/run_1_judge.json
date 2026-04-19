@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 3,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 4.40,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies SHP-009, CAR-001 (Kerry Express, ground type), PROD-003 (refrigerated), the mismatch, the exception reason, and the affected customer (Tops Supermarket). However, it omits one critical fact: the existence of refrigerated carrier alternatives (SCG Cold Chain or Flash Express) that could have been used instead.",
+  "facts_found": [
+    "SHP-009 uses Kerry Express (CAR-001, ground type)",
+    "PROD-003 Keaw Mango Box 5kg has storage_type: refrigerated",
+    "Ground carrier used for refrigerated product — mismatch confirmed",
+    "Exception reason: refrigeration unit malfunction on delivery vehicle",
+    "Affected customer is Tops Supermarket (CUST-003)"
+  ],
+  "facts_missing": [
+    "Refrigerated carrier alternatives exist (e.g., SCG Cold Chain or Flash Express)"
+  ],
+  "hallucinations": []
+}

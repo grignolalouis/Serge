@@ -1,0 +1,28 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.80,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are present and correctly stated: PROD-001 short by 4 units (8 available vs 12 needed), PROD-004 sufficient (19 available), PO-008 arriving Feb 18 same day as deadline with 150 units, and refrigerated carrier requirement correctly identified. All important facts (120 kg, 3,000 THB SCG Cold Chain, 4,200 THB Flash Express) are present. Minor concern about PO-015 and PO-017 mentions which aren't in the ground truth, but they don't fabricate an early resolution—they merely provide correct context that those POs don't resolve the PROD-001 gap, and the agent ultimately reaches the correct conclusion.",
+  "facts_found": [
+    "PROD-001: 8 available, 4 short of 12 needed",
+    "PROD-004: 19 available, sufficient for 6 needed",
+    "PO-008 ships 150 units of PROD-001, expected Feb 18 (same day as deadline) — tight",
+    "Refrigerated carrier required for both products",
+    "CAR-002 SCG Cold Chain at 25 THB/kg and CAR-003 Flash Express at 35 THB/kg identified",
+    "Total weight 120 kg",
+    "SCG Cold Chain shipping cost 3,000 THB",
+    "Flash Express cost 4,200 THB",
+    "CAR-002 recommended as cheaper with same transit time"
+  ],
+  "facts_missing": [],
+  "hallucinations": [
+    "PO-015 expected Feb 15 carrying different products — not verifiable from ground truth",
+    "PO-017 covering PROD-004 arriving Feb 19 — not verifiable from ground truth (however neither fabricates an early resolution to the shortage)"
+  ]
+}

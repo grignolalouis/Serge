@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are present and correct: both SHP-017 and SHP-018 are identified, carrier assignments are accurate (SCG Cold Chain/CAR-002 for PROD-001, Kerry Express/CAR-001 for PROD-006), both shipments are correctly stated as in transit. The answer also covers all important facts (storage-type justification, Mandarin Oriental customer) and correctly concludes the split was appropriate, not an error.",
+  "facts_found": [
+    "ORD-023 has two shipments: SHP-017 and SHP-018",
+    "SHP-017 uses refrigerated carrier SCG Cold Chain (CAR-002) for PROD-001",
+    "SHP-018 uses ground carrier Kerry Express (CAR-001) for PROD-006",
+    "Both shipments are in transit",
+    "Split justified by different storage types (refrigerated vs ambient)",
+    "Customer is Mandarin Oriental"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

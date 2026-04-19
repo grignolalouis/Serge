@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 4,
+  "completeness": 2,
+  "no_hallucination": 4,
+  "reasoning": 3,
+  "weighted_score": 3.30,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies the product details (450 THB, 8 units available, refrigerated, 7-day shelf life), both suppliers (SUP-001 at 280 THB and SUP-004 at 270 THB), and the stock shortfall. However, it completely omits the critical fact that PO-008 (150 units from SUP-001) is already in transit with an expected arrival of 2026-02-18, which fundamentally changes the diagnosis — an emergency PO may not be necessary since inbound stock already exceeds active demand.",
+  "facts_found": [
+    "PROD-001 is Nam Doc Mai Mango Box 5kg at 450 THB, refrigerated, 7-day shelf life",
+    "SUP-001 at 280 THB unit cost (170 THB margin)",
+    "SUP-004 at 270 THB unit cost (180 THB margin)",
+    "Current available stock: 8 units",
+    "Active demand exceeds available stock (67 units demanded vs 8 available)",
+    "Reorder point of 20 is too low given demand spikes"
+  ],
+  "facts_missing": [
+    "PO-008 (150 units from SUP-001) is currently in transit, expected 2026-02-18 — this inbound PO would cover the entire active shortfall and changes the urgency of the recommendation"
+  ],
+  "hallucinations": []
+}

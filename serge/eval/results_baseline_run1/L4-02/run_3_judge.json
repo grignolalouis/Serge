@@ -1,0 +1,27 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 3,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.2,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies the carrier mismatch (CAR-001 ground vs PROD-003 refrigerated), ORD-011, Tops Supermarket, and the exception reason. However, it fails to mention the available refrigerated alternatives (SCG Cold Chain or Flash Express), which is a listed critical fact. SHP-009 shipment ID is also not explicitly cited.",
+  "facts_found": [
+    "Kerry Express CAR-001 is ground type",
+    "PROD-003 storage_type is refrigerated",
+    "Carrier mismatch confirmed",
+    "ORD-011 is the associated order",
+    "Exception reason: refrigeration unit malfunction on delivery vehicle",
+    "Tops Supermarket (CUST-003) is the affected customer"
+  ],
+  "facts_missing": [
+    "Refrigerated carrier alternatives exist: SCG Cold Chain or Flash Express",
+    "SHP-009 shipment ID not explicitly stated"
+  ],
+  "hallucinations": [
+    "Minor speculative claim that ground trucks 'don't have refrigeration units to begin with' — contradicts the recorded exception which implies a refrigeration unit was present or expected; this is an interpretive overreach but not a fabricated entity"
+  ]
+}

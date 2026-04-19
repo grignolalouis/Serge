@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and accurate: ORD-007 and ORD-011 are both flagged as overdue, SHP-009 is correctly identified as having an exception (cold chain/refrigeration failure), and all three low-stock products (PROD-001, PROD-005, PROD-008) are listed. The connection between ORD-007 being stuck in processing and PROD-001 low stock is explicitly noted. Additional details (other overdue orders, supplier POs) appear consistent with real system data and enrich the report without fabricating any IDs or values.",
+  "facts_found": [
+    "ORD-007 overdue and stuck in processing",
+    "ORD-011 overdue",
+    "SHP-009 exception (refrigeration unit malfunction)",
+    "PROD-001 low stock (8 available, reorder point 20)",
+    "PROD-005 low stock (12 available, reorder point 15)",
+    "PROD-008 low stock (6 available, reorder point 15)",
+    "Connection between ORD-007 stuck and PROD-001 shortage",
+    "Actionable recommendations provided"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

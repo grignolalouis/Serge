@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.80,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All critical facts are present and accurate: PO-002 (+3 days), PO-005 (+4 days), chronic lateness pattern for SUP-002 (Northern Fruits Co.), and rating 3.2 consistent with performance. The agent's 24% on-time rate vs ground truth's '0% among scenario POs' is a scope difference — the agent used all 17 historical POs from tool data while the ground truth references only the scenario-defined POs; this is legitimate use of broader data and not a contradiction. No fabricated IDs or values detected.",
+  "facts_found": [
+    "SUP-002 (Northern Fruits Co.) shows repeated late deliveries across Oct 2025–Feb 2026",
+    "PO-002: expected 2026-01-10, received 2026-01-13 (+3 days)",
+    "PO-005: expected 2026-01-20, received 2026-01-24 (+4 days)",
+    "Chronic pattern confirmed — 13/17 received POs were late",
+    "Rating 3.2/5.0 consistent with poor delivery performance",
+    "Declared lead time 5 days; actual often 6-9 days",
+    "PO-009 currently overdue (pending, expected 2026-02-15)",
+    "Recommendation: apply 4-day safety buffer or switch suppliers"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

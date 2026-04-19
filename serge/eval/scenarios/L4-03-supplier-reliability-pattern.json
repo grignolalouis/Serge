@@ -1,0 +1,28 @@
+{
+  "id": "L4-03",
+  "level": "L4",
+  "use_case": "UC-3",
+  "title": "Supplier Reliability Pattern",
+  "expected_systems": [
+    "SRM"
+  ],
+  "expected_tool_count_min": 2,
+  "estimated_human_minutes": 15,
+  "question": "Does Northern Fruits Co. (SUP-002) have a chronic delivery problem, or is it an isolated issue?",
+  "ground_truth": {
+    "critical_facts": [
+      "SUP-002 shows repeated late deliveries in scenario data",
+      "PO-002: expected 2026-01-10, received 2026-01-13 (3 days late)",
+      "PO-005: expected 2026-01-20, received 2026-01-24 (4 days late)",
+      "Pattern is chronic \u2014 0% on-time rate among received scenario POs"
+    ],
+    "important_facts": [
+      "Average actual lead time around 8 days vs declared 5",
+      "Rating 3.2 is consistent with the performance"
+    ],
+    "must_not_contain": [
+      "Claim delivery is on time",
+      "Invented POs"
+    ]
+  }
+}

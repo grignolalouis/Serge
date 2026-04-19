@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical products are correctly identified with exact available quantities (8, 12, 6) and reorder points (20, 15, 15). No products outside the low-stock list are mentioned, and the agent adds valid context (shelf life, shortfall) that enhances the answer without introducing any errors.",
+  "facts_found": [
+    "PROD-001: available=8, reorder_point=20, shortfall=-12",
+    "PROD-005: available=12, reorder_point=15, shortfall=-3",
+    "PROD-008: available=6, reorder_point=15, shortfall=-9",
+    "All three are refrigerated products",
+    "PROD-008 has 3-day shelf life making it most urgent"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

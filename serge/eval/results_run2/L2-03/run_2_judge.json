@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 4,
+  "completeness": 3,
+  "no_hallucination": 5,
+  "reasoning": 4,
+  "weighted_score": 3.90,
+  "pass": true,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "missed_fact",
+  "justification": "ORD-007 is correctly identified as overdue (processing, required 2026-02-12). ORD-011 is listed as 'shipped' but the ground truth specifies it has an exception status (shipped with exception), which is a meaningful distinction the agent missed — it did not investigate the TMS exception status for ORD-011, leaving a critical diagnostic detail absent.",
+  "facts_found": [
+    "ORD-007 overdue, processing, required 2026-02-12, urgent",
+    "ORD-011 overdue, shipped, required 2026-02-10",
+    "12 overdue orders listed with IDs, customer, status, priority, required date",
+    "No delivered or cancelled orders included"
+  ],
+  "facts_missing": [
+    "ORD-011 has a TMS exception status (shipped with exception) — the agent listed it only as 'shipped' without noting the delivery exception"
+  ],
+  "hallucinations": []
+}

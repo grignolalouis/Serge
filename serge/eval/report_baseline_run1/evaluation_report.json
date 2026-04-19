@@ -1,0 +1,2672 @@
+{
+  "summary": {
+    "total_scenarios": 27,
+    "total_runs": 80,
+    "pass_rate": 0.8,
+    "avg_weighted_score": 4.52,
+    "hallucination_rate": 0.19,
+    "critical_facts_missing_rate": 0.2,
+    "functional_consistency_rate": 0.84,
+    "total_human_baseline_minutes": 3567,
+    "total_agent_minutes": 41.5,
+    "total_time_saved_minutes": 1147.5,
+    "avg_time_saved_pct_per_scenario": 32.2,
+    "avg_factual_accuracy": 4.56,
+    "avg_completeness": 4.42,
+    "avg_no_hallucination": 4.49,
+    "avg_reasoning": 4.72
+  },
+  "failure_taxonomy": [
+    {
+      "category": "none",
+      "count": 64,
+      "rate": 0.8
+    },
+    {
+      "category": "missed_fact",
+      "count": 9,
+      "rate": 0.11
+    },
+    {
+      "category": "wrong_value",
+      "count": 4,
+      "rate": 0.05
+    },
+    {
+      "category": "hallucination",
+      "count": 3,
+      "rate": 0.04
+    }
+  ],
+  "by_scenario": [
+    {
+      "scenario_id": "L1-01",
+      "title": "Product Lookup",
+      "level": "L1",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "WMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 2,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 16883,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 85.9,
+          "cost_usd": 0.0651
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 11754,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 90.2,
+          "cost_usd": 0.03
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 10988,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 90.8,
+          "cost_usd": 0.0292
+        }
+      ]
+    },
+    {
+      "scenario_id": "L1-02",
+      "title": "Customer Lookup",
+      "level": "L1",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "OMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 2,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 8606,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 92.8,
+          "cost_usd": 0.0639
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 8044,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 93.3,
+          "cost_usd": 0.0265
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 8821,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 92.6,
+          "cost_usd": 0.0275
+        }
+      ]
+    },
+    {
+      "scenario_id": "L1-03",
+      "title": "Supplier Profile",
+      "level": "L1",
+      "use_case": "UC-3",
+      "expected_systems": [
+        "SRM"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 2,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 15063,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_get_supplier"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 87.4,
+          "cost_usd": 0.0651
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 9379,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_get_supplier"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 92.2,
+          "cost_usd": 0.0288
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 9870,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_get_supplier"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 91.8,
+          "cost_usd": 0.028
+        }
+      ]
+    },
+    {
+      "scenario_id": "L1-04",
+      "title": "List Carriers",
+      "level": "L1",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "TMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 2,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 11186,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_list_carriers"
+          ],
+          "systems_touched": [
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 90.7,
+          "cost_usd": 0.0636
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 9436,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_list_carriers"
+          ],
+          "systems_touched": [
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 92.1,
+          "cost_usd": 0.0276
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 11809,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_list_carriers"
+          ],
+          "systems_touched": [
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 90.2,
+          "cost_usd": 0.0282
+        }
+      ]
+    },
+    {
+      "scenario_id": "L2-01",
+      "title": "Basic Order Status",
+      "level": "L2",
+      "use_case": "UC-1",
+      "expected_systems": [
+        "OMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 5,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 10428,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.5,
+          "cost_usd": 0.0657
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 10903,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.4,
+          "cost_usd": 0.0288
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 11395,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.2,
+          "cost_usd": 0.0303
+        }
+      ]
+    },
+    {
+      "scenario_id": "L2-02",
+      "title": "Customer Order History",
+      "level": "L2",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "OMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 6,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 28648,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_customer"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 92.0,
+          "cost_usd": 0.1189
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 26009,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_customer"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 92.8,
+          "cost_usd": 0.0753
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 28314,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_customer"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 92.1,
+          "cost_usd": 0.0743
+        }
+      ]
+    },
+    {
+      "scenario_id": "L2-03",
+      "title": "Overdue Orders",
+      "level": "L2",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "OMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 5,
+      "avg_score": 3.7,
+      "pass_rate": 0.67,
+      "consistency_std": 0.33,
+      "functional_consistency": 0.67,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 3.7,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 1,
+          "duration_ms": 17523,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 94.2,
+          "cost_usd": 0.1152
+        },
+        {
+          "run": 2,
+          "weighted_score": 3.3,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "wrong_value",
+          "hallucination_count": 0,
+          "duration_ms": 24463,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 91.8,
+          "cost_usd": 0.051
+        },
+        {
+          "run": 3,
+          "weighted_score": 4.1,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 15307,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders"
+          ],
+          "systems_touched": [
+            "OMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 94.9,
+          "cost_usd": 0.0413
+        }
+      ]
+    },
+    {
+      "scenario_id": "L2-04",
+      "title": "Low Stock Alert",
+      "level": "L2",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "WMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 5,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 10871,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_low_stock"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.4,
+          "cost_usd": 0.0668
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 10034,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_low_stock"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.7,
+          "cost_usd": 0.0317
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 12039,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_low_stock"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.0,
+          "cost_usd": 0.0319
+        }
+      ]
+    },
+    {
+      "scenario_id": "L2-05",
+      "title": "Supplier Order History",
+      "level": "L2",
+      "use_case": "UC-3",
+      "expected_systems": [
+        "SRM"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 6,
+      "avg_score": 4.93,
+      "pass_rate": 1.0,
+      "consistency_std": 0.09,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 19425,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 94.6,
+          "cost_usd": 0.0827
+        },
+        {
+          "run": 2,
+          "weighted_score": 4.8,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 20969,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 94.2,
+          "cost_usd": 0.0459
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 20017,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 94.4,
+          "cost_usd": 0.0452
+        }
+      ]
+    },
+    {
+      "scenario_id": "L2-06",
+      "title": "Shipment Exceptions",
+      "level": "L2",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "TMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 5,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 10497,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_list_exception_shipments"
+          ],
+          "systems_touched": [
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.5,
+          "cost_usd": 0.0641
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 11665,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_list_exception_shipments"
+          ],
+          "systems_touched": [
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.1,
+          "cost_usd": 0.0287
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 11872,
+          "tool_calls_count": 2,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_list_exception_shipments"
+          ],
+          "systems_touched": [
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.0,
+          "cost_usd": 0.0283
+        }
+      ]
+    },
+    {
+      "scenario_id": "L3-01",
+      "title": "Order Tracking with Current Location",
+      "level": "L3",
+      "use_case": "UC-1",
+      "expected_systems": [
+        "OMS",
+        "TMS"
+      ],
+      "expected_tool_count_min": 2,
+      "estimated_human_minutes": 10,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 13845,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.67,
+          "time_saved_pct": 97.7,
+          "cost_usd": 0.0697
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 14087,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.67,
+          "time_saved_pct": 97.7,
+          "cost_usd": 0.0338
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 15733,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.67,
+          "time_saved_pct": 97.4,
+          "cost_usd": 0.0335
+        }
+      ]
+    },
+    {
+      "scenario_id": "L3-02",
+      "title": "Product Demand View",
+      "level": "L3",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "OMS",
+        "WMS"
+      ],
+      "expected_tool_count_min": 2,
+      "estimated_human_minutes": 12,
+      "avg_score": 4.93,
+      "pass_rate": 1.0,
+      "consistency_std": 0.09,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 4.8,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 56325,
+          "tool_calls_count": 7,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "Agent",
+            "Read",
+            "Read",
+            "Read"
+          ],
+          "systems_touched": [
+            "OMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.29,
+          "time_saved_pct": 92.2,
+          "cost_usd": 0.195
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 52740,
+          "tool_calls_count": 7,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "Agent",
+            "Read",
+            "Read",
+            "Read"
+          ],
+          "systems_touched": [
+            "OMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.29,
+          "time_saved_pct": 92.7,
+          "cost_usd": 0.127
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 46122,
+          "tool_calls_count": 7,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "Agent",
+            "Read",
+            "Read",
+            "Read"
+          ],
+          "systems_touched": [
+            "OMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.29,
+          "time_saved_pct": 93.6,
+          "cost_usd": 0.1165
+        }
+      ]
+    },
+    {
+      "scenario_id": "L3-03",
+      "title": "Supplier Side-by-Side Comparison",
+      "level": "L3",
+      "use_case": "UC-3",
+      "expected_systems": [
+        "SRM"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 15,
+      "avg_score": 2.23,
+      "pass_rate": 0.0,
+      "consistency_std": 0.09,
+      "functional_consistency": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 2.3,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "wrong_value",
+          "hallucination_count": 2,
+          "duration_ms": 19630,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_compare_suppliers",
+            "mcp__serge-supply-chain__srm_list_suppliers"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.33,
+          "time_saved_pct": 97.8,
+          "cost_usd": 0.0761
+        },
+        {
+          "run": 2,
+          "weighted_score": 2.3,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "wrong_value",
+          "hallucination_count": 0,
+          "duration_ms": 16923,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_compare_suppliers",
+            "mcp__serge-supply-chain__srm_list_suppliers"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.33,
+          "time_saved_pct": 98.1,
+          "cost_usd": 0.0403
+        },
+        {
+          "run": 3,
+          "weighted_score": 2.1,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "wrong_value",
+          "hallucination_count": 3,
+          "duration_ms": 14907,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_compare_suppliers",
+            "mcp__serge-supply-chain__srm_list_suppliers"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.33,
+          "time_saved_pct": 98.3,
+          "cost_usd": 0.0398
+        }
+      ]
+    },
+    {
+      "scenario_id": "L3-04",
+      "title": "Sourcing Options",
+      "level": "L3",
+      "use_case": "UC-3",
+      "expected_systems": [
+        "SRM"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 10,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 14039,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_products",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+          ],
+          "systems_touched": [
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.33,
+          "time_saved_pct": 97.7,
+          "cost_usd": 0.078
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 24277,
+          "tool_calls_count": 6,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_products",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_get_supplier"
+          ],
+          "systems_touched": [
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.17,
+          "time_saved_pct": 96.0,
+          "cost_usd": 0.0647
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 14309,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_products",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+          ],
+          "systems_touched": [
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.33,
+          "time_saved_pct": 97.6,
+          "cost_usd": 0.0416
+        }
+      ]
+    },
+    {
+      "scenario_id": "L3-05",
+      "title": "Late Delivery Check",
+      "level": "L3",
+      "use_case": "UC-1",
+      "expected_systems": [
+        "OMS",
+        "TMS"
+      ],
+      "expected_tool_count_min": 2,
+      "estimated_human_minutes": 8,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 11176,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.67,
+          "time_saved_pct": 97.7,
+          "cost_usd": 0.0678
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 12374,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.67,
+          "time_saved_pct": 97.4,
+          "cost_usd": 0.0333
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 12341,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.67,
+          "time_saved_pct": 97.4,
+          "cost_usd": 0.0305
+        }
+      ]
+    },
+    {
+      "scenario_id": "L3-06",
+      "title": "Product With Current Inventory",
+      "level": "L3",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "WMS"
+      ],
+      "expected_tool_count_min": 1,
+      "estimated_human_minutes": 5,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 11569,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_check_inventory"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.33,
+          "time_saved_pct": 96.1,
+          "cost_usd": 0.0685
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 15581,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_check_inventory"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.33,
+          "time_saved_pct": 94.8,
+          "cost_usd": 0.0318
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 12463,
+          "tool_calls_count": 3,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_check_inventory"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.33,
+          "time_saved_pct": 95.8,
+          "cost_usd": 0.0321
+        }
+      ]
+    },
+    {
+      "scenario_id": "L4-01",
+      "title": "Order Delay Diagnosis",
+      "level": "L4",
+      "use_case": "UC-2",
+      "expected_systems": [
+        "OMS",
+        "SRM",
+        "TMS",
+        "WMS"
+      ],
+      "expected_tool_count_min": 4,
+      "estimated_human_minutes": 25,
+      "avg_score": 4.5,
+      "pass_rate": 0.67,
+      "consistency_std": 0.36,
+      "functional_consistency": 0.67,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 4.0,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "missed_fact",
+          "hallucination_count": 0,
+          "duration_ms": 24131,
+          "tool_calls_count": 5,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order",
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 0.75,
+          "tool_efficiency": 0.8,
+          "time_saved_pct": 98.4,
+          "cost_usd": 0.0949
+        },
+        {
+          "run": 2,
+          "weighted_score": 4.8,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 1,
+          "duration_ms": 43601,
+          "tool_calls_count": 9,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order",
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.44,
+          "time_saved_pct": 97.1,
+          "cost_usd": 0.0905
+        },
+        {
+          "run": 3,
+          "weighted_score": 4.7,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 40713,
+          "tool_calls_count": 9,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order",
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.44,
+          "time_saved_pct": 97.3,
+          "cost_usd": 0.1019
+        }
+      ]
+    },
+    {
+      "scenario_id": "L4-02",
+      "title": "Carrier Mismatch Diagnosis",
+      "level": "L4",
+      "use_case": "UC-2",
+      "expected_systems": [
+        "OMS",
+        "TMS",
+        "WMS"
+      ],
+      "expected_tool_count_min": 3,
+      "estimated_human_minutes": 20,
+      "avg_score": 4.18,
+      "pass_rate": 0.0,
+      "consistency_std": 0.18,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 4.4,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "missed_fact",
+          "hallucination_count": 0,
+          "duration_ms": 24535,
+          "tool_calls_count": 4,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_get_shipment",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.75,
+          "time_saved_pct": 98.0,
+          "cost_usd": 0.0912
+        },
+        {
+          "run": 2,
+          "weighted_score": 3.95,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "missed_fact",
+          "hallucination_count": 0,
+          "duration_ms": 24605,
+          "tool_calls_count": 5,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_get_shipment",
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.6,
+          "time_saved_pct": 97.9,
+          "cost_usd": 0.0637
+        },
+        {
+          "run": 3,
+          "weighted_score": 4.2,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "missed_fact",
+          "hallucination_count": 1,
+          "duration_ms": 21674,
+          "tool_calls_count": 5,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__tms_get_shipment",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.6,
+          "time_saved_pct": 98.2,
+          "cost_usd": 0.0649
+        }
+      ]
+    },
+    {
+      "scenario_id": "L4-03",
+      "title": "Supplier Reliability Pattern",
+      "level": "L4",
+      "use_case": "UC-3",
+      "expected_systems": [
+        "SRM"
+      ],
+      "expected_tool_count_min": 2,
+      "estimated_human_minutes": 15,
+      "avg_score": 4.55,
+      "pass_rate": 1.0,
+      "consistency_std": 0.12,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 4.55,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 37492,
+          "tool_calls_count": 4,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 95.8,
+          "cost_usd": 0.108
+        },
+        {
+          "run": 2,
+          "weighted_score": 4.7,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 33268,
+          "tool_calls_count": 4,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.3,
+          "cost_usd": 0.0724
+        },
+        {
+          "run": 3,
+          "weighted_score": 4.4,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 33856,
+          "tool_calls_count": 4,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+          ],
+          "systems_touched": [
+            "SRM"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 96.2,
+          "cost_usd": 0.0741
+        }
+      ]
+    },
+    {
+      "scenario_id": "L4-04",
+      "title": "Operational Scan",
+      "level": "L4",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "OMS",
+        "SRM",
+        "TMS",
+        "WMS"
+      ],
+      "expected_tool_count_min": 4,
+      "estimated_human_minutes": 25,
+      "avg_score": 4.73,
+      "pass_rate": 1.0,
+      "consistency_std": 0.25,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 4.8,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 36421,
+          "tool_calls_count": 5,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_low_stock",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+            "mcp__serge-supply-chain__tms_list_exception_shipments",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.8,
+          "time_saved_pct": 97.6,
+          "cost_usd": 0.1023
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 37910,
+          "tool_calls_count": 5,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_low_stock",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+            "mcp__serge-supply-chain__tms_list_exception_shipments",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.8,
+          "time_saved_pct": 97.5,
+          "cost_usd": 0.0703
+        },
+        {
+          "run": 3,
+          "weighted_score": 4.4,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 34634,
+          "tool_calls_count": 5,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_low_stock",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+            "mcp__serge-supply-chain__tms_list_exception_shipments",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.8,
+          "time_saved_pct": 97.7,
+          "cost_usd": 0.0688
+        }
+      ]
+    },
+    {
+      "scenario_id": "L4-05",
+      "title": "Customer Impact Assessment",
+      "level": "L4",
+      "use_case": "UC-2",
+      "expected_systems": [
+        "OMS",
+        "WMS"
+      ],
+      "expected_tool_count_min": 3,
+      "estimated_human_minutes": 20,
+      "avg_score": 2.67,
+      "pass_rate": 0.0,
+      "consistency_std": 0.42,
+      "functional_consistency": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 3.1,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "missed_fact",
+          "hallucination_count": 1,
+          "duration_ms": 60037,
+          "tool_calls_count": 12,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "Agent",
+            "Read",
+            "Read",
+            "Read",
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer",
+            "mcp__serge-supply-chain__oms_get_customer",
+            "mcp__serge-supply-chain__oms_get_customer"
+          ],
+          "systems_touched": [
+            "OMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.25,
+          "time_saved_pct": 95.0,
+          "cost_usd": 0.2021
+        },
+        {
+          "run": 2,
+          "weighted_score": 2.1,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "hallucination",
+          "hallucination_count": 1,
+          "duration_ms": 69957,
+          "tool_calls_count": 11,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "Agent",
+            "Read",
+            "Read",
+            "Read",
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer",
+            "mcp__serge-supply-chain__oms_get_customer",
+            "mcp__serge-supply-chain__oms_get_customer"
+          ],
+          "systems_touched": [
+            "OMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.27,
+          "time_saved_pct": 94.2,
+          "cost_usd": 0.3089
+        },
+        {
+          "run": 3,
+          "weighted_score": 2.8,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "missed_fact",
+          "hallucination_count": 1,
+          "duration_ms": 66048,
+          "tool_calls_count": 10,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "Agent",
+            "Read",
+            "Skill",
+            "Read",
+            "Read",
+            "Read",
+            "Read"
+          ],
+          "systems_touched": [
+            "OMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.3,
+          "time_saved_pct": 94.5,
+          "cost_usd": 0.2549
+        }
+      ]
+    },
+    {
+      "scenario_id": "L4-06",
+      "title": "Split Shipment Status",
+      "level": "L4",
+      "use_case": "UC-1",
+      "expected_systems": [
+        "OMS",
+        "TMS",
+        "WMS"
+      ],
+      "expected_tool_count_min": 3,
+      "estimated_human_minutes": 18,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 22572,
+          "tool_calls_count": 6,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order",
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 97.9,
+          "cost_usd": 0.0947
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 24052,
+          "tool_calls_count": 6,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order",
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 97.8,
+          "cost_usd": 0.0587
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 20778,
+          "tool_calls_count": 6,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__tms_track_customer_order",
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 98.1,
+          "cost_usd": 0.0591
+        }
+      ]
+    },
+    {
+      "scenario_id": "L5-01",
+      "title": "Full Product Supply Chain History",
+      "level": "L5",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "OMS",
+        "SRM",
+        "WMS"
+      ],
+      "expected_tool_count_min": 6,
+      "estimated_human_minutes": 40,
+      "avg_score": 2.5,
+      "pass_rate": 0.0,
+      "consistency_std": 0.22,
+      "functional_consistency": 0.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 2.3,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "missed_fact",
+          "hallucination_count": 2,
+          "duration_ms": 102953,
+          "tool_calls_count": 10,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_get_stock_movements",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "Agent",
+            "Read",
+            "Read",
+            "Read"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.6,
+          "time_saved_pct": 95.7,
+          "cost_usd": 0.2883
+        },
+        {
+          "run": 2,
+          "weighted_score": 2.4,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "hallucination",
+          "hallucination_count": 6,
+          "duration_ms": 110849,
+          "tool_calls_count": 10,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_get_stock_movements",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "Agent",
+            "Read",
+            "Read",
+            "Read"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.6,
+          "time_saved_pct": 95.4,
+          "cost_usd": 0.252
+        },
+        {
+          "run": 3,
+          "weighted_score": 2.8,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "missed_fact",
+          "hallucination_count": 2,
+          "duration_ms": 120413,
+          "tool_calls_count": 13,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_get_stock_movements",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+            "ToolSearch",
+            "Agent",
+            "Read",
+            "Read",
+            "Read",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_get_supplier"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.46,
+          "time_saved_pct": 95.0,
+          "cost_usd": 0.2691
+        }
+      ]
+    },
+    {
+      "scenario_id": "L5-02",
+      "title": "Full Operational Health Check",
+      "level": "L5",
+      "use_case": "UC-4",
+      "expected_systems": [
+        "OMS",
+        "SRM",
+        "TMS",
+        "WMS"
+      ],
+      "expected_tool_count_min": 6,
+      "estimated_human_minutes": 45,
+      "avg_score": 4.93,
+      "pass_rate": 1.0,
+      "consistency_std": 0.09,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 4.8,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 1,
+          "duration_ms": 88602,
+          "tool_calls_count": 16,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_status",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_status",
+            "mcp__serge-supply-chain__wms_list_low_stock",
+            "mcp__serge-supply-chain__tms_list_exception_shipments",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders",
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_suppliers",
+            "mcp__serge-supply-chain__tms_get_carrier",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.38,
+          "time_saved_pct": 96.7,
+          "cost_usd": 0.1928
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 118347,
+          "tool_calls_count": 17,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_status",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_status",
+            "mcp__serge-supply-chain__tms_list_exception_shipments",
+            "mcp__serge-supply-chain__tms_list_shipments_by_status",
+            "mcp__serge-supply-chain__wms_list_low_stock",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders",
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__wms_get_product",
+            "mcp__serge-supply-chain__tms_get_carrier",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_get_supplier",
+            "mcp__serge-supply-chain__srm_get_supplier"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.35,
+          "time_saved_pct": 95.6,
+          "cost_usd": 0.1774
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 84966,
+          "tool_calls_count": 9,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_status",
+            "mcp__serge-supply-chain__oms_list_customer_orders_by_status",
+            "mcp__serge-supply-chain__tms_list_exception_shipments",
+            "mcp__serge-supply-chain__tms_list_shipments_by_status",
+            "mcp__serge-supply-chain__wms_list_low_stock",
+            "mcp__serge-supply-chain__srm_list_overdue_supplier_orders",
+            "mcp__serge-supply-chain__srm_list_suppliers"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.67,
+          "time_saved_pct": 96.9,
+          "cost_usd": 0.1245
+        }
+      ]
+    },
+    {
+      "scenario_id": "L5-03",
+      "title": "Fulfillment Feasibility Plan",
+      "level": "L5",
+      "use_case": "UC-5",
+      "expected_systems": [
+        "OMS",
+        "SRM",
+        "TMS",
+        "WMS"
+      ],
+      "expected_tool_count_min": 6,
+      "estimated_human_minutes": 35,
+      "avg_score": 4.93,
+      "pass_rate": 1.0,
+      "consistency_std": 0.09,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 52360,
+          "tool_calls_count": 10,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "mcp__serge-supply-chain__tms_list_carriers",
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.6,
+          "time_saved_pct": 97.5,
+          "cost_usd": 0.1336
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 47077,
+          "tool_calls_count": 13,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__tms_list_carriers",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__srm_get_supplier_product",
+            "mcp__serge-supply-chain__srm_get_supplier_product"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.46,
+          "time_saved_pct": 97.8,
+          "cost_usd": 0.0921
+        },
+        {
+          "run": 3,
+          "weighted_score": 4.8,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 2,
+          "duration_ms": 63837,
+          "tool_calls_count": 10,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__oms_get_customer_order",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "mcp__serge-supply-chain__tms_list_carriers"
+          ],
+          "systems_touched": [
+            "OMS",
+            "SRM",
+            "TMS",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.6,
+          "time_saved_pct": 97.0,
+          "cost_usd": 0.092
+        }
+      ]
+    },
+    {
+      "scenario_id": "L5-04",
+      "title": "Sourcing Strategy Review",
+      "level": "L5",
+      "use_case": "UC-3",
+      "expected_systems": [
+        "SRM"
+      ],
+      "expected_tool_count_min": 4,
+      "estimated_human_minutes": 30,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "consistency_std": 0.0,
+      "functional_consistency": 1.0,
+      "runs": [
+        {
+          "run": 1,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 51507,
+          "tool_calls_count": 8,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_products",
+            "mcp__serge-supply-chain__srm_compare_suppliers",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+            "ToolSearch",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+            "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+            "mcp__serge-supply-chain__wms_check_inventory"
+          ],
+          "systems_touched": [
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 0.5,
+          "time_saved_pct": 97.1,
+          "cost_usd": 0.1414
+        },
+        {
+          "run": 2,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 33199,
+          "tool_calls_count": 4,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_products",
+            "mcp__serge-supply-chain__srm_compare_suppliers",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+          ],
+          "systems_touched": [
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 1.0,
+          "time_saved_pct": 98.2,
+          "cost_usd": 0.0662
+        },
+        {
+          "run": 3,
+          "weighted_score": 5.0,
+          "pass": true,
+          "critical_facts_present": true,
+          "same_conclusion_as_ground_truth": true,
+          "failure_category": "none",
+          "hallucination_count": 0,
+          "duration_ms": 32844,
+          "tool_calls_count": 4,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_list_products",
+            "mcp__serge-supply-chain__srm_compare_suppliers",
+            "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+          ],
+          "systems_touched": [
+            "SRM",
+            "WMS"
+          ],
+          "system_coverage": 1.0,
+          "tool_efficiency": 1.0,
+          "time_saved_pct": 98.2,
+          "cost_usd": 0.0648
+        }
+      ]
+    },
+    {
+      "scenario_id": "L5-05",
+      "title": "Reorder Point Analysis",
+      "level": "L5",
+      "use_case": "UC-5",
+      "expected_systems": [
+        "OMS",
+        "SRM",
+        "WMS"
+      ],
+      "expected_tool_count_min": 5,
+      "estimated_human_minutes": 35,
+      "avg_score": 2.6,
+      "pass_rate": 0.0,
+      "consistency_std": 0.1,
+      "functional_consistency": 0.0,
+      "runs": [
+        {
+          "run": 2,
+          "weighted_score": 2.5,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "hallucination",
+          "hallucination_count": 4,
+          "duration_ms": 66598,
+          "tool_calls_count": 4,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_get_stock_movements",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 0.33,
+          "tool_efficiency": 1.25,
+          "time_saved_pct": 96.8,
+          "cost_usd": 0.1347
+        },
+        {
+          "run": 3,
+          "weighted_score": 2.7,
+          "pass": false,
+          "critical_facts_present": false,
+          "same_conclusion_as_ground_truth": false,
+          "failure_category": "missed_fact",
+          "hallucination_count": 1,
+          "duration_ms": 46774,
+          "tool_calls_count": 4,
+          "tools_used": [
+            "ToolSearch",
+            "mcp__serge-supply-chain__wms_check_inventory",
+            "mcp__serge-supply-chain__wms_get_stock_movements",
+            "mcp__serge-supply-chain__wms_get_product"
+          ],
+          "systems_touched": [
+            "WMS"
+          ],
+          "system_coverage": 0.33,
+          "tool_efficiency": 1.25,
+          "time_saved_pct": 97.8,
+          "cost_usd": 0.117
+        }
+      ]
+    }
+  ],
+  "by_level": [
+    {
+      "level": "L1",
+      "scenario_count": 4,
+      "avg_score": 5.0,
+      "pass_rate": 1.0,
+      "avg_tool_calls": 2.0,
+      "avg_duration_ms": 10987,
+      "avg_systems_touched": 1.0,
+      "avg_system_coverage": 1.0,
+      "avg_tool_efficiency": 0.5,
+      "avg_time_saved_pct": 90.8
+    },
+    {
+      "level": "L2",
+      "scenario_count": 6,
+      "avg_score": 4.77,
+      "pass_rate": 0.94,
+      "avg_tool_calls": 2.0,
+      "avg_duration_ms": 16688,
+      "avg_systems_touched": 1.0,
+      "avg_system_coverage": 1.0,
+      "avg_tool_efficiency": 0.5,
+      "avg_time_saved_pct": 94.9
+    },
+    {
+      "level": "L3",
+      "scenario_count": 6,
+      "avg_score": 4.53,
+      "pass_rate": 0.83,
+      "avg_tool_calls": 3.8,
+      "avg_duration_ms": 21024,
+      "avg_systems_touched": 1.7,
+      "avg_system_coverage": 1.0,
+      "avg_tool_efficiency": 0.43,
+      "avg_time_saved_pct": 96.4
+    },
+    {
+      "level": "L4",
+      "scenario_count": 6,
+      "avg_score": 4.27,
+      "pass_rate": 0.61,
+      "avg_tool_calls": 6.4,
+      "avg_duration_ms": 36460,
+      "avg_systems_touched": 2.8,
+      "avg_system_coverage": 0.99,
+      "avg_tool_efficiency": 0.55,
+      "avg_time_saved_pct": 97.0
+    },
+    {
+      "level": "L5",
+      "scenario_count": 5,
+      "avg_score": 4.09,
+      "pass_rate": 0.64,
+      "avg_tool_calls": 9.4,
+      "avg_duration_ms": 72880,
+      "avg_systems_touched": 2.9,
+      "avg_system_coverage": 0.9,
+      "avg_tool_efficiency": 0.69,
+      "avg_time_saved_pct": 96.8
+    }
+  ],
+  "by_use_case": [
+    {
+      "use_case": "UC-1",
+      "scenario_count": 4,
+      "avg_score": 5.0,
+      "pass_rate": 1.0
+    },
+    {
+      "use_case": "UC-2",
+      "scenario_count": 3,
+      "avg_score": 3.78,
+      "pass_rate": 0.22
+    },
+    {
+      "use_case": "UC-3",
+      "scenario_count": 6,
+      "avg_score": 4.45,
+      "pass_rate": 0.83
+    },
+    {
+      "use_case": "UC-4",
+      "scenario_count": 12,
+      "avg_score": 4.65,
+      "pass_rate": 0.89
+    },
+    {
+      "use_case": "UC-5",
+      "scenario_count": 2,
+      "avg_score": 4.0,
+      "pass_rate": 0.6
+    }
+  ],
+  "metrics": {
+    "total_cost_usd": 6.8166,
+    "total_duration_ms": 2487269,
+    "total_tool_calls": 376
+  }
+}

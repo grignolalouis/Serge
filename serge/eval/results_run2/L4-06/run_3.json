@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-06",
+  "question": "Order ORD-023 was split into two shipments. Give me the status of each and explain why it was split.",
+  "agent_answer": "Here's the full picture for ORD-023 (OMS: urgent order for Mandarin Oriental, shipped 2026-02-12):\n\n## Shipment Status\n\n| Shipment | Carrier | Type | Products | Status | ETA |\n|----------|---------|------|----------|--------|-----|\n| SHP-017 | SCG Cold Chain (CAR-002) | Refrigerated | PROD-001 \u2014 Nam Doc Mai Mango Box 5kg (\u00d710) | In transit | 2026-02-13 |\n| SHP-018 | Kerry Express (CAR-001) | Ground | PROD-006 \u2014 Dried Mango Slices 500g (\u00d760) | In transit | 2026-02-14 |\n\n## Why It Was Split\n\nThe two order lines have incompatible storage requirements (WMS):\n\n- **PROD-001** \u2014 fresh mangoes, `storage_type: refrigerated`, 7-day shelf life \u2192 **must** travel in a cold chain truck (SHP-017 via SCG Cold Chain \u2713)\n- **PROD-006** \u2014 dried mango slices, `storage_type: ambient`, 180-day shelf life \u2192 standard ground delivery is fine (SHP-018 via Kerry Express \u2713)\n\nThis is the correct approach. Putting fresh mangoes on a ground carrier would violate the cold chain rule and risk spoilage. The split also has a cost benefit: ambient freight via Kerry Express (15 THB/kg) is cheaper than cold chain (25 THB/kg), so only the perishable line pays the premium rate.\n\nBoth shipments are in transit and on track to arrive before the required date of 2026-02-15.",
+  "duration_ms": 27849,
+  "cost_usd": 0.06100420000000001,
+  "num_turns": 7,
+  "session_id": "b42fda7f-2005-4ba9-b858-04a08c64180c",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 6,
+  "systems_touched": [
+    "OMS",
+    "TMS",
+    "WMS"
+  ]
+}

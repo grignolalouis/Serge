@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-06",
+  "question": "Any shipments with problems right now?",
+  "agent_answer": "One active shipment exception (from TMS):\n\n| Field | Detail |\n|-------|--------|\n| **Shipment** | SHP-009 |\n| **Order** | ORD-011 |\n| **Customer** | Tops Supermarket, Bangkok |\n| **Carrier** | CAR-001 |\n| **Problem** | Refrigeration unit malfunction on delivery vehicle |\n| **Shipped** | Feb 6 \u2014 was due Feb 8 |\n\n**This is critical.** A refrigeration failure on a cold-chain delivery means perishable mangoes may be spoiling right now. Recommend immediately: contact CAR-001 to assess product temperature, consider rerouting via another refrigerated carrier, and notify the customer of the delay.",
+  "duration_ms": 10497,
+  "cost_usd": 0.06406335,
+  "num_turns": 3,
+  "session_id": "61b0be6c-e49e-40a9-b4e1-bbfb3a5c8579",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_exception_shipments"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "TMS"
+  ]
+}

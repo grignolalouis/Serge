@@ -1,0 +1,24 @@
+{
+  "scenario_id": "L2-06",
+  "question": "Any shipments with problems right now?",
+  "agent_answer": "**One exception \u2014 and it's a critical cold chain failure.**\n\n| Field | Detail | Source |\n|-------|--------|--------|\n| Shipment | SHP-009 | TMS |\n| Order | ORD-011 \u2192 Tops Supermarket | OMS |\n| Product | PROD-003 Keaw Mango Box 5kg (25 units, 125 kg) | WMS |\n| Storage type | **refrigerated** | WMS |\n| Carrier | CAR-001 Kerry Express \u2014 **ground** | TMS |\n| Exception reason | Refrigeration unit malfunction on delivery vehicle | TMS |\n| Shipped | 2026-02-06, ETA 2026-02-08 | TMS |\n\n**Double problem:**\n1. **Carrier mismatch** \u2014 PROD-003 requires cold chain (`storage_type: refrigerated`) but was assigned to Kerry Express, a ground carrier. This was wrong even before the breakdown.\n2. **Active malfunction** \u2014 the vehicle's refrigeration unit failed in transit, meaning 25 boxes of fresh mango (shelf life: 10 days) are at spoilage risk right now.\n\n**Recommended actions for the team:**\n- Contact Kerry Express immediately for status on SHP-009 and whether the goods can be transferred to a refrigerated vehicle.\n- Assess whether the cargo is still viable for delivery to Tops Supermarket.\n- For future orders containing refrigerated products, route to SCG Cold Chain (CAR-002) or Flash Express (CAR-003) instead.",
+  "duration_ms": 24798,
+  "cost_usd": 0.0770786,
+  "num_turns": 8,
+  "session_id": "f9c13b1e-2d9d-4569-a61b-aa0ffa6b2b29",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_exception_shipments",
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_get_carrier",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "TMS",
+    "WMS"
+  ]
+}

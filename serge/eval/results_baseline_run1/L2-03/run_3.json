@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-03",
+  "question": "Which customer orders are currently overdue?",
+  "agent_answer": "Here are the **13 overdue customer orders** (source: OMS), sorted by urgency:\n\n| Order | Customer | Status | Priority | Required By | Days Overdue |\n|-------|----------|--------|----------|-------------|-------------|\n| ORD-007 | CUST-001 | processing | **urgent** | Feb 12 | 65 days |\n| ORD-023 | CUST-004 | shipped | **urgent** | Feb 15 | 62 days |\n| ORD-011 | CUST-003 | shipped | normal | Feb 10 | 67 days |\n| ORD-019 | CUST-012 | shipped | **high** | Feb 13 | 64 days |\n| ORD-005 | CUST-005 | shipped | normal | Feb 14 | 63 days |\n| ORD-018 | CUST-011 | shipped | normal | Feb 14 | 63 days |\n| ORD-027 | CUST-002 | shipped | normal | Feb 16 | 61 days |\n| ORD-012 | CUST-004 | processing | **high** | Feb 17 | 60 days |\n| ORD-009 | CUST-008 | pending | **high** | Feb 18 | 59 days |\n| ORD-028 | CUST-006 | processing | **high** | Feb 18 | 59 days |\n| ORD-021 | CUST-010 | pending | normal | Feb 19 | 58 days |\n| ORD-025 | CUST-011 | pending | normal | Feb 20 | 57 days |\n| ORD-020 | CUST-009 | processing | normal | Feb 18 | 59 days |\n\n**Key concerns:**\n\n- **ORD-007** (CUST-001) is the most critical \u2014 `urgent` priority, still stuck in `processing`, 65 days overdue. This likely indicates a stock shortage blocking fulfillment.\n- **4 orders are still `pending` or `processing`** and have never shipped \u2014 these are the most actionable (ORD-007, ORD-009, ORD-012, ORD-020, ORD-021, ORD-025, ORD-028).\n- **ORD-019** has a VIP note (\"VIP guest dinner \u2014 must arrive by noon\") and is still only `shipped`.\n\nWould you like me to investigate why the stuck processing orders haven't shipped (likely a stock issue)?",
+  "duration_ms": 15307,
+  "cost_usd": 0.0412569,
+  "num_turns": 3,
+  "session_id": "b8832200-c0be-4bfd-88aa-0c640c1bef6e",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "OMS"
+  ]
+}

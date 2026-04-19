@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-06",
+  "question": "Any shipments with problems right now?",
+  "agent_answer": "There is **1 shipment with a problem** (TMS):\n\n| Field | Detail |\n|---|---|\n| Shipment | SHP-009 |\n| Order | ORD-011 |\n| Carrier | CAR-001 |\n| Destination | Tops Supermarket, Bangkok |\n| Shipped | 2026-02-06 |\n| Est. Arrival | 2026-02-08 |\n| Exception | **Refrigeration unit malfunction on delivery vehicle** |\n\n**This is critical.** The carrier's refrigeration unit failed mid-delivery, meaning any refrigerated products in this shipment are at spoilage risk. The shipment is now 2+ months overdue (estimated 2026-02-08, today is 2026-04-18).\n\n**Recommended actions for the team:**\n1. Confirm whether goods were salvaged or spoiled \u2014 this shipment is long past its estimated arrival.\n2. Check if ORD-011 was ever re-fulfilled or is still open in OMS.\n3. Contact Tops Supermarket regarding the delivery outcome.\n\nWant me to dig into ORD-011's current status or check what products were in this shipment?",
+  "duration_ms": 15057,
+  "cost_usd": 0.0322317,
+  "num_turns": 3,
+  "session_id": "d4219382-c9e7-412b-871d-e72eebcaebec",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_exception_shipments"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "TMS"
+  ]
+}

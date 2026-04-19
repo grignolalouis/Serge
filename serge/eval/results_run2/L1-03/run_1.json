@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L1-03",
+  "question": "Give me the profile for supplier SUP-001.",
+  "agent_answer": "**SUP-001 \u2014 Somchai Mango Farm** *(Source: SRM)*\n\n| Field | Value |\n|---|---|\n| Region | Chanthaburi |\n| Contact | somchai@mangomail.th |\n| Rating | 4.5 / 5.0 |\n| Lead Time | 3 days |\n| Product Categories | Premium, Standard |\n| Payment Terms | Net 30 |\n\nA high-rated supplier with a fast lead time. Chanthaburi is one of Thailand's top mango-producing regions.",
+  "duration_ms": 13254,
+  "cost_usd": 0.06941175,
+  "num_turns": 3,
+  "session_id": "85bf3f23-074d-4f5f-a897-cf451eea3988",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_get_supplier"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "SRM"
+  ]
+}

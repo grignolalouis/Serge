@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly reports 8 available units, lists all critical active orders (ORD-007 at 50 units, ORD-009 at 5 units), notes active demand exceeds stock, and adds ORD-028 as additional valid data. All values and IDs are consistent with the ground truth and no fabricated data is present.",
+  "facts_found": [
+    "PROD-001 inventory: 8 available, 0 reserved",
+    "ORD-007: 50 units of PROD-001, urgent, processing",
+    "ORD-009: 5 units of PROD-001, high, pending",
+    "ORD-028: 12 units of PROD-001, high, processing",
+    "Active demand (67 units) exceeds available stock (8 units)",
+    "Shortfall of -59 units identified",
+    "Reorder point is 20, needs_reorder: true"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

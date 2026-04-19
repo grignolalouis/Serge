@@ -1,0 +1,33 @@
+{
+  "id": "L5-01",
+  "level": "L5",
+  "use_case": "UC-4",
+  "title": "Full Product Supply Chain History",
+  "expected_systems": [
+    "SRM",
+    "WMS",
+    "OMS"
+  ],
+  "expected_tool_count_min": 6,
+  "estimated_human_minutes": 40,
+  "question": "Give me the complete supply chain history for PROD-001 — from purchase orders to inventory to customer demand. What does it tell you?",
+  "ground_truth": {
+    "critical_facts": [
+      "Product is Nam Doc Mai Mango Box 5kg, premium, 450 THB, refrigerated, 7-day shelf life",
+      "Two suppliers: SUP-001 (Somchai) at 280 THB and SUP-004 (Rayong Tropical) at 270 THB",
+      "Current inventory is 8 units available",
+      "PO-008 (150 units, from SUP-001) is in transit, expected 2026-02-18",
+      "Active demand currently exceeds available stock"
+    ],
+    "important_facts": [
+      "Multiple purchase orders historically supplied this product",
+      "Multiple customer orders historically consumed this product",
+      "Margin analysis: roughly 170 THB per unit (~60% gross margin)",
+      "Reorder point of 20 may be too low given observed demand spikes"
+    ],
+    "must_not_contain": [
+      "Wrong current stock",
+      "Missing one of the two suppliers"
+    ]
+  }
+}

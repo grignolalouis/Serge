@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L3-02",
+  "question": "Which orders are requesting PROD-001 and do we have enough stock to cover them?",
+  "agent_answer": "Here's the full picture across OMS and WMS:\n\n## PROD-001 \u2014 Nam Doc Mai Mango Box 5kg\n\n**Inventory (WMS)**\n\n| Metric | Value |\n|---|---|\n| In warehouse | 8 units |\n| Reserved | 0 |\n| Available | **8 units** |\n| Reorder point | 20 |\n| Status | **Needs reorder** |\n\n---\n\n**Active Orders (OMS)**\n\n| Order ID | Customer | Status | Priority | Required Date | Qty PROD-001 |\n|---|---|---|---|---|---|\n| ORD-007 | CUST-001 | processing | **urgent** | 2026-02-12 | 50 |\n| ORD-028 | CUST-006 | processing | high | 2026-02-18 | 12 |\n| ORD-009 | CUST-008 | pending | high | 2026-02-18 | 5 |\n| ORD-023 | CUST-004 | shipped | urgent | 2026-02-15 | 10 |\n\n**Total active demand: 77 units** (67 still to fulfill: 62 processing + 5 pending; 10 already shipped)\n\n---\n\n**Verdict: Critical shortage.** We have only 8 units available against 67 units still to fulfill. ORD-007 alone requires 50 units (urgent, due 2026-02-12) \u2014 6\u00d7 our current stock. Procurement should raise an emergency supplier order for PROD-001 immediately. Note: PROD-001 is `refrigerated`, so the incoming shipment will also require a refrigerated carrier (CAR-002 or CAR-003).",
+  "duration_ms": 49470,
+  "cost_usd": 0.1377161,
+  "num_turns": 5,
+  "session_id": "0a780b11-df60-45c7-b66e-36228b596a89",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

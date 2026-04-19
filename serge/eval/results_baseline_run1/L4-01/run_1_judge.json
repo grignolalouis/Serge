@@ -1,0 +1,26 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 2,
+  "no_hallucination": 5,
+  "reasoning": 4,
+  "weighted_score": 4.0,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "All stated facts are correct and no hallucinations are present, but the agent failed to actually query SRM and therefore missed the critical PO-008 finding: a supplier order in transit expected 2026-02-18, which is after the required date and confirms the order cannot be fulfilled on time even with incoming stock.",
+  "facts_found": [
+    "ORD-007 status is processing",
+    "ORD-007 is overdue (required date 2026-02-12)",
+    "Needs 50 units of PROD-001 (Nam Doc Mai)",
+    "Only 8 units available",
+    "Root cause is stock shortage",
+    "No shipment exists in TMS",
+    "Priority is urgent",
+    "Customer is CUST-001"
+  ],
+  "facts_missing": [
+    "PO-008 is in transit from SUP-001 for 150 units, expected 2026-02-18 — after the required date"
+  ],
+  "hallucinations": []
+}

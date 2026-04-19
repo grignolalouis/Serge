@@ -1,0 +1,26 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.80,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All five critical facts are correctly stated: ORD-007 stuck in processing, 50 units of PROD-001 needed, only 8 available, root cause is stock shortage, and PO-008 expected Feb 18 (after the Feb 12 required date). The recommendation section references SUP-004/SP-009 with specific pricing (270 THB vs 280 THB) that cannot be verified from the provided ground truth, introducing a minor hallucination risk, but no must_not_contain rules are violated.",
+  "facts_found": [
+    "ORD-007 status: processing (stuck)",
+    "Order is overdue — required date 2026-02-12",
+    "Needs 50 units of PROD-001",
+    "Only 8 units available (shortfall of 42)",
+    "Root cause: stock shortage",
+    "PO-008 shipped from SUP-001, 150 units, expected 2026-02-18 (after required date)",
+    "No shipment created for ORD-007",
+    "Customer CUST-001, urgent priority"
+  ],
+  "facts_missing": [],
+  "hallucinations": [
+    "SUP-004/SP-009 at 270 THB/unit as a cheaper alternative — specific pricing and recommendation not verifiable from ground truth (minor risk)"
+  ]
+}

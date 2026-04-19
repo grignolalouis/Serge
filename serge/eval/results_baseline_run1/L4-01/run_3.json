@@ -1,0 +1,27 @@
+{
+  "scenario_id": "L4-01",
+  "question": "Why hasn't order ORD-007 shipped yet? The customer is chasing us.",
+  "agent_answer": "Here's the full diagnosis:\n\n---\n\n**ORD-007 \u2014 Root Cause: Stock Shortage + Severely Overdue**\n\n**Order facts** (OMS):\n- Customer: CUST-001 | Priority: **URGENT**\n- Ordered: 2026-02-05 | Required: 2026-02-12\n- **Today is 2026-04-18 \u2014 this order is 65 days overdue**\n- Product: PROD-001 (Nam Doc Mai Mango Box 5kg, refrigerated), 50 units\n\n**Why it hasn't shipped** (WMS):\n- Available stock: only **8 units** \u2014 42 units short\n- Reorder point is 20; stock flagged as `needs_reorder: true`\n- No shipment was ever created in TMS\n\n**Incoming replenishment** (SRM):\n- **PO-008** (SUP-001, SP-001 \u2192 PROD-001): 150 units, status `shipped`, expected delivery **2026-02-18**\n\nThis is a red flag. PO-008 was expected over 2 months ago and is still showing as `shipped` \u2014 not `received`. Either it was never received into WMS, or it was received and consumed by other orders without restocking ORD-007.\n\n---\n\n**Recommended actions for your team:**\n1. Urgently investigate PO-008 \u2014 why hasn't it been marked `received` after 2 months?\n2. Check current physical stock in the warehouse \u2014 WMS last updated 2026-02-10, may be stale.\n3. Contact CUST-001 immediately given the 65-day overdue on an urgent order.\n4. If stock is available, manually trigger fulfillment for ORD-007 and assign a **refrigerated carrier** (PROD-001 requires cold chain).",
+  "duration_ms": 40713,
+  "cost_usd": 0.10194199999999999,
+  "num_turns": 10,
+  "session_id": "77ce8161-a8d0-47fd-901c-b8a25ae63936",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+  ],
+  "tool_calls_count": 9,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

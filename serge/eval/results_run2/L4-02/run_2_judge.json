@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 4,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 4.70,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: SHP-009 on CAR-001 (ground), ORD-011 with PROD-003 (refrigerated), and the mismatch diagnosis. The agent also correctly identifies the exception reason and refrigerated alternatives. Minor omissions are the affected customer (Tops Supermarket / CUST-003) and the overdue status, both of which are 'important' rather than 'critical'.",
+  "facts_found": [
+    "SHP-009 uses Kerry Express CAR-001 (ground type)",
+    "Order ORD-011 contains PROD-003 (refrigerated product)",
+    "Carrier mismatch: ground carrier assigned to refrigerated product",
+    "Exception: refrigeration unit malfunction on delivery vehicle",
+    "Refrigerated alternatives: SCG Cold Chain CAR-002, Flash Express CAR-003",
+    "Product shelf life: 10 days"
+  ],
+  "facts_missing": [
+    "Affected customer: Tops Supermarket (CUST-003)",
+    "Order ORD-011 is now overdue"
+  ],
+  "hallucinations": []
+}

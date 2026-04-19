@@ -1,0 +1,22 @@
+{
+  "scenario_id": "L4-01",
+  "question": "Why hasn't order ORD-007 shipped yet? The customer is chasing us.",
+  "agent_answer": "Root cause is clear. Here's the full picture:\n\n**ORD-007 \u2014 Blocked by stock shortage**\n\n| Field | Value |\n|---|---|\n| Status (OMS) | `processing` \u2014 stuck, no shipment created |\n| Priority | **urgent** (must ship within 24h) |\n| Order date | 2026-02-05 |\n| Required date | 2026-02-12 \u2014 **already overdue** |\n| Product | PROD-001 \u2014 Nam Doc Mai Mango Box 5kg |\n| Quantity needed | 50 units |\n| Available stock (WMS) | **8 units** |\n| Shortfall | **42 units** |\n| TMS | No shipment exists |\n\nThe order requires 50 units of PROD-001 but only 8 are available in WH-BKK. Since there's insufficient stock, the warehouse can't pick and pack the order, so no shipment has been created in TMS. The order has also missed its required date of Feb 12 \u2014 it's been sitting for over two months.\n\n**Recommended actions for the team:**\n1. Check SRM for any pending/confirmed supplier orders for PROD-001 that may be inbound.\n2. If none, raise an emergency purchase order with a supplier \u2014 PROD-001 has a 7-day shelf life so speed is critical.\n3. Consider a partial shipment of the 8 available units now to show the customer progress, then fulfill the remaining 42 when restocked.\n4. Communicate the delay to CUST-001 immediately given this is urgent priority.",
+  "duration_ms": 24131,
+  "cost_usd": 0.09488535,
+  "num_turns": 6,
+  "session_id": "5ca4ee87-5859-4088-a52a-95c8446ccafb",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory"
+  ],
+  "tool_calls_count": 5,
+  "systems_touched": [
+    "OMS",
+    "TMS",
+    "WMS"
+  ]
+}

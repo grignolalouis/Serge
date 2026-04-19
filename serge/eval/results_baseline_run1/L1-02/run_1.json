@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L1-02",
+  "question": "Who is customer CUST-004?",
+  "agent_answer": "**CUST-004 \u2014 Arunee Thongchai** (OMS)\n\n- **Company:** Mandarin Oriental Bangkok\n- **Segment:** Wholesale (hotel \u2014 large, likely weekly orders)\n- **Zone:** Central Bangkok (1-day delivery)\n- **Address:** 48 Oriental Ave, Bang Rak",
+  "duration_ms": 8606,
+  "cost_usd": 0.0638504,
+  "num_turns": 3,
+  "session_id": "e2bdbd03-e7fd-4fcd-b869-b7aad616986b",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "OMS"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-05",
+  "question": "Show me all our purchase orders from Somchai Mango Farm (SUP-001).",
+  "agent_answer": "Here are all 14 purchase orders from Somchai Mango Farm (SUP-001), sourced from SRM:\n\n| PO | Order Date | Status | Lines (SP-ID \u00d7 Qty) | Expected Delivery | Actual Delivery |\n|---|---|---|---|---|---|\n| PO-001 | 2026-01-02 | received | SP-001 \u00d7 100 | 2026-01-05 | 2026-01-05 \u2713 |\n| PO-004 | 2026-01-12 | received | SP-003 \u00d7 50 | 2026-01-15 | 2026-01-14 \u2713 (early) |\n| PO-006 | 2026-01-22 | received | SP-001 \u00d7 80 | 2026-01-25 | 2026-01-25 \u2713 |\n| PO-008 | 2026-02-10 | **shipped** | SP-001 \u00d7 150 | 2026-02-18 | \u2014 |\n| PO-102 | 2026-01-22 | received | SP-002 \u00d7 137 | 2026-01-25 | 2026-01-25 \u2713 |\n| PO-104 | 2025-11-02 | received | SP-003 \u00d7 67, SP-001 \u00d7 56 | 2025-11-05 | 2025-11-05 \u2713 |\n| PO-106 | 2025-11-25 | received | SP-001 \u00d7 86 | 2025-11-28 | 2025-11-28 \u2713 |\n| PO-107 | 2025-12-27 | received | SP-002 \u00d7 104, SP-003 \u00d7 129 | 2025-12-30 | 2025-12-30 \u2713 |\n| PO-109 | 2026-01-10 | received | SP-002 \u00d7 140 | 2026-01-13 | 2026-01-13 \u2713 |\n| PO-110 | 2025-11-28 | received | SP-003 \u00d7 46, SP-001 \u00d7 52 | 2025-12-01 | 2025-12-01 \u2713 |\n| PO-130 | 2026-02-01 | received | SP-003 \u00d7 32, SP-002 \u00d7 30 | 2026-02-04 | 2026-02-04 \u2713 |\n| PO-132 | 2025-10-10 | received | SP-002 \u00d7 106, SP-001 \u00d7 140 | 2025-10-13 | 2025-10-13 \u2713 |\n| PO-136 | 2025-12-30 | received | SP-003 \u00d7 78 | 2026-01-02 | 2026-01-02 \u2713 |\n| PO-140 | 2025-10-21 | received | SP-002 \u00d7 86 | 2025-10-24 | 2025-10-24 \u2713 |\n\n**Summary:** 13 received, 1 currently shipped (PO-008, due 2026-02-18). On-time delivery rate is excellent \u2014 every completed order arrived on or before the expected date.",
+  "duration_ms": 20969,
+  "cost_usd": 0.045902700000000005,
+  "num_turns": 3,
+  "session_id": "957dd46d-779f-4bca-8097-1584e34598c1",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "SRM"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "L4-05",
+  "level": "L4",
+  "use_case": "UC-2",
+  "title": "Customer Impact Assessment",
+  "expected_systems": [
+    "WMS",
+    "OMS"
+  ],
+  "expected_tool_count_min": 3,
+  "estimated_human_minutes": 20,
+  "question": "Given our PROD-001 shortage, which customers are at risk of being impacted?",
+  "ground_truth": {
+    "critical_facts": [
+      "Current PROD-001 stock is 8 units available",
+      "ORD-007 (CUST-001 Siam Paragon) needs 50 units — blocked, the most severe impact",
+      "ORD-009 (CUST-008 Gaggan Anand) needs 5 units — at risk (pending)",
+      "At least one additional active or shipped order consuming PROD-001 is surfaced (e.g., ORD-023 Mandarin Oriental or ORD-028 Sukhothai Hotel)"
+    ],
+    "important_facts": [
+      "Customer names are identified from OMS",
+      "Total demand across active PROD-001 orders is quantified against the 8 available units",
+      "Orders already delivered are distinguished from at-risk ones"
+    ],
+    "must_not_contain": [
+      "Customers whose orders don't include PROD-001",
+      "Already-delivered orders listed as at-risk"
+    ]
+  }
+}

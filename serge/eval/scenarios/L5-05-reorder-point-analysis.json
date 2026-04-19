@@ -1,0 +1,30 @@
+{
+  "id": "L5-05",
+  "level": "L5",
+  "use_case": "UC-5",
+  "title": "Reorder Point Analysis",
+  "expected_systems": [
+    "WMS",
+    "OMS",
+    "SRM"
+  ],
+  "expected_tool_count_min": 5,
+  "estimated_human_minutes": 35,
+  "question": "Our reorder point for PROD-001 is 20 units, but we still ran out. Look at the active orders demanding PROD-001 and the supplier lead times — is the threshold wrong, or is something else going on?",
+  "ground_truth": {
+    "critical_facts": [
+      "Current state: 8 available, reorder point 20 — already below threshold",
+      "At least one active order for PROD-001 is much larger than the reorder point (ORD-007 requests 50 units)",
+      "Supplier lead time is roughly 3 days (SUP-001 or SUP-004)",
+      "Diagnosis links the shortfall to the mismatch between reorder point and large-order demand, not to supplier performance"
+    ],
+    "important_facts": [
+      "PO-008 is in transit (150 units) but arrives after ORD-007 was needed",
+      "Recommendation direction: raise reorder point, or add a workflow for orders that exceed the buffer"
+    ],
+    "must_not_contain": [
+      "Claim the reorder point is correct as-is without any qualification",
+      "Blame the supplier (they are reliable)"
+    ]
+  }
+}

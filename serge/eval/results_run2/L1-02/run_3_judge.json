@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All critical facts are correctly stated: company is Mandarin Oriental Bangkok and segment is wholesale. All important facts (contact name Arunee Thongchai, central_bkk delivery zone, Bangkok address) are also present and accurate. No fabricated data.",
+  "facts_found": [
+    "Company: Mandarin Oriental Bangkok",
+    "Segment: wholesale",
+    "Contact: Arunee Thongchai",
+    "Delivery zone: central_bkk (central Bangkok)",
+    "Address: 48 Oriental Ave, Bang Rak"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent's answer contains all critical facts with correct values: quantity on hand (22), reserved (3), available (19), reorder point (10), and correctly concludes no reorder is needed. All additional details (product name, category, shelf life, storage type) are accurate and consistent with the ground truth.",
+  "facts_found": [
+    "Quantity on hand: 22",
+    "Reserved: 3",
+    "Available: 19",
+    "Reorder point: 10",
+    "No reorder needed",
+    "Product name: Mahachanok Mango Box 10kg",
+    "Category: Premium",
+    "Shelf life: 5 days",
+    "Storage type: Refrigerated"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

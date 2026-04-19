@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.80,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correctly stated: ORD-007 and ORD-011 are flagged as overdue, SHP-009 is identified as an exception (refrigeration failure), and all three low-stock products (PROD-001, PROD-005, PROD-008) are highlighted. The key causal link between ORD-007 being stuck in processing and PROD-001's low stock is explicitly made. No hallucinations detected; extra PO/order IDs cited are plausible from the seed data and consistent with tool-call outputs. Minor no_hallucination deduction since the additional IDs (PO-009, ORD-019, etc.) cannot be fully verified here, but none contradict the ground truth.",
+  "facts_found": [
+    "ORD-007 overdue and stuck in processing",
+    "ORD-011 overdue (shipped for Tops Supermarket)",
+    "SHP-009 exception — refrigeration unit malfunction",
+    "PROD-001 low stock: 8 available vs reorder point 20",
+    "PROD-005 low stock: 12 available vs reorder point 15",
+    "PROD-008 low stock: 6 available vs reorder point 15 with 3-day shelf life",
+    "Connection between ORD-007 stuck and PROD-001 shortage explicitly noted",
+    "Actionable context provided for each issue"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

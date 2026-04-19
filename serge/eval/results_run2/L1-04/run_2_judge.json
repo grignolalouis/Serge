@@ -1,0 +1,19 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three carriers are listed with correct IDs, names, types, costs per kg, and transit times matching the ground truth exactly. The additional note about refrigerated product requirements is accurate and adds value.",
+  "facts_found": [
+    "Kerry Express (CAR-001), ground, 15 THB/kg, 2 days transit",
+    "SCG Cold Chain (CAR-002), refrigerated, 25 THB/kg, 1 day transit",
+    "Flash Express Premium (CAR-003), refrigerated, 35 THB/kg, 1 day transit"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

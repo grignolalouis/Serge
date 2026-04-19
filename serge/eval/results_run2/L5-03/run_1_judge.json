@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identified all critical facts: PROD-004 has 19 available (sufficient), PROD-001 has 8 available with a 4-unit shortfall, PO-008 delivers 150 units on Feb 18 (same day as deadline making it a tight race), and correctly mandated a refrigerated carrier (CAR-002 or CAR-003, explicitly ruling out Kerry Express CAR-001). All important facts are also present including the 120kg total weight, SCG Cold Chain cost of 3,000 THB, Flash Express cost of 4,200 THB, and the recommendation favoring SCG Cold Chain.",
+  "facts_found": [
+    "PROD-004: 19 available, 6 needed — sufficient",
+    "PROD-001: 8 available, 12 needed — 4-unit shortfall",
+    "PO-008: 150 units of PROD-001, shipped status, expected Feb 18 (same day as deadline)",
+    "Refrigerated carrier required; Kerry Express (CAR-001, ground) must not be used",
+    "SCG Cold Chain (CAR-002): refrigerated, 1-day transit, 25 THB/kg, 3,000 THB total",
+    "Flash Express (CAR-003): refrigerated, 1-day transit, 35 THB/kg, 4,200 THB total",
+    "Total weight: 120 kg (12×5 + 6×10)",
+    "Recommendation: SCG Cold Chain (CAR-002) — same transit, 30% cheaper"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

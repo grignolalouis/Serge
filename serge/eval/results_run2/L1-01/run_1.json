@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L1-01",
+  "question": "Can you tell me about product PROD-001?",
+  "agent_answer": "Here's a full overview of **PROD-001** (source: WMS):\n\n| Field | Value |\n|---|---|\n| Name | Nam Doc Mai Mango Box 5kg |\n| SKU | MANGO-NDM-5 |\n| Category | Premium |\n| Unit Price | \u0e3f450 THB |\n| Weight | 5 kg |\n| Storage Type | **Refrigerated** (cold chain required) |\n| Shelf Life | 7 days |\n| Reorder Point | 20 units |\n\n**Current Inventory (WH-BKK):**\n\n| Quantity | Reserved | Available | Status |\n|---|---|---|---|\n| 8 | 0 | 8 | \u26a0 Needs reorder |\n\n**Alert:** Stock (8 units) is below the reorder point (20 units). A purchase order should be raised immediately. Since this is a refrigerated product, any shipment must use a refrigerated carrier (e.g., SCG Cold Chain CAR-002 or Flash Express CAR-003).",
+  "duration_ms": 19959,
+  "cost_usd": 0.0925619,
+  "num_turns": 5,
+  "session_id": "7e9753ef-e593-46e3-8eae-9e463215348d",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "WMS"
+  ]
+}

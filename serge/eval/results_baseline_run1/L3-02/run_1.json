@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L3-02",
+  "question": "Which orders are requesting PROD-001 and do we have enough stock to cover them?",
+  "agent_answer": "## PROD-001 \u2014 Nam Doc Mai Mango Box 5kg\n\n**Source: WMS**\n\n| Metric | Value |\n|--------|-------|\n| Stock on hand | 8 units |\n| Reserved | 0 |\n| Available | **8 units** |\n| Reorder point | 20 \u2192 already flagged |\n\n---\n\n**Active orders needing fulfillment (OMS):**\n\n| Order | Status | Priority | Customer | PROD-001 Qty |\n|-------|--------|----------|----------|-------------|\n| ORD-007 | processing | **urgent** | CUST-001 | 50 |\n| ORD-028 | processing | **high** | CUST-006 | 12 |\n| ORD-009 | pending | **high** | CUST-008 | 5 |\n\n**Total unfulfilled demand: 67 units \u2014 against 8 available. We are short by 59 units.**\n\n---\n\n**Recommendations for the team:**\n\n1. **ORD-007 is urgent** (50 units, CUST-001) \u2014 prioritize restocking immediately.\n2. Check SRM for any incoming supplier orders for PROD-001 that could cover the gap.\n3. Note: PROD-001 is `refrigerated` with a 7-day shelf life \u2014 the restocking order must come from a supplier who can deliver within that window, and must ship via a refrigerated carrier.",
+  "duration_ms": 56325,
+  "cost_usd": 0.19496634999999998,
+  "num_turns": 5,
+  "session_id": "7748b86b-f13a-46c3-a79f-7945e4a10986",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

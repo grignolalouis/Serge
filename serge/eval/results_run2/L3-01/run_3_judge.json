@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 3,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 4.40,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies the shipped status, SCG Cold Chain CAR-002 refrigerated carrier, ETA 2026-02-12, shipped date, destination, and most recent tracking event — but omits the tracking number SCG-20260210-005, which is listed as a critical fact. All stated facts are accurate and no fabrications are detected.",
+  "facts_found": [
+    "Order status: shipped",
+    "Carrier: SCG Cold Chain, CAR-002, refrigerated",
+    "ETA: 2026-02-12",
+    "Shipped on 2026-02-10",
+    "Destination: Villa Market, Bangkok",
+    "Most recent tracking event: local distribution center on 2026-02-11"
+  ],
+  "facts_missing": [
+    "Tracking number SCG-20260210-005"
+  ],
+  "hallucinations": []
+}

@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L3-01",
+  "question": "Where is order ORD-005 right now?",
+  "agent_answer": "**ORD-005 is currently in transit.**\n\n**Order Summary** (OMS)\n\n| Field | Value |\n|---|---|\n| Customer | CUST-005 |\n| Status | `shipped` |\n| Priority | normal |\n| Ordered | 2026-02-08 |\n| Required by | 2026-02-14 |\n| Items | PROD-002 \u00d7 15, PROD-005 \u00d7 10 |\n\n**Shipment SHP-005** (TMS)\n\n| Field | Value |\n|---|---|\n| Carrier | SCG Cold Chain (CAR-002) \u2014 refrigerated |\n| Tracking | SCG-20260210-005 |\n| Route | Bangkok Central Warehouse \u2192 Villa Market, Bangkok |\n| Shipped | 2026-02-10 08:00 |\n| ETA | 2026-02-12 17:00 |\n\n**Tracking Events**\n\n| Time | Location | Event |\n|---|---|---|\n| 2026-02-10 08:30 | Bang Na, Bangkok | Picked up from warehouse |\n| 2026-02-10 14:00 | Bangkok | Departed sorting facility |\n| 2026-02-11 10:00 | Bangkok | At local distribution center, scheduled for delivery |\n\nThe order is on track \u2014 last known position is at a Bangkok distribution center, scheduled for delivery before the 2026-02-14 required date. Carrier type (refrigerated) is appropriate for cold-chain products.",
+  "duration_ms": 12985,
+  "cost_usd": 0.03719535,
+  "num_turns": 4,
+  "session_id": "f551cf07-6096-4545-ad37-112451f523c9",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "OMS",
+    "TMS"
+  ]
+}

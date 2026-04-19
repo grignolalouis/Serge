@@ -1,0 +1,27 @@
+{
+  "id": "L3-04",
+  "level": "L3",
+  "use_case": "UC-3",
+  "title": "Sourcing Options",
+  "expected_systems": [
+    "SRM"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 10,
+  "question": "Who can supply us Nam Doc Mai mangoes and at what price?",
+  "ground_truth": {
+    "critical_facts": [
+      "Two suppliers: SUP-001 and SUP-004",
+      "SUP-001 cost is 280 THB (SP-001)",
+      "SUP-004 cost is 270 THB (SP-009)"
+    ],
+    "important_facts": [
+      "SUP-001 is Somchai Mango Farm in Chanthaburi, rating 4.5, lead 3 days",
+      "SUP-004 is Rayong Tropical, rating 4.0, lead 3 days"
+    ],
+    "must_not_contain": [
+      "Fabricated suppliers",
+      "Wrong unit costs"
+    ]
+  }
+}

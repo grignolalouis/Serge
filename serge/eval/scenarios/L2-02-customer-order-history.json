@@ -1,0 +1,27 @@
+{
+  "id": "L2-02",
+  "level": "L2",
+  "use_case": "UC-4",
+  "title": "Customer Order History",
+  "expected_systems": [
+    "OMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 6,
+  "question": "Show me all the orders from Mandarin Oriental (CUST-004).",
+  "ground_truth": {
+    "critical_facts": [
+      "Multiple orders listed for CUST-004",
+      "ORD-004 is included and marked delivered",
+      "ORD-012 is included and marked processing",
+      "ORD-023 is included and marked shipped"
+    ],
+    "important_facts": [
+      "Dates are present for each order"
+    ],
+    "must_not_contain": [
+      "Orders belonging to other customers",
+      "Invented order IDs"
+    ]
+  }
+}

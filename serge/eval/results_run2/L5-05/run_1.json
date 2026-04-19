@@ -1,0 +1,28 @@
+{
+  "scenario_id": "L5-05",
+  "question": "Our reorder point for PROD-001 is 20 units, but we still ran out. Look at the active orders demanding PROD-001 and the supplier lead times \u2014 is the threshold wrong, or is something else going on?",
+  "agent_answer": "Here's the full picture across all four systems.\n\n---\n\n## PROD-001 \u2014 Nam Doc Mai Mango Box 5kg (Refrigerated, 7-day shelf life)\n\n### Current State (WMS)\n| Metric | Value |\n|--------|-------|\n| On-hand | 8 units |\n| Reserved | 0 |\n| Available | 8 units |\n| Reorder point | 20 |\n| Status | `needs_reorder: true` |\n\n---\n\n### Active Demand (OMS)\n| Order | Status | Priority | PROD-001 qty | Required by |\n|-------|--------|----------|-------------|-------------|\n| ORD-007 | processing | urgent | **50** | 2026-02-12 \u26a0\ufe0f overdue |\n| ORD-023 | shipped | urgent | 10 | 2026-02-15 |\n| ORD-028 | processing | high | 12 | 2026-02-18 |\n| ORD-009 | pending | high | 5 | 2026-02-18 |\n| **Total** | | | **77 units** | |\n\n---\n\n### Suppliers for PROD-001 (SRM)\n| Supplier | Lead time | Rating | Unit cost |\n|----------|-----------|--------|-----------|\n| Somchai Mango Farm (SUP-001) | 3 days | 4.5/5 | 280 THB |\n| Rayong Tropical (SUP-004) | 3 days | 4.0/5 | 270 THB |\n\n---\n\n## Diagnosis\n\n**Both problems are real \u2014 the threshold is wrong AND there's a demand spike.**\n\n**1. The reorder point of 20 is structurally too low.**\nA reorder point should cover demand during the replenishment window (lead time = 3 days). If average daily pull is even 5 units, the 3-day window alone requires 15 units \u2014 leaving almost no safety buffer at a threshold of 20. The threshold was clearly sized for average, routine orders.\n\n**2. ORD-007 is the proximate cause: a 50-unit urgent order \u2014 2.5\u00d7 the entire reorder point \u2014 hit the system as a single spike.** By the time the reorder trigger fired at 20 units, there was already a 30-unit deficit just from this one order. No reorder point of 20 could survive this.\n\n**3. Shelf life limits your safety stock options.** With only 7 days of shelf life, you can't hold 100+ units as a buffer without spoilage risk. This creates a structural tension: large safety stock \u2192 spoilage; small safety stock \u2192 stockouts on spikes.\n\n---\n\n## Recommendation\n\n- **Raise the reorder point** to at least 60\u201370 units \u2014 enough to cover 3-day lead time + the largest realistic single order (50 units seen in ORD-007).\n- **For urgent large orders** (>30 units of a refrigerated product), trigger procurement immediately when the order is received \u2014 don't wait for the reorder point to be breached.\n- **Prefer SUP-004 (Rayong Tropical)** for cost efficiency (270 vs 280 THB), but split across both suppliers for large restocks given the short shelf life and refrigerated requirement.\n- ORD-007 is **already overdue** (required 2026-02-12). With 8 units available and 50 needed, a purchase order to one or both suppliers should be raised urgently \u2014 stock can arrive in 3 days.",
+  "duration_ms": 70382,
+  "cost_usd": 0.35216600000000003,
+  "num_turns": 9,
+  "session_id": "c3dcf0e5-8ba1-44b8-b1c9-6a083c2474b3",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+    "Agent",
+    "ToolSearch",
+    "Read",
+    "Read",
+    "Read",
+    "mcp__serge-supply-chain__srm_get_supplier",
+    "mcp__serge-supply-chain__srm_get_supplier"
+  ],
+  "tool_calls_count": 11,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "WMS"
+  ]
+}

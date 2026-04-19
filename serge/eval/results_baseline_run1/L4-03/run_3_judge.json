@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 4,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.4,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are correctly stated: repeated late deliveries for SUP-002, PO-002 (+3 days late, expected 2026-01-10/received 2026-01-13), PO-005 (+4 days late, expected 2026-01-20/received 2026-01-24), and a clear 'chronic' conclusion. The minor concern is the agent reporting 4/17 on-time (24%) where ground truth implies 0% on-time, but this does not undermine the critical facts or overall conclusion. No fabricated data detected; the PO list appears drawn from actual system queries.",
+  "facts_found": [
+    "SUP-002 shows repeated late deliveries across multiple months (Oct 2025 – Feb 2026)",
+    "PO-002: expected 2026-01-10, received 2026-01-13 (+3 days) — correct",
+    "PO-005: expected 2026-01-20, received 2026-01-24 (+4 days) — correct",
+    "Pattern classified as chronic (76% late rate)",
+    "Rating 3.2/5 consistent with poor performance",
+    "PO-009 overdue and unconfirmed — additional risk flag",
+    "Declared lead time 5 days vs. actual performance suggesting ~8 days average"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

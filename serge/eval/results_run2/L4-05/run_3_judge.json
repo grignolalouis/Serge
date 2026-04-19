@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 4,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 4.70,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are present and accurate: 8 units available, ORD-007 blocked needing 50 units (most severe), ORD-009 pending needing 5 units, and two additional orders (ORD-023 and ORD-028) surfaced. The only minor gap is that customer business names (Siam Paragon, Gaggan Anand, etc.) are not cited — only IDs — which is in the 'important' tier, not critical. No hallucinations detected; all IDs follow valid patterns and quantities are consistent with ground truth.",
+  "facts_found": [
+    "PROD-001 available stock = 8 units, below reorder point of 20",
+    "ORD-007 (CUST-001) needs 50 units, status processing, urgent priority, already overdue — most critical",
+    "ORD-009 (CUST-008) needs 5 units, status pending, high priority — at risk",
+    "ORD-023 shipped (lower risk, already dispatched)",
+    "ORD-028 processing, needs 12 units — blocked",
+    "Total active unfulfilled demand quantified as 67 units vs 8 available",
+    "PROD-001 is refrigerated, requiring refrigerated carrier"
+  ],
+  "facts_missing": [
+    "Customer business names (Siam Paragon, Gaggan Anand, Mandarin Oriental, Sukhothai Hotel) — important tier only"
+  ],
+  "hallucinations": []
+}

@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: available stock is 8 units, ORD-007 (50 units) and ORD-009 (5 units) are both listed, and active demand (77 units) clearly exceeds stock. The agent also correctly flags ORD-007 alone exceeding available stock, matching the important fact. No fabricated IDs or values detected.",
+  "facts_found": [
+    "PROD-001 available stock = 8 units",
+    "ORD-007 requires 50 units of PROD-001 (urgent, processing)",
+    "ORD-009 requires 5 units of PROD-001 (high, pending)",
+    "Total active demand = 77 units vs 8 available",
+    "Reorder point = 20, status = needs reorder",
+    "ORD-023 (10 units, urgent, shipped) and ORD-028 (12 units, high, processing) also listed"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

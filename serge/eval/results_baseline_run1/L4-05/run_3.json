@@ -1,0 +1,26 @@
+{
+  "scenario_id": "L4-05",
+  "question": "Given our PROD-001 shortage, which customers are at risk of being impacted?",
+  "agent_answer": "I've scanned the entire dataset. Here's the full picture:\n\n---\n\n## PROD-001 Shortage Impact Analysis\n**Source: WMS + OMS**\n\n**Stock position (WMS):** 8 units available \u2014 reorder point is 20. Nam Doc Mai Mango Box 5kg (refrigerated, 7-day shelf life).\n\n---\n\n### At-Risk Orders (pending / processing)\n\n| Priority | Order | Customer | Status | PROD-001 Qty | Required By |\n|----------|-------|----------|--------|-------------|-------------|\n| **urgent** | ORD-007 | CUST-001 | processing | 50 | 2026-02-12 |\n| **high** | ORD-028 | CUST-006 | processing | 12 | 2026-02-18 |\n| **high** | ORD-009 | CUST-008 | pending | 5 | 2026-02-18 |\n\n**Total demand: 67 units vs. 8 available \u2014 deficit of 59 units.**\n\n---\n\n### Risk Assessment\n\n- **CUST-001 / ORD-007** is the most critical: already stuck in `processing` with an urgent priority, needing 50 units by Feb 12. With only 8 in stock, this order is almost entirely blocked. This customer likely cannot be fulfilled without an emergency restock.\n- **CUST-006 / ORD-028** is a recurring hotel breakfast buffet standing order (noted as weekly). It needs 12 units by Feb 18 \u2014 even if all 8 units are held back for this order, it still comes up 4 short.\n- **CUST-008 / ORD-009** needs only 5 units by Feb 18 \u2014 the smallest exposure, but stock is already exhausted by higher-priority orders above it.\n\n### Recommended Actions (for the operations team)\n1. **Emergency supplier order** for PROD-001 immediately \u2014 check active supplier options via SRM.\n2. **Communicate proactively** with CUST-001 (urgent order), as their Feb 12 deadline is the tightest.\n3. **Prioritize allocation** of the 8 units to ORD-007 (urgent) first, then partial fulfillment for ORD-028/ORD-009 only if more stock arrives in time (PROD-001 shelf life is only 7 days \u2014 timing matters).",
+  "duration_ms": 66048,
+  "cost_usd": 0.254941,
+  "num_turns": 8,
+  "session_id": "d57be128-d991-4a5e-9da3-4f8ccdb83a6b",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Skill",
+    "Read",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 10,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

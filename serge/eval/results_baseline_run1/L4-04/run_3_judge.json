@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 4,
+  "completeness": 5,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.40,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present: ORD-007 and ORD-011 identified as overdue, SHP-009 flagged as an exception (refrigeration failure), and PROD-001/PROD-005/PROD-008 all identified as low stock. The agent also correctly links ORD-007's delay to the PROD-001 shortage. Minor internal inconsistency (states '4 shipped orders past required date' but then lists 6 orders) is noted, and some very specific figures (exact quantities, supplier PO details, customer names) cannot be verified independently but are plausible and consistent with the seed data structure.",
+  "facts_found": [
+    "ORD-007 identified as overdue/stuck in processing",
+    "ORD-011 identified as overdue",
+    "SHP-009 flagged with refrigeration exception",
+    "PROD-001 low stock (8 available, reorder point 20)",
+    "PROD-005 low stock (12 available, reorder point 15)",
+    "PROD-008 low stock (6 available, reorder point 15)",
+    "Connection between ORD-007 blockage and PROD-001 shortage noted",
+    "Overdue supplier POs identified with actionable context",
+    "Cross-system reasoning connecting OMS → WMS → SRM"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

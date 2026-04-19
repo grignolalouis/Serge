@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L5-05",
+  "question": "Our reorder point for PROD-001 is 20 units, but we still ran out. Is the threshold wrong, or is something else going on?",
+  "agent_answer": "Here's the analysis across WMS data.\n\n---\n\n## PROD-001 Reorder Point Diagnosis\n\n**Product (WMS):** Nam Doc Mai Mango Box 5kg \u2014 shelf life **7 days**, reorder point **20 units**\n**Current stock:** 8 units available \u2014 `needs_reorder: true`\n\n---\n\n### Both the threshold AND the process are broken\n\n**1. The reorder point is too low for the demand velocity**\n\nLooking at the most recent replenishment cycle (WMS stock movements):\n- Jan 29: +113 units received (PO-115)\n- Jan 30\u2013Feb 9: **\u2212127 units** shipped across 9 orders\n- Feb 10: only **8 units** remain\n\nThat's ~**11 units/day** at peak. A reorder point of 20 provides barely **2 days of coverage**. If supplier lead time is longer than that, stockout is inevitable before the next PO arrives.\n\n**2. Single large orders jump over the trigger**\n\nMultiple individual orders consume 20\u201329 units in one transaction (ORD-235: 29, ORD-422: 29, ORD-438: 29, ORD-334: 26, ORD-344: 26\u2026). If stock sits at 25 and a 27-unit order comes in, it executes and stock drops to \u22122 \u2014 the reorder point was technically crossed but the order was already being fulfilled.\n\n**3. Short shelf life creates a hard constraint**\n\nWith only 7 days of shelf life, you can't simply raise the reorder point and hold more buffer stock \u2014 excess stock spoils. This is the real tension.\n\n---\n\n### Root cause\n\n| Factor | Evidence |\n|--------|----------|\n| Threshold too low | 20 units \u2248 2 days demand at ~11 units/day |\n| Single orders exceed threshold | 15+ orders consumed \u226520 units each |\n| Shelf life limits buffer size | 7-day limit caps safe safety stock |\n\n---\n\n### Recommendation for the team\n\nTo set the right reorder point, check the supplier lead time in SRM:\n> `reorder_point = avg_daily_demand \u00d7 lead_time_days + safety_stock`\n\nWith ~10 units/day, even a 3-day lead time requires a reorder point of **30\u201340 units**. Beyond adjusting the threshold, the team should consider **reserving stock at order creation** (not just at pick time) so large orders don't silently drain below the reorder trigger. The shelf life constraint means the fix is process as much as it is the number.",
+  "duration_ms": 66598,
+  "cost_usd": 0.13472515000000002,
+  "num_turns": 5,
+  "session_id": "9d33f13f-01d1-48f9-8449-f37fdf5479eb",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__wms_get_stock_movements",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "WMS"
+  ]
+}

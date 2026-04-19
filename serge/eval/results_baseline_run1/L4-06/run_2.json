@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-06",
+  "question": "Order ORD-023 was split into two shipments. Give me the status of each and explain why it was split.",
+  "agent_answer": "Here's the full picture for **ORD-023** (urgent order to Mandarin Oriental, placed 2026-02-10):\n\n---\n\n## Shipment Status\n\n| Shipment | Carrier | Type | Status | ETA |\n|----------|---------|------|--------|-----|\n| **SHP-017** | SCG Cold Chain | Refrigerated | In transit | 2026-02-13 17:00 |\n| **SHP-018** | Kerry Express | Ground | In transit | 2026-02-14 17:00 |\n\nBoth were dispatched simultaneously on 2026-02-12 08:00 from Bangkok Central Warehouse. No exceptions or delays flagged on either.\n\n---\n\n## Why It Was Split\n\nThe order contains two products with incompatible storage requirements (WMS):\n\n- **PROD-001 \u2014 Nam Doc Mai Mango Box 5kg** \u2192 `storage_type: refrigerated`, shelf life 7 days \u2192 **must** travel via cold chain (SHP-017, SCG Cold Chain)\n- **PROD-006 \u2014 Dried Mango Slices 500g** \u2192 `storage_type: ambient`, shelf life 180 days \u2192 can travel via standard ground carrier (SHP-018, Kerry Express)\n\nThis is correct procedure: shipping refrigerated goods on a ground truck would risk spoilage. The split also optimizes cost \u2014 ground freight (Kerry) at 15 THB/kg vs. cold chain (SCG) at 25 THB/kg, so only the perishable items pay the cold chain premium.\n\nBoth shipments are on track to arrive before the required date of **2026-02-15**.",
+  "duration_ms": 24052,
+  "cost_usd": 0.058660949999999996,
+  "num_turns": 7,
+  "session_id": "375bd22b-ee86-4ef5-83e9-68d916f55532",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 6,
+  "systems_touched": [
+    "OMS",
+    "TMS",
+    "WMS"
+  ]
+}

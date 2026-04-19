@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-04",
+  "question": "Give me a quick scan of everything that needs my attention right now.",
+  "agent_answer": "Here's your operational snapshot as of today (Apr 18, 2026):\n\n---\n\n## \ud83d\udd34 Critical \u2014 Act Now\n\n**SHP-009 | Refrigeration failure** *(TMS)*\nShipment for ORD-011 (Tops Supermarket, 125 kg fresh produce) has a refrigeration unit malfunction. Goods are at spoilage risk. Carrier: CAR-001. Requires immediate intervention \u2014 reroute or replace vehicle.\n\n**ORD-007 | URGENT order stuck in processing** *(OMS)*\nCUST-001 ordered 50 units of PROD-001 (Nam Doc Mai Mango 5kg), required Feb 12 \u2014 already overdue. WMS shows only **8 units available** (reorder point: 20). PO-008 from SUP-001 (SP-001, 150 units) is shipped but itself overdue since Feb 18. Follow up with SUP-001 for ETA.\n\n---\n\n## \ud83d\udfe0 High Priority\n\n**3 products below reorder point** *(WMS)*\n\n| Product | Available | Reorder Point |\n|---|---|---|\n| PROD-001 Nam Doc Mai 5kg | 8 | 20 |\n| PROD-005 Mixed Assortment 5kg | 12 | 15 |\n| PROD-008 Sticky Rice Kit | 6 | 15 |\n\nAll three are `refrigerated`. PROD-001 is directly blocking two orders below.\n\n**Processing orders blocked \u2014 HIGH priority** *(OMS)*\n- **ORD-028** (CUST-006, hotel breakfast buffet) \u2014 needs PROD-001 \u00d712 + PROD-004 \u00d76, due Feb 18\n- **ORD-012** (CUST-004) \u2014 needs PROD-002 \u00d78, due Feb 17\n- **ORD-009** (CUST-008) \u2014 needs PROD-001 \u00d75 + PROD-004 \u00d73, due Feb 18\n\nPROD-001 shortage is the common blocker for ORD-007, ORD-028, and ORD-009.\n\n---\n\n## \ud83d\udfe1 Watch\n\n**6 overdue supplier POs** *(SRM)*\n\n| PO | Supplier | Status | Expected |\n|---|---|---|---|\n| PO-009 | SUP-002 | pending | Feb 15 |\n| PO-015 | SUP-004 | shipped | Feb 15 |\n| PO-010 | SUP-003 | confirmed | Feb 16 |\n| PO-008 | SUP-001 | shipped | Feb 18 |\n| PO-016 | SUP-003 | pending | Feb 18 |\n| PO-017 | SUP-005 | confirmed | Feb 19 |\n\nPO-009 and PO-016 are still `pending` (supplier hasn't confirmed) \u2014 most at risk of further delay.\n\n**4 shipped orders past required date** *(OMS)*\nORD-005, ORD-011, ORD-018, ORD-019, ORD-023, ORD-027 \u2014 shipped but undelivered. ORD-011 is the one with the refrigeration exception above.\n\n---\n\n**Top action items for your team:**\n1. Emergency response on SHP-009 (refrigeration failure)\n2. Call SUP-001 for ETA on PO-008 \u2014 unblocks PROD-001 shortage + ORD-007/028/009\n3. Chase SUP-002 and SUP-003 on PO-009 and PO-016 (still pending, no confirmation)\n4. Investigate pending orders ORD-025, ORD-009, ORD-021 \u2014 sitting idle, not yet in processing",
+  "duration_ms": 34634,
+  "cost_usd": 0.0688473,
+  "num_turns": 6,
+  "session_id": "a2f84c4b-1741-41b4-a9e8-5126cdea1569",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_low_stock",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+    "mcp__serge-supply-chain__tms_list_exception_shipments",
+    "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+  ],
+  "tool_calls_count": 5,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

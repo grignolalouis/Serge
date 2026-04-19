@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-03",
+  "question": "Which customer orders are currently overdue?",
+  "agent_answer": "Here are all 13 overdue orders (source: OMS):\n\n| Order | Customer | Priority | Status | Required Date | Products |\n|-------|----------|----------|--------|---------------|---------|\n| ORD-007 | CUST-001 | **urgent** | processing | 2026-02-12 | PROD-001 \u00d750 |\n| ORD-012 | CUST-004 | **high** | processing | 2026-02-17 | PROD-002 \u00d78 |\n| ORD-028 | CUST-006 | **high** | processing | 2026-02-18 | PROD-001 \u00d712, PROD-004 \u00d76 |\n| ORD-009 | CUST-008 | **high** | pending | 2026-02-18 | PROD-004 \u00d73, PROD-001 \u00d75 |\n| ORD-019 | CUST-012 | **high** | shipped | 2026-02-13 | PROD-004 \u00d76, PROD-008 \u00d710 |\n| ORD-020 | CUST-009 | normal | processing | 2026-02-18 | PROD-006 \u00d7100 |\n| ORD-021 | CUST-010 | normal | pending | 2026-02-19 | PROD-007 \u00d720, PROD-008 \u00d715 |\n| ORD-025 | CUST-011 | normal | pending | 2026-02-20 | PROD-003 \u00d740 |\n| ORD-005 | CUST-005 | normal | shipped | 2026-02-14 | PROD-002 \u00d715, PROD-005 \u00d710 |\n| ORD-011 | CUST-003 | normal | shipped | 2026-02-10 | PROD-003 \u00d725 |\n| ORD-018 | CUST-011 | normal | shipped | 2026-02-14 | PROD-002 \u00d730, PROD-006 \u00d740 |\n| ORD-023 | CUST-004 | **urgent** | shipped | 2026-02-15 | PROD-001 \u00d710, PROD-006 \u00d760 |\n| ORD-027 | CUST-002 | normal | shipped | 2026-02-16 | PROD-004 \u00d73, PROD-003 \u00d78 |\n\n**Key concerns:**\n\n- **3 orders still stuck in processing/pending** with high/urgent priority: ORD-007 (urgent, CUST-001, 50 units PROD-001 \u2014 worst offender), ORD-012, ORD-028, ORD-009. These haven't even shipped yet and are well past their required dates \u2014 likely a stock shortage or fulfillment bottleneck.\n- **4 shipped but undelivered** past their required dates (ORD-019, ORD-005, ORD-011, ORD-018, ORD-023, ORD-027) \u2014 worth checking TMS for delivery exceptions.\n\nWould you like me to investigate the root cause for any of these, particularly the stuck processing orders?",
+  "duration_ms": 17722,
+  "cost_usd": 0.08658115,
+  "num_turns": 3,
+  "session_id": "c5ef41b1-fb35-4fb2-a4b2-9af896be1436",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "OMS"
+  ]
+}

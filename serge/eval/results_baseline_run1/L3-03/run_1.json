@@ -1,0 +1,18 @@
+{
+  "scenario_id": "L3-03",
+  "question": "Compare our suppliers \u2014 who is the most reliable?",
+  "agent_answer": "Here is the full supplier reliability ranking based on SRM data:\n\n| Rank | Supplier | Rating | On-Time Rate | Avg Lead (days) | Orders |\n|------|----------|--------|-------------|-----------------|--------|\n| 1 | **Somchai Mango Farm** (SUP-001) | 4.5 | **100%** (13/13) | 2.9 | 14 |\n| 2 | **Rayong Tropical** (SUP-004) | 4.0 | **100%** (6/6) | 2.8 | 7 |\n| 3 | **Isaan Organic Farms** (SUP-005) | 3.5 | 33% (3/9) | 7.1 | 10 |\n| 4 | **Northern Fruits Co.** (SUP-002) | 3.2 | 24% (4/17) | 6.3 | 19 |\n| 5 | **Prachuap Harvest** (SUP-003) | 2.8 | 25% (2/8) | 5.1 | 10 |\n\n---\n\n**Key findings:**\n\n- **Most reliable: Somchai Mango Farm (SUP-001)** \u2014 100% on-time rate across 13 received orders (largest sample), fastest average lead time at 2.9 days, and the highest rating (4.5). Strong choice for premium and standard products.\n\n- **Rayong Tropical (SUP-004)** is equally perfect on-time (6/6) and even slightly faster (2.8 days), but with only 6 received orders the sample is small. Best option for processed products.\n\n- **Bottom 3 are unreliable**: Northern Fruits, Prachuap Harvest, and Isaan Organic all deliver on-time only 24\u201333% of the time and average 5\u20137 days actual lead time \u2014 consistently exceeding their declared lead times.\n\n**Recommendation**: Prioritize Somchai Mango Farm and Rayong Tropical for time-sensitive orders (especially fresh/refrigerated stock). Avoid Northern Fruits Co. and Prachuap Harvest for anything with tight fulfillment windows.",
+  "duration_ms": 19630,
+  "cost_usd": 0.07610354999999999,
+  "num_turns": 4,
+  "session_id": "3dbb619b-0f33-4e08-9fcf-472f5be7ce97",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_compare_suppliers",
+    "mcp__serge-supply-chain__srm_list_suppliers"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "SRM"
+  ]
+}

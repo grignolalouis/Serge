@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 4,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 4.70,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are clearly present and accurate: 8 available vs reorder point of 20, ORD-007 demanding 50 units (2.5× the threshold), 3-day lead times for both suppliers, and the diagnosis correctly blames the reorder point/demand mismatch rather than supplier performance. The only missing element is the important (non-critical) detail about PO-008 being in transit with 150 units arriving too late for ORD-007.",
+  "facts_found": [
+    "Available stock 8 units, reorder point 20, needs_reorder true",
+    "ORD-007 is processing with urgent priority requesting 50 units",
+    "SUP-001 and SUP-004 both have 3-day lead times",
+    "Diagnosis explicitly links stockout to mismatch between reorder point and large-order demand, not supplier failure",
+    "Recommendation to raise reorder point to ~50 units and add advance-notice workflow for large orders",
+    "Shelf life tension (7 days) acknowledged as complicating factor for large buffers"
+  ],
+  "facts_missing": [
+    "PO-008 in transit with 150 units arriving after ORD-007 was needed"
+  ],
+  "hallucinations": []
+}

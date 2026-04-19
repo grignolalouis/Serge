@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-05",
+  "question": "Show me all our purchase orders from Somchai Mango Farm (SUP-001).",
+  "agent_answer": "Here are all 14 purchase orders from **Somchai Mango Farm (SUP-001)** \u2014 source: SRM.\n\n| PO | Order Date | Expected | Actual Delivery | Status | Lines |\n|----|-----------|----------|-----------------|--------|-------|\n| PO-132 | 2025-10-10 | 2025-10-13 | 2025-10-13 | received | SP-002 \u00d7106, SP-001 \u00d7140 |\n| PO-140 | 2025-10-21 | 2025-10-24 | 2025-10-24 | received | SP-002 \u00d786 |\n| PO-104 | 2025-11-02 | 2025-11-05 | 2025-11-05 | received | SP-003 \u00d767, SP-001 \u00d756 |\n| PO-106 | 2025-11-25 | 2025-11-28 | 2025-11-28 | received | SP-001 \u00d786 |\n| PO-110 | 2025-11-28 | 2025-12-01 | 2025-12-01 | received | SP-003 \u00d746, SP-001 \u00d752 |\n| PO-107 | 2025-12-27 | 2025-12-30 | 2025-12-30 | received | SP-002 \u00d7104, SP-003 \u00d7129 |\n| PO-136 | 2025-12-30 | 2026-01-02 | 2026-01-02 | received | SP-003 \u00d778 |\n| PO-001 | 2026-01-02 | 2026-01-05 | 2026-01-05 | received | SP-001 \u00d7100 |\n| PO-004 | 2026-01-12 | 2026-01-15 | **2026-01-14** | received | SP-003 \u00d750 |\n| PO-109 | 2026-01-10 | 2026-01-13 | 2026-01-13 | received | SP-002 \u00d7140 |\n| PO-102 | 2026-01-22 | 2026-01-25 | 2026-01-25 | received | SP-002 \u00d7137 |\n| PO-006 | 2026-01-22 | 2026-01-25 | 2026-01-25 | received | SP-001 \u00d780 |\n| PO-130 | 2026-02-01 | 2026-02-04 | 2026-02-04 | received | SP-003 \u00d732, SP-002 \u00d730 |\n| PO-008 | 2026-02-10 | 2026-02-18 | \u2014 | **shipped** | SP-001 \u00d7150 |\n\n**Summary:**\n- 13 received, 1 currently in transit (PO-008, expected 2026-02-18)\n- On-time delivery: all 13 received orders met or beat their expected date (PO-004 arrived 1 day early)\n- PO-008 (SP-001 \u00d7150) is en route \u2014 expected over 2 months ago relative to today (2026-04-18), which may warrant follow-up\n\nPO-008 is notably overdue \u2014 expected 2026-02-18 but still showing as \"shipped\" with no actual delivery recorded. Worth investigating with the supplier.",
+  "duration_ms": 19425,
+  "cost_usd": 0.08267985,
+  "num_turns": 3,
+  "session_id": "ce847e69-72a1-4f40-84cc-d942a366fe2d",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "SRM"
+  ]
+}

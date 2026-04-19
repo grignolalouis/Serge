@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 4,
+  "completeness": 4,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.1,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "Both critical orders (ORD-007 processing/Feb-12 and ORD-011 shipped/Feb-10) are correctly identified with accurate statuses and dates. The only minor gap is that ORD-011's shipment exception status is not called out explicitly — the agent says 'shipped' but does not mention the TMS exception flag. All other data appears consistent with seed patterns and no fabrications are evident.",
+  "facts_found": [
+    "ORD-007 overdue, status processing, required 2026-02-12",
+    "ORD-011 overdue, status shipped, required 2026-02-10",
+    "13 total overdue orders listed with IDs, customer IDs, statuses, priorities, and required dates",
+    "ORD-007 flagged as most critical (urgent priority, stuck in processing)",
+    "ORD-019 VIP note mentioned"
+  ],
+  "facts_missing": [
+    "ORD-011 shipment has exception status in TMS (agent only says 'shipped', not 'shipped with exception')"
+  ],
+  "hallucinations": []
+}

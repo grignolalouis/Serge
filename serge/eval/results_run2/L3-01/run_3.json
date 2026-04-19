@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L3-01",
+  "question": "Where is order ORD-005 right now?",
+  "agent_answer": "Here's the current status of **ORD-005**:\n\n**Order Summary** (OMS)\n\n| Field | Value |\n|---|---|\n| Customer | CUST-005 |\n| Status | `shipped` |\n| Priority | normal |\n| Ordered | 2026-02-08 |\n| Shipped | 2026-02-10 |\n| Required by | 2026-02-14 |\n\n**Products:** 15\u00d7 PROD-002, 10\u00d7 PROD-005\n\n---\n\n**Shipment SHP-005** (TMS \u2014 SCG Cold Chain, CAR-002, refrigerated)\n\n| Time | Location | Event |\n|---|---|---|\n| 2026-02-10 08:30 | Bang Na, Bangkok | Picked up from warehouse |\n| 2026-02-10 14:00 | Bangkok | Departed sorting facility |\n| 2026-02-11 10:00 | Bangkok | At local distribution center, scheduled for delivery |\n\n**Destination:** Villa Market, Bangkok\n**ETA:** 2026-02-12 17:00 \u2014 well within the 2026-02-14 required date.\n\nThe order is in transit on a refrigerated carrier (correct for cold-chain products) and on track to deliver on time.",
+  "duration_ms": 15381,
+  "cost_usd": 0.0363372,
+  "num_turns": 4,
+  "session_id": "55df7754-5ea1-4ec7-8396-c7a7bd4760f4",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order"
+  ],
+  "tool_calls_count": 3,
+  "systems_touched": [
+    "OMS",
+    "TMS"
+  ]
+}

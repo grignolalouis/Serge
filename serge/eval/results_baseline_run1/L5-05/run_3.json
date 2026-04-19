@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L5-05",
+  "question": "Our reorder point for PROD-001 is 20 units, but we still ran out. Is the threshold wrong, or is something else going on?",
+  "agent_answer": "Here's what the data shows.\n\n---\n\n## PROD-001 Reorder Analysis \u2014 Nam Doc Mai Mango Box 5kg\n\n**Sources: WMS (inventory, movements)**\n\n### Current State\n| Metric | Value |\n|---|---|\n| On hand | 8 units |\n| Reserved | 0 |\n| Available | **8 units** |\n| Reorder point | 20 (needs_reorder: true) |\n| Shelf life | **7 days** |\n\n---\n\n### What Happened: Both the threshold AND the process are broken\n\n**Problem 1 \u2014 Large single orders exceed the entire safety buffer**\n\nLooking at the outbound movement history, individual orders frequently ship **20\u201329 units** in a single shot:\n\n| Order | Units out |\n|---|---|\n| ORD-343, ORD-235, ORD-438, ORD-495, ORD-518 | **29 each** |\n| ORD-182, ORD-475 | 27\u201328 |\n| ORD-115, ORD-334, ORD-344 | 23\u201326 |\n\nA reorder point of 20 means: \"when stock drops *below* 20, trigger a reorder.\" But if stock is at 25 and a 29-unit order ships, stock goes to **-4** \u2014 the threshold is crossed in a single transaction, with no time to reorder before the next demand hits.\n\n**Problem 2 \u2014 7-day shelf life limits the safety stock you can hold**\n\nEven if you raise the reorder point, you can't hold 60+ units of a product that expires in 7 days. This forces lean stocking, which makes the gap between reorder point and actual demand more dangerous.\n\n**Problem 3 \u2014 Inbound replenishment is episodic, not demand-driven**\n\nThe 3 most recent inbound POs (Jan 2026): +100, +60, +80 units. That's 240 units over ~4 weeks. But then current stock is down to 8, meaning ~232 units shipped out in roughly 4 weeks \u2014 averaging **~8\u201310 units/day**. A reorder point of 20 only covers ~2 days of demand.\n\n---\n\n### Root Cause Summary\n\nThe reorder point of 20 is **too low**, but raising it alone won't fix this. The real formula should be:\n\n> **Reorder point = (avg daily demand \u00d7 supplier lead time) + safety stock**\n\nWith ~8\u201310 units/day demand and supplier lead times likely 3\u20137 days (check SRM), the reorder point should be in the range of **40\u201380 units** \u2014 but shelf life caps what you can safely stock. This is a structural tension unique to refrigerated fresh products.\n\n**Recommended actions for the team:**\n1. Check supplier lead time for PROD-001 suppliers in SRM, then recalculate the reorder point properly.\n2. Consider splitting large customer orders (>20 units) into multiple smaller shipments with lead time buffers.\n3. Set a **maximum single-order fulfillment check**: flag orders that would bring available stock below reorder point before committing.",
+  "duration_ms": 46774,
+  "cost_usd": 0.11699419999999999,
+  "num_turns": 5,
+  "session_id": "74d4236c-865e-4aed-a529-729427a7e6ec",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__wms_get_stock_movements",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "WMS"
+  ]
+}

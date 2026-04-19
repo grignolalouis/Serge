@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies all critical facts: PROD-001 short by 4 units with 8 available against 12 needed, PROD-004 fully covered with 19 available, PO-008 arriving on the deadline (Feb 18) as the only replenishment source, and the mandatory refrigerated carrier requirement ruling out CAR-001. All important facts (120 kg weight, 3,000 THB vs 4,200 THB carrier costs, SCG Cold Chain recommendation) are also present and accurate. No hallucinations detected.",
+  "facts_found": [
+    "PROD-001: 8 available, need 12, gap of -4 units",
+    "PROD-004: 19 available (22-3 reserved), covers 6 units needed",
+    "PO-008: 150 units of PROD-001, expected Feb 18 (deadline day) — tight",
+    "Refrigerated carrier required; CAR-001 (Kerry Express, ground) must not be used",
+    "CAR-002 SCG Cold Chain: 25 THB/kg, 1-day transit, 3,000 THB total",
+    "CAR-003 Flash Express: 35 THB/kg, 1-day transit, 4,200 THB total",
+    "Total weight: 120 kg (12×5 + 6×10)",
+    "Recommended CAR-002 as cheaper option with same transit time"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

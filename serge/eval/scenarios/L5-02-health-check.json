@@ -1,0 +1,32 @@
+{
+  "id": "L5-02",
+  "level": "L5",
+  "use_case": "UC-4",
+  "title": "Full Operational Health Check",
+  "expected_systems": [
+    "OMS",
+    "TMS",
+    "WMS",
+    "SRM"
+  ],
+  "expected_tool_count_min": 6,
+  "estimated_human_minutes": 45,
+  "question": "Give me a full health check of our supply chain: orders, shipments, inventory, supplier performance. Where are the risks and what should I act on this week?",
+  "ground_truth": {
+    "critical_facts": [
+      "Overdue orders (ORD-007, ORD-011) are surfaced",
+      "Shipment exception (SHP-009) is surfaced",
+      "Low stock (PROD-001, PROD-005, PROD-008) is surfaced",
+      "Supplier reliability concern for SUP-002 is noted",
+      "At least one cross-system insight is drawn (e.g., ORD-007 stuck because PROD-001 low, or SHP-009 failed due to carrier mismatch)"
+    ],
+    "important_facts": [
+      "Concrete prioritized actions are proposed, not just a list",
+      "Positives (reliable suppliers, orders on track) are acknowledged"
+    ],
+    "must_not_contain": [
+      "Fabricated issues",
+      "Missing major known problems"
+    ]
+  }
+}

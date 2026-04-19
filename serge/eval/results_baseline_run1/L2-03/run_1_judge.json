@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 3.5,
+  "completeness": 4.0,
+  "no_hallucination": 3.5,
+  "reasoning": 4.0,
+  "weighted_score": 3.70,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "Both critical orders (ORD-007 as overdue/processing/Feb-12 and ORD-011 as overdue/shipped/Feb-10) are correctly identified and present in the answer. However, ORD-011's 'exception' shipment status (as specified in ground truth) is not explicitly noted — the agent only groups it under 'Shipped but Not Yet Delivered'. The agent also lists 11 additional overdue orders that cannot be fully verified without tool access, introducing some hallucination risk, but the core facts are sound.",
+  "facts_found": [
+    "ORD-007 overdue, status processing, required Feb 12 (2026-02-12)",
+    "ORD-011 overdue, status shipped, required Feb 10 (2026-02-10)"
+  ],
+  "facts_missing": [
+    "ORD-011 shipment has 'exception' status (not just 'shipped but undelivered')"
+  ],
+  "hallucinations": [
+    "11 additional overdue orders listed (ORD-005, ORD-009, ORD-012, ORD-018, ORD-019, ORD-020, ORD-021, ORD-023, ORD-025, ORD-027, ORD-028) could not be verified against seed data"
+  ]
+}

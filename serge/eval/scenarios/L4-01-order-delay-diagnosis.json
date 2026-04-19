@@ -1,0 +1,34 @@
+{
+  "id": "L4-01",
+  "level": "L4",
+  "use_case": "UC-2",
+  "title": "Order Delay Diagnosis",
+  "expected_systems": [
+    "OMS",
+    "TMS",
+    "WMS",
+    "SRM"
+  ],
+  "expected_tool_count_min": 4,
+  "estimated_human_minutes": 25,
+  "question": "Why hasn't order ORD-007 shipped yet? The customer is chasing us.",
+  "ground_truth": {
+    "critical_facts": [
+      "ORD-007 is in processing status and overdue",
+      "It needs 50 units of PROD-001 (Nam Doc Mai)",
+      "Current inventory is only 8 units available",
+      "Root cause is stock shortage",
+      "PO-008 is in transit, expected 2026-02-18, AFTER the required date"
+    ],
+    "important_facts": [
+      "Customer is Siam Paragon (CUST-001), priority urgent",
+      "PO-008 is from SUP-001 for 150 units",
+      "No shipment exists yet for ORD-007"
+    ],
+    "must_not_contain": [
+      "Wrong root cause (carrier issue, customer cancellation)",
+      "Claim PO-008 arrives before Feb 12",
+      "Fabricated IDs"
+    ]
+  }
+}

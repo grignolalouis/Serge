@@ -1,0 +1,27 @@
+{
+  "scenario_id": "L4-01",
+  "question": "Why hasn't order ORD-007 shipped yet? The customer is chasing us.",
+  "agent_answer": "Here's the full diagnostic for ORD-007:\n\n---\n\n## ORD-007 \u2014 Root Cause Diagnosis\n\n**Order summary** *(OMS)*\n\n| Field | Value |\n|-------|-------|\n| Customer | CUST-001 |\n| Status | `processing` \u2014 **stuck** |\n| Priority | `urgent` |\n| Ordered | 2026-02-05 |\n| Required by | 2026-02-12 \u2014 **overdue** |\n| Needs | 50 \u00d7 PROD-001 (Nam Doc Mai Mango Box 5kg) |\n\n**Root cause: stock shortage** *(WMS)*\n\n| Stock | Units |\n|-------|-------|\n| On hand | 8 |\n| Reserved | 0 |\n| **Available** | **8** |\n| **Required** | **50** |\n| **Shortfall** | **\u221242 units** |\n\nNo shipment has been created in TMS \u2014 the order cannot progress until stock is available.\n\n**Incoming replenishment** *(SRM)*\n\nPO-008 from SUP-001 covers PROD-001 (SP-001, 150 units), status `shipped`, expected **2026-02-18**. Once received, 8 + 150 = 158 units will be on hand \u2014 more than enough to fulfill the 50 needed.\n\n**One more flag:** PROD-001 has `storage_type: refrigerated`. When the team books the shipment, they **must** use a refrigerated carrier (e.g. CAR-002 SCG Cold Chain or CAR-003 Flash Express) \u2014 a ground carrier would risk spoilage.\n\n---\n\n**Summary:** ORD-007 is blocked by a 42-unit stock shortfall on PROD-001. PO-008 (150 units) is inbound, expected Feb 18. Once it arrives, this urgent order should be fulfilled first and booked on a refrigerated carrier.",
+  "duration_ms": 49888,
+  "cost_usd": 0.14418499999999998,
+  "num_turns": 10,
+  "session_id": "9b447d37-e098-4f04-94b1-044be44218d6",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+  ],
+  "tool_calls_count": 9,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

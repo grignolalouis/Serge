@@ -1,0 +1,27 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All five critical facts are present and accurately stated: ORD-007 and ORD-011 are surfaced, SHP-009 exception is detailed, all three low-stock products (PROD-001, PROD-005, PROD-008) are identified, SUP-002 reliability concern is noted, and multiple cross-system insights are drawn (e.g., PROD-001 shortage blocking ORD-007, PO-008 as the incoming restock). No fabricated IDs or values detected. The answer exceeds requirements with a structured priority action list and supplier performance table.",
+  "facts_found": [
+    "ORD-007 surfaced as URGENT and overdue",
+    "ORD-011 surfaced via SHP-009 exception",
+    "SHP-009 refrigeration malfunction exception clearly surfaced",
+    "PROD-001 low stock (8 available vs 20 reorder point) surfaced",
+    "PROD-005 low stock (12 available vs 15 reorder point) surfaced",
+    "PROD-008 low stock (6 available vs 15 reorder point, 3-day shelf life) surfaced",
+    "SUP-002 reliability concern noted (PO-009 unconfirmed, rating 3.2)",
+    "Cross-system insight: PROD-001 shortage blocking ORD-007 (OMS+WMS)",
+    "Cross-system insight: PO-008 from SUP-001 is late restock for PROD-001 (WMS+SRM)",
+    "Prioritized action list with concrete recommendations",
+    "SUP-003 Prachuap Harvest flagged as weakest supplier (rating 2.8, 2 unresponsive POs)"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

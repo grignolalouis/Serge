@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L1-04",
+  "question": "What carriers do we work with?",
+  "agent_answer": "We work with 3 carriers (from TMS):\n\n| Carrier | Type | Cost/kg | Avg Transit |\n|---|---|---|---|\n| **Kerry Express** (CAR-001) | Ground | \u0e3f15/kg | 2 days |\n| **SCG Cold Chain** (CAR-002) | Refrigerated | \u0e3f25/kg | 1 day |\n| **Flash Express Premium** (CAR-003) | Refrigerated | \u0e3f35/kg | 1 day |\n\nNote: SCG Cold Chain and Flash Express Premium are both cold chain carriers \u2014 required for any refrigerated products. Kerry Express (ground) is for ambient/processed goods only.",
+  "duration_ms": 9436,
+  "cost_usd": 0.027584200000000003,
+  "num_turns": 3,
+  "session_id": "b39b2475-f5e2-4960-8ed4-93f309ba226b",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_carriers"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "TMS"
+  ]
+}

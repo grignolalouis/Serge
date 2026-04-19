@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical POs (PO-001, PO-004, PO-006, PO-008) are correctly listed with accurate statuses, dates, and delivery outcomes matching the ground truth. No POs from other suppliers are included, no fabricated IDs, and all important facts (PO-004 early delivery, PO-008 shipped/expected date) are correctly stated.",
+  "facts_found": [
+    "PO-001 received 2026-01-05 (on time)",
+    "PO-004 received 2026-01-14 (1 day early)",
+    "PO-006 received 2026-01-25 (on time)",
+    "PO-008 shipped, expected 2026-02-18",
+    "All 14 POs belong to SUP-001 Somchai Mango Farm",
+    "13 received, 1 shipped — 100% on-time rate for completed orders"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

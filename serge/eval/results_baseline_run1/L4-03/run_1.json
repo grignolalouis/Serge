@@ -1,0 +1,19 @@
+{
+  "scenario_id": "L4-03",
+  "question": "Does Northern Fruits Co. (SUP-002) have a chronic delivery problem, or is it an isolated issue?",
+  "agent_answer": "**This is a chronic delivery problem.** Here's the full picture from SRM:\n\n---\n\n### SUP-002 Profile\n| Field | Value |\n|-------|-------|\n| Rating | **3.2 / 5.0** (below average) |\n| Declared lead time | 5 days |\n| Payment terms | net_15 |\n\n---\n\n### Delivery Performance \u2014 All 16 Received Orders\n\n| PO | Expected | Actual | Delay |\n|----|----------|--------|-------|\n| PO-133 | 2025-10-07 | 2025-10-08 | +1 day |\n| PO-122 | 2025-10-08 | 2025-10-09 | +1 day |\n| PO-101 | 2025-10-11 | 2025-10-12 | +1 day |\n| PO-123 | 2025-10-31 | 2025-10-31 | \u2713 On time |\n| PO-139 | 2025-11-12 | 2025-11-13 | +1 day |\n| PO-120 | 2025-11-14 | 2025-11-14 | \u2713 On time |\n| PO-117 | 2025-12-02 | 2025-12-02 | \u2713 On time |\n| PO-128 | 2025-12-15 | 2025-12-16 | +1 day |\n| PO-103 | 2025-12-23 | 2025-12-25 | +2 days |\n| PO-118 | 2025-12-25 | 2025-12-27 | +2 days |\n| PO-121 | 2026-01-01 | 2026-01-01 | \u2713 On time |\n| PO-113 | 2026-01-14 | 2026-01-15 | +1 day |\n| PO-002 | 2026-01-10 | 2026-01-13 | **+3 days** |\n| PO-005 | 2026-01-20 | 2026-01-24 | **+4 days** |\n| PO-134 | 2026-02-02 | 2026-02-04 | +2 days |\n| PO-124 | 2026-02-04 | 2026-02-05 | +1 day |\n| PO-131 | 2026-02-05 | 2026-02-07 | +2 days |\n\n**Late rate: 13 / 17 = 76%** \u2014 avg delay on late orders: ~1.8 days\n\n---\n\n### Active Red Flag\n\n**PO-009** (60 units of SP-004) is currently in the overdue list \u2014 status is still **pending** as of today (2026-04-18), with an expected delivery of **2026-02-15**. That's **62 days overdue with no confirmation from the supplier.** This is the most serious issue.\n\n---\n\n### Verdict\n\nThis is **chronic, not isolated.** Key signals:\n- **76% late delivery rate** across 17 completed orders\n- Delays span Oct 2025 \u2192 Feb 2026 with no improvement trend\n- **PO-009 is critically stalled** (62 days, still pending)\n- The 3.2 rating reflects this sustained underperformance\n\n**Recommended action for the operations team:** Escalate PO-009 immediately (contact info@northernfruits.th). For medium-term procurement, consider shifting volume to an alternative supplier for SP-004/SP-005 \u2014 especially for time-sensitive fresh mango orders.",
+  "duration_ms": 37492,
+  "cost_usd": 0.10800225,
+  "num_turns": 5,
+  "session_id": "1deeb64b-063d-448d-a778-95a33b8e9262",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_get_supplier",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_supplier",
+    "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "SRM"
+  ]
+}

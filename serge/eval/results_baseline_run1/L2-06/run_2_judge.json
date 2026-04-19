@@ -1,0 +1,20 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies SHP-009 with exception status and the exact reason (refrigeration unit malfunction on delivery vehicle), plus the associated order ORD-011 and carrier CAR-001. All critical and important facts are present with no fabrications.",
+  "facts_found": [
+    "SHP-009 has exception status",
+    "Reason: refrigeration unit malfunction on delivery vehicle",
+    "Associated order is ORD-011",
+    "Carrier is CAR-001"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

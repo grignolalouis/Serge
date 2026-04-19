@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies SHP-009 as the exception shipment with the exact reason 'refrigeration unit malfunction on delivery vehicle', and accurately cites ORD-011 and CAR-001 (Kerry Express). All critical and important facts are present with no fabricated data.",
+  "facts_found": [
+    "SHP-009 has exception status",
+    "Reason: refrigeration unit malfunction on delivery vehicle",
+    "Associated order ORD-011 (Tops Supermarket)",
+    "Carrier CAR-001 Kerry Express (ground)",
+    "Carrier mismatch identified (refrigerated product on ground carrier)",
+    "Recommends CAR-002 and CAR-003 as alternatives"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

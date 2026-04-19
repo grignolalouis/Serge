@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All five critical facts are present and correct: status shipped, customer CUST-005, order date 2026-02-08, required date 2026-02-14, shipped date 2026-02-10. Both important facts (line items and priority) are also correctly stated. No hallucinations detected.",
+  "facts_found": [
+    "Status: Shipped",
+    "Customer: CUST-005",
+    "Order date: 2026-02-08",
+    "Required by: 2026-02-14",
+    "Shipped date: 2026-02-10",
+    "PROD-002 × 15 units",
+    "PROD-005 × 10 units",
+    "Priority: Normal"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

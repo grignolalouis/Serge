@@ -1,0 +1,20 @@
+{
+  "scenario_id": "L5-04",
+  "question": "We want to rethink our sourcing for Nam Doc Mai mangoes. Based on our data, which supplier should we rely on and why? What's the risk if we stop using the other one?",
+  "agent_answer": "Here's the full sourcing picture for **Nam Doc Mai Mango Box 5kg (PROD-001, sell price: 450 THB)**.\n\n## Supplier Comparison \u2014 PROD-001\n\n| Metric | SUP-001 Somchai Mango Farm | SUP-004 Rayong Tropical |\n|--------|---------------------------|------------------------|\n| Supplier product | SP-001 (Chanthaburi) | SP-009 (Rayong) |\n| Unit cost (SRM) | 280 THB | 270 THB |\n| Margin per unit | **170 THB (37.8%)** | **180 THB (40.0%)** |\n| Rating (SRM) | 4.5 / 5.0 | 4.0 / 5.0 |\n| Declared lead time | 3 days | 3 days |\n| Actual avg lead time | 2.92 days | 2.83 days |\n| On-time rate | **100%** (13/13 received) | **100%** (6/6 received) |\n| Total POs placed | 14 | 7 |\n| Payment terms | net_30 | net_30 |\n\n## Recommendation: Primary on SUP-001, keep SUP-004 as backup\n\n**Rely on Somchai (SUP-001)** as primary. Despite being 10 THB/unit more expensive, it has twice the order history (14 POs vs 7) and a higher reliability rating (4.5 vs 4.0) \u2014 more confidence in that 100% on-time rate.\n\n**Rayong Tropical (SUP-004)** is marginally cheaper and marginally faster, but its track record is thinner. Its 100% on-time rate could look very different after another 7 orders.\n\n## Risk of dropping either supplier\n\n| Dropped | Risk |\n|---------|------|\n| **Drop SUP-004** | Lose 10 THB/unit margin advantage. Low risk operationally \u2014 SUP-001 covers full demand with better track record. |\n| **Drop SUP-001** | **High risk.** PROD-001 is refrigerated with only 7-day shelf life \u2014 any disruption from a single-source supplier leaves no buffer. SUP-004's thinner history makes it a riskier sole source for a premium perishable. |\n\n**Bottom line:** Don't drop either. Dual-sourcing is the right posture for a perishable premium product. If budget forces a choice, consolidate on SUP-001 (Somchai) and accept the slightly lower margin in exchange for reliability.",
+  "duration_ms": 35364,
+  "cost_usd": 0.10690749999999999,
+  "num_turns": 5,
+  "session_id": "fa3e944d-a60b-486f-8926-e0d2fdd747b1",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_products",
+    "mcp__serge-supply-chain__srm_compare_suppliers",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "SRM",
+    "WMS"
+  ]
+}

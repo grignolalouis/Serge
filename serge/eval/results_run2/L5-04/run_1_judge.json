@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies both suppliers (SUP-001 at 280 THB and SUP-004 at 270 THB), accurately reports ratings (4.5 vs 4.0), lead times (3 days each), on-time performance, and the 10 THB cost differential. All critical facts are present and no fabricated data is detected. The recommendation for dual-sourcing aligns perfectly with the ground truth's implied conclusion.",
+  "facts_found": [
+    "SUP-001 Somchai Mango Farm: SP-001, 280 THB unit cost, rating 4.5, 3-day lead time, 100% on-time (13/13 POs)",
+    "SUP-004 Rayong Tropical: SP-009, 270 THB unit cost, rating 4.0, 3-day lead time, 100% on-time (6/6 POs)",
+    "SUP-004 is 10 THB/unit cheaper with marginally higher margin",
+    "SUP-001 has more order history (14 POs vs 7)",
+    "Both suppliers are reliable; dual-sourcing recommended for perishable product"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

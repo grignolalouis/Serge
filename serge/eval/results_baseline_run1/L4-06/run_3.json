@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-06",
+  "question": "Order ORD-023 was split into two shipments. Give me the status of each and explain why it was split.",
+  "agent_answer": "Here's the full picture for ORD-023 (urgent order to Mandarin Oriental, Bangkok):\n\n---\n\n## Why It Was Split\n\nThe order contains two products with incompatible storage requirements:\n\n| Product | Storage Type | Carrier Assigned |\n|---|---|---|\n| PROD-001 \u2014 Nam Doc Mai Mango Box 5kg (\u00d710) | `refrigerated` | SCG Cold Chain (refrigerated) |\n| PROD-006 \u2014 Dried Mango Slices 500g (\u00d760) | `ambient` | Kerry Express (ground) |\n\nFresh mangoes (shelf life: 7 days) **must** travel via cold chain \u2014 mixing them with ambient goods on a ground truck would risk spoilage. This is the correct handling per the carrier rule.\n\n---\n\n## Shipment Status\n\n**SHP-017** \u2014 Fresh mangoes \u2192 SCG Cold Chain (refrigerated)\n- Status: `in_transit`\n- Tracking: `SCG-20260212-017A`\n- Dispatched: Feb 12, 08:00 \u2014 ETA: **Feb 13, 17:00**\n- Last event: In transit via cold chain (Bangkok, 12:00)\n\n**SHP-018** \u2014 Dried mango slices \u2192 Kerry Express (ground)\n- Status: `in_transit`\n- Tracking: `KRY-20260212-017B`\n- Dispatched: Feb 12, 08:00 \u2014 ETA: **Feb 14, 17:00**\n- Last event: In transit via ground delivery (Bangkok, 14:00)\n\n---\n\nBoth shipments are moving. The fresh mangoes (SHP-017) will arrive a day earlier (Feb 13) than the dried goods (Feb 14), both within the Feb 15 required date. No action needed.",
+  "duration_ms": 20778,
+  "cost_usd": 0.05912905,
+  "num_turns": 7,
+  "session_id": "0fc0e45d-68ce-413d-8f88-0dd446d703b3",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_get_product"
+  ],
+  "tool_calls_count": 6,
+  "systems_touched": [
+    "OMS",
+    "TMS",
+    "WMS"
+  ]
+}

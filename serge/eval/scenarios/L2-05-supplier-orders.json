@@ -1,0 +1,28 @@
+{
+  "id": "L2-05",
+  "level": "L2",
+  "use_case": "UC-3",
+  "title": "Supplier Order History",
+  "expected_systems": [
+    "SRM"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 6,
+  "question": "Show me all our purchase orders from Somchai Mango Farm (SUP-001).",
+  "ground_truth": {
+    "critical_facts": [
+      "PO-001, PO-004, PO-006, PO-008 are listed",
+      "Each shows status, order date, expected delivery, and actual delivery (if received)"
+    ],
+    "important_facts": [
+      "PO-001 received on time on 2026-01-05",
+      "PO-004 received 1 day early on 2026-01-14",
+      "PO-006 received on time on 2026-01-25",
+      "PO-008 status is shipped, expected 2026-02-18"
+    ],
+    "must_not_contain": [
+      "POs from other suppliers",
+      "Fabricated PO IDs"
+    ]
+  }
+}

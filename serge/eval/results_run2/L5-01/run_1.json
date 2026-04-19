@@ -1,0 +1,27 @@
+{
+  "scenario_id": "L5-01",
+  "question": "Give me the complete supply chain history for PROD-001 \u2014 from purchase orders to inventory to customer demand. What does it tell you?",
+  "agent_answer": "Here is the complete supply chain picture for PROD-001.\n\n---\n\n## PROD-001 \u2014 Nam Doc Mai Mango Box 5kg\n\n**Sources:** WMS, SRM, OMS\n\n| Attribute | Value |\n|---|---|\n| SKU | MANGO-NDM-5 |\n| Category | Premium |\n| Storage | Refrigerated |\n| Shelf life | 7 days |\n| Sell price | 450 THB |\n| Reorder point | 20 units |\n\n---\n\n## 1. Sourcing (SRM)\n\nTwo suppliers offer this product:\n\n| Supplier ID | Product | Unit Cost | Margin vs. sell price |\n|---|---|---|---|\n| SUP-001 | Fresh Nam Doc Mai (Chanthaburi) | 280 THB | 170 THB (37.8%) |\n| SUP-004 | Premium Nam Doc Mai (Rayong) | 270 THB | 180 THB (40.0%) |\n\nSUP-004 is THB 10/unit cheaper \u2014 on large restocks that adds up.\n\n---\n\n## 2. Procurement History (WMS \u2014 inbound stock movements)\n\n8 purchase orders received at WH-BKK:\n\n| PO | Qty | Date |\n|---|---|---|\n| PO-132 | 140 | 2025-10-13 |\n| PO-104 | 56 | 2025-11-05 |\n| PO-106 | 86 | 2025-11-28 |\n| PO-110 | 52 | 2025-12-01 |\n| PO-001 | 100 | 2026-01-05 |\n| PO-012 | 60 | 2026-01-22 |\n| PO-006 | 80 | 2026-01-25 |\n| PO-115 | 113 | 2026-01-29 |\n| **Total** | **687** | |\n\nRestock cadence is roughly every 3\u20134 weeks in batches of 52\u2013140 units. The last recorded inbound was 2026-01-29 \u2014 over 11 weeks ago (today is 2026-04-18). No new PO has arrived since.\n\n---\n\n## 3. Current Inventory (WMS)\n\n| Qty on hand | Reserved | Available | Reorder point | Status |\n|---|---|---|---|---|\n| 8 | 0 | **8** | 20 | **\u26a0 Needs reorder** |\n\nStock is critically low \u2014 only 8 units remain, well below the reorder point of 20.\n\n---\n\n## 4. Customer Demand (OMS)\n\n120 customer orders have included PROD-001, totalling ~1,895 units demanded historically.\n\n| Status | Orders |\n|---|---|\n| Delivered | 115 |\n| Shipped | 1 |\n| Processing | 2 |\n| Pending | 1 |\n| Cancelled | 0 |\n\n### Active orders right now:\n\n| Order | Status | Priority | Required date | PROD-001 qty |\n|---|---|---|---|---|\n| ORD-007 | processing | **urgent** | 2026-02-12 | **50** |\n| ORD-028 | processing | high | 2026-02-18 | 12 |\n| ORD-009 | pending | high | 2026-02-18 | 5 |\n| **Total active demand** | | | | **67 units** |\n\n---\n\n## Diagnosis\n\n**Three compounding problems:**\n\n1. **Stockout vs. active demand.** Only 8 units available; active orders require 67. The gap is 59 units. ORD-007 alone needs 50 \u2014 more than 6\u00d7 current stock.\n\n2. **ORD-007 is stuck and severely overdue.** It is `processing` + `urgent`, with a required date of 2026-02-12 \u2014 over 2 months ago. A 50-unit urgent order sitting frozen in processing is a VIP service failure. The order cannot ship because there is no stock.\n\n3. **Reorder point is miscalibrated.** The reorder point of 20 was designed for average orders (~12 units). But the largest single order is 50 units. Any time a large order comes in, the reorder point is functionally useless \u2014 stock was already insufficient before the alert would trigger.\n\n**Recommended actions for the team:**\n- Place an emergency PO immediately for PROD-001 (minimum 67 units to cover active demand, ideally 100+ as buffer). SUP-004 (270 THB/unit) is the cheaper option.\n- Escalate ORD-007 to the customer \u2014 it is 2 months overdue.\n- Raise the reorder point to at least 50 (matching the largest observed single-order demand) to prevent this pattern recurring.",
+  "duration_ms": 134355,
+  "cost_usd": 0.4725882,
+  "num_turns": 8,
+  "session_id": "6be1a4a1-6ff7-4c6a-a083-56859a5e180e",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__wms_get_stock_movements",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 10,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "WMS"
+  ]
+}

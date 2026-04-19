@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: available stock is exactly 8 units, ORD-007 (50 units) and ORD-009 (5 units) are both cited, and the agent clearly establishes that active demand (67 units) far exceeds available stock. No fabricated IDs or values detected; all IDs follow valid patterns and the demand math is internally consistent.",
+  "facts_found": [
+    "PROD-001 available stock = 8 units",
+    "ORD-007 requires 50 units of PROD-001 (processing, urgent)",
+    "ORD-009 requires 5 units of PROD-001 (pending, high)",
+    "ORD-028 requires 12 units (processing, high)",
+    "ORD-023 shipped (10 units)",
+    "Total unfulfilled demand = 67 units, shortfall = 59 units",
+    "Below reorder point of 20",
+    "PROD-001 is refrigerated, shelf_life 7 days"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-05",
+  "question": "Given our PROD-001 shortage, which customers are at risk of being impacted?",
+  "agent_answer": "Here's the full risk picture for PROD-001 (Nam Doc Mai Mango Box 5kg):\n\n**Stock:** 8 units available, reorder point 20 \u2014 already in shortage (WMS)\n\n| Order | Customer | Status | Priority | Required Date | PROD-001 Qty | Risk |\n|-------|----------|--------|----------|---------------|--------------|------|\n| ORD-007 | CUST-001 | processing | **urgent** | 2026-02-12 \u26a0\ufe0f | 50 | Critical \u2014 overdue, 6\u00d7 stock |\n| ORD-028 | CUST-006 | processing | high | 2026-02-18 | 12 | High \u2014 stuck in processing |\n| ORD-009 | CUST-008 | pending | high | 2026-02-18 | 5 | High \u2014 won't reach processing |\n| ORD-023 | CUST-004 | shipped | urgent | 2026-02-15 | 10 | Lower \u2014 already dispatched |\n\n**Total active unfulfilled demand: 67 units** (excluding ORD-023 which is shipped). Available stock covers only **12%** of that demand.\n\n**Key findings:**\n- **ORD-007 (CUST-001)** is the most critical: urgent priority, already overdue (required 2026-02-12, today is 2026-04-18), and demands 50 units \u2014 6\u00d7 what's in stock. It's stuck in `processing`.\n- **ORD-028 and ORD-009** are also blocked; 8 units can't even cover ORD-009 (5) + ORD-028 (12) together without leaving ORD-007 empty.\n- PROD-001 is `refrigerated` \u2014 any restock shipment must use a refrigerated carrier (CAR-002 or CAR-003).\n\n**Recommendation:** Escalate immediately \u2014 place an emergency supplier order for PROD-001, prioritize fulfillment of ORD-007 (urgent/overdue) with whatever stock arrives first, and notify CUST-001 of the delay.",
+  "duration_ms": 47214,
+  "cost_usd": 0.12178075,
+  "num_turns": 5,
+  "session_id": "5f03d082-9d30-43c9-a642-4211937114f4",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

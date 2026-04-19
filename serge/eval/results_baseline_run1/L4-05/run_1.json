@@ -1,0 +1,28 @@
+{
+  "scenario_id": "L4-05",
+  "question": "Given our PROD-001 shortage, which customers are at risk of being impacted?",
+  "agent_answer": "Here's the full at-risk picture for the PROD-001 shortage (**Nam Doc Mai Mango Box 5kg** \u2014 only **8 units available**, reorder point: 20).\n\n---\n\n## Customers at Risk\n\n| Priority | Order | Customer | Company | Segment | PROD-001 Qty | Required By | Status |\n|----------|-------|----------|---------|---------|:---:|-------------|--------|\n| **URGENT** | ORD-007 | Somying Prasertsak | Siam Paragon Food Hall | Retail | 50 | 2026-02-12 | processing |\n| **HIGH** | ORD-028 | Kanokwan Meesuk | The Sukhothai Hotel | Wholesale | 12 | 2026-02-18 | processing |\n| **HIGH** | ORD-009 | Piyanut Sricharoen | Gaggan Anand Restaurant | Wholesale | 5 | 2026-02-18 | pending |\n\n**Total demand: 67 units \u2014 vs. 8 available. Shortfall: 59 units.**\n\n---\n\n## Key Risks\n\n- **ORD-007 is the most critical**: Siam Paragon Food Hall needs 50 units urgently by Feb 12 \u2014 that's a high-profile retail account that must ship within 24 hours. Current stock (8 units) covers only 16% of this order.\n- **Two wholesale accounts** (Sukhothai Hotel and Gaggan Anand) are also blocked, both with high priority and Feb 18 deadlines.\n- PROD-001 is **refrigerated** (shelf life: 7 days), so any incoming supplier stock must arrive quickly to be usable.\n\n## Recommended Actions for the Team\n\n1. Check SRM for any open supplier orders for PROD-001 that are **confirmed or shipped** \u2014 incoming stock may partially cover demand.\n2. If no inbound PO exists, place an emergency purchase order immediately, prioritizing suppliers with the shortest lead time.\n3. Consider partial fulfillment for ORD-007 (ship the 8 available units now) while awaiting restocking.\n4. Proactively notify Siam Paragon Food Hall of the likely delay \u2014 this is an urgent retail order.",
+  "duration_ms": 60037,
+  "cost_usd": 0.20213735,
+  "num_turns": 10,
+  "session_id": "6e5844aa-c856-412a-87e6-e409252b28c5",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read",
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer",
+    "mcp__serge-supply-chain__oms_get_customer",
+    "mcp__serge-supply-chain__oms_get_customer"
+  ],
+  "tool_calls_count": 12,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

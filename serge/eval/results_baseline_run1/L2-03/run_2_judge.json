@@ -1,0 +1,20 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 3,
+  "no_hallucination": 4,
+  "reasoning": 4,
+  "weighted_score": 3.30,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "wrong_value",
+  "justification": "ORD-007 is correctly identified as overdue (urgent, processing, required Feb 12). However, ORD-011 is listed under 'Shipped but Not Yet Delivered' with status 'shipped' when the ground truth specifies its status is 'shipped with exception' — a materially different and operationally important distinction that the agent missed.",
+  "facts_found": [
+    "ORD-007 overdue, processing, required 2026-02-12, urgent priority",
+    "ORD-011 overdue, required 2026-02-10, listed as shipped"
+  ],
+  "facts_missing": [
+    "ORD-011 has 'exception' status (not merely 'shipped'), which is a critical operational flag indicating a delivery problem"
+  ],
+  "hallucinations": []
+}

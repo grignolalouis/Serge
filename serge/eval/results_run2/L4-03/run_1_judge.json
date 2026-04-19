@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 4,
+  "completeness": 4,
+  "no_hallucination": 4,
+  "reasoning": 5,
+  "weighted_score": 4.20,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "wrong_value",
+  "justification": "The agent correctly identifies SUP-002 as chronically late, correctly cites PO-002 (expected 2026-01-10, received 2026-01-13, +3 days) and PO-005 (expected 2026-01-20, received 2026-01-24, +4 days), and reaches the correct verdict of a chronic systemic pattern. However, the agent reports a 24% on-time rate (4/17 POs on time) while the ground truth states 0% on-time rate among received scenario POs — this is a factual discrepancy on the on-time rate metric, though the overall conclusion and recommendation remain valid and well-supported.",
+  "facts_found": [
+    "SUP-002 has repeated late deliveries across Oct 2025 – Feb 2026",
+    "PO-002: expected 2026-01-10, received 2026-01-13 (+3 days)",
+    "PO-005: expected 2026-01-20, received 2026-01-24 (+4 days)",
+    "Pattern deemed chronic/systemic",
+    "Rating 3.2/5.0 cited as consistent with performance",
+    "Declared lead time 5 days, average actual ~8 days implied",
+    "Worsening trend in recent POs noted"
+  ],
+  "facts_missing": [
+    "Ground truth specifies 0% on-time rate among received scenario POs; agent reports 24% (4/17 on time) — this contradicts the ground truth"
+  ],
+  "hallucinations": []
+}

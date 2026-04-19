@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-04",
+  "question": "Give me a quick scan of everything that needs my attention right now.",
+  "agent_answer": "Here's your operational dashboard as of today (2026-04-18):\n\n---\n\n## \ud83d\udd34 Critical \u2014 Act Now\n\n**[TMS] 1 shipment exception**\n| Shipment | Order | Reason |\n|----------|-------|--------|\n| SHP-009 | ORD-011 (CUST-003) | Refrigeration unit malfunction on delivery vehicle (CAR-001) |\n\nCargo includes perishables (PROD-003). Cold chain is broken \u2014 this needs immediate rerouting to a refrigerated carrier.\n\n---\n\n**[OMS] 4 orders stuck in processing \u2014 all overdue**\n| Order | Priority | Customer | Products | Required |\n|-------|----------|----------|----------|----------|\n| ORD-007 | **urgent** | CUST-001 | PROD-001 \u00d750 | 2026-02-12 |\n| ORD-028 | high | CUST-006 | PROD-001 \u00d712, PROD-004 \u00d76 | 2026-02-18 |\n| ORD-012 | high | CUST-004 | PROD-002 \u00d78 | 2026-02-17 |\n| ORD-020 | normal | CUST-009 | PROD-006 \u00d7100 | 2026-02-18 |\n\nORD-007 (urgent, 50\u00d7 PROD-001) is almost certainly blocked by the PROD-001 stock shortage below.\n\n---\n\n## \ud83d\udfe0 Urgent \u2014 Address Today\n\n**[WMS] 3 products below reorder point**\n| Product | Available | Reorder Point | Storage |\n|---------|-----------|---------------|---------|\n| PROD-001 Nam Doc Mai 5kg | 6 | 20 | refrigerated |\n| PROD-008 Sticky Rice Kit | 6 | 15 | refrigerated |\n| PROD-005 Mixed Assortment 5kg | 12 | 15 | refrigerated |\n\nAll three are refrigerated \u2014 check if incoming POs cover these.\n\n**[SRM] 6 overdue supplier orders**\n| PO | Supplier | Status | Expected | Items |\n|----|----------|--------|----------|-------|\n| PO-009 | SUP-002 | pending | 2026-02-15 | SP-004 \u00d760 |\n| PO-015 | SUP-004 | shipped | 2026-02-15 | SP-010 \u00d7150, SP-012 \u00d730 |\n| PO-010 | SUP-003 | confirmed | 2026-02-16 | SP-008 \u00d780 |\n| PO-008 | SUP-001 | shipped | 2026-02-18 | SP-001 \u00d7150 |\n| PO-016 | SUP-003 | pending | 2026-02-18 | SP-006 \u00d7100 |\n| PO-017 | SUP-005 | confirmed | 2026-02-19 | SP-013 \u00d725 |\n\nPO-009 is still **pending** (supplier hasn't confirmed) \u2014 2 months overdue, escalate immediately. PO-008 (SP-001 feeds PROD-001) is shipped but late \u2014 ETA needed.\n\n---\n\n## \ud83d\udfe1 Monitor \u2014 Shipped but Overdue\n\n3 pending orders not yet started: ORD-009 (high), ORD-021, ORD-025 \u2014 need to be picked up.\n\n6 shipped orders past required date: ORD-019, ORD-005, ORD-018, ORD-027, ORD-023, ORD-011 \u2014 verify delivery confirmation or track for last-mile issues.\n\n---\n\n**Top 3 actions:** (1) Reroute SHP-009 to a refrigerated carrier. (2) Escalate PO-009 with SUP-002 \u2014 still pending after 2 months. (3) Chase PO-008 ETA \u2014 SP-001 is blocking ORD-007 (urgent).",
+  "duration_ms": 35348,
+  "cost_usd": 0.06832835,
+  "num_turns": 6,
+  "session_id": "71fc6dfd-6095-4f26-84c9-5d46207a3945",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_low_stock",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+    "mcp__serge-supply-chain__tms_list_exception_shipments",
+    "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+  ],
+  "tool_calls_count": 5,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

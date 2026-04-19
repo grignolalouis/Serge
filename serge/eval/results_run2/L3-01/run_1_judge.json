@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All critical facts are present and accurate: shipped status, SCG Cold Chain CAR-002 refrigerated carrier, tracking number SCG-20260210-005, and ETA 2026-02-12. All important facts are also correctly stated. No fabricated data detected.",
+  "facts_found": [
+    "Order status: shipped",
+    "Carrier: SCG Cold Chain (CAR-002, refrigerated)",
+    "Tracking number: SCG-20260210-005",
+    "ETA: 2026-02-12",
+    "Shipped on 2026-02-10",
+    "Destination: Villa Market, Bangkok",
+    "Last tracking event at local distribution center on 2026-02-11"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

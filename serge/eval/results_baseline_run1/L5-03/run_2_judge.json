@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies all critical facts: PROD-001 shortage of 4 units (8 available vs 12 needed), PROD-004 fully covered (19 available vs 6 needed), PO-008 arriving on the Feb 18 deadline with 150 units of PROD-001 as a same-day risk, and the mandatory use of a refrigerated carrier (CAR-002 or CAR-003, not Kerry Express). All important facts including weight (120 kg), carrier costs (3,000 THB vs 4,200 THB), and recommendation for CAR-002 are also present and correct. No hallucinations detected.",
+  "facts_found": [
+    "PROD-001 has 8 available (qty:8, reserved:0), 4 short of 12 needed",
+    "PROD-004 has 19 available (qty:22, reserved:3), fully covers 6 needed",
+    "PO-008 brings 150 units of PROD-001 on Feb 18 (same-day deadline risk)",
+    "Both products are refrigerated — ground carrier prohibited",
+    "CAR-002 SCG Cold Chain: 25 THB/kg, 1-day transit",
+    "CAR-003 Flash Express: 35 THB/kg, 1-day transit",
+    "Total shipment weight: 120 kg",
+    "CAR-002 cost: 3,000 THB; CAR-003 cost: 4,200 THB",
+    "Recommendation: CAR-002 (cheaper, same transit)"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

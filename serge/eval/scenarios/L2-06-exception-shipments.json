@@ -1,0 +1,26 @@
+{
+  "id": "L2-06",
+  "level": "L2",
+  "use_case": "UC-4",
+  "title": "Shipment Exceptions",
+  "expected_systems": [
+    "TMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 5,
+  "question": "Any shipments with problems right now?",
+  "ground_truth": {
+    "critical_facts": [
+      "SHP-009 has exception status",
+      "Reason is refrigeration unit malfunction on delivery vehicle"
+    ],
+    "important_facts": [
+      "Associated order is ORD-011",
+      "Carrier is Kerry Express (CAR-001)"
+    ],
+    "must_not_contain": [
+      "Invented exception reasons",
+      "Successfully-delivered shipments listed as exceptions"
+    ]
+  }
+}

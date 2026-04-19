@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L2-04",
+  "question": "What products are below their reorder point right now?",
+  "agent_answer": "3 products are below their reorder point (WMS \u2014 WH-BKK):\n\n| Product | SKU | Available | Reorder Point | Shortfall | Storage |\n|---|---|---|---|---|---|\n| Nam Doc Mai Mango Box 5kg (PROD-001) | MANGO-NDM-5 | 8 | 20 | \u221212 | Refrigerated |\n| Mixed Mango Assortment 5kg (PROD-005) | MANGO-MIX-5 | 12 | 15 | \u22123 | Refrigerated |\n| Mango Sticky Rice Kit 2-person (PROD-008) | MANGO-STICKY-KIT | 6 | 15 | \u22129 | Refrigerated |\n\nAll three are refrigerated with short shelf lives (3\u20137 days), so restocking urgency is high. PROD-001 has the largest shortfall (\u221212 units). A purchase order to a reliable refrigerated-product supplier should be raised for all three.",
+  "duration_ms": 12019,
+  "cost_usd": 0.07266500000000001,
+  "num_turns": 3,
+  "session_id": "3506b32f-e8ac-44e9-9d14-181ee0defbb3",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_low_stock"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "WMS"
+  ]
+}

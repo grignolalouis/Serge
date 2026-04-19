@@ -1,0 +1,31 @@
+{
+  "scenario_id": "L4-01",
+  "question": "Why hasn't order ORD-007 shipped yet? The customer is chasing us.",
+  "agent_answer": "Here's the full picture across all four systems:\n\n## ORD-007 \u2014 Root Cause Diagnosis\n\n**Order summary (OMS)**\n| Field | Value |\n|---|---|\n| Status | `processing` \u2014 stuck, never shipped |\n| Priority | **urgent** (should have shipped within 24h of order) |\n| Order date | 2026-02-05 |\n| Required date | 2026-02-12 \u2014 **overdue by ~65 days** |\n| Product | PROD-001 \u00b7 Nam Doc Mai Mango Box 5kg \u00b7 qty **50** |\n\n---\n\n### Root cause: stock shortage (WMS)\n\n| Metric | Value |\n|---|---|\n| On hand | 8 units |\n| Reserved | 0 |\n| **Available** | **8 units** |\n| Needed | **50 units** |\n| **Shortfall** | **\u221242 units** |\n\nThe warehouse only has 8 units available \u2014 not enough to fulfill the 50-unit order. No shipment was ever created in TMS as a result.\n\n---\n\n### Incoming supply (SRM)\n\nOne PO covers PROD-001:\n\n| PO | Supplier | Status | Qty | Expected delivery |\n|---|---|---|---|---|\n| PO-008 | SUP-001 | `shipped` | 150 | 2026-02-18 |\n\nPO-008 was expected on **2026-02-18** \u2014 but that date has long passed with no receipt recorded. This PO itself appears overdue.\n\n---\n\n### Additional concern\n\nPROD-001 is `refrigerated` with a **shelf life of only 7 days**. The 8 units currently in stock were last recorded on 2026-02-10 \u2014 they are almost certainly expired by now and should not be used.\n\n---\n\n### Recommended actions for the team\n\n1. **Investigate PO-008** \u2014 contact SUP-001 to find out why the 150-unit shipment never arrived at the warehouse.\n2. **Write off the 8 units** on hand if expired (last updated 2026-02-10, shelf life 7 days).\n3. **Place a new urgent PO** for PROD-001 once the PO-008 situation is clarified.\n4. **Communicate to the customer (CUST-001)** that fulfilment is blocked pending restocking \u2014 the required date of 2026-02-12 has already been missed.",
+  "duration_ms": 43247,
+  "cost_usd": 0.10316615,
+  "num_turns": 14,
+  "session_id": "5f185451-4cb5-4ec0-9ebb-767f78331c20",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_get_customer_order",
+    "mcp__serge-supply-chain__tms_track_customer_order",
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "mcp__serge-supply-chain__srm_list_supplier_orders_by_status",
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_get_supplier_product",
+    "mcp__serge-supply-chain__srm_get_supplier_product",
+    "mcp__serge-supply-chain__srm_get_supplier_product",
+    "mcp__serge-supply-chain__srm_get_supplier_product",
+    "mcp__serge-supply-chain__srm_get_supplier_product"
+  ],
+  "tool_calls_count": 13,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

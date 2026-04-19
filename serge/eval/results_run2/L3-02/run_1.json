@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L3-02",
+  "question": "Which orders are requesting PROD-001 and do we have enough stock to cover them?",
+  "agent_answer": "## PROD-001 \u2014 Nam Doc Mai Mango Box 5kg (refrigerated)\n\n### Inventory (WMS)\n| Available | Reserved | Reorder Point | Status |\n|-----------|----------|---------------|--------|\n| **8 units** | 0 | 20 | \u26a0\ufe0f Below reorder point |\n\n---\n\n### Active Orders (OMS)\n\n| Order | Customer | Status | Priority | Required Date | PROD-001 Qty |\n|-------|----------|--------|----------|---------------|-------------|\n| ORD-023 | CUST-004 | shipped | urgent | 2026-02-15 | 10 |\n| ORD-007 | CUST-001 | processing | urgent | 2026-02-12 | 50 |\n| ORD-028 | CUST-006 | processing | high | 2026-02-18 | 12 |\n| ORD-009 | CUST-008 | pending | high | 2026-02-18 | 5 |\n\n---\n\n### Stock Coverage\n\n| Demand type | Units |\n|-------------|-------|\n| Unfulfilled demand (processing + pending) | **67 units** |\n| Available stock | **8 units** |\n| **Shortfall** | **\u221259 units** |\n\n**No, stock is critically insufficient.** Only 8 units are available against 67 units of unfulfilled demand \u2014 a **shortfall of 59 units**. All three unshipped orders are also **overdue** (required dates in February 2026).\n\n**Recommended actions:**\n1. Raise an urgent purchase order for PROD-001 with your fastest supplier (check SRM lead times).\n2. Prioritize the 8 available units toward ORD-007 (urgent, CUST-001) \u2014 though even that order needs 50 units.\n3. Since PROD-001 is refrigerated (shelf_life: 7 days), ensure any incoming stock and shipments use a **refrigerated carrier** (CAR-002 or CAR-003).",
+  "duration_ms": 65499,
+  "cost_usd": 0.32777295,
+  "num_turns": 5,
+  "session_id": "ccb93bcc-cd1c-4319-b1ca-1f60c0407340",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

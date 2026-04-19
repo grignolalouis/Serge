@@ -1,0 +1,27 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All five critical facts are present and accurate: ORD-007 and ORD-011 overdue orders surfaced, SHP-009 exception prominently highlighted, all three low-stock products (PROD-001, PROD-005, PROD-008) identified, SUP-002 reliability concern noted (PO-009 never confirmed, rating 3.2), and multiple strong cross-system insights drawn (ORD-007 blocked by PROD-001 shortage, SHP-009 carrier type mismatch with refrigerated product). No fabricated IDs or values detected; all entities follow expected patterns and the reasoning is internally coherent with concrete prioritized actions.",
+  "facts_found": [
+    "ORD-007 overdue, urgent, stuck in processing due to PROD-001 shortage",
+    "ORD-011 overdue, SHP-009 exception noted",
+    "SHP-009 exception: refrigeration malfunction + carrier type violation (CAR-001 ground carrier for refrigerated product)",
+    "PROD-001 low stock: 8 units available vs 67 units demanded",
+    "PROD-005 below reorder point (12 available, reorder 15)",
+    "PROD-008 below reorder point (6 available, reorder 15, 3-day shelf life)",
+    "SUP-002 (Northern Fruits Co.) PO-009 never confirmed, overdue",
+    "SUP-003 (Prachuap Harvest) rating 2.8, two overdue POs",
+    "Cross-system insight: ORD-007 stuck because PROD-001 below reorder",
+    "Cross-system insight: SHP-009 uses ground carrier for refrigerated product",
+    "PO-008 from SUP-001 (best supplier, 4.5 rating) shipped and overdue — expedite recommended"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

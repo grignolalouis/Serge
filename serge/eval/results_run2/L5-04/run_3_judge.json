@@ -1,0 +1,24 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies both suppliers for PROD-001 with accurate costs (SUP-001 at 280 THB, SUP-004 at 270 THB), correct ratings (4.5 vs 4.0), correct lead times (~3 days each), and correct on-time rates. The 10 THB/box cost difference is accurately stated. The answer also correctly addresses all important facts including volume history (13 vs 6 orders) and single-source risk, arriving at the same conclusion as the ground truth: both are reliable, SUP-004 is cheaper, and diversification is recommended.",
+  "facts_found": [
+    "SUP-001 (Somchai Mango Farm) cost 280 THB for PROD-001",
+    "SUP-004 (Rayong Tropical) cost 270 THB for PROD-001",
+    "SUP-001 rating 4.5, ~2.92 day lead time, 100% on-time (13/13 orders)",
+    "SUP-004 rating 4.0, ~2.83 day lead time, 100% on-time (6/6 orders)",
+    "10 THB/box cost difference correctly stated",
+    "SUP-001 has larger order history (13 vs 6)",
+    "Single-source risk highlighted for perishable refrigerated product",
+    "Recommendation to keep both suppliers for diversification"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

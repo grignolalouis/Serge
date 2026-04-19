@@ -1,0 +1,20 @@
+{
+  "scenario_id": "L5-04",
+  "question": "We want to rethink our sourcing for Nam Doc Mai mangoes. Based on our data, which supplier should we rely on and why? What's the risk if we stop using the other one?",
+  "agent_answer": "Here's the full picture across SRM and WMS:\n\n## Nam Doc Mai Sourcing \u2014 PROD-001 (sell price: **450 THB/box**)\n\n| Supplier | ID | Cost | Margin | On-time rate | Avg lead | Rating | Orders received |\n|---|---|---|---|---|---|---|---|\n| Somchai Mango Farm | SUP-001 | 280 THB | **170 THB** | **100%** (13/13) | 2.92 days | **4.5** | 13 |\n| Rayong Tropical | SUP-004 | **270 THB** | 180 THB | **100%** (6/6) | **2.83 days** | 4.0 | 6 |\n\n*Source: SRM (supplier products, supplier comparison), WMS (unit_price)*\n\n---\n\n## Recommendation: Keep Somchai Mango Farm (SUP-001) as primary\n\nBoth suppliers have a perfect on-time rate, but Somchai's track record is twice as large (13 orders vs 6), its rating is higher (4.5 vs 4.0), and the 10 THB/box cost difference is marginal (~3.6% on margin). Somchai is the more proven and reliable source.\n\nRayong Tropical is cheaper by 10 THB/box and slightly faster, but its sample size is too small to treat the 100% rate with the same confidence.\n\n---\n\n## Risk of dropping Rayong Tropical\n\n| Risk | Severity |\n|---|---|\n| Single-source dependency on a **refrigerated, perishable** product (7-day shelf life) | High |\n| Any disruption at Somchai (weather, harvest failure) \u2192 **zero backup** for a premium SKU | High |\n| Loss of price leverage \u2014 no competitor to negotiate Somchai's 280 THB cost down | Medium |\n\n**Verdict:** Do not drop Rayong Tropical entirely. Keep them as a qualified backup supplier. The 10 THB/box savings aren't the reason to keep them \u2014 the insurance against a single-source failure on a perishable premium product is.",
+  "duration_ms": 28868,
+  "cost_usd": 0.06074725,
+  "num_turns": 5,
+  "session_id": "983e0901-52dc-4d84-9d90-517532a3aa68",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_products",
+    "mcp__serge-supply-chain__srm_compare_suppliers",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product"
+  ],
+  "tool_calls_count": 4,
+  "systems_touched": [
+    "SRM",
+    "WMS"
+  ]
+}

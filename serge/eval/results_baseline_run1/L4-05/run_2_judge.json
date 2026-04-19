@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 2,
+  "completeness": 2,
+  "no_hallucination": 2,
+  "reasoning": 3,
+  "weighted_score": 2.10,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "hallucination",
+  "justification": "The agent missed the critical fact about ORD-023 (CUST-004 Mandarin Oriental, 10 units, already shipped) and instead included ORD-028 (The Sukhothai Hotel, 12 units) which does not appear in the ground truth's list of PROD-001 orders — this appears to be a fabricated or incorrectly attributed order. The total demand figure (67 units) is also inconsistent with the ground truth orders.",
+  "facts_found": [
+    "PROD-001 stock is 8 units available",
+    "ORD-007 (CUST-001 Siam Paragon Food Hall) needs 50 units — blocked/unfulfillable",
+    "ORD-009 (CUST-008 Gaggan Anand Restaurant) needs 5 units — at risk"
+  ],
+  "facts_missing": [
+    "ORD-023 (CUST-004 Mandarin Oriental) needs 10 units — already shipped (important context that this order was fulfilled)"
+  ],
+  "hallucinations": [
+    "ORD-028 (CUST-006 The Sukhothai Hotel, 12 units needing PROD-001) — not present in ground truth's list of PROD-001 orders, driving an inflated and incorrect total demand of 67 units"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All five critical facts are present and accurately stated: ORD-007 and ORD-011 are surfaced as overdue, SHP-009 exception is highlighted with the refrigeration failure detail, all three low-stock products (PROD-001, PROD-005, PROD-008) are identified with correct available quantities and reorder points, SUP-002's unconfirmed PO-009 is flagged as a reliability concern, and multiple cross-system insights are drawn (PROD-001 stockout causing ORD-007/ORD-028/ORD-009 to be stuck, CAR-001 refrigeration failure risking cold-chain integrity). All IDs follow proper patterns and no values contradict the ground truth. The answer also provides a well-structured prioritized action list and notes positive suppliers.",
+  "facts_found": [
+    "ORD-007 surfaced as most critical overdue order (URGENT, 65+ days, PROD-001 ×50)",
+    "ORD-011 surfaced via SHP-009 exception",
+    "SHP-009 refrigeration unit malfunction on CAR-001 flagged",
+    "PROD-001 low stock (8 available vs 67 demanded)",
+    "PROD-005 low stock (12 available, reorder point 15)",
+    "PROD-008 low stock (6 available, 3-day shelf life, 15 demanded)",
+    "SUP-002 PO-009 pending with no confirmation flagged",
+    "Cross-system insight: PROD-001 stockout blocking ORD-007/ORD-028/ORD-009",
+    "Cross-system insight: CAR-001 used on refrigerated products after malfunction",
+    "6 overdue supplier POs identified with SUP-003 worst performer",
+    "Prioritized 8-item action list with urgency levels"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

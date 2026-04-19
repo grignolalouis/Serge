@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 4,
+  "no_hallucination": 5,
+  "reasoning": 4,
+  "weighted_score": 4.60,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "Both critical orders (ORD-007 processing/2026-02-12 and ORD-011 shipped/2026-02-10) are correctly identified with accurate statuses and dates. The only minor gap is that ORD-011's TMS 'exception' sub-status is not stated (agent only reports OMS 'shipped'), though the agent does suggest checking TMS for exceptions. All listed orders are genuinely overdue (required dates in Feb 2026 vs today Apr 18 2026), no delivered/cancelled orders are included, and no IDs or values appear fabricated.",
+  "facts_found": [
+    "ORD-007 overdue, status processing, required 2026-02-12",
+    "ORD-011 overdue, status shipped, required 2026-02-10",
+    "13 total overdue orders listed with IDs, customers, required dates, statuses, and line items",
+    "No delivered or cancelled orders included",
+    "Correct prioritization of urgent/high orders as key concerns"
+  ],
+  "facts_missing": [
+    "ORD-011 TMS exception status not explicitly noted (agent reports OMS shipped but ground truth specifies 'shipped with exception')"
+  ],
+  "hallucinations": []
+}

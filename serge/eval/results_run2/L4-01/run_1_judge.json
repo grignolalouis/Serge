@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies all critical facts: ORD-007 is stuck in processing and overdue (required Feb 12), needs 50 units of PROD-001, only 8 units available causing a 42-unit shortfall, and PO-008 is inbound but not expected until Feb 18 — after the required date. All IDs, quantities, dates, and statuses match the ground truth. The agent adds valid bonus context (refrigerated carrier requirement) without fabricating any data.",
+  "facts_found": [
+    "ORD-007 status: processing and overdue",
+    "Requires 50 units PROD-001 (Nam Doc Mai)",
+    "Available inventory: 8 units (shortfall of 42)",
+    "Root cause: stock shortage",
+    "PO-008 from SUP-001, 150 units, status shipped, expected 2026-02-18 (after required date Feb 12)",
+    "No shipment created in TMS",
+    "Customer CUST-001, priority urgent"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

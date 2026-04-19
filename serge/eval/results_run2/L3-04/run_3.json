@@ -1,0 +1,22 @@
+{
+  "scenario_id": "L3-04",
+  "question": "Who can supply us Nam Doc Mai mangoes and at what price?",
+  "agent_answer": "Two suppliers can provide Nam Doc Mai Mango Box 5kg (PROD-001, sell price: **450 THB**):\n\n| Supplier | Region | Unit Cost | Margin | Rating | Lead Time | Payment |\n|----------|--------|-----------|--------|--------|-----------|---------|\n| Somchai Mango Farm (SUP-001) | Chanthaburi | 280 THB | 170 THB | 4.5/5 | 3 days | net_30 |\n| Rayong Tropical (SUP-004) | Rayong | 270 THB | 180 THB | 4.0/5 | 3 days | net_30 |\n\n*Sources: WMS (product/pricing), SRM (supplier products, supplier profiles)*\n\n**Recommendation:** Rayong Tropical is slightly cheaper (270 vs 280 THB/unit), but Somchai Mango Farm has a higher reliability rating (4.5 vs 4.0). For cost-sensitive orders, Rayong Tropical saves 10 THB/unit; for reliability-critical orders, Somchai is the safer pick.",
+  "duration_ms": 22797,
+  "cost_usd": 0.0668155,
+  "num_turns": 7,
+  "session_id": "f0eea09e-22b5-4e0c-ae01-a5207dbad5a7",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_products",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+    "ToolSearch",
+    "mcp__serge-supply-chain__srm_get_supplier",
+    "mcp__serge-supply-chain__srm_get_supplier"
+  ],
+  "tool_calls_count": 6,
+  "systems_touched": [
+    "SRM",
+    "WMS"
+  ]
+}

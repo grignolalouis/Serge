@@ -1,0 +1,19 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present with correct product IDs, available quantities, and reorder points. No disallowed products appear, shortfalls are arithmetically correct, and the recommendation is coherent.",
+  "facts_found": [
+    "PROD-001 available=8, reorder_point=20",
+    "PROD-005 available=12, reorder_point=15",
+    "PROD-008 available=6, reorder_point=15"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

@@ -1,0 +1,27 @@
+{
+  "id": "L3-02",
+  "level": "L3",
+  "use_case": "UC-4",
+  "title": "Product Demand View",
+  "expected_systems": [
+    "WMS",
+    "OMS"
+  ],
+  "expected_tool_count_min": 2,
+  "estimated_human_minutes": 12,
+  "question": "Which orders are requesting PROD-001 and do we have enough stock to cover them?",
+  "ground_truth": {
+    "critical_facts": [
+      "Current PROD-001 inventory is 8 available",
+      "Multiple active orders need PROD-001 including ORD-007 (50 units) and ORD-009 (5 units)",
+      "Active demand exceeds current stock"
+    ],
+    "important_facts": [
+      "ORD-007 alone exceeds available stock"
+    ],
+    "must_not_contain": [
+      "Wrong available stock value",
+      "Orders not containing PROD-001"
+    ]
+  }
+}

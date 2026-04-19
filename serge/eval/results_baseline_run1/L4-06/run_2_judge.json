@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are present and correct: ORD-023 has SHP-017 (SCG Cold Chain, refrigerated, for PROD-001) and SHP-018 (Kerry Express, ground, for PROD-006), both in transit. The reasoning about the split (storage type compatibility) and additional context (customer, dates, carrier costs) is consistent with the seed data and adds value without fabricating contradictory information.",
+  "facts_found": [
+    "ORD-023 has two shipments: SHP-017 and SHP-018",
+    "SHP-017 uses SCG Cold Chain (refrigerated carrier) for PROD-001",
+    "SHP-018 uses Kerry Express (ground carrier) for PROD-006",
+    "Both shipments are in transit",
+    "Split justified by different storage types (refrigerated vs ambient)",
+    "Customer is Mandarin Oriental"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L3-02",
+  "question": "Which orders are requesting PROD-001 and do we have enough stock to cover them?",
+  "agent_answer": "## PROD-001 \u2014 Nam Doc Mai Mango Box 5kg\n\n### Inventory (WMS)\n| | |\n|---|---|\n| On hand | 8 units |\n| Reserved | 0 |\n| **Available** | **8 units** |\n| Reorder point | 20 |\n| Status | **Needs reorder** |\n\n### Active Orders (OMS)\n| Order | Customer | Status | Priority | Required | Qty |\n|-------|----------|--------|----------|----------|-----|\n| ORD-007 | CUST-001 | processing | **urgent** | 2026-02-12 | 50 |\n| ORD-023 | CUST-004 | shipped | **urgent** | 2026-02-15 | 10 |\n| ORD-028 | CUST-006 | processing | high | 2026-02-18 | 12 |\n| ORD-009 | CUST-008 | pending | high | 2026-02-18 | 5 |\n\n**Total demand from active orders: 77 units**\n\n### Coverage Assessment\n\nWe have **8 units available against 77 units demanded \u2014 a shortfall of 69 units (89% uncovered).**\n\nKey concerns:\n- **ORD-007** (urgent, 50 units, required 2026-02-12) is already past its required date and stuck in *processing* \u2014 almost certainly blocked by this stock shortage.\n- **ORD-023** (urgent, 10 units) is already *shipped*, so those 10 units are presumably en route \u2014 but we only have 8 on hand, which is inconsistent and worth investigating.\n- The remaining 27 units for ORD-028 and ORD-009 cannot be fulfilled.\n\n**Recommendation:** A restock purchase order for PROD-001 is urgent. Also worth investigating ORD-023's shipment via TMS to confirm carrier and delivery status, given the stock discrepancy.",
+  "duration_ms": 46122,
+  "cost_usd": 0.1164685,
+  "num_turns": 5,
+  "session_id": "e95dea7c-850d-45c6-b046-b752bbd47abf",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 7,
+  "systems_touched": [
+    "OMS",
+    "WMS"
+  ]
+}

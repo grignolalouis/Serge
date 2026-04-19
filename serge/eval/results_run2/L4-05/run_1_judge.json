@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical facts are present and accurate: 8 units available, ORD-007/CUST-001 needing 50 units as the most severe case, ORD-009/CUST-008 needing 5 units (pending/at-risk), and ORD-028 as an additional active order. The agent correctly quantifies total demand vs. stock, prioritizes correctly, and the conclusion matches the ground truth perfectly.",
+  "facts_found": [
+    "PROD-001 stock: 8 units available",
+    "ORD-007 (CUST-001) needs 50 units, urgent priority, processing status",
+    "ORD-009 (CUST-008) needs 5 units, high priority, pending status",
+    "ORD-028 (CUST-006) needs 12 units, high priority, processing — additional at-risk order",
+    "Total demand: 67 units vs 8 available, shortfall of 59",
+    "ORD-007 identified as most critical due to urgent priority and earliest deadline 2026-02-12"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

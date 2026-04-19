@@ -1,0 +1,25 @@
+{
+  "factual_accuracy": 3,
+  "completeness": 2,
+  "no_hallucination": 4,
+  "reasoning": 3,
+  "weighted_score": 2.90,
+  "pass": false,
+  "critical_facts_present": false,
+  "same_conclusion_as_ground_truth": false,
+  "failure_category": "missed_fact",
+  "justification": "The agent correctly identifies the product details, both suppliers (SUP-001 at 280 THB and SUP-004 at 270 THB), and current inventory of 8 units. However, it completely misses the critical fact that PO-008 (150 units from SUP-001) is already in transit with expected delivery 2026-02-18. The agent explicitly states 'No inbound supply in 10+ weeks' and recommends placing a new PO — both conclusions are wrong given PO-008 exists. This fundamentally changes the supply chain diagnosis.",
+  "facts_found": [
+    "PROD-001 is Nam Doc Mai Mango Box 5kg, premium, 450 THB, refrigerated, 7-day shelf life",
+    "Two suppliers: SUP-001 at 280 THB (SP-001) and SUP-004 at 270 THB (SP-009)",
+    "Current inventory: 8 units available, below reorder point of 20",
+    "Multiple historical POs and customer orders cited",
+    "Active demand exceeds available stock (ORD-007 needs 50 units)",
+    "Margin analysis: ~170 THB per unit (~37.8%)",
+    "Reorder point of 20 too low given demand spikes"
+  ],
+  "facts_missing": [
+    "PO-008 (150 units from SUP-001) is in transit, expected 2026-02-18 — this is a critical inbound supply that resolves the stockout"
+  ],
+  "hallucinations": []
+}

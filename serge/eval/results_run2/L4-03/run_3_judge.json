@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 4,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 4.70,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All critical facts are present and correctly stated: PO-002 (3 days late) and PO-005 (4 days late) match exactly, the chronic pattern is clearly identified, and the 3.2 rating is noted. The only minor discrepancy is the on-time rate: the ground truth states '0% among received scenario POs' (referring specifically to PO-002 and PO-005), while the agent computed 24% (4/17) across all 17 historical POs. This difference is a scope distinction rather than a factual error — the agent's broader dataset analysis is legitimate and does not contradict the ground truth's conclusion about the chronic pattern. The practical lead time estimate (6–7 days vs ground truth's ~8 days) is slightly low but not materially wrong.",
+  "facts_found": [
+    "SUP-002 shows chronic late deliveries across 17 received POs",
+    "PO-002: expected 2026-01-10, received 2026-01-13 (3 days late)",
+    "PO-005: expected 2026-01-20, received 2026-01-24 (4 days late)",
+    "Pattern described as chronic with 76% late rate",
+    "Rating 3.2/5 cited as consistent with performance",
+    "Declared 5-day lead time should be treated as longer in practice"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

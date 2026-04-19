@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All four critical POs (PO-001, PO-004, PO-006, PO-008) are present with correct statuses, dates, and delivery info. Important facts are also all correct: PO-001 received on time 2026-01-05, PO-004 received early on 2026-01-14, PO-006 received on time 2026-01-25, PO-008 still shipped with expected date 2026-02-18. No fabricated IDs or data from other suppliers.",
+  "facts_found": [
+    "PO-001 received 2026-01-05 (on time)",
+    "PO-004 received 2026-01-14 (1 day early, expected 2026-01-15)",
+    "PO-006 received 2026-01-25 (on time)",
+    "PO-008 shipped, expected 2026-02-18, no actual delivery",
+    "All 14 POs listed with status, order date, expected date, and actual delivery"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

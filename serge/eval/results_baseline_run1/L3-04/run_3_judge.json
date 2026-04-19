@@ -1,0 +1,20 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: two suppliers identified (SUP-001 and SUP-004), SUP-001 cost is 280 THB, SUP-004 cost is 270 THB. No fabrications detected and reasoning is clear.",
+  "facts_found": [
+    "Two suppliers: SUP-001 and SUP-004",
+    "SUP-001 unit cost: 280 THB",
+    "SUP-004 unit cost: 270 THB",
+    "Correct margins (180 THB and 170 THB) derived from sell price 450 THB"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

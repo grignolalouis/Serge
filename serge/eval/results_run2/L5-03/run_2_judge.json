@@ -1,0 +1,23 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies all critical facts: PROD-001 shortage of 4 units (8 available vs 12 needed), PROD-004 fully covered (19 available vs 6 needed), PO-008 arriving same-day Feb 18 with 150 units of PROD-001 (tight timing risk), and mandatory refrigerated carrier requirement recommending CAR-002 over CAR-001. All important facts (weight, costs, recommendation) are also accurately stated.",
+  "facts_found": [
+    "PROD-001 has 8 available, 4-unit shortfall for 12 needed",
+    "PROD-004 has 19 available, covers 6 needed",
+    "PO-008 ships 150 units of PROD-001 arriving Feb 18 same day as deadline",
+    "Refrigerated carrier mandatory, CAR-002 recommended over CAR-003 and CAR-001 excluded",
+    "Total weight 120 kg (12x5 + 6x10)",
+    "CAR-002 cost 3,000 THB, CAR-003 cost 4,200 THB",
+    "Split shipment option mentioned for PROD-004"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

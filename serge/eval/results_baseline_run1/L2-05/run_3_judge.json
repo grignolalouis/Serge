@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly listed all 14 POs from SUP-001, including all four critical POs (PO-001, PO-004, PO-006, PO-008) with accurate statuses, order dates, expected delivery dates, and actual delivery dates. All important facts match: PO-001 on time 2026-01-05, PO-004 early 2026-01-14, PO-006 on time 2026-01-25, PO-008 shipped with expected delivery 2026-02-18. No fabricated IDs or values detected, and the agent correctly flagged PO-008 as overdue.",
+  "facts_found": [
+    "PO-001 listed, received on time 2026-01-05",
+    "PO-004 listed, received early 2026-01-14",
+    "PO-006 listed, received on time 2026-01-25",
+    "PO-008 listed, status shipped, expected 2026-02-18",
+    "All 14 POs include status, order date, expected delivery, and actual delivery where applicable",
+    "No POs from other suppliers included"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

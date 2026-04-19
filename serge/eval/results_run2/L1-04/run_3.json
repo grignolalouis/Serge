@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L1-04",
+  "question": "What carriers do we work with?",
+  "agent_answer": "We work with 3 carriers (TMS):\n\n| ID | Name | Type | Cost/kg | Avg Transit |\n|----|------|------|---------|-------------|\n| CAR-001 | Kerry Express | Ground | \u0e3f15/kg | 2 days |\n| CAR-002 | SCG Cold Chain | Refrigerated | \u0e3f25/kg | 1 day |\n| CAR-003 | Flash Express Premium | Refrigerated | \u0e3f35/kg | 1 day |\n\n**Note:** Refrigerated products must use CAR-002 or CAR-003. CAR-001 is ground-only and cannot be used for fresh mangoes.",
+  "duration_ms": 11132,
+  "cost_usd": 0.028711599999999997,
+  "num_turns": 3,
+  "session_id": "6c7f4bd3-60be-441e-b6ea-175521383e55",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_carriers"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "TMS"
+  ]
+}

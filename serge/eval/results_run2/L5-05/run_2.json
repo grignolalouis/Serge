@@ -1,0 +1,29 @@
+{
+  "scenario_id": "L5-05",
+  "question": "Our reorder point for PROD-001 is 20 units, but we still ran out. Look at the active orders demanding PROD-001 and the supplier lead times \u2014 is the threshold wrong, or is something else going on?",
+  "agent_answer": "Here is the full diagnosis.\n\n---\n\n## PROD-001 Stock-Out Analysis\n\n### Current Inventory (WMS)\n| Metric | Value |\n|--------|-------|\n| On hand | 8 units |\n| Reserved | 0 |\n| Available | **8 units** |\n| Reorder point | 20 (already breached) |\n| Shelf life | 7 days |\n| Storage type | refrigerated |\n\n---\n\n### Active Demand (OMS)\n| Order | Status | Priority | Required Date | PROD-001 Qty |\n|-------|--------|----------|---------------|--------------|\n| ORD-007 | processing | **urgent** | 2026-02-12 | **50** |\n| ORD-028 | processing | high | 2026-02-18 | 12 |\n| ORD-009 | pending | high | 2026-02-18 | 5 |\n| **Total** | | | | **67 units** |\n\nActive demand is **67 units** against **8 available** \u2014 a deficit of 59 units.\n\n---\n\n### Supplier Lead Times (SRM)\n| Supplier | Lead Time | Rating | Unit Cost |\n|----------|-----------|--------|-----------|\n| SUP-001 Somchai Mango Farm | 3 days | 4.5 | 280 THB |\n| SUP-004 Rayong Tropical | 3 days | 4.0 | 270 THB |\n\n---\n\n## Verdict: Both the threshold AND a demand spike are the problem\n\n**The reorder point of 20 is structurally wrong.** The logic it encodes is: *\"trigger a reorder when stock drops to 20, cover the 3-day lead time with that buffer.\"* That works only if orders arrive in small batches (5\u201315 units). It completely fails against ORD-007's 50-unit urgent order \u2014 a single order that is **2.5\u00d7 the entire reorder threshold**.\n\nThe correct reorder point formula for a product with 3-day lead time and this demand profile is:\n\n> **Reorder Point = max single-order demand + safety stock**\n> = 50 + ~20 buffer = **~70 units**\n\n**However**, PROD-001 has a **7-day shelf life**. Holding 70 units risks spoilage if demand drops. This creates a real tension that the current policy ignores entirely.\n\n### Recommended actions for the team\n\n1. **Raise reorder point to ~60\u201370 units** to cover the largest observed single-order spike.\n2. **Flag large urgent orders (>30 units) for immediate emergency PO** at the time they are placed \u2014 don't wait for the standing reorder trigger.\n3. **ORD-007 is urgent and overdue** (required 2026-02-12, currently stuck in processing with only 8 units available). A purchase order to SUP-004 (cheaper at 270 THB, same 3-day lead time) should be raised immediately.\n4. Consider a **demand-based ordering policy** for perishables instead of a fixed reorder point, given the 7-day shelf life constraint.",
+  "duration_ms": 72103,
+  "cost_usd": 0.28366040000000003,
+  "num_turns": 10,
+  "session_id": "b0fcc237-f677-4954-be48-088a365d1b81",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+    "ToolSearch",
+    "Agent",
+    "Read",
+    "Read",
+    "Read",
+    "mcp__serge-supply-chain__srm_get_supplier",
+    "mcp__serge-supply-chain__srm_get_supplier"
+  ],
+  "tool_calls_count": 12,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "WMS"
+  ]
+}

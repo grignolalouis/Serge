@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.0,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical low-stock products are correctly identified with exact available quantities and reorder points (PROD-001: 8/20, PROD-005: 12/15, PROD-008: 6/15). No non-low-stock products are incorrectly included, and no values contradict the ground truth.",
+  "facts_found": [
+    "PROD-001 Nam Doc Mai: 8 available, reorder point 20",
+    "PROD-005 Mixed Mango: 12 available, reorder point 15",
+    "PROD-008 Sticky Rice Kit: 6 available, reorder point 15",
+    "Shortage gaps correctly computed (-12, -3, -9)",
+    "All three correctly identified as refrigerated storage"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-04",
+  "question": "Give me a quick scan of everything that needs my attention right now.",
+  "agent_answer": "Here's your operational snapshot for today (Apr 18):\n\n---\n\n## \ud83d\udd34 Critical \u2014 Act Now\n\n**SHP-009 | Refrigeration failure in transit** (TMS)\nORD-011 (Tops Supermarket, CUST-003) \u2014 carrier CAR-001 has a refrigeration unit malfunction. Shipment was estimated to arrive Feb 8. Contains perishable product. Risk of spoilage \u2014 escalate to carrier immediately.\n\n**ORD-007 | Urgent order stuck in processing** (OMS)\n50 units of PROD-001 (Nam Doc Mai 5kg) for CUST-001, required Feb 12 \u2014 badly overdue. PROD-001 has only **8 units available** (reorder point: 20). This order cannot ship without restocking.\n\n---\n\n## \ud83d\udfe0 High Priority\n\n**3 products below reorder point** (WMS):\n\n| Product | Available | Reorder Point | Shelf Life |\n|---------|-----------|---------------|------------|\n| PROD-001 Nam Doc Mai 5kg | 8 | 20 | 7 days |\n| PROD-005 Mixed Assortment 5kg | 12 | 15 | 7 days |\n| PROD-008 Mango Sticky Rice Kit | **6** | 15 | **3 days** \u2014 urgent |\n\nPROD-008 is especially critical: only 6 units, 3-day shelf life, and it appears in overdue ORD-021 (15 units needed).\n\n**PO-009 | Supplier order never confirmed** (SRM)\nPlaced with SUP-002 on Feb 10, expected Feb 15 \u2014 still **pending** (supplier has not confirmed). 3+ days overdue. Contact SUP-002 now.\n\n---\n\n## \ud83d\udfe1 Monitor\n\n**5 more overdue supplier orders** (SRM): PO-010, PO-015, PO-016, PO-017, PO-008 \u2014 ranging from confirmed to shipped. PO-015 and PO-008 are in \"shipped\" status so may arrive soon.\n\n**13 overdue customer orders total** (OMS):\n- 3 stuck in `processing` (ORD-007, ORD-020, ORD-028) \u2014 likely stock-blocked\n- 3 still `pending` (ORD-021, ORD-025, ORD-009) \u2014 not even started\n- 7 `shipped` but past required date \u2014 check TMS for delivery confirmation\n\n**ORD-019** (HIGH priority, VIP dinner, \"must arrive by noon\") is shipped but past its Feb 13 deadline \u2014 verify delivery status.\n\n---\n\n**Top 3 actions for a human operator:**\n1. Investigate SHP-009 refrigeration failure \u2014 potential spoilage of perishable stock\n2. Call SUP-002 about PO-009 (unconfirmed, 3 days overdue)\n3. Emergency reorder for PROD-008 (6 units left, 3-day shelf life, multiple orders pending)",
+  "duration_ms": 36421,
+  "cost_usd": 0.10230064999999999,
+  "num_turns": 6,
+  "session_id": "9fdb51d7-156f-4a5a-a366-130261a3fcb8",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_low_stock",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+    "mcp__serge-supply-chain__tms_list_exception_shipments",
+    "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+  ],
+  "tool_calls_count": 5,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

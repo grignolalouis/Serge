@@ -1,0 +1,29 @@
+{
+  "id": "L3-03",
+  "level": "L3",
+  "use_case": "UC-3",
+  "title": "Supplier Side-by-Side Comparison",
+  "expected_systems": [
+    "SRM"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 15,
+  "question": "Compare our suppliers — who is the most reliable?",
+  "ground_truth": {
+    "critical_facts": [
+      "All 5 suppliers appear in the comparison: SUP-001, SUP-002, SUP-003, SUP-004, SUP-005",
+      "SUP-001 (Somchai Mango Farm) is identified as one of the most reliable based on on-time delivery",
+      "SUP-002 (Northern Fruits Co.) is identified as the least reliable based on on-time delivery",
+      "A clear ranking or verdict is given"
+    ],
+    "important_facts": [
+      "Average lead times are reported per supplier",
+      "Rating values are referenced",
+      "Some quantitative metric (on-time rate, count of late POs, etc.) backs the ranking"
+    ],
+    "must_not_contain": [
+      "Missing suppliers (all 5 should be in view)",
+      "Naming SUP-002 as most reliable (contradicts the data)"
+    ]
+  }
+}

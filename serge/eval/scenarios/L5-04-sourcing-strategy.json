@@ -1,0 +1,29 @@
+{
+  "id": "L5-04",
+  "level": "L5",
+  "use_case": "UC-3",
+  "title": "Sourcing Strategy Review",
+  "expected_systems": [
+    "SRM"
+  ],
+  "expected_tool_count_min": 4,
+  "estimated_human_minutes": 30,
+  "question": "We want to rethink our sourcing for Nam Doc Mai mangoes. Based on our data, which supplier should we rely on and why? What's the risk if we stop using the other one?",
+  "ground_truth": {
+    "critical_facts": [
+      "Two suppliers for PROD-001: SUP-001 (Somchai, 280 THB) and SUP-004 (Rayong Tropical, 270 THB)",
+      "SUP-001 rating 4.5, 3-day lead, fully on-time in scenario POs",
+      "SUP-004 rating 4.0, 3-day lead, on-time or early in scenario POs",
+      "Both are reliable; SUP-004 is 10 THB cheaper per unit"
+    ],
+    "important_facts": [
+      "SUP-001 has more volume and history in the data",
+      "SUP-004 is a good secondary source for diversification",
+      "Single-sourcing creates risk if one supplier has a disruption"
+    ],
+    "must_not_contain": [
+      "Claim that only one supplier exists for PROD-001",
+      "Invented cost or reliability figures"
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "id": "L1-04",
+  "level": "L1",
+  "use_case": "UC-4",
+  "title": "List Carriers",
+  "expected_systems": [
+    "TMS"
+  ],
+  "expected_tool_count_min": 1,
+  "estimated_human_minutes": 2,
+  "question": "What carriers do we work with?",
+  "ground_truth": {
+    "critical_facts": [
+      "Kerry Express (CAR-001), ground, 15 THB/kg, 2 days transit",
+      "SCG Cold Chain (CAR-002), refrigerated, 25 THB/kg, 1 day transit",
+      "Flash Express Premium (CAR-003), refrigerated, 35 THB/kg, 1 day transit"
+    ],
+    "important_facts": [
+      "All 3 carriers are listed"
+    ],
+    "must_not_contain": [
+      "Fabricated carriers",
+      "Wrong costs or transit times"
+    ]
+  }
+}

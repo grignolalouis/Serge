@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are present and correct: required date 2026-01-18, delivered date 2026-01-20, and 2 days late. Important facts (Kerry Express, SHP-003) are also correctly stated.",
+  "facts_found": [
+    "Required date: Jan 18, 2026",
+    "Delivered date: Jan 20, 2026",
+    "2 days late",
+    "SHP-003",
+    "Kerry Express"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

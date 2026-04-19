@@ -1,0 +1,17 @@
+{
+  "scenario_id": "L1-04",
+  "question": "What carriers do we work with?",
+  "agent_answer": "We work with 3 carriers (TMS):\n\n| ID | Name | Type | Cost/kg | Avg Transit |\n|----|------|------|---------|-------------|\n| CAR-001 | Kerry Express | Ground | 15 THB | 2 days |\n| CAR-002 | SCG Cold Chain | Refrigerated | 25 THB | 1 day |\n| CAR-003 | Flash Express Premium | Refrigerated | 35 THB | 1 day |\n\nNote: refrigerated products **must** use CAR-002 or CAR-003. Kerry Express (CAR-001) is ground only and cannot be used for perishable/cold-chain items.",
+  "duration_ms": 10877,
+  "cost_usd": 0.02951065,
+  "num_turns": 3,
+  "session_id": "d2566efc-002c-4fd0-9401-52be2ef2fb89",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__tms_list_carriers"
+  ],
+  "tool_calls_count": 2,
+  "systems_touched": [
+    "TMS"
+  ]
+}

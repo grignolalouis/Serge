@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-04",
+  "question": "Give me a quick scan of everything that needs my attention right now.",
+  "agent_answer": "Here's your operational briefing for today (2026-04-18):\n\n---\n\n## \ud83d\udd34 Critical \u2014 Act Immediately\n\n**SHP-009 \u2014 Cold chain failure** (TMS)\nRefrigeration unit malfunction on the truck carrying ORD-011 (CUST-003, Tops Supermarket). 25 units of PROD-003 at risk of spoilage. Shipment was due 2026-02-08 \u2014 long overdue. Escalate to carrier CAR-001 and assess product condition.\n\n**ORD-007 \u2014 Urgent order stuck in processing** (OMS)\nCUST-001 ordered 50\u00d7 PROD-001 (Nam Doc Mai 5kg), due 2026-02-12, priority `urgent`. WMS shows only **8 units available** \u2014 this order cannot ship. Critically overdue.\n\n---\n\n## \ud83d\udfe0 High Priority\n\n| Order | Customer | Priority | Status | Due | Issue |\n|-------|----------|----------|--------|-----|-------|\n| ORD-019 | CUST-012 | high | shipped | 2026-02-13 | VIP dinner note \u2014 overdue, check TMS |\n| ORD-012 | CUST-004 | high | **processing** | 2026-02-17 | Stuck, needs investigation |\n| ORD-028 | CUST-006 | high | **processing** | 2026-02-18 | Hotel breakfast buffet \u2014 needs 12\u00d7 PROD-001, only 8 available |\n| ORD-009 | CUST-008 | high | pending | 2026-02-18 | Needs 5\u00d7 PROD-001 \u2014 stock insufficient |\n\n---\n\n## \ud83d\udfe1 Low Stock Alerts (WMS)\n\n| Product | Available | Reorder Point | Shelf Life | Risk |\n|---------|-----------|---------------|------------|------|\n| PROD-008 \u2014 Mango Sticky Rice Kit | 6 | 15 | **3 days** | Expires soon + 2 open orders need 25 units |\n| PROD-001 \u2014 Nam Doc Mai 5kg | 8 | 20 | 7 days | 3 stuck/pending orders competing for it |\n| PROD-005 \u2014 Mixed Mango 5kg | 12 | 15 | 7 days | Below reorder point |\n\n---\n\n## \ud83d\udfe1 Overdue Supplier Orders (SRM)\n\n| PO | Supplier | Status | Was Due |\n|----|----------|--------|---------|\n| PO-009 | SUP-002 | **pending** (not even confirmed) | 2026-02-15 |\n| PO-015 | SUP-004 | shipped | 2026-02-15 |\n| PO-010 | SUP-003 | confirmed | 2026-02-16 |\n| PO-016 | SUP-003 | **pending** | 2026-02-18 |\n| PO-008 | SUP-001 | shipped | 2026-02-18 |\n| PO-017 | SUP-005 | confirmed | 2026-02-19 |\n\nPO-009 is most alarming \u2014 still `pending` after its due date, meaning SUP-002 hasn't even confirmed the order.\n\n---\n\n**Top 3 actions for a human operator:**\n1. Dispatch a replacement refrigerated vehicle for SHP-009 immediately; inspect PROD-003 for spoilage.\n2. Chase SUP-002 on PO-009 \u2014 it's unconfirmed and overdue.\n3. Prioritize any incoming PROD-001 stock (PO-008 from SUP-001 is shipped) toward ORD-007 (`urgent`) before ORD-028 and ORD-009.",
+  "duration_ms": 37910,
+  "cost_usd": 0.07034195,
+  "num_turns": 6,
+  "session_id": "7093ce3b-a53e-428e-8a81-07b344662564",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_low_stock",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+    "mcp__serge-supply-chain__tms_list_exception_shipments",
+    "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+  ],
+  "tool_calls_count": 5,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "scenario_id": "L5-01",
+  "question": "Give me the complete supply chain history for PROD-001 \u2014 from purchase orders to inventory to customer demand. What does it tell you?",
+  "agent_answer": "Here's the complete picture for PROD-001 across all four systems.\n\n---\n\n## PROD-001 \u2014 Nam Doc Mai Mango Box 5kg | Full Supply Chain Analysis\n\n---\n\n### The Product (WMS)\n| Attribute | Value |\n|---|---|\n| SKU | MANGO-NDM-5 |\n| Category | Premium |\n| Sell price | THB 450/box |\n| Shelf life | **7 days** |\n| Storage | **Refrigerated** |\n| Reorder point | 20 units |\n\n---\n\n### Sourcing \u2014 Who Supplies It (SRM)\n\nTwo suppliers offer this product:\n\n| Supplier | Source | Unit Cost | Margin | Margin % |\n|---|---|---|---|---|\n| SUP-001 | Chanthaburi | THB 280 | THB 170 | 37.8% |\n| SUP-004 | Rayong | **THB 270** | **THB 180** | **40.0%** |\n\n**8 purchase orders received** (all inbound confirmed via WMS stock movements):\n\n| PO | Units Received | Date |\n|---|---|---|\n| PO-132 | 140 | 2025-10-13 |\n| PO-115 | 113 | 2026-01-29 |\n| PO-001 | 100 | 2026-01-05 |\n| PO-106 | 86 | 2025-11-28 |\n| PO-006 | 80 | 2026-01-25 |\n| PO-012 | 60 | 2026-01-22 |\n| PO-110 | 52 | 2025-12-01 |\n| PO-104 | 56 | 2025-11-05 |\n| **Total** | **687 units** | Oct '25 \u2013 Jan '26 |\n\nAverage replenishment: ~2 POs/month. Batch sizes vary widely (52\u2013140), suggesting reactive rather than scheduled procurement.\n\n---\n\n### Inventory (WMS)\n\n| Metric | Value |\n|---|---|\n| Quantity on hand | 8 units |\n| Reserved | 0 |\n| Available | **8** |\n| Reorder point | 20 |\n| Status | **NEEDS REORDER** |\n| Last updated | **2026-02-10** |\n\n> **Critical caveat**: The inventory snapshot is **67 days old** (today is 2026-04-18). The \"8 units\" figure is almost certainly wrong \u2014 there have likely been inbound and outbound movements since. The WMS record has not been updated in over two months. Actual stock is unknown.\n\n---\n\n### Customer Demand (OMS)\n\n- **103 orders** placed between 2025-10-01 and 2026-02-13\n- **1,582 total units ordered** across all lines\n- **~23 orders/month** \u2014 this is a high-velocity SKU\n\n**Status breakdown:**\n| Status | Count |\n|---|---|\n| Delivered | 98 |\n| Shipped | 1 |\n| Processing | 2 |\n| **Pending** | **2** |\n\n**Priority breakdown:**\n| Priority | Count |\n|---|---|\n| Normal | 65 |\n| High | 20 |\n| Urgent | 18 |\n\n37% of orders are high or urgent priority \u2014 this SKU is mission-critical for customers.\n\n**Open orders requiring attention:**\n\n| Order | Status | Priority | Units |\n|---|---|---|---|\n| ORD-007 | Pending | **Urgent** | **50** |\n| ORD-009 | Pending | High | 5 |\n| ORD-028 | Processing | High | 12 |\n\nORD-007 is the most alarming: 50 units urgent, still pending, against a (stale) available stock of 8.\n\n---\n\n### What Does It All Tell You?\n\n**1. Stale inventory is the most immediate operational risk.**\nThe WMS record hasn't been updated since Feb 10. No one has visibility into current real stock. Before any decision is made, the warehouse team must do a physical count.\n\n**2. ORD-007 is in trouble.**\nAn urgent order for 50 units cannot be fulfilled from declared stock of 8. If inventory is truly this low, a rush purchase order must go out immediately. With a 7-day shelf life, even a 3-day supplier lead time matters.\n\n**3. SUP-004 is the better default supplier.**\nAt THB 270 vs THB 280, it's cheaper by THB 10/unit. Over 687 units historically received, that's THB 6,870 left on the table. Unless SUP-004 has worse reliability, it should be the primary source \u2014 recommend cross-checking their rating with `srm_get_supplier`.\n\n**4. Replenishment is reactive, not planned.**\nPO sizes range from 52 to 140 units with no obvious pattern. For a SKU with 7-day shelf life and ~23 orders/month (~370 units/month demand implied), over-ordering risks spoilage; under-ordering risks stockouts. A more consistent cadence (e.g., ~80\u2013100 units twice a month) would reduce both risks.\n\n**5. The product's shelf life and refrigerated requirement compound every delay.**\nEvery day a shipment is delayed is a day closer to spoilage. Any carrier used must be refrigerated type \u2014 non-negotiable per business rules.",
+  "duration_ms": 110849,
+  "cost_usd": 0.2519949,
+  "num_turns": 8,
+  "session_id": "43a72895-e6d3-45ee-a03a-99cb2c0c20ea",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_get_product",
+    "mcp__serge-supply-chain__wms_check_inventory",
+    "mcp__serge-supply-chain__wms_get_stock_movements",
+    "mcp__serge-supply-chain__srm_list_supplier_products_by_product",
+    "mcp__serge-supply-chain__oms_search_customer_orders_by_product",
+    "Agent",
+    "Read",
+    "Read",
+    "Read"
+  ],
+  "tool_calls_count": 10,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "WMS"
+  ]
+}

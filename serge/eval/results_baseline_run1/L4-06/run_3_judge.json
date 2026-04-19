@@ -1,0 +1,22 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "The agent correctly identifies both shipments (SHP-017 and SHP-018), correctly maps refrigerated carrier (SCG Cold Chain) to PROD-001 and ground carrier (Kerry Express) to PROD-006, confirms both are in_transit, and correctly explains the split rationale. All critical facts are present with no fabrications.",
+  "facts_found": [
+    "ORD-023 has two shipments: SHP-017 and SHP-018",
+    "SHP-017 uses SCG Cold Chain (refrigerated) for PROD-001 (refrigerated storage)",
+    "SHP-018 uses Kerry Express (ground) for PROD-006 (ambient storage)",
+    "Both shipments are in_transit",
+    "Split justified by incompatible storage types",
+    "Customer is Mandarin Oriental (CUST-004)"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}

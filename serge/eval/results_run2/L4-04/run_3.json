@@ -1,0 +1,23 @@
+{
+  "scenario_id": "L4-04",
+  "question": "Give me a quick scan of everything that needs my attention right now.",
+  "agent_answer": "Here's everything flagged across all 4 systems:\n\n---\n\n## \ud83d\udd34 Critical \u2014 Act Now\n\n**[TMS] SHP-009 \u2014 Refrigeration unit malfunction**\nCarrier CAR-001 had a vehicle breakdown on delivery to Tops Supermarket (ORD-011). Shipment is in `exception` status. Goods may be at spoilage risk \u2014 needs immediate rerouting.\n\n**[OMS + WMS] ORD-007 \u2014 URGENT order stuck in processing**\nCustomer CUST-001 ordered 50 units of PROD-001 (Nam Doc Mai 5kg), but only **8 units** are available (reorder point: 20). This urgent order has been stuck since Feb 5, required Feb 12.\n\n---\n\n## \ud83d\udfe0 High Priority\n\n**[OMS] Orders stuck in processing with likely stock issues**\n\n| Order | Priority | Customer | Product(s) | Required |\n|-------|----------|----------|------------|---------|\n| ORD-028 | high | CUST-006 | PROD-001 \u00d712, PROD-004 \u00d76 | Feb 18 (hotel buffet) |\n| ORD-012 | high | CUST-004 | PROD-002 \u00d78 | Feb 17 |\n| ORD-020 | normal | CUST-009 | PROD-006 \u00d7100 | Feb 18 |\n\n**[OMS] Overdue orders still pending (not yet started)**\n\n| Order | Priority | Product | Required |\n|-------|----------|---------|---------|\n| ORD-009 | high | PROD-004 \u00d73, PROD-001 \u00d75 | Feb 18 |\n| ORD-025 | normal | PROD-003 \u00d740 | Feb 20 |\n| ORD-021 | normal | PROD-007 \u00d720, **PROD-008 \u00d715** | Feb 19 |\n\n> ORD-021 wants 15 units of PROD-008, but only **6 are in stock** (shelf life: 3 days \u2014 urgent reorder).\n\n---\n\n## \ud83d\udfe1 Watch\n\n**[WMS] 3 products below reorder point**\n\n| Product | Available | Reorder Point | Shelf Life |\n|---------|-----------|---------------|------------|\n| PROD-001 Nam Doc Mai 5kg | 8 | 20 | 7 days |\n| PROD-005 Mixed Assortment 5kg | 12 | 15 | 7 days |\n| PROD-008 Mango Sticky Rice Kit | 6 | 15 | **3 days** |\n\nAll three are `refrigerated` \u2014 any restock PO must use a cold chain carrier.\n\n**[SRM] 6 overdue supplier orders**\n\n| PO | Supplier | Status | Due | Lines |\n|----|----------|--------|-----|-------|\n| PO-009 | SUP-002 | pending | Feb 15 | SP-004 \u00d760 |\n| PO-010 | SUP-003 | confirmed | Feb 16 | SP-008 \u00d780 |\n| PO-015 | SUP-004 | shipped | Feb 15 | SP-010 \u00d7150, SP-012 \u00d730 |\n| PO-008 | SUP-001 | shipped | Feb 18 | SP-001 \u00d7150 |\n| PO-016 | SUP-003 | pending | Feb 18 | SP-006 \u00d7100 |\n| PO-017 | SUP-005 | confirmed | Feb 19 | SP-013 \u00d725 |\n\nPO-009 and PO-016 are still `pending` \u2014 suppliers haven't confirmed yet, which is the most concerning status for overdue POs.\n\n---\n\n**Summary:** Top 3 actions for a human to take: (1) resolve SHP-009 exception and check if cold goods are still viable, (2) escalate ORD-007 (urgent, severely understocked), (3) chase SUP-002 and SUP-003 on unconfirmed POs (PO-009, PO-016).",
+  "duration_ms": 43933,
+  "cost_usd": 0.07535939999999999,
+  "num_turns": 6,
+  "session_id": "1465dec0-08bc-47a4-91ae-6a73095ffc48",
+  "tools_used": [
+    "ToolSearch",
+    "mcp__serge-supply-chain__wms_list_low_stock",
+    "mcp__serge-supply-chain__oms_list_overdue_customer_orders",
+    "mcp__serge-supply-chain__tms_list_exception_shipments",
+    "mcp__serge-supply-chain__srm_list_overdue_supplier_orders"
+  ],
+  "tool_calls_count": 5,
+  "systems_touched": [
+    "OMS",
+    "SRM",
+    "TMS",
+    "WMS"
+  ]
+}

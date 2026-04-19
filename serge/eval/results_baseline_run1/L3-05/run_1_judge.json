@@ -1,0 +1,21 @@
+{
+  "factual_accuracy": 5,
+  "completeness": 5,
+  "no_hallucination": 5,
+  "reasoning": 5,
+  "weighted_score": 5.00,
+  "pass": true,
+  "critical_facts_present": true,
+  "same_conclusion_as_ground_truth": true,
+  "failure_category": "none",
+  "justification": "All three critical facts are correctly stated: required date 2026-01-18, delivered date 2026-01-20, and 2-day delay. Important facts (SHP-003, Kerry Express) are also present. No fabricated data.",
+  "facts_found": [
+    "Required date: 2026-01-18",
+    "Delivered date: 2026-01-20",
+    "Delay: 2 days",
+    "Shipment: SHP-003",
+    "Carrier: Kerry Express"
+  ],
+  "facts_missing": [],
+  "hallucinations": []
+}
