@@ -1,0 +1,20 @@
+% ============================================================================
+% CHAPTER 3 — RELATED WORK
+% ============================================================================
+
+\chapter{Related Work}
+\label{ch:relwork}
+
+\section{AI Agents for Supply Chain}
+
+Multi-agent \gls{llm} systems have been shown to reduce the bullwhip effect in simulation~\cite{jannelli2024agentic}. Generative planning has been deployed at industrial scale by JD.com (SCPA)~\cite{yin2025scpa}. Knowledge-graph query agents have been applied to disruption monitoring~\cite{almahri2026disruption}, and multi-agent retrieval pipelines have been used to ingest unstructured supply chain communications~\cite{zhang2025rag}. All four systems aim at autonomous action. SERGE takes the complementary read-only diagnostic position: an agent that reads current state and explains it, before anything is written back.
+
+A systematic review of 98 peer-reviewed studies~\cite{gaisc2025systematic} observes that about 45\% of published \gls{ai}-for-supply-chain work does not fully specify its architecture. The field is still methodologically young.
+
+\section{LLM-as-Judge}
+
+Zheng et~al.~\cite{zheng2023judge} introduced the \gls{llm}-as-judge framework with MT-Bench and Chatbot Arena, reporting over 80\% agreement with human raters. Follow-up surveys~\cite{gu2024judgesurvey,li2024judgessurvey} catalogue common biases (position, verbosity, self-enhancement) and their mitigations. Shankar et~al.~\cite{shankar2024validators} examine rubric design and alignment with human judgement. Our methodology (Chapter~\ref{ch:methodology}) uses pointwise judging with a domain-specific rubric and adds an explicit \emph{flexible-on-form} rule after observing the strictness failure mode in our own baseline run.
+
+\section{Gaps Addressed}
+
+Four gaps identified in our Week~3 state-of-the-art review motivate this work: (1)~no standardised supply chain agent benchmark, (2)~no plug-and-play architecture connecting supply chain systems to agents, (3)~read-only diagnostic agents underexplored, (4)~no supply-chain-specific \gls{llm}-as-judge rubric. SERGE addresses gaps 2--4 directly; the 27 scenarios released with this work contribute to gap~1.

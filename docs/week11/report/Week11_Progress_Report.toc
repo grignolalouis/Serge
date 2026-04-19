@@ -1,0 +1,6 @@
+\contentsline {section}{\numberline {1}Summary}{2}{section.1}%
+\contentsline {section}{\numberline {2}Use Case Restructuring by Complexity}{2}{section.2}%
+\contentsline {section}{\numberline {3}Pipeline Resilience}{2}{section.3}%
+\contentsline {section}{\numberline {4}LLM-as-Judge Tuning}{3}{section.4}%
+\contentsline {section}{\numberline {5}Evaluation Runs Launched}{4}{section.5}%
+\contentsline {section}{\numberline {6}Final Report Drafting}{4}{section.6}%

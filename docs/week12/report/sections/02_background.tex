@@ -1,0 +1,24 @@
+% ============================================================================
+% CHAPTER 2 — BACKGROUND
+% ============================================================================
+
+\chapter{Background}
+\label{ch:background}
+
+\section{Large Language Models}
+
+A \gls{llm} is a deep neural network trained on very large text corpora. All modern \gls{llm}s are built on the \textbf{Transformer} architecture~\cite{vaswani2017attention}. Loss scales predictably with model size, data size, and compute~\cite{kaplan2020scaling,hoffmann2022chinchilla}; capabilities such as multi-step reasoning and tool use \emph{emerge} past capability thresholds rather than improving linearly~\cite{wei2022emergent}. In April 2026 the practical models are Claude~4.5, GPT-5, Llama~4, and Mistral Large~3. This work uses Claude Sonnet through the Claude Code client.
+
+A \gls{llm} on its own is a text-to-text function: no memory, no tools, no ability to act. For supply chain diagnostics---which require reading state from multiple sources---the \gls{llm} must be embedded in a larger system that provides tools and a reasoning loop. That system is the agent.
+
+\section{AI Agents}
+
+An \textbf{agent} wraps an \gls{llm} with (i) a set of tools it can call, (ii) a mechanism to observe the tool result, and (iii) a loop that decides what to call next and when to stop~\cite{weng2023agents}. The seminal formulation is \gls{react}~\cite{yao2023react}: the \gls{llm} alternates reasoning steps and tool calls until it emits a terminal response.
+
+The agent used here, Claude Code~\cite{anthropic2025howccworks}, goes beyond a plain \gls{react} loop: extended thinking is built in, sub-agent spawning is available, reusable workflows can be loaded on demand, and context is actively managed~\cite{anthropic2025contextengineering}. Tool description quality is the dominant factor in tool-call reliability~\cite{anthropic2025writingtools,schick2023toolformer,patil2024gorilla}, a point we return to in the architecture chapter.
+
+\section{Model Context Protocol}
+
+Without a standard integration layer, every agent-system pair needs bespoke code; with $N$ agents and $M$ systems the integration matrix has $N \times M$ cells. The \gls{mcp}~\cite{mcp2024,mcpspec}, introduced by Anthropic in November~2024, collapses this matrix to $N + M$: each agent and each system implements \gls{mcp} once and all combinations work. Primitives are \emph{tools} (callable functions with typed parameters), \emph{resources} (readable data), and \emph{prompts} (templates); transports are \texttt{stdio} (subprocess) or HTTP. SERGE uses tools only, over \texttt{stdio}.
+
+\gls{mcp} is the right glue for SERGE for three reasons: it is agent-agnostic (swap Claude for any \gls{mcp} client without touching the backend), typed and self-describing (new agents connect without extra configuration), and trivial to deploy locally (no network services to run).

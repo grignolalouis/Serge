@@ -1,0 +1,213 @@
+% ============================================================================
+% UML CLASS DIAGRAM — SERGE Domain Model
+% Uses tabular-in-rect nodes (no rectangle split — avoids header/body overlap).
+% Canvas sized to ~textwidth so resizebox barely scales.
+% ============================================================================
+\newcommand{\umlclass}[2]{%
+  \begin{tabular}{@{}l@{}}\bfseries #1\\\hline #2\end{tabular}%
+}
+\newcommand{\umlenum}[2]{%
+  \begin{tabular}{@{}c@{}}\scriptsize$\langle\langle$enum$\rangle\rangle$\\\bfseries #1\\\hline #2\end{tabular}%
+}
+
+\begin{tikzpicture}[
+    every node/.style={font=\ttfamily\scriptsize},
+    cls/.style={rectangle, draw=black!70, inner sep=4pt, anchor=north west},
+    enm/.style={rectangle, draw=black!50, inner sep=3pt, anchor=north west},
+    zone/.style={rounded corners, draw, thick, inner sep=9pt, font=\sffamily\footnotesize\bfseries},
+    rel/.style={->, >=stealth, thick, shorten >=2pt, shorten <=2pt},
+    xrel/.style={->, >=stealth, dashed, thick, gray!70, shorten >=2pt, shorten <=2pt},
+]
+
+% ================= SRM — top left =================
+\node[cls, fill=scblue!5] (Supplier) at (0, 22) {\umlclass{Supplier}{%
++id: String\\
++name: String\\
++region: String\\
++contact: String\\
++leadTimeDays: int\\
++rating: float\\
++paymentTerms: String\\
++productCategories: []String}};
+
+\node[cls, fill=scblue!5] (SupplierProduct) at (4.2, 22) {\umlclass{SupplierProduct}{%
++id: String\\
++supplierId: String\\
++productId: String\\
++name: String\\
++unitCost: float}};
+
+\node[cls, fill=scblue!5] (SupplierOrder) at (0, 15.5) {\umlclass{SupplierOrder}{%
++id: String\\
++supplierId: String\\
++status: SOStatus\\
++orderDate: Date\\
++expectedDelivery: Date\\
++actualDelivery: Date?\\
++lines: []SOLine}};
+
+\node[cls, fill=scblue!5] (SOLine) at (4.2, 15.5) {\umlclass{SupplierOrderLine}{%
++supplierProductId: String\\
++quantity: int}};
+
+\node[enm, fill=scblue!3] (SOStatus) at (8.4, 15.5) {\umlenum{SOStatus}{%
+pending\\
+confirmed\\
+shipped\\
+received\\
+cancelled}};
+
+\begin{pgfonlayer}{background}
+    \node[zone, draw=scblue, fill=scblue!3,
+          fit=(Supplier)(SupplierProduct)(SupplierOrder)(SOLine)(SOStatus),
+          label={[scblue,font=\sffamily\bfseries\small]above:SRM --- Procurement}] (SRMzone) {};
+\end{pgfonlayer}
+
+% ================= WMS — top right =================
+\node[cls, fill=BurntOrange!5] (Product) at (12.5, 22) {\umlclass{Product}{%
++id: String\\
++sku: String\\
++name: String\\
++category: String\\
++unitPrice: float\\
++weightKg: float\\
++reorderPoint: int\\
++shelfLifeDays: int\\
++storageType: String}};
+
+\node[cls, fill=BurntOrange!5] (Warehouse) at (17, 22) {\umlclass{Warehouse}{%
++id: String\\
++name: String\\
++location: String}};
+
+\node[cls, fill=BurntOrange!5] (InventoryRecord) at (12.5, 15.5) {\umlclass{InventoryRecord}{%
++productId: String\\
++warehouseId: String\\
++quantity: int\\
++reserved: int\\
++lastUpdated: Date}};
+
+\node[cls, fill=BurntOrange!5] (StockMovement) at (17, 15.5) {\umlclass{StockMovement}{%
++id: String\\
++productId: String\\
++warehouseId: String\\
++type: MovementType\\
++quantity: int\\
++referenceId: String\\
++referenceType: String\\
++createdAt: Date}};
+
+\node[enm, fill=BurntOrange!5] (MovementType) at (21.3, 15.5) {\umlenum{MovementType}{%
+inbound\\
+outbound}};
+
+\begin{pgfonlayer}{background}
+    \node[zone, draw=BurntOrange, fill=BurntOrange!3,
+          fit=(Product)(Warehouse)(InventoryRecord)(StockMovement)(MovementType),
+          label={[BurntOrange!80!black,font=\sffamily\bfseries\small]above:WMS --- Inventory}] (WMSzone) {};
+\end{pgfonlayer}
+
+% ================= OMS — bottom left =================
+\node[cls, fill=OliveGreen!5] (Customer) at (0, 8) {\umlclass{Customer}{%
++id: String\\
++name: String\\
++company: String\\
++segment: Segment\\
++region: String\\
++address: String\\
++deliveryZone: String}};
+
+\node[cls, fill=OliveGreen!5] (CustomerOrder) at (4.2, 8) {\umlclass{CustomerOrder}{%
++id: String\\
++customerId: String\\
++status: COStatus\\
++orderDate: Date\\
++requiredDate: Date\\
++shippedDate: Date?\\
++deliveredDate: Date?\\
++priority: Priority\\
++notes: String?\\
++lines: []COLine}};
+
+\node[cls, fill=OliveGreen!5] (COLine) at (8.8, 8) {\umlclass{CustomerOrderLine}{%
++productId: String\\
++quantity: int}};
+
+\node[enm, fill=OliveGreen!5] (Segment) at (0, 1) {\umlenum{Segment}{%
+retail\\
+wholesale}};
+
+\node[enm, fill=OliveGreen!5] (COStatus) at (4.2, 1) {\umlenum{COStatus}{%
+pending\\
+processing\\
+shipped\\
+delivered\\
+cancelled}};
+
+\node[enm, fill=OliveGreen!5] (Priority) at (6.7, 1) {\umlenum{Priority}{%
+normal\\
+high\\
+urgent}};
+
+\begin{pgfonlayer}{background}
+    \node[zone, draw=OliveGreen, fill=OliveGreen!3,
+          fit=(Customer)(CustomerOrder)(COLine)(COStatus)(Priority)(Segment),
+          label={[OliveGreen!80!black,font=\sffamily\bfseries\small]below:OMS --- Sales}] (OMSzone) {};
+\end{pgfonlayer}
+
+% ================= TMS — bottom right =================
+\node[cls, fill=Purple!5] (Carrier) at (12.5, 8) {\umlclass{Carrier}{%
++id: String\\
++name: String\\
++type: String\\
++costPerKg: float\\
++avgTransitDays: int}};
+
+\node[cls, fill=Purple!5] (Shipment) at (17, 8) {\umlclass{Shipment}{%
++id: String\\
++customerOrderId: String\\
++carrierId: String\\
++status: ShipStatus\\
++trackingNumber: String\\
++origin: String\\
++destination: String\\
++weightKg: float\\
++shippedAt: Date?\\
++estimatedArrival: Date?\\
++deliveredAt: Date?\\
++exceptionReason: String?}};
+
+\node[cls, fill=Purple!5] (TrackingEvent) at (21.5, 8) {\umlclass{TrackingEvent}{%
++shipmentId: String\\
++timestamp: Date\\
++location: String\\
++status: String\\
++description: String}};
+
+\node[enm, fill=Purple!5] (ShipStatus) at (12.5, 1) {\umlenum{ShipStatus}{%
+pending\\
+in\_transit\\
+delivered\\
+exception}};
+
+\begin{pgfonlayer}{background}
+    \node[zone, draw=Purple, fill=Purple!3,
+          fit=(Carrier)(Shipment)(TrackingEvent)(ShipStatus),
+          label={[Purple!80!black,font=\sffamily\bfseries\small]below:TMS --- Shipping}] (TMSzone) {};
+\end{pgfonlayer}
+
+% ================= Intra-context associations (solid) =================
+\draw[rel] (SupplierProduct.west) -- (Supplier.east);
+\draw[rel] (SOLine.west)          -- (SupplierOrder.east);
+\draw[rel] (CustomerOrder.west)   -- (Customer.east);
+\draw[rel] (COLine.west)          -- (CustomerOrder.east);
+\draw[rel] (Shipment.west)        -- (Carrier.east);
+\draw[rel] (TrackingEvent.west)   -- (Shipment.east);
+
+% ================= Cross-context references (dashed) =================
+\draw[xrel] (SupplierProduct.south) to[bend right=8] node[above,font=\tiny,sloped]{ref Product} (Product.north west);
+\draw[xrel] (COLine.north)          to[bend right=6] node[right,font=\tiny,sloped]{ref Product} (Product.south);
+\draw[xrel] (InventoryRecord.north) to[bend left=4]  node[right,font=\tiny,sloped]{ref Product} (Product.south);
+\draw[xrel] (Shipment.north west)   to[bend left=10] node[above,font=\tiny,sloped]{ref CustomerOrder} (CustomerOrder.north east);
+
+\end{tikzpicture}

@@ -1,0 +1,59 @@
+% ============================================================================
+% CHAPTER 6 — EVALUATION METHODOLOGY
+% ============================================================================
+
+\chapter{Evaluation Methodology}
+\label{ch:methodology}
+
+\section{Three-Stage Pipeline}
+
+Each scenario is run three times through a three-stage pipeline. The \textbf{agent run} sends the question to Claude Code with the 35 \gls{mcp} tools enabled and captures the response, the tool trace, the duration, and the cost. The \textbf{judge run} sends the agent response plus the scenario's ground truth to a separate \gls{llm} (also Claude Sonnet) with a structured rubric, which returns per-dimension scores, a pass flag, and a failure category. The \textbf{aggregation} step (Python) produces per-scenario, per-level, per-use-case, and failure-taxonomy statistics. The pipeline is resumable: transient failures are retried with exponential back-off, and quota exhaustion is detected explicitly so a run can be continued in a later session.
+
+\section{Judge Rubric: Flexible on Form, Strict on Facts}
+
+Naive \gls{llm}-as-judge setups over-penalise presentation. In our baseline run, one scenario scored 4.18/5.0 on the weighted dimensions but was marked failing because one item of the critical list was not literally mentioned, despite the agent's conclusion being identical to the expected one. The refined judge prompt is organised around one principle: \emph{flexible on form, strict on facts}. Wording variations, alternative tool paths, extra analysis, and answers that extend the ground truth with legitimate data are accepted; wrong values, wrong identifiers, and genuine fabrication are penalised. Identifiers that match the known patterns (\texttt{ORD-XXX}, \texttt{PO-XXX}, \ldots) are not flagged as hallucinations unless they contradict the ground truth.
+
+\section{Complexity Levels}
+
+\begin{table}[H]
+    \centering\small
+    \begin{tabularx}{\textwidth}{|l|l|c|c|X|}
+        \hline
+        \rowcolor{lightgray}
+        \textbf{Level} & \textbf{Name} & \textbf{N} & \textbf{Tools} & \textbf{Tests} \\
+        \hline
+        L1 & Trivial   & 4  & 1    & Single entity lookup \\ \hline
+        L2 & Simple    & 6  & 1--2 & One-system filter or aggregation \\ \hline
+        L3 & Moderate  & 6  & 2--3 & Cross-reference between two systems \\ \hline
+        L4 & Complex   & 6  & 3--5 & Causal reasoning across 3--4 systems \\ \hline
+        L5 & Expert    & 5  & 6+   & Full diagnostic plus actionable recommendation \\ \hline
+    \end{tabularx}
+    \caption{Five complexity levels. Complexity is orthogonal to the business use case; each scenario is tagged with both.}
+    \label{tab:levels}
+\end{table}
+
+\section{Scoring and Metrics}
+
+The judge rates each response on four 1-to-5 dimensions with weights in Table~\ref{tab:dimensions}. A run \textbf{passes} if the weighted score is $\geq$3.5 \emph{and} all critical facts are present \emph{and} no hallucination is detected.
+
+\begin{table}[H]
+    \centering\small
+    \begin{tabularx}{\textwidth}{|l|r|X|}
+        \hline
+        \rowcolor{lightgray}
+        \textbf{Dimension} & \textbf{Weight} & \textbf{Rewards} \\
+        \hline
+        Factual accuracy  & 40\% & All values, IDs, dates, statuses match. \\ \hline
+        Completeness      & 30\% & Critical facts present. \\ \hline
+        No hallucination  & 20\% & No fabricated content. \\ \hline
+        Reasoning         & 10\% & Internal coherence. \\ \hline
+    \end{tabularx}
+    \caption{Judge scoring dimensions.}
+    \label{tab:dimensions}
+\end{table}
+
+The aggregator also computes the \emph{pass rate}, \emph{functional consistency} (conclusion matches ground truth across repeated runs), the \emph{hallucination rate}, \emph{system coverage} (expected systems actually queried), \emph{tool efficiency} (expected min / actual tool count), and the \emph{measured agent resolution time} per run. Each judge output records a \emph{failure category} from \{\texttt{none}, \texttt{missed\_fact}, \texttt{wrong\_value}, \texttt{hallucination}, \texttt{bad\_reasoning}, \texttt{refused}\}, which powers the failure analysis in Chapter~\ref{ch:results}.
+
+\section{Setup}
+
+Each pass is 27 scenarios $\times$ 3 runs = 81 evaluations. Both agent and judge run on Claude Sonnet. Two passes are reported: \textbf{Run~1} (baseline, 17~April~2026) and \textbf{Run~2} (refined, 18~April~2026, after the iteration cycle documented in \S\ref{sec:finetuning}).

@@ -1,0 +1,39 @@
+% ============================================================================
+% CHAPTER 1 — INTRODUCTION
+% ============================================================================
+
+\chapter{Introduction}
+\label{ch:intro}
+
+\section{The Problem}
+
+Supply chains run on four enterprise systems: \gls{srm} (procurement), \gls{wms} (inventory), \gls{oms} (sales), \gls{tms} (shipping). These systems come from different vendors and do not talk to each other. A GEODIS survey reports only 6\% of companies achieve full visibility across them~\cite{geodis2024}; operations managers spend 15 to 30 minutes per investigation manually stitching data from three or four interfaces~\cite{aws2024sync,omniful2026}.
+
+Most cross-system questions are blocked by this fragmentation: \emph{why is this order late?}, \emph{which customers are at risk if product X runs out?}, \emph{is the chosen carrier appropriate for that product?}
+
+\section{The Question}
+
+\emph{Can an AI agent with read-only access to the four systems answer realistic operational questions at human-level factual accuracy, while significantly reducing investigation time?}
+
+\section{SERGE}
+
+We build \textbf{SERGE}, a read-only agent that sits over the four supply chain systems via the Model Context Protocol~\cite{mcp2024}. A simulated B2B mango distributor is used as the target domain; its four systems are exposed as 35 read-only \gls{mcp} tools. Claude Code acts as the reasoning agent, invoked from the user's desktop client.
+
+The system is evaluated on 27 scenarios spanning five complexity levels (L1 trivial to L5 expert). Each scenario is run three times, judged by a separate \gls{llm} on four dimensions (factual accuracy, completeness, hallucination, reasoning), and aggregated. Two passes are reported: a baseline and a refined run after one iteration cycle.
+
+\section{Contributions}
+
+\begin{enumerate}
+    \item A plug-and-play \gls{mcp} architecture for supply chain systems, agent-agnostic by design.
+    \item A read-only diagnostic agent pattern, complementary to the optimisation-centric supply chain \gls{ai} literature.
+    \item An \gls{llm}-as-judge methodology with an explicit \emph{flexible-on-form, strict-on-facts} principle and a structured failure taxonomy.
+    \item A reusable benchmark of 27 scenarios at five complexity levels.
+\end{enumerate}
+
+\section{Headline Results}
+
+Refined pass (Run~2): 94\% pass rate over 81 evaluations, weighted score 4.84/5.0, \textbf{zero hallucinations}, 100\% pass on L4 (complex cross-system) scenarios. Resolution time averages about 13\,s on L1 and 72\,s on L5.
+
+\section{Report Map}
+
+Chapter~\ref{ch:background}: background on \gls{llm}s, agents, and \gls{mcp}. Chapter~\ref{ch:relwork}: related work. Chapter~\ref{ch:modelisation}: the modelled business, the entity model, and how the dataset was seeded. Chapter~\ref{ch:architecture}: the agent--\gls{mcp}--backend stack. Chapter~\ref{ch:methodology}: evaluation methodology. Chapter~\ref{ch:scenarios}: the 27 scenarios. Chapter~\ref{ch:results}: empirical results, including the refinement cycle. Chapter~\ref{ch:discussion}: discussion. Chapter~\ref{ch:conclusion}: conclusion.

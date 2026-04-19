@@ -1,0 +1,28 @@
+% ============================================================================
+% CHAPTER 9 — DISCUSSION
+% ============================================================================
+
+\chapter{Discussion}
+\label{ch:discussion}
+
+\section{What Worked}
+
+\textbf{MCP delivered on its agent-agnostic promise.} The same backend runs unchanged under Claude Code and Claude Desktop; any \gls{mcp}-compatible client would work without modification.
+
+\textbf{Flexible-on-form judging lifted the pass rate by 14 points.} The most impactful methodological change between the two runs was the judge rubric, not the agent. The agent was already correct in most scenarios that failed Run~1.
+
+\textbf{Tool descriptions and system prompt are the high-leverage artefacts.} The iteration budget was spent on these two surfaces, not on code. The measured accuracy improvement between Run~1 and Run~2 came almost entirely from prompt-level changes.
+
+\section{Limitations}
+
+The dataset is simulated and contains patterns we designed; a production dataset would include noise and edge cases not exercised here. The domain is narrow (one small distributor in Bangkok), so generalisation across verticals is untested. Both agent and judge are Claude Sonnet, so cross-family comparison is left to future work. The judge is itself an \gls{llm}, and is not cross-validated against humans.
+
+\section{Threats to Validity}
+
+A critic could argue that the Run~1 $\to$ Run~2 improvement is partly due to ground-truth softening. Three observations push back. First, the hallucination rate---a purely factual metric independent of rubric tolerance---fell from 19\% to 0\%. Second, functional consistency rose from 84\% to 95\% and measures whether the conclusion is correct, not whether a list of facts is matched. Third, L1 and L2 scenarios, none of which had their ground truths modified, also improved marginally between runs. The ground-truth recalibration explains part of the L3--L4 improvement but not the hallucination and consistency gains.
+
+We report \emph{measured} agent resolution times (13--72\,s per scenario, averaging 32\,s per run) but do not claim a percentage saving over a human. Comparing against a human baseline would require measured data from real operators, which we do not have.
+
+\section{Implications for Practice}
+
+Three practical implications. \textbf{Read-only is a defensible initial scope}: the diagnostic value alone justifies the deployment, and write access can be added later once trust is established. \textbf{\gls{mcp} integration is cheap insurance}: the investment is small and preserves optionality on the agent side. \textbf{Tool descriptions and the system prompt deserve explicit ownership}, as much as the data model itself; both dominate the measured agent accuracy.

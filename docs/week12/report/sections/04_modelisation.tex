@@ -1,0 +1,55 @@
+% ============================================================================
+% CHAPTER 4 — BUSINESS AND SUPPLY CHAIN MODELISATION
+% ============================================================================
+
+\chapter{Business and Supply Chain Modelisation}
+\label{ch:modelisation}
+
+\section{The Business: Siam Mango Co.}
+
+Siam Mango Co.\ is a fictional small B2B mango distributor in Bangkok. It sources from 5 Thai farms, stores in 1 warehouse (Bang Na), sells 5 fresh and 3 processed products to 12 business customers (hotels, supermarkets, food halls), and delivers through 3 carriers (1 ground, 2 refrigerated). The domain is small enough to audit manually and rich enough to exercise four realistic constraints: perishability (fresh shelf life 3--10 days), cold chain (refrigerated products require refrigerated carriers), supplier reliability (0--100\% on-time in the data), and multi-sourcing (most products available from two farms at different costs).
+
+\section{Four Bounded Contexts}
+
+The four supply chain systems map to four bounded contexts in the Domain-Driven Design sense: each has its own ubiquitous language and its own state; cross-context references are carried by stable identifiers.
+
+\begin{table}[H]
+    \centering\small
+    \begin{tabularx}{\textwidth}{|l|l|X|}
+        \hline
+        \rowcolor{lightgray}
+        \textbf{System} & \textbf{Domain} & \textbf{Entities} \\
+        \hline
+        \gls{srm} & Procurement & Supplier, SupplierProduct, SupplierOrder \\
+        \hline
+        \gls{wms} & Inventory   & Product, Warehouse, InventoryRecord, StockMovement \\
+        \hline
+        \gls{oms} & Sales       & Customer, CustomerOrder \\
+        \hline
+        \gls{tms} & Shipping    & Carrier, Shipment, TrackingEvent \\
+        \hline
+    \end{tabularx}
+    \caption{Supply chain systems and their entities.}
+    \label{tab:systems}
+\end{table}
+
+\section{Entity Model}
+
+Figure~\ref{fig:classdiagram} shows the conceptual class diagram. Solid arrows are associations within a context; dashed arrows are cross-context references carried by identifier. One design point is worth calling out: prices are not duplicated on order lines. A \texttt{SupplierProduct} bridge entity carries the purchase cost; sale prices live on the \texttt{Product} entity. Order lines reference a product-level entity and a quantity---nothing else. This removes a whole class of ``price on line vs price in catalogue'' inconsistencies and sharpens the domain language the agent reads in its system prompt.
+
+\begin{figure}[H]
+    \centering
+    \resizebox{\textwidth}{!}{\input{diagrams/class-diagram}}
+    \caption{Conceptual class diagram. Four bounded contexts; solid arrows are associations within a context, dashed arrows are cross-context references by identifier. Field-level detail is omitted for clarity.}
+    \label{fig:classdiagram}
+\end{figure}
+
+Each transactional entity moves through a status lifecycle. A \texttt{SupplierOrder} goes \texttt{pending $\to$ confirmed $\to$ shipped $\to$ received}. A \texttt{CustomerOrder} goes \texttt{pending $\to$ processing $\to$ shipped $\to$ delivered}; an order that cannot be fulfilled (insufficient stock) stays in \texttt{processing}, which is the state of the flagship L4 scenario. A \texttt{Shipment} goes \texttt{pending $\to$ in\_transit $\to$ delivered}, with \texttt{exception} as a branch for delivery problems. \texttt{cancelled} is a terminal state on each lifecycle.
+
+\section{Dataset}
+
+The dataset combines 30 hand-authored scenario orders, 18 scenario \gls{po}s, 23 scenario shipments (identifiers below~100) with 470 additional orders, 42 \gls{po}s, and 470 shipments generated on top (identifiers from~100 onward). Volumes: 500 customer orders, 60 supplier orders, 493 shipments, 1{,}431 tracking events, 965 stock movements.
+
+\textbf{Seeding.} The dataset was bootstrapped by an agent producing realistic initial entity definitions, then expanded deterministically by a reproducible Go seeding script (fixed random seed, five months of history). An agent review pass verified internal consistency of the generated data. The evaluation ground truth was built with the same agent-assisted approach: for each scenario, the expected answer was cross-checked against the actual dataset through exploratory queries, ensuring the ground truth reflects what exists in the data rather than what we thought existed at scenario-design time. The identifier convention (scenario below~100, generated from~100) means the dataset can be regenerated without disturbing ground truth.
+
+\textbf{Embedded patterns.} The 30 hand-authored scenarios encode specific operational situations used as ground truth during evaluation: a stock-out cascade on \texttt{PROD-001}, a supplier with a consistent delay pattern (\texttt{SUP-002}), a ground carrier assigned to a refrigerated product in error (\texttt{SHP-009}), a split shipment across two carriers (\texttt{ORD-023}), and a single order (\texttt{ORD-007}, 50 units) larger than the product's reorder point.

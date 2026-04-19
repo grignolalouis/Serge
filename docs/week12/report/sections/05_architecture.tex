@@ -1,0 +1,65 @@
+% ============================================================================
+% CHAPTER 5 — ARCHITECTURE
+% ============================================================================
+
+\chapter{Architecture}
+\label{ch:architecture}
+
+SERGE is a three-layer stack: a natural-language agent in the user's desktop client, an \gls{mcp} server exposing the supply chain domain, and the four data contexts (SRM, WMS, OMS, TMS) behind the server.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.8cm,
+        layer/.style={rectangle, draw=scblue, fill=scblue!8, minimum width=11cm, minimum height=0.9cm, align=center, font=\small},
+        user/.style={rectangle, draw, fill=lightgray, minimum width=11cm, minimum height=0.8cm, align=center, font=\small},
+        ctx/.style={rectangle, draw=scaccent, fill=scaccent!10, minimum width=2.0cm, minimum height=0.7cm, align=center, font=\footnotesize},
+        arrow/.style={->, thick, >=stealth}
+    ]
+        \node[user]  (user)   {User (operations manager, natural-language question)};
+        \node[layer, below=of user]   (client) {MCP client: Claude Code or Claude Desktop};
+        \node[layer, below=of client] (server) {SERGE MCP server (35 read-only tools)};
+
+        \node[ctx, below=0.3cm of server.south west, xshift=1.3cm] (srm) {SRM (11)};
+        \node[ctx, right=0.2cm of srm] (wms) {WMS (8)};
+        \node[ctx, right=0.2cm of wms] (oms) {OMS (8)};
+        \node[ctx, right=0.2cm of oms] (tms) {TMS (6)};
+
+        \draw[arrow] (user)   -- node[right,font=\scriptsize]{question} (client);
+        \draw[arrow] (client) -- node[right,font=\scriptsize]{MCP over \texttt{stdio}} (server);
+    \end{tikzpicture}
+    \caption{The three-layer stack. The user speaks natural language to their desktop client; the client runs SERGE as an MCP subprocess; the server exposes 35 read-only tools grouped by the four systems.}
+    \label{fig:stack}
+\end{figure}
+
+\section{Agent Layer}
+
+Any \gls{mcp}-compatible client can be used; we run Claude Code. The agent receives the user's question together with a project-level system prompt (\texttt{CLAUDE.md}) that describes the business, enumerates every entity and status, states the critical business rules (refrigerated products require refrigerated carriers; overdue = past required date and not delivered or cancelled), and lists common cross-system reasoning patterns. A final block of \emph{Rules to Avoid Mistakes} (added in the refinement cycle of Chapter~\ref{ch:results}) instructs the agent to never invent identifiers, to distinguish active from historical data, and to list all matching items rather than a subset.
+
+\section{MCP Layer}
+
+The 35 tools are grouped by system and distributed as shown in Table~\ref{tab:toolcount}. All tools are read-only \emph{at the protocol level}: no mutation tool is registered, so the agent cannot write to the backend even if prompted to. Tool descriptions follow Anthropic's guidance~\cite{anthropic2025writingtools}: each states what the tool returns, what its parameters expect, and---for critical tools---an example value. Description quality was re-reviewed between the two evaluation passes; small tightenings on ambiguous tools measurably improved tool-selection accuracy.
+
+\begin{table}[H]
+    \centering\small
+    \begin{tabularx}{\textwidth}{|l|c|X|}
+        \hline
+        \rowcolor{lightgray}
+        \textbf{System} & \textbf{Tools} & \textbf{Examples} \\
+        \hline
+        SRM & 11 & \texttt{get\_supplier}, \texttt{compare\_suppliers}, \texttt{list\_supplier\_orders\_by\_status} \\
+        \hline
+        WMS & 8  & \texttt{check\_inventory}, \texttt{list\_low\_stock}, \texttt{get\_stock\_movements} \\
+        \hline
+        OMS & 8  & \texttt{get\_customer\_order}, \texttt{search\_customer\_orders\_by\_product} \\
+        \hline
+        TMS & 6  & \texttt{get\_shipment}, \texttt{track\_customer\_order}, \texttt{list\_exception\_shipments} \\
+        \hline
+    \end{tabularx}
+    \caption{35 MCP tools distributed by system. Full reference in Appendix~\ref{app:tools}.}
+    \label{tab:toolcount}
+\end{table}
+
+\section{End-to-End Example}
+
+For the question \emph{Why has order ORD-007 not shipped yet?}, a typical run is four tool calls: \texttt{get\_customer\_order} (order is processing), \texttt{track\_customer\_order} (no shipment exists), \texttt{check\_inventory} (8 units on hand against 50 required), \texttt{list\_supplier\_orders\_by\_status} (incoming \gls{po} arrives after the required date). The agent then synthesises the causal chain. No component in the backend is aware the question is diagnostic; the intelligence lives entirely in the agent, which is why swapping \gls{mcp} clients requires no backend change.

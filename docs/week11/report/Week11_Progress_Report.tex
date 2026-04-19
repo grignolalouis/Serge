@@ -1,0 +1,245 @@
+% !TEX program = pdflatex
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=2.4cm,top=2.8cm,bottom=2.8cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{makecell}
+\renewcommand\theadfont{\bfseries\small}
+\renewcommand\theadgape{}
+
+\usepackage{graphicx}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{float}
+
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage[most]{tcolorbox}
+
+\setlist{nosep,leftmargin=1.5em}
+\titleformat{\section}{\Large\bfseries\color{MidnightBlue}}{}{0em}{}[\vspace{0.2em}\titlerule]
+\titleformat{\subsection}{\large\bfseries\color{MidnightBlue!80}}{}{0em}{}
+\titlespacing*{\section}{0pt}{2em}{1em}
+\titlespacing*{\subsection}{0pt}{1.4em}{0.6em}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MidnightBlue,
+    urlcolor=RoyalBlue,
+    citecolor=MidnightBlue,
+    pdfauthor={Grignola, Schmitt, Tellus, Schwarz},
+    pdftitle={Week 11 Progress Report -- SERGE},
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\lhead{\small\color{gray} SE618-1 Logistics -- SIIT}
+\rhead{\small\color{gray} Week~11 -- Progress Report}
+\cfoot{\small\thepage}
+
+\newtcolorbox{keyinsight}{
+    colback=MidnightBlue!5, colframe=MidnightBlue!60,
+    fonttitle=\bfseries, title=Key Insight,
+    boxrule=0.6pt, arc=2pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+}
+
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% =====================================================================
+\begin{document}
+
+% ── Title Page ───────────────────────────────────────────────────────
+\begin{titlepage}
+\centering
+\vspace*{0.5cm}
+
+\includegraphics[width=4cm]{siitlogo.png}
+
+\vspace{1cm}
+
+{\large\bfseries SE618 LOGISTIC CASE STUDY ANALYSIS}
+
+\vspace{0.5cm}
+
+{\normalsize WEEK 11 -- PROGRESS REPORT}
+
+\vspace{1.5cm}
+
+{\large\bfseries PROJECT TITLE: SERGE -- AI Agent for Supply Chain Operations}
+
+\vspace{0.5cm}
+
+{\normalsize Scenario Restructuring, Pipeline Resilience \& Evaluation Runs}
+
+\vspace{1.5cm}
+
+\begin{tabular}{l l}
+Gauthier SCHMITT & 6822807466 \\
+Louis GRIGNOLA   & 6822807516 \\
+Matteo SCHWARZ   & 6822807557 \\
+Ma\"el TELLUS    & 6822807532 \\
+\end{tabular}
+
+\vspace{1.5cm}
+
+{\large SUBMITTED TO:}\\[0.5em]
+{\large AJARN WARUT}
+
+\vspace{1.5cm}
+
+{\large APRIL 2026}\\[0.3em]
+{\large SEMESTER 2/2025}
+
+\vspace{2cm}
+
+{\large
+SCHOOL OF MANUFACTURING SYSTEMS AND MECHANICAL ENGINEERING\\[0.3em]
+SIRINDHORN INTERNATIONAL INSTITUTE OF TECHNOLOGY\\[0.3em]
+THAMMASAT UNIVERSITY
+}
+
+\vfill
+\end{titlepage}
+
+\newpage
+\tableofcontents
+\newpage
+
+% =====================================================================
+\section{Summary}
+% =====================================================================
+
+This week was focused on \textbf{evaluation readiness}: reworking the use cases to reflect realistic operational questions at increasing difficulty, hardening the evaluation pipeline for real-world constraints (quota limits, network issues), tuning the LLM-as-Judge to be fair instead of over-strict, and launching multiple full evaluation passes. We also started writing the final report and prepared the groundwork for aggregating the results.
+
+% =====================================================================
+\section{Use Case Restructuring by Complexity}
+% =====================================================================
+
+The previous version of our evaluation had 15 scenarios spread across 3 use cases with a coarse easy/medium/hard tag. After running the agent qualitatively, we realised the agent's behaviour varies more with \textbf{resolution complexity} (how many systems to chain, how much synthesis is needed) than with use case.
+
+We reorganised the evaluation around \textbf{5 complexity levels}, each containing real operational questions:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} l l l X @{}}
+\toprule
+\thead{Level} & \thead{Name} & \thead{Scenarios} & \thead{What it tests} \\
+\midrule
+L1 & Trivial   & 4 & Single lookup in one system \\
+L2 & Simple    & 6 & One-system filtering or listing \\
+L3 & Moderate  & 6 & Cross-reference between two systems \\
+L4 & Complex   & 6 & Causal reasoning across 3--4 systems \\
+L5 & Expert    & 5 & Full diagnostic plus actionable recommendation \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Total: \textbf{27 scenarios}, covering the five business use cases (UC-1 order status, UC-2 root cause, UC-3 supplier sourcing, UC-4 operational monitoring, UC-5 planning) as a second cross-axis.
+
+Each scenario is written as a realistic question an operations manager would ask, and includes a baseline estimate of how long the same task would take a human working manually across multiple systems (ranging from 2 minutes for a trivial lookup to 45 minutes for a full health check).
+
+% =====================================================================
+\section{Pipeline Resilience}
+% =====================================================================
+
+Running Claude at scale via the subscription exposed us to two real constraints:
+\begin{enumerate}[itemsep=0.3em]
+    \item \textbf{Quota limits} reset periodically and interrupt long evaluation runs.
+    \item \textbf{Transient failures} (network, timeouts) happen occasionally.
+\end{enumerate}
+
+We rewrote the evaluation pipeline to be \textbf{fully resumable}:
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} L{4.5cm} X @{}}
+\toprule
+\thead{Feature} & \thead{Behaviour} \\
+\midrule
+Idempotent runs       & Each run checks if a valid output already exists. Re-running the pipeline skips completed items and continues with pending ones. \\
+Retry with backoff    & Failed calls are retried up to 3 times with exponential backoff (15s, 45s, 135s). Handles transient network issues automatically. \\
+Quota detection       & Rate-limit and quota errors are recognised by scanning Claude's output. The pipeline stops cleanly with a clear message instead of burning retries. \\
+Safe interrupt        & Ctrl+C exits gracefully, leaving all completed work on disk. \\
+Progress tracking     & A \texttt{--status} flag shows how many runs are done without launching anything. \\
+Failure log           & Persistent failures are logged with category (\texttt{quota}, \texttt{network}, \texttt{unknown}) for later diagnosis. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{keyinsight}
+The pipeline can now be stopped and resumed across multiple sessions without losing progress. This is essential given the subscription's 5-hour quota windows — we can run, hit a limit, come back later, and continue exactly where we left off.
+\end{keyinsight}
+
+% =====================================================================
+\section{LLM-as-Judge Tuning}
+% =====================================================================
+
+Early judge runs showed a consistent problem: the judge was \textbf{too strict on form}. It penalised answers for wording differences, for alternative tool paths, and for not citing systems in an exact way — even when the factual content was correct.
+
+We reworked the judge prompt around a new principle: \textbf{flexible on form, strict on facts}.
+
+\begin{table}[H]
+\centering\small
+\begin{tabularx}{\textwidth}{@{} X X @{}}
+\toprule
+\thead{The judge penalises} & \thead{The judge now accepts} \\
+\midrule
+Wrong numbers, IDs, statuses, dates & Alternative wording (``450 THB'' = ``฿450'') \\
+Fabricated data (anything not in seed) & Different tool call paths leading to the same answer \\
+Missing critical facts from the scenario & Summary-level answers when all criticals are present \\
+Internally contradictory reasoning & Extra analysis or context beyond what was asked \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+We also redesigned the scoring dimensions and added new structured judge outputs:
+
+\begin{itemize}[itemsep=0.3em]
+    \item \textbf{4 scoring dimensions} (instead of 5): factual accuracy (40\%), completeness on critical facts (30\%), no hallucination (20\%), reasoning clarity (10\%).
+    \item \textbf{Critical facts tier} — each scenario defines which facts are critical vs. nice-to-have. An answer passes only if all critical facts are present.
+    \item \textbf{Failure categorisation} — when an answer fails, the judge classifies it: \texttt{missed\_fact}, \texttt{wrong\_value}, \texttt{hallucination}, \texttt{bad\_reasoning}, or \texttt{refused}. This lets us analyse failure modes in aggregate.
+    \item \textbf{Functional consistency} — in addition to numeric score stability, the judge checks if the high-level conclusion matches across repeated runs of the same scenario.
+\end{itemize}
+
+% =====================================================================
+\section{Evaluation Runs Launched}
+% =====================================================================
+
+We ran the full pipeline several times across the week to:
+\begin{itemize}[itemsep=0.3em]
+    \item Validate that resumability works as intended after quota interruptions.
+    \item Confirm the judge scores are now aligned with our manual qualitative evaluation.
+    \item Collect enough runs to make aggregation meaningful.
+\end{itemize}
+
+Each full pass is \textbf{27 scenarios × 3 runs = 81 agent evaluations + 81 judge evaluations}. With the new scenarios covering L1--L5 and five use cases, the result dataset is rich enough to support the analysis planned for the final report.
+
+In parallel we added supplementary metrics captured during each run so the aggregation step can produce meaningful charts:
+\begin{itemize}[itemsep=0.3em]
+    \item Tools actually used and systems actually touched (not just a count).
+    \item Time saved versus the human baseline estimate per scenario.
+    \item Tool efficiency (realistic minimum vs. actual tool calls).
+    \item System coverage ratio (expected systems hit vs. total).
+\end{itemize}
+
+% =====================================================================
+\section{Final Report Drafting}
+% =====================================================================
+
+We started drafting the final report in parallel with the evaluation runs. The current draft covers the problem statement, the literature review, the methodology, and the architecture — all sections that are stable regardless of the final numbers. The results, analysis, and conclusion sections are placeholders waiting for the aggregated evaluation data.
+
+The aggregation script is ready and has been tested on partial data. Once the full run completes, generating the final report's quantitative sections will be a matter of running the aggregator and plugging the numbers into the existing narrative.
+
+\end{document}

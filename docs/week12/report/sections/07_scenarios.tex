@@ -1,0 +1,69 @@
+% ============================================================================
+% CHAPTER 7 — SCENARIOS
+% ============================================================================
+
+\chapter{Scenarios}
+\label{ch:scenarios}
+
+\section{Structure}
+
+Each scenario is a JSON document with a natural-language question and a tiered ground truth: \textbf{critical} facts must all appear for the run to pass; \textbf{important} facts are expected but not pass-critical; \textbf{must-not-contain} facts are hard negatives the answer must avoid. Metadata fields (expected systems, minimum tool count, estimated human minutes) drive the aggregator's coverage, efficiency, and time-savings metrics.
+
+\section{The 27 Scenarios}
+
+The scenarios span five business use cases: UC-1 order status, UC-2 root cause, UC-3 supplier/sourcing, UC-4 operational monitoring, UC-5 planning. Use case and complexity level are orthogonal.
+
+\begin{table}[H]
+    \centering\scriptsize
+    \begin{tabularx}{\textwidth}{|l|l|l|X|}
+        \hline
+        \rowcolor{lightgray}
+        \textbf{ID} & \textbf{Level} & \textbf{UC} & \textbf{Title} \\
+        \hline
+        L1-01 & L1 & UC-4 & Product Lookup \\ \hline
+        L1-02 & L1 & UC-4 & Customer Lookup \\ \hline
+        L1-03 & L1 & UC-3 & Supplier Profile \\ \hline
+        L1-04 & L1 & UC-4 & List Carriers \\ \hline
+        L2-01 & L2 & UC-1 & Basic Order Status \\ \hline
+        L2-02 & L2 & UC-4 & Customer Order History \\ \hline
+        L2-03 & L2 & UC-4 & Overdue Orders \\ \hline
+        L2-04 & L2 & UC-4 & Low Stock Alert \\ \hline
+        L2-05 & L2 & UC-3 & Supplier Order History \\ \hline
+        L2-06 & L2 & UC-4 & Shipment Exceptions \\ \hline
+        L3-01 & L3 & UC-1 & Order Tracking with Current Location \\ \hline
+        L3-02 & L3 & UC-4 & Product Demand View \\ \hline
+        L3-03 & L3 & UC-3 & Supplier Side-by-Side Comparison \\ \hline
+        L3-04 & L3 & UC-3 & Sourcing Options \\ \hline
+        L3-05 & L3 & UC-1 & Late Delivery Check \\ \hline
+        L3-06 & L3 & UC-4 & Product With Current Inventory \\ \hline
+        L4-01 & L4 & UC-2 & Order Delay Diagnosis \\ \hline
+        L4-02 & L4 & UC-2 & Carrier Mismatch Diagnosis \\ \hline
+        L4-03 & L4 & UC-3 & Supplier Reliability Pattern \\ \hline
+        L4-04 & L4 & UC-4 & Operational Scan \\ \hline
+        L4-05 & L4 & UC-2 & Customer Impact Assessment \\ \hline
+        L4-06 & L4 & UC-1 & Split Shipment Status \\ \hline
+        L5-01 & L5 & UC-4 & Full Product Supply Chain History \\ \hline
+        L5-02 & L5 & UC-4 & Full Operational Health Check \\ \hline
+        L5-03 & L5 & UC-5 & Fulfillment Feasibility Plan \\ \hline
+        L5-04 & L5 & UC-3 & Sourcing Strategy Review \\ \hline
+        L5-05 & L5 & UC-5 & Reorder Point Analysis \\ \hline
+    \end{tabularx}
+    \caption{The 27 evaluation scenarios. Full metadata in Appendix~\ref{app:scenarios}.}
+    \label{tab:scenarios}
+\end{table}
+
+\section{One Scenario per Level}
+
+\textbf{L1-01 Product Lookup.} ``\emph{Tell me about PROD-001}.'' One \gls{wms} call; the agent must pick the right tool on the first try.
+
+\textbf{L2-04 Low Stock Alert.} ``\emph{What products are below their reorder point?}'' One \gls{wms} call; the agent must return all three low-stock products, not a subset.
+
+\textbf{L3-01 Order Tracking.} ``\emph{Where is ORD-005 right now?}'' \gls{oms} then \gls{tms}; the agent synthesises carrier, current location, and ETA from two systems.
+
+\textbf{L4-01 Order Delay Diagnosis.} ``\emph{Why has ORD-007 not shipped?}'' The canonical cross-system diagnostic: \gls{oms} (processing) $\to$ \gls{tms} (no shipment) $\to$ \gls{wms} (stock shortage) $\to$ \gls{srm} (incoming \gls{po} arrives too late).
+
+\textbf{L5-02 Operational Health Check.} ``\emph{Full health check of the supply chain.}'' Scan all four systems, surface overdue orders, exceptions, low stock, supplier reliability concerns; produce at least one cross-system insight.
+
+\section{Ground-Truth Construction}
+
+Ground truths are derived from the scenario data (identifiers below~100). The baseline set was written against scenario data only, which caused the judge to flag legitimate extensions to generated data as hallucinations. The refinement cycle (Chapter~\ref{ch:results}) either rewrote the ground truths to focus on the \emph{shape} of the expected answer rather than exhaustive ID lists, or tightened the judge prompt to accept legitimate extensions.

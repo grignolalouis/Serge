@@ -1,0 +1,48 @@
+% ============================================================================
+% APPENDIX B: SCENARIO METADATA
+% ============================================================================
+
+\chapter{Scenario Metadata}
+\label{app:scenarios}
+
+Table~\ref{tab:scenariosmeta} lists all 27 scenarios with their expected system coverage, minimum tool count, and human-baseline estimate. These metadata fields are used by the aggregator to compute cross-system coverage, tool efficiency, and time-savings metrics.
+
+\begin{longtable}{@{}llllrr@{}}
+\caption{Scenario metadata.}\label{tab:scenariosmeta}\\
+\toprule
+\textbf{ID} & \textbf{Level} & \textbf{UC} & \textbf{Expected systems} & \textbf{Min tools} & \textbf{Human min} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{ID} & \textbf{Level} & \textbf{UC} & \textbf{Expected systems} & \textbf{Min tools} & \textbf{Human min} \\
+\midrule
+\endhead
+L1-01 & L1 & UC-4 & WMS               & 1 & 2  \\
+L1-02 & L1 & UC-4 & OMS               & 1 & 2  \\
+L1-03 & L1 & UC-3 & SRM               & 1 & 2  \\
+L1-04 & L1 & UC-4 & TMS               & 1 & 2  \\
+L2-01 & L2 & UC-1 & OMS               & 1 & 5  \\
+L2-02 & L2 & UC-4 & OMS               & 1 & 6  \\
+L2-03 & L2 & UC-4 & OMS               & 1 & 5  \\
+L2-04 & L2 & UC-4 & WMS               & 1 & 5  \\
+L2-05 & L2 & UC-3 & SRM               & 1 & 6  \\
+L2-06 & L2 & UC-4 & TMS               & 1 & 5  \\
+L3-01 & L3 & UC-1 & OMS, TMS          & 2 & 10 \\
+L3-02 & L3 & UC-4 & WMS, OMS          & 2 & 12 \\
+L3-03 & L3 & UC-3 & SRM               & 1 & 15 \\
+L3-04 & L3 & UC-3 & SRM               & 1 & 10 \\
+L3-05 & L3 & UC-1 & OMS, TMS          & 2 & 8  \\
+L3-06 & L3 & UC-4 & WMS               & 1 & 5  \\
+L4-01 & L4 & UC-2 & OMS, TMS, WMS, SRM & 4 & 25 \\
+L4-02 & L4 & UC-2 & TMS, OMS, WMS     & 3 & 20 \\
+L4-03 & L4 & UC-3 & SRM               & 2 & 15 \\
+L4-04 & L4 & UC-4 & OMS, TMS, WMS, SRM & 4 & 25 \\
+L4-05 & L4 & UC-2 & WMS, OMS          & 3 & 20 \\
+L4-06 & L4 & UC-1 & OMS, TMS, WMS     & 3 & 18 \\
+L5-01 & L5 & UC-4 & SRM, WMS, OMS     & 6 & 40 \\
+L5-02 & L5 & UC-4 & OMS, TMS, WMS, SRM & 6 & 45 \\
+L5-03 & L5 & UC-5 & OMS, WMS, SRM, TMS & 6 & 35 \\
+L5-04 & L5 & UC-3 & SRM               & 4 & 30 \\
+L5-05 & L5 & UC-5 & WMS, OMS, SRM     & 5 & 35 \\
+\bottomrule
+\end{longtable}

@@ -1,0 +1,66 @@
+% ============================================================================
+% APPENDIX A — MCP TOOL REFERENCE
+% ============================================================================
+
+\chapter{MCP Tool Reference}
+\label{app:tools}
+
+The 35 \gls{mcp} tools are listed below. Naming convention: \texttt{\textit{system}\_\textit{verb}\_\textit{noun}}. All tools are read-only.
+
+{\footnotesize
+\begin{longtable}{@{}p{6.2cm}p{8.5cm}@{}}
+\toprule
+\textbf{Tool} & \textbf{Description} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Tool} & \textbf{Description} \\
+\midrule
+\endhead
+\multicolumn{2}{@{}l}{\textbf{SRM --- Procurement}} \\
+\addlinespace[2pt]
+\texttt{srm\_get\_supplier} & Supplier profile. \\
+\texttt{srm\_list\_suppliers} & All suppliers. \\
+\texttt{srm\_get\_supplier\_product} & One supplier-product entry (cost, product link). \\
+\texttt{srm\_list\_supplier\_products\_by\_supplier} & All items offered by one supplier. \\
+\texttt{srm\_list\_supplier\_products\_by\_product} & All suppliers that sell a given product. \\
+\texttt{srm\_get\_supplier\_order} & One supplier order by ID. \\
+\texttt{srm\_list\_all\_supplier\_orders} & All supplier orders. \\
+\texttt{srm\_list\_supplier\_orders\_by\_supplier} & Supplier orders placed with a given supplier. \\
+\texttt{srm\_list\_supplier\_orders\_by\_status} & Supplier orders filtered by status. \\
+\texttt{srm\_list\_overdue\_supplier\_orders} & Supplier orders past expected delivery. \\
+\texttt{srm\_compare\_suppliers} & Side-by-side supplier performance. \\
+\addlinespace[4pt]
+\multicolumn{2}{@{}l}{\textbf{WMS --- Inventory}} \\
+\addlinespace[2pt]
+\texttt{wms\_get\_product} & Product by ID. \\
+\texttt{wms\_get\_product\_by\_sku} & Product by SKU. \\
+\texttt{wms\_list\_products} & All products. \\
+\texttt{wms\_check\_inventory} & Inventory status for one product. \\
+\texttt{wms\_list\_low\_stock} & Products below reorder point. \\
+\texttt{wms\_get\_stock\_movements} & Movement history for one product. \\
+\texttt{wms\_list\_all\_inventory} & Full inventory snapshot. \\
+\texttt{wms\_get\_warehouse} & Warehouse by ID. \\
+\addlinespace[4pt]
+\multicolumn{2}{@{}l}{\textbf{OMS --- Sales}} \\
+\addlinespace[2pt]
+\texttt{oms\_get\_customer\_order} & Customer order with line items. \\
+\texttt{oms\_get\_customer} & Customer by ID. \\
+\texttt{oms\_list\_customer\_orders\_by\_customer} & Customer orders for one customer. \\
+\texttt{oms\_list\_customer\_orders\_by\_status} & Customer orders filtered by status. \\
+\texttt{oms\_list\_overdue\_customer\_orders} & Customer orders past required date. \\
+\texttt{oms\_list\_all\_customer\_orders} & All customer orders. \\
+\texttt{oms\_list\_customers} & All customers. \\
+\texttt{oms\_search\_customer\_orders\_by\_product} & Customer orders containing a product. \\
+\addlinespace[4pt]
+\multicolumn{2}{@{}l}{\textbf{TMS --- Shipping}} \\
+\addlinespace[2pt]
+\texttt{tms\_get\_shipment} & Shipment with tracking events. \\
+\texttt{tms\_track\_customer\_order} & All shipments for a customer order. \\
+\texttt{tms\_list\_exception\_shipments} & Shipments in exception state. \\
+\texttt{tms\_get\_carrier} & Carrier by ID. \\
+\texttt{tms\_list\_shipments\_by\_status} & Shipments filtered by status. \\
+\texttt{tms\_list\_carriers} & All carriers. \\
+\bottomrule
+\end{longtable}
+}

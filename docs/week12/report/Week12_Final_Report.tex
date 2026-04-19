@@ -1,0 +1,193 @@
+% ============================================================================
+% SERGE — Final Report
+% SE618 Logistic Case Study Analysis — Semester 2/2025
+% ============================================================================
+
+\documentclass[12pt,a4paper]{report}
+
+% ── Encoding ─────────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% ── Layout ───────────────────────────────────────────────────────────
+\usepackage[top=2.2cm, bottom=2.2cm, left=2.2cm, right=2.2cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.1}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.35em}
+
+% ── Fonts ────────────────────────────────────────────────────────────
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{ragged2e}
+
+% ── Paragraph robustness ─────────────────────────────────────────────
+\sloppy
+\emergencystretch=1em
+\hbadness=10000
+
+% ── Colors ───────────────────────────────────────────────────────────
+\usepackage[dvipsnames]{xcolor}
+\definecolor{scblue}{HTML}{1E40AF}
+\definecolor{scdark}{HTML}{1E3A8A}
+\definecolor{scaccent}{HTML}{F59E0B}
+\definecolor{lightgray}{HTML}{F5F5F5}
+
+% ── Headers and footers ──────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\fancyfoot[C]{\textcolor{scblue}{SERGE --- Supply Chain Agent}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Titles ───────────────────────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\chapter}[hang]
+  {\normalfont\Large\bfseries\color{scblue}}
+  {\thechapter.}{14pt}{}
+\titlespacing*{\chapter}{0pt}{-15pt}{8pt}
+\titleformat{\section}
+  {\normalfont\large\bfseries\color{scdark}}
+  {\thesection}{0.7em}{}
+\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titleformat{\subsection}
+  {\normalfont\normalsize\bfseries}
+  {\thesubsection}{0.6em}{}
+\titlespacing*{\subsection}{0pt}{7pt}{2pt}
+
+% ── Graphics ─────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\graphicspath{{images/}{figures/}}
+
+% ── Tables ───────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{colortbl}
+
+% ── Lists ────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Listings ─────────────────────────────────────────────────────────
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  frame=single,
+  rulecolor=\color{scblue},
+  keywordstyle=\color{scblue}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b,
+}
+
+% ── Boxes ────────────────────────────────────────────────────────────
+\usepackage[most]{tcolorbox}
+
+% ── Hyperref ─────────────────────────────────────────────────────────
+\usepackage[hyphens,spaces,obeyspaces]{url}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=scblue,
+  urlcolor=scblue,
+  citecolor=scblue,
+  pdftitle={SERGE - Final Report},
+  pdfauthor={Grignola, Schmitt, Tellus, Schwarz},
+}
+
+% ── Glossary ─────────────────────────────────────────────────────────
+\usepackage[acronym,toc,nopostdot]{glossaries}
+\makeglossaries
+
+% ── TikZ ─────────────────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning,fit,backgrounds}
+\pgfdeclarelayer{background}
+\pgfsetlayers{background,main}
+
+% ── Columns ──────────────────────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% ============================================================================
+% GLOSSARY ENTRIES
+% ============================================================================
+
+\newacronym{srm}{SRM}{Supplier Relationship Management}
+\newacronym{wms}{WMS}{Warehouse Management System}
+\newacronym{oms}{OMS}{Order Management System}
+\newacronym{tms}{TMS}{Transport Management System}
+\newacronym{mcp}{MCP}{Model Context Protocol}
+\newacronym{llm}{LLM}{Large Language Model}
+\newacronym{ai}{AI}{Artificial Intelligence}
+\newacronym{api}{API}{Application Programming Interface}
+\newacronym{po}{PO}{Purchase Order}
+\newacronym{sdk}{SDK}{Software Development Kit}
+
+\newglossaryentry{react}{
+  name={ReAct},
+  description={Reasoning and Acting; an agent paradigm that interleaves a reasoning step (thought) and an action step (tool call) in a single loop}
+}
+\newglossaryentry{boundedcontext}{
+  name={bounded context},
+  description={In Domain-Driven Design, a coherent region of a software system within which a single ubiquitous language applies; inter-context references are carried by stable identifiers rather than by object references}
+}
+
+% ============================================================================
+% DOCUMENT
+% ============================================================================
+
+\begin{document}
+
+% ── Cover ────────────────────────────────────────────────────────────
+\input{sections/cover}
+
+% ── Front matter ─────────────────────────────────────────────────────
+\pagenumbering{roman}
+
+\tableofcontents
+\clearpage
+
+\listoffigures
+\clearpage
+
+\listoftables
+\clearpage
+
+% ── Body ─────────────────────────────────────────────────────────────
+\pagenumbering{arabic}
+
+\input{sections/01_introduction}
+\input{sections/02_background}
+\input{sections/03_related_work}
+\input{sections/04_modelisation}
+\input{sections/05_architecture}
+\input{sections/06_methodology}
+\input{sections/07_scenarios}
+\input{sections/08_results}
+\input{sections/09_discussion}
+\input{sections/10_conclusion}
+
+% ── References ───────────────────────────────────────────────────────
+\input{sections/references}
+
+% ── Appendices ───────────────────────────────────────────────────────
+\appendix
+\input{sections/appendix_tools}
+\input{sections/appendix_scenarios}
+
+% ── Glossary ─────────────────────────────────────────────────────────
+\printglossaries
+
+\end{document}
